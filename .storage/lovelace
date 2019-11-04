@@ -1,0 +1,665 @@
+{
+    "data": {
+        "config": {
+            "title": "Maison",
+            "views": [
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "cards": [
+                                {
+                                    "entity": "light.sam",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon_height": "48px",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "light.salon",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon_height": "48px",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "light.cleo",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon_height": "48px",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "light.chambre",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon_height": "48px",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                }
+                            ],
+                            "title": "Lumi\u00e8res",
+                            "type": "horizontal-stack"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.salon_sc_temperature"
+                                }
+                            ],
+                            "title": "Temp\u00e9rature",
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.salon_sc_humidity"
+                                }
+                            ],
+                            "title": "Humidit\u00e9",
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.salon_sc_light"
+                                },
+                                {
+                                    "entity": "sensor.salon_sc_airquality"
+                                },
+                                {
+                                    "entity": "sensor.salon_sc_noise"
+                                }
+                            ],
+                            "title": "Autres",
+                            "type": "glance"
+                        }
+                    ],
+                    "icon": "mdi:home",
+                    "path": "lumieres",
+                    "title": "Lumi\u00e8res"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "cards": [
+                                {
+                                    "entity": "script.neato_cuisine",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon": "mdi:robot-vacuum-variant",
+                                    "icon_height": "48px",
+                                    "name": "Cuisine",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "script.neato_table",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon": "mdi:robot-vacuum-variant",
+                                    "icon_height": "48px",
+                                    "name": "Table",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "script.neato_table_basse",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon": "mdi:robot-vacuum-variant",
+                                    "icon_height": "48px",
+                                    "name": "T.Basse",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "script.neato_sam",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon": "mdi:robot-vacuum-variant",
+                                    "icon_height": "48px",
+                                    "name": "S\u00e0M",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "script.neato_chambre",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon": "mdi:robot-vacuum-variant",
+                                    "icon_height": "48px",
+                                    "name": "Chambre",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                }
+                            ],
+                            "title": "Aspirer zone",
+                            "type": "horizontal-stack"
+                        },
+                        {
+                            "cards": [
+                                {
+                                    "entity": "script.neato_cleo",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon": "mdi:robot-vacuum-variant",
+                                    "icon_height": "48px",
+                                    "name": "Cl\u00e9o",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "script.neato_couloir",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon": "mdi:robot-vacuum-variant",
+                                    "icon_height": "48px",
+                                    "name": "Couloir",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "script.neato_entree",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon": "mdi:robot-vacuum-variant",
+                                    "icon_height": "48px",
+                                    "name": "Entr\u00e9e",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "script.neato_sdb",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon": "mdi:robot-vacuum-variant",
+                                    "icon_height": "48px",
+                                    "name": "SdB",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                },
+                                {
+                                    "entity": "script.neato_wc",
+                                    "hold_action": {
+                                        "action": "more-info"
+                                    },
+                                    "icon": "mdi:robot-vacuum-variant",
+                                    "icon_height": "48px",
+                                    "name": "WC",
+                                    "show_icon": true,
+                                    "show_name": true,
+                                    "tap_action": {
+                                        "action": "toggle"
+                                    },
+                                    "type": "entity-button"
+                                }
+                            ],
+                            "type": "horizontal-stack"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.conchita_schedule"
+                                },
+                                {
+                                    "entity": "vacuum.conchita"
+                                },
+                                {
+                                    "entity": "sensor.conchita_battery"
+                                }
+                            ],
+                            "type": "entities"
+                        },
+                        {
+                            "aspect_ratio": "100%",
+                            "camera_image": "camera.conchita_cleaning_map",
+                            "entity": "camera.conchita_cleaning_map",
+                            "type": "picture-entity"
+                        }
+                    ],
+                    "icon": "mdi:robot-vacuum-variant",
+                    "panel": false,
+                    "title": "Aspirateur"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entity": "weather.nice",
+                            "name": "M\u00e9t\u00e9o France",
+                            "type": "weather-forecast"
+                        },
+                        {
+                            "columns": 3,
+                            "entities": [
+                                {
+                                    "entity": "sun.sun"
+                                },
+                                {
+                                    "entity": "sensor.nice_weather"
+                                },
+                                {
+                                    "entity": "sensor.nice_temperature"
+                                },
+                                {
+                                    "entity": "sensor.nice_wind_speed"
+                                },
+                                {
+                                    "entity": "sensor.nice_rain_chance"
+                                },
+                                {
+                                    "entity": "sensor.nice_uv"
+                                }
+                            ],
+                            "show_name": false,
+                            "type": "glance"
+                        },
+                        {
+                            "entity": "weather.maison",
+                            "type": "weather-forecast"
+                        }
+                    ],
+                    "icon": "mdi:weather-rainy",
+                    "panel": false,
+                    "path": "meteo",
+                    "title": "M\u00e9t\u00e9o"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.neufbox_router_kbyte_sec_sent"
+                                },
+                                {
+                                    "entity": "sensor.neufbox_router_kbyte_sec_received"
+                                }
+                            ],
+                            "title": "Internet",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "binary_sensor.updater"
+                                }
+                            ],
+                            "title": "Updater",
+                            "type": "entities"
+                        },
+                        {
+                            "columns": 3,
+                            "entities": [
+                                {
+                                    "entity": "sensor.salon_sc_signal"
+                                },
+                                {
+                                    "entity": "sensor.salle_a_manger_signal"
+                                },
+                                {
+                                    "entity": "sensor.salon_signal"
+                                },
+                                {
+                                    "entity": "sensor.chambre_signal"
+                                },
+                                {
+                                    "entity": "sensor.chambre_cleo_signal"
+                                }
+                            ],
+                            "title": "Signal Sonoff",
+                            "type": "glance"
+                        },
+                        {
+                            "columns": 3,
+                            "entities": [
+                                {
+                                    "entity": "sensor.salle_a_manger_ip"
+                                },
+                                {
+                                    "entity": "sensor.salon_ip"
+                                },
+                                {
+                                    "entity": "sensor.salon_sc_ip"
+                                },
+                                {
+                                    "entity": "sensor.chambre_cleo_ip"
+                                },
+                                {
+                                    "entity": "sensor.chambre_ip"
+                                }
+                            ],
+                            "title": "IPs Sonoff",
+                            "type": "glance"
+                        },
+                        {
+                            "columns": 3,
+                            "entities": [
+                                {
+                                    "entity": "sensor.salle_a_manger_version"
+                                },
+                                {
+                                    "entity": "sensor.salon_version"
+                                },
+                                {
+                                    "entity": "sensor.salon_sc_version"
+                                },
+                                {
+                                    "entity": "sensor.chambre_version"
+                                },
+                                {
+                                    "entity": "sensor.chambre_cleo_version"
+                                }
+                            ],
+                            "title": "Versions Sonoff",
+                            "type": "glance"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.iphone_de_le_gone_battery_level"
+                                },
+                                {
+                                    "entity": "sensor.iphone_de_marina_battery_level"
+                                },
+                                {
+                                    "entity": "sensor.iphone_de_marina_battery_state"
+                                }
+                            ],
+                            "title": "iPhone",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "automation.power_state_on_ha_start_up"
+                                },
+                                {
+                                    "entity": "automation.tasmota_versions_on_ha_start_up"
+                                },
+                                {
+                                    "entity": "automation.sonoff_ips_on_ha_start_up"
+                                }
+                            ],
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "sensor.processor_use"
+                                },
+                                {
+                                    "entity": "sensor.memory_use_percent"
+                                },
+                                {
+                                    "entity": "sensor.swap_use_percent"
+                                },
+                                {
+                                    "entity": "sensor.last_boot"
+                                },
+                                {
+                                    "entity": "sensor.disk_use_percent_users"
+                                },
+                                {
+                                    "entity": "sensor.disk_use_percent_volumes_media"
+                                },
+                                {
+                                    "entity": "sensor.disk_use_percent_volumes_backups"
+                                }
+                            ],
+                            "title": "Hackintosh",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:network",
+                    "path": "reseau",
+                    "title": "R\u00e9seau"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                "switch.conchita_schedule",
+                                "sensor.conchita_battery",
+                                "vacuum.conchita"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Cuisine",
+                            "type": "entities"
+                        },
+                        {
+                            "entity": "camera.conchita_cleaning_map",
+                            "type": "picture-entity"
+                        },
+                        {
+                            "entities": [
+                                "sensor.neufbox_router_kbyte_sec_sent",
+                                "sensor.neufbox_router_kbyte_sec_received"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Salon",
+                            "type": "entities"
+                        },
+                        {
+                            "entity": "media_player.tele",
+                            "type": "media-control"
+                        },
+                        {
+                            "entities": [
+                                "sun.sun",
+                                "sensor.nice_weather",
+                                "sensor.nice_temperature",
+                                "sensor.nice_wind_speed",
+                                "sensor.nice_rain_chance",
+                                "sensor.nice_weather_alert",
+                                "sensor.nice_uv",
+                                "sensor.nice_snow_chance",
+                                "sensor.nice_thunder_chance",
+                                "sensor.nice_next_rain",
+                                "sensor.nice_freeze_chance"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "M\u00e9t\u00e9o",
+                            "type": "entities"
+                        },
+                        {
+                            "entity": "weather.nice",
+                            "type": "weather-forecast"
+                        },
+                        {
+                            "entities": [
+                                "sensor.salle_a_manger_signal",
+                                "sensor.salle_a_manger_ip",
+                                "sensor.salle_a_manger_version",
+                                "sensor.salon_signal",
+                                "sensor.salon_ip",
+                                "sensor.salon_version",
+                                "sensor.chambre_signal",
+                                "sensor.chambre_ip",
+                                "sensor.chambre_version",
+                                "sensor.chambre_cleo_signal",
+                                "sensor.chambre_cleo_ip",
+                                "sensor.chambre_cleo_version",
+                                "sensor.salon_sc_signal",
+                                "sensor.salon_sc_ip",
+                                "sensor.salon_sc_version"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Sonoffs",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.conchita_battery",
+                                "switch.conchita_schedule",
+                                "vacuum.conchita",
+                                "script.neato_chambre",
+                                "script.neato_cleo",
+                                "script.neato_couloir",
+                                "script.neato_cuisine",
+                                "script.neato_entree",
+                                "script.neato_sam",
+                                "script.neato_sdb",
+                                "script.neato_table",
+                                "script.neato_table_basse",
+                                "script.neato_wc"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Conchita",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "binary_sensor.updater"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Updater",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "person.fabrice_pipart",
+                                "person.marina_pipart",
+                                "person.cleo_pipart"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Utilisateurs",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.plex_hackintosh"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Plex",
+                            "type": "entities"
+                        },
+                        {
+                            "entity": "media_player.plex_openpht",
+                            "type": "media-control"
+                        },
+                        {
+                            "entities": [
+                                "sensor.salon_sc_temperature",
+                                "sensor.salon_sc_humidity",
+                                "sensor.salon_sc_airquality",
+                                "sensor.salon_sc_light",
+                                "sensor.salon_sc_noise"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "Salon",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "sensor.iphone_de_le_gone_battery_level"
+                            ],
+                            "show_header_toggle": true,
+                            "title": "iPhone",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "automation.sonoff_ips_on_ha_start_up",
+                                "automation.power_state_on_ha_start_up",
+                                "automation.tasmota_versions_on_ha_start_up"
+                            ],
+                            "title": "Automatisation",
+                            "type": "entities"
+                        },
+                        {
+                            "entities": [
+                                "light.salon",
+                                "light.chambre",
+                                "light.salle_a_manger",
+                                "light.chambre_cleo"
+                            ],
+                            "title": "Lumi\u00e8re",
+                            "type": "entities"
+                        },
+                        {
+                            "entity": "weather.maison",
+                            "type": "weather-forecast"
+                        }
+                    ],
+                    "icon": "mdi:folder-open",
+                    "path": "default_view",
+                    "title": "Home"
+                }
+            ]
+        }
+    },
+    "key": "lovelace",
+    "version": 1
+}

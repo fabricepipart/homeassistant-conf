@@ -40,6 +40,8 @@ meteo_france:
         - uv
         - weather_alert
 
+wemo:
+  discovery: false
 
 mqtt:
   broker: !secret mosquitto_ip
