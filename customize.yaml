@@ -1,0 +1,22 @@
+script.neato_chambre:
+  icon: mdi:robot-vacuum-variant
+switch.conchita_schedule:
+  icon: mdi:clock-check-outline
+script.neato_cleo:
+  icon: mdi:robot-vacuum-variant
+script.neato_couloir:
+  icon: mdi:robot-vacuum-variant
+script.neato_cuisine:
+  icon: mdi:robot-vacuum-variant
+script.neato_entree:
+  icon: mdi:robot-vacuum-variant
+script.neato_sdb:
+  icon: mdi:robot-vacuum-variant
+script.neato_sam:
+  icon: mdi:robot-vacuum-variant
+script.neato_table:
+  icon: mdi:robot-vacuum-variant
+script.neato_table_basse:
+  icon: mdi:robot-vacuum-variant
+script.neato_wc:
+  icon: mdi:robot-vacuum-variant

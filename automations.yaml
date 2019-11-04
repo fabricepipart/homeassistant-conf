@@ -1,0 +1,85 @@
+- alias: Power state on HA start-up
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/sonoffs/state
+      payload: ''
+  - service: mqtt.publish
+    data:
+      topic: cmnd/sonoffs/POWER
+  - service: mqtt.publish
+    data:
+      topic: cmnd/sonoffs/POWER2
+  - service: mqtt.publish
+    data:
+      topic: cmnd/sonoffs/POWER3
+  id: 8ae9dc0a910341228ff342cb7d27e2d3
+- alias: Tasmota versions on HA start-up
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/sonoffs/STATUS
+      payload: '2'
+  id: c21df24d3f444ab7af35cddb924a1f7d
+- alias: Sonoff IPs on HA start-up
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/sonoffs/ipaddress
+      payload: ''
+  id: faf8a1d80157482c8dd0a0dcc3f34270
+- id: '1572786257007'
+  alias: Redémarrage
+  description: ''
+  trigger:
+    platform: homeassistant
+    event: start
+  action:
+  - alias: ''
+    data:
+      data:
+        push:
+          badge: 5
+          thread-id: home-assistant
+        subtitle: Subtitle goes here
+      message: Something happened at home!
+      title: Redémarrage de Home Assistant
+    service: notify.ios_iphone_de_le_gone
+    
+- alias: Risque de pluie
+  trigger:
+    platform: time
+    at: "07:30:00"
+  condition:
+    - condition: time
+      weekday:
+        - mon
+        - tue
+        - wed
+        - thu
+        - fri
+    - condition: state
+      entity_id: switch.conchita_schedule
+      state: 'on'
+    - condition: numeric_state
+      entity_id: sensor.nice_rain_chance
+      above: 20
+  action:
+  - alias: ''
+    data:
+      data:
+        push:
+          badge: 5
+          thread-id: home-assistant
+      message: Pense à prendre ton blouson de moto étanche
+      title: Risque de pluie
+    service: notify.ios_iphone_de_le_gone

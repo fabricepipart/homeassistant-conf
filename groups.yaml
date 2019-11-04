@@ -1,0 +1,99 @@
+# sonoff:
+#   name: "Sonoff Tasmota"
+#   control: hidden
+#   entities:
+#     - script.get_sonoff_ip
+#     - sensor.sonoff_ip
+
+weather:
+  name: "Météo"
+  entities:
+    - sun.sun
+    - sensor.nice_weather
+    - sensor.nice_temperature
+    - sensor.nice_wind_speed
+    - sensor.nice_rain_chance
+    - sensor.nice_weather_alert
+    - sensor.nice_uv
+    - sensor.nice_snow_chance
+    - sensor.nice_thunder_chance
+    - weather.nice
+    - sensor.nice_next_rain
+    - sensor.nice_freeze_chance
+
+sonoff:
+  name: "Sonoffs"
+  entities:
+    - sensor.salle_a_manger_signal
+    - sensor.salle_a_manger_ip
+    - sensor.salle_a_manger_version
+    - sensor.salon_signal
+    - sensor.salon_ip
+    - sensor.salon_version
+    - sensor.chambre_signal
+    - sensor.chambre_ip
+    - sensor.chambre_version
+    - sensor.chambre_cleo_signal
+    - sensor.chambre_cleo_ip
+    - sensor.chambre_cleo_version
+    - sensor.salon_sc_signal
+    - sensor.salon_sc_ip
+    - sensor.salon_sc_version
+
+conchita:
+  name: "Conchita"
+  entities:
+    - sensor.conchita_battery
+    - switch.conchita_schedule
+    - vacuum.conchita
+    - script.neato_chambre
+    - script.neato_cleo
+    - script.neato_couloir
+    - script.neato_cuisine
+    - script.neato_entree
+    - script.neato_sam
+    - script.neato_sdb
+    - script.neato_table
+    - script.neato_table_basse
+    - script.neato_wc
+
+updater:
+  name: Updater
+  entities:
+    - binary_sensor.updater
+
+people:
+  name: Utilisateurs
+  entities:
+    - person.fabrice_pipart
+    - person.marina_pipart
+    - person.cleo_pipart
+ 
+
+plex:
+  name: Plex
+  entities:
+    - media_player.plex_openpht
+    - sensor.plex_hackintosh
+
+salon:
+  name: Salon
+  entities:
+    - sensor.salon_sc_temperature
+    - sensor.salon_sc_humidity
+    - sensor.salon_sc_airquality
+    - sensor.salon_sc_light
+    - sensor.salon_sc_noise
+
+iphone:
+  name: iPhone
+  entities:
+    - sensor.iphone_de_le_gone_battery_level
+
+
+
+ 
+ 
+
+
+

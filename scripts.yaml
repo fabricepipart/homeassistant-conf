@@ -1,0 +1,107 @@
+# get_sonoff_ip:
+#   alias: Get Sonoff New IP (sonoff)
+#   sequence:
+#   - data:
+#       topic: cmnd/sonoff/ipaddress
+#     service: mqtt.publish
+
+neato_cuisine:
+  alias: Cuisine
+  sequence:
+  - service: vacuum.neato_custom_cleaning
+    data:
+      entity_id: vacuum.conchita
+      mode: 1
+      navigation: 2
+      zone: "Cuisine"
+
+neato_chambre:
+  alias: Chambre
+  sequence:
+  - service: vacuum.neato_custom_cleaning
+    data:
+      entity_id: vacuum.conchita
+      mode: 1
+      navigation: 2
+      zone: "Chambre Principale"
+
+neato_sdb:
+  alias: SdB
+  sequence:
+  - service: vacuum.neato_custom_cleaning
+    data:
+      entity_id: vacuum.conchita
+      mode: 1
+      navigation: 2
+      zone: "Salle De Bains"
+
+neato_couloir:
+  alias: Couloir
+  sequence:
+  - service: vacuum.neato_custom_cleaning
+    data:
+      entity_id: vacuum.conchita
+      mode: 1
+      navigation: 2
+      zone: "Couloir"
+
+neato_cleo:
+  alias: Cléo
+  sequence:
+  - service: vacuum.neato_custom_cleaning
+    data:
+      entity_id: vacuum.conchita
+      mode: 1
+      navigation: 2
+      zone: "Chambre Cléo"
+
+neato_wc:
+  alias: Toilettes
+  sequence:
+  - service: vacuum.neato_custom_cleaning
+    data:
+      entity_id: vacuum.conchita
+      mode: 1
+      navigation: 2
+      zone: "Toilettes"
+
+neato_entree:
+  alias: Entrée
+  sequence:
+  - service: vacuum.neato_custom_cleaning
+    data:
+      entity_id: vacuum.conchita
+      mode: 1
+      navigation: 2
+      zone: "Entrée"
+
+neato_table:
+  alias: Table
+  sequence:
+  - service: vacuum.neato_custom_cleaning
+    data:
+      entity_id: vacuum.conchita
+      mode: 1
+      navigation: 2
+      zone: "Table"
+
+neato_sam:
+  alias: SàM
+  sequence:
+  - service: vacuum.neato_custom_cleaning
+    data:
+      entity_id: vacuum.conchita
+      mode: 1
+      navigation: 2
+      zone: "Salle A Manger"
+
+neato_table_basse:
+  alias: Table basse
+  sequence:
+  - service: vacuum.neato_custom_cleaning
+    data:
+      entity_id: vacuum.conchita
+      mode: 1
+      navigation: 2
+      zone: "Table basse"
+
