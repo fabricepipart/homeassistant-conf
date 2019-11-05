@@ -54,25 +54,24 @@
       message: Something happened at home!
       title: Redémarrage de Home Assistant
     service: notify.ios_iphone_de_le_gone
-    
 - alias: Risque de pluie
   trigger:
     platform: time
-    at: "07:30:00"
+    at: 07:30:00
   condition:
-    - condition: time
-      weekday:
-        - mon
-        - tue
-        - wed
-        - thu
-        - fri
-    - condition: state
-      entity_id: switch.conchita_schedule
-      state: 'on'
-    - condition: numeric_state
-      entity_id: sensor.nice_rain_chance
-      above: 20
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  - condition: state
+    entity_id: switch.conchita_schedule
+    state: 'on'
+  - condition: numeric_state
+    entity_id: sensor.nice_rain_chance
+    above: 20
   action:
   - alias: ''
     data:
@@ -83,3 +82,107 @@
       message: Pense à prendre ton blouson de moto étanche
       title: Risque de pluie
     service: notify.ios_iphone_de_le_gone
+  id: 6fbc85b1b12f43ff83421c7e0879c21b
+- alias: Il pleut
+  trigger:
+    platform: time
+    at: 07:25:00
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  - condition: state
+    entity_id: switch.conchita_schedule
+    state: 'on'
+  - condition: state
+    entity_id: sensor.nice_weather
+    state: Pluie
+  action:
+  - alias: ''
+    data:
+      data:
+        push:
+          badge: 5
+          thread-id: home-assistant
+      message: Habillez vous en conséquence
+      title: Il pleut dehors
+    service: notify.ios_iphone_de_le_gone
+  - service: notify.alexa_media_echo_de_marina
+    data:
+      target: media_player.alexa
+      message: Attention, il pleut dehors.
+      data:
+        type: announce
+        method: all
+  id: 41d536435d6346bca25d4eabb55c7d35
+- alias: Météo du jour
+  trigger:
+    platform: time
+    at: 07:00:00
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  - condition: state
+    entity_id: switch.conchita_schedule
+    state: 'on'
+  action:
+  - service: notify.alexa_media_echo_de_marina
+    data:
+      target: media_player.alexa
+      message: Bonjour! Aujourd'hui il fait {{ states("sensor.nice_temperature") }}
+        degrés dehors avec {{ states("sensor.nice_wind_speed") }} km/h de vent. Comptez
+        {{ states("sensor.nice_rain_chance") }} % de chances pour qu'il pleuve. Quel
+        temps dehors? {{ states("sensor.nice_weather") }}. Bonne journée!
+      data:
+        type: announce
+        method: all
+  id: bca7238164864128b43edb16c3231af9
+
+- id: '1572943897953'
+  alias: Conchita se decharge
+  description: ''
+  trigger:
+  - entity_id: sensor.conchita_battery
+    from: '1'
+    platform: state
+    to: '80'
+  condition: []
+  action:
+  - service: notify.ios_iphone_de_le_gone
+    data:
+    data:
+      push:
+        badge: 5
+        thread-id: home-assistant
+    message: Quelqu'un pourrait la remettre sur sa base?
+    title: Conchita se décharge anormalement
+  service: notify.ios_iphone_de_le_gone
+  - service: notify.alexa_media
+    message: Conchita se décharge anormalement. Quelqu'un pourrait la remettre sur sa base?
+    data:
+      type: announce
+      method: all
+
+- id: '1572943972632'
+  alias: Conchita en erreur
+  description: ''
+  trigger:
+  - entity_id: vacuum.conchita
+    from: error
+    platform: state
+  condition: []
+  action:
+  - service: notify.alexa_media
+    message: Conchita a un soucis, quelqu'un veut bien l'aider?
+    data:
+      type: announce
+      method: all

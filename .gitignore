@@ -8,10 +8,14 @@ cloud
 onboarding
 person
 notes
+custom_components
+
 
 # .storage
 auth*
 .core*
+hacs*
+alexa*
 
 # Ignore folders.
 .cloud

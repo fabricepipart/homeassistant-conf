@@ -278,6 +278,7 @@
                                     "entity": "sensor.conchita_battery"
                                 }
                             ],
+                            "title": "Conchita",
                             "type": "entities"
                         },
                         {
@@ -327,6 +328,25 @@
                         {
                             "entity": "weather.maison",
                             "type": "weather-forecast"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.alexa_do_not_disturb_switch"
+                                },
+                                {
+                                    "entity": "sensor.alexa_next_alarm"
+                                },
+                                {
+                                    "entity": "sensor.alexa_next_reminder"
+                                },
+                                {
+                                    "entity": "sensor.alexa_next_timer"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Alexa",
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:weather-rainy",
@@ -340,12 +360,37 @@
                         {
                             "entities": [
                                 {
+                                    "entity": "media_player.alexa"
+                                },
+                                {
+                                    "entity": "switch.alexa_shuffle_switch"
+                                },
+                                {
+                                    "entity": "switch.alexa_repeat_switch"
+                                }
+                            ],
+                            "show_header_toggle": false,
+                            "title": "Alexa",
+                            "type": "entities"
+                        }
+                    ],
+                    "icon": "mdi:music",
+                    "path": "medias",
+                    "title": "Medias"
+                },
+                {
+                    "badges": [],
+                    "cards": [
+                        {
+                            "entities": [
+                                {
                                     "entity": "sensor.neufbox_router_kbyte_sec_sent"
                                 },
                                 {
                                     "entity": "sensor.neufbox_router_kbyte_sec_received"
                                 }
                             ],
+                            "show_header_toggle": false,
                             "title": "Internet",
                             "type": "entities"
                         },
@@ -355,6 +400,7 @@
                                     "entity": "binary_sensor.updater"
                                 }
                             ],
+                            "show_header_toggle": false,
                             "title": "Updater",
                             "type": "entities"
                         },
@@ -377,6 +423,7 @@
                                     "entity": "sensor.chambre_cleo_signal"
                                 }
                             ],
+                            "show_icon": false,
                             "title": "Signal Sonoff",
                             "type": "glance"
                         },
@@ -399,6 +446,7 @@
                                     "entity": "sensor.chambre_ip"
                                 }
                             ],
+                            "show_icon": false,
                             "title": "IPs Sonoff",
                             "type": "glance"
                         },
@@ -421,6 +469,7 @@
                                     "entity": "sensor.chambre_cleo_version"
                                 }
                             ],
+                            "show_icon": false,
                             "title": "Versions Sonoff",
                             "type": "glance"
                         },
@@ -436,6 +485,7 @@
                                     "entity": "sensor.iphone_de_marina_battery_state"
                                 }
                             ],
+                            "show_header_toggle": false,
                             "title": "iPhone",
                             "type": "entities"
                         },
@@ -449,6 +499,18 @@
                                 },
                                 {
                                     "entity": "automation.sonoff_ips_on_ha_start_up"
+                                },
+                                {
+                                    "entity": "automation.il_pleut"
+                                },
+                                {
+                                    "entity": "automation.meteo_du_jour"
+                                },
+                                {
+                                    "entity": "automation.redemarrage"
+                                },
+                                {
+                                    "entity": "automation.risque_de_pluie"
                                 }
                             ],
                             "type": "entities"
@@ -477,6 +539,7 @@
                                     "entity": "sensor.disk_use_percent_volumes_backups"
                                 }
                             ],
+                            "show_header_toggle": false,
                             "title": "Hackintosh",
                             "type": "entities"
                         }
@@ -640,10 +703,18 @@
                         },
                         {
                             "entities": [
-                                "light.salon",
-                                "light.chambre",
-                                "light.salle_a_manger",
-                                "light.chambre_cleo"
+                                {
+                                    "entity": "light.sam"
+                                },
+                                {
+                                    "entity": "light.salon"
+                                },
+                                {
+                                    "entity": "light.cleo"
+                                },
+                                {
+                                    "entity": "light.chambre"
+                                }
                             ],
                             "title": "Lumi\u00e8re",
                             "type": "entities"
@@ -651,6 +722,32 @@
                         {
                             "entity": "weather.maison",
                             "type": "weather-forecast"
+                        },
+                        {
+                            "entities": [
+                                {
+                                    "entity": "switch.alexa_do_not_disturb_switch"
+                                },
+                                {
+                                    "entity": "media_player.alexa"
+                                },
+                                {
+                                    "entity": "switch.alexa_shuffle_switch"
+                                },
+                                {
+                                    "entity": "switch.alexa_repeat_switch"
+                                },
+                                {
+                                    "entity": "sensor.alexa_next_alarm"
+                                },
+                                {
+                                    "entity": "sensor.alexa_next_reminder"
+                                },
+                                {
+                                    "entity": "sensor.alexa_next_timer"
+                                }
+                            ],
+                            "type": "entities"
                         }
                     ],
                     "icon": "mdi:folder-open",
