@@ -1,0 +1,35 @@
+
+- cal_id: fabrice.pipart@gmail.com
+  entities:
+  - device_id: fabrice_pipart_gmail_com
+    ignore_availability: true
+    name: fabrice.pipart@gmail.com
+    track: true
+
+- cal_id: legone69@gmail.com
+  entities:
+  - device_id: calendrier_perso
+    ignore_availability: true
+    name: Calendrier Perso
+    track: true
+
+- cal_id: addressbook#contacts@group.v.calendar.google.com
+  entities:
+  - device_id: contacts
+    ignore_availability: true
+    name: Contacts
+    track: true
+
+- cal_id: en.french#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: holidays_in_france
+    ignore_availability: true
+    name: Holidays in France
+    track: true
+
+- cal_id: e_2_en#weeknum@group.v.calendar.google.com
+  entities:
+  - device_id: week_numbers
+    ignore_availability: true
+    name: Week Numbers
+    track: true
