@@ -17,6 +17,7 @@
     data:
       topic: cmnd/sonoffs/POWER3
   id: 8ae9dc0a910341228ff342cb7d27e2d3
+
 - alias: Tasmota versions on HA start-up
   trigger:
     platform: homeassistant
@@ -159,18 +160,19 @@
   action:
   - service: notify.ios_iphone_de_le_gone
     data:
-    data:
-      push:
-        badge: 5
-        thread-id: home-assistant
-    message: Quelqu'un pourrait la remettre sur sa base?
-    title: Conchita se décharge anormalement
-  service: notify.ios_iphone_de_le_gone
+      data:
+        push:
+          badge: 5
+          thread-id: home-assistant
+      message: Quelqu'un pourrait la remettre sur sa base?
+      title: Conchita se décharge anormalement
   - service: notify.alexa_media
-    message: Conchita se décharge anormalement. Quelqu'un pourrait la remettre sur sa base?
     data:
-      type: announce
-      method: all
+      target: media_player.alexa
+      message: Conchita se décharge anormalement. Quelqu'un pourrait la remettre sur sa base?
+      data:
+        type: announce
+        method: all
 
 - id: '1572943972632'
   alias: Conchita en erreur
@@ -182,7 +184,56 @@
   condition: []
   action:
   - service: notify.alexa_media
-    message: Conchita a un soucis, quelqu'un veut bien l'aider?
     data:
-      type: announce
-      method: all
+      target: media_player.alexa
+      message: Conchita a un soucis, quelqu'un veut bien l'aider?
+      data:
+        type: announce
+        method: all
+
+- alias: Qualité de l'air
+  description: ''
+  trigger:
+  - entity_id: sensor.salon_sc_airquality
+    from: '1'
+    platform: state
+    to: '80'
+  condition: []
+  action:
+  - service: notify.ios_iphone_de_le_gone
+    data:
+      data:
+        push:
+          badge: 5
+          thread-id: home-assistant
+      message: Quelqu'un pourrait ouvrir la fenêtre?
+      title: Qualité de l'air insuffisante
+  - service: notify.alexa_media
+    data:
+      target: media_player.alexa
+      message: La qualité de l'air semble insuffisante. Quelqu'un pourrait ouvrir la fenêtre?
+      data:
+        type: announce
+        method: all
+
+- id: letsencrypt-renewal
+  alias: "Let's Encrypt Renewal"
+  trigger:
+  - platform: time
+    at: '01:23:45'
+  action:
+  - service: hassio.addon_restart
+    data:
+      addon: core_letsencrypt
+
+- id: '1565194745362'
+  alias: Restart SC regularly
+  trigger:
+  - platform: time_pattern
+    hours: "/6"
+  condition: []
+  action:
+  - data:
+      payload: '1'
+      topic: cmnd/home/living/sc/restart
+    service: mqtt.publish

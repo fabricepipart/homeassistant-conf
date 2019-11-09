@@ -1,3 +1,5 @@
+#https://cdn.materialdesignicons.com/3.2.89/
+
 script.neato_chambre:
   icon: mdi:robot-vacuum-variant
 switch.conchita_schedule:
@@ -20,3 +22,5 @@ script.neato_table_basse:
   icon: mdi:robot-vacuum-variant
 script.neato_wc:
   icon: mdi:robot-vacuum-variant
+script.sleep_mac:
+   icon: mdi:sleep

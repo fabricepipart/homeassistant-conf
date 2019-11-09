@@ -22,8 +22,8 @@ discovery:
 ios:
 
 http:
-  ssl_certificate: !secret my_home_domain_cert
-  ssl_key: !secret my_home_domain_key
+  ssl_certificate: /ssl/fullchain.pem
+  ssl_key: /ssl/privkey.pem
   base_url: !secret my_home_domain
 
 meteo_france:
@@ -53,6 +53,16 @@ mqtt:
 neato:
   username: !secret neato_username
   password: !secret neato_password
+
+google:
+  client_id: !secret gcal_client_id
+  client_secret: !secret gcal_client_secret
+
+shell_command:
+  sleep_mac: !secret my_sleep_command
+
+lovelace:
+  mode: yaml
 
 light:
   - platform: mqtt
@@ -239,11 +249,7 @@ sensor:
   - platform: systemmonitor
     resources:
       - type: disk_use_percent
-        arg: /Users
-      - type: disk_use_percent
-        arg: /Volumes/Media
-      - type: disk_use_percent
-        arg: /Volumes/Backups
+        arg: /
       - type: memory_use_percent
       - type: swap_use_percent
       - type: processor_use
