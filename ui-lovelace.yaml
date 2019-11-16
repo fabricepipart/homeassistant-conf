@@ -2,7 +2,12 @@ title: Maison
 resources:
   - url: /community_plugin/calendar-card/calendar-card.js
     type: js
+  - url: /community_plugin/mini-media-player/mini-media-player-bundle.js
+    type: module
+
+
 views:
+
   - badges: []
     cards:
       - cards:
@@ -61,12 +66,15 @@ views:
       - entities:
           - entity: sensor.salon_sc_temperature
           - entity: sensor.salon_sc_humidity
-        hours_to_show: 24
+        hours_to_show: 72
         refresh_interval: 0
         type: history-graph
     icon: 'mdi:home'
     path: lumieres
     title: Lumières
+
+
+
   - badges: []
     cards:
       - cards:
@@ -197,6 +205,9 @@ views:
     icon: 'mdi:robot-vacuum-variant'
     panel: false
     title: Aspirateur
+
+
+
   - badges: []
     cards:
       - entity: weather.nice
@@ -233,8 +244,150 @@ views:
     panel: false
     path: meteo
     title: Météo
+
   - badges: []
     cards:
+      - title: Activités
+        type: horizontal-stack
+        cards:
+          - entity: script.activity_off
+            name: 'Off'
+            icon: 'mdi:power'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_box
+            name: Box
+            icon: 'mdi:television-box'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_netflix
+            name: Netflix
+            icon: 'mdi:netflix'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_plex
+            name: Plex
+            icon: 'mdi:plex'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+      - type: horizontal-stack
+        cards:
+          - entity: script.activity_amazon
+            name: Prime
+            icon: 'mdi:amazon'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_wii
+            name: Wii
+            icon: 'mdi:wii'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_youtube
+            name: Youtube
+            icon: 'mdi:youtube'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_youtube_kids
+            name: Kids
+            icon: 'mdi:youtube'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+      - type: horizontal-stack
+        cards:
+          - entity: script.activity_ps3
+            name: 'PS3'
+            icon: 'mdi:playstation'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_airplay
+            name: 'Airplay'
+            icon: 'mdi:airplay'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_spotify
+            name: Spotify
+            icon: 'mdi:spotify'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_dlna
+            name: iTunes
+            icon: 'mdi:itunes'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+      - type: custom:mini-media-player
+        entity: media_player.sony_bravia_tv
       - entities:
           - entity: media_player.alexa
           - entity: switch.alexa_shuffle_switch
@@ -242,13 +395,13 @@ views:
         show_header_toggle: false
         title: Alexa
         type: entities
-      - entities:
-          - entity: media_player.plex_openpht
-          - entity: sensor.plex_hackintosh
-        type: entities
+      - entity: media_player.rx_v475
+        type: media-control
+
     icon: 'mdi:music'
     path: medias
     title: Medias
+
   - badges: []
     cards:
       - cards:
@@ -333,6 +486,7 @@ views:
     icon: 'mdi:network'
     path: reseau
     title: Réseau
+
   - badges: []
     cards:
       - entities:
@@ -351,6 +505,8 @@ views:
         title: Salon
         type: entities
       - entity: media_player.tele
+        type: media-control
+      - entity: media_player.rx_v475
         type: media-control
       - entities:
           - sun.sun

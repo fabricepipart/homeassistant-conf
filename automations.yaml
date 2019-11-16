@@ -237,3 +237,21 @@
       payload: '1'
       topic: cmnd/home/living/sc/restart
     service: mqtt.publish
+
+- alias: Yamaha allumé par erreur
+  trigger:
+  - entity_id: media_player.rx_v475
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: time
+    after: '22:00:00'
+    before: '07:00:00'
+  - condition: state
+    entity_id: media_player.tele
+    state: 'off'
+  action:
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.rx_v475
