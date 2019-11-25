@@ -293,6 +293,29 @@ sensor:
       - type: throughput_network_in
       - type: throughput_network_out
 
+  - platform: waze_travel_time
+    name: "Fabrice to Work"
+    origin: zone.home
+    destination: zone.amadeus_bel_air
+    region: 'EU'
+    vehicle_type: motorcycle
+  - platform: waze_travel_time
+    name: "Fabrice back Home"
+    origin: zone.amadeus_bel_air
+    destination: zone.home
+    region: 'EU'
+    vehicle_type: motorcycle
+  - platform: waze_travel_time
+    name: "Marina to Work"
+    origin: zone.home
+    destination: zone.caf_nice_europe
+    region: 'EU'
+  - platform: waze_travel_time
+    name: "Marina back Home"
+    origin: zone.caf_nice_europe
+    destination: zone.home
+    region: 'EU'
+
 emulated_hue:
   host_ip: 192.168.69.99
   listen_port: 80
@@ -344,4 +367,16 @@ emulated_hue:
       name: "Ampli"
       hidden: false
 
-      
+#frontend:
+#  themes: !include themes/clear-dark.yaml
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+
+#https://www.ipaddressguide.com/cidr
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.69.128/31
+  - platform: bluetooth_tracker
+#  - platform: bluetooth_le_tracker
