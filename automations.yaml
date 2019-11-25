@@ -17,7 +17,7 @@
     data:
       topic: cmnd/sonoffs/POWER3
   id: 8ae9dc0a910341228ff342cb7d27e2d3
-
+  
 - alias: Tasmota versions on HA start-up
   trigger:
     platform: homeassistant
@@ -38,6 +38,7 @@
       topic: cmnd/sonoffs/ipaddress
       payload: ''
   id: faf8a1d80157482c8dd0a0dcc3f34270
+
 - id: '1572786257007'
   alias: Redémarrage
   description: ''
@@ -51,10 +52,11 @@
         push:
           badge: 5
           thread-id: home-assistant
-        subtitle: Subtitle goes here
-      message: Something happened at home!
+        subtitle: Démarrage terminé
+      message: Le redémarrage était-il intentionnel?
       title: Redémarrage de Home Assistant
     service: notify.ios_iphone_de_le_gone
+
 - alias: Risque de pluie
   trigger:
     platform: time
@@ -84,6 +86,7 @@
       title: Risque de pluie
     service: notify.ios_iphone_de_le_gone
   id: 6fbc85b1b12f43ff83421c7e0879c21b
+
 - alias: Il pleut
   trigger:
     platform: time
@@ -120,6 +123,66 @@
         type: announce
         method: all
   id: 41d536435d6346bca25d4eabb55c7d35
+
+- alias: Temps de trajet
+  trigger:
+    platform: time
+    at: "07:32:00"
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  - condition: state
+    entity_id: switch.conchita_schedule
+    state: 'on'
+  action:
+  - alias: ''
+    service: notify.ios_iphone_de_le_gone
+    data:
+      message: '{{ states(''sensor.fabrice_to_work'') }} minutes'
+      title: Temps de trajet estimé
+      data:
+        push:
+          badge: 5
+          thread-id: home-assistant
+  - service: notify.alexa_media_echo_de_marina
+    data:
+      target: media_player.alexa
+      message: Temps de trajet estimé à {{ states('sensor.fabrice_to_work') }} minutes
+      data:
+        type: announce
+        method: all
+
+- alias: Temps de trajet retour
+  trigger:
+    platform: time
+    at: "18:00:00"
+  condition:
+  - condition: time
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+  - condition: state
+    entity_id: switch.conchita_schedule
+    state: 'on'
+  action:
+  - alias: ''
+    service: notify.ios_iphone_de_le_gone
+    data:
+      message: '{{ states(''sensor.fabrice_to_work'') }} minutes'
+      title: Temps de trajet estimé
+      data:
+        push:
+          badge: 5
+          thread-id: home-assistant
+
 - alias: Météo du jour
   trigger:
     platform: time
@@ -142,7 +205,8 @@
       message: Bonjour! Aujourd'hui il fait {{ states("sensor.nice_temperature") }}
         degrés dehors avec {{ states("sensor.nice_wind_speed") }} km/h de vent. Comptez
         {{ states("sensor.nice_rain_chance") }} % de chances pour qu'il pleuve. Quel
-        temps dehors? {{ states("sensor.nice_weather") }}. Bonne journée!
+        temps dehors? {{ states("sensor.nice_weather") }}. Temps de trajet estimé?
+        {{ states("sensor.fabrice_to_work") }} minutes. Bonne journée!
       data:
         type: announce
         method: all
@@ -169,7 +233,8 @@
   - service: notify.alexa_media
     data:
       target: media_player.alexa
-      message: Conchita se décharge anormalement. Quelqu'un pourrait la remettre sur sa base?
+      message: Conchita se décharge anormalement. Quelqu'un pourrait la remettre sur
+        sa base?
       data:
         type: announce
         method: all
@@ -211,29 +276,53 @@
   - service: notify.alexa_media
     data:
       target: media_player.alexa
-      message: La qualité de l'air semble insuffisante. Quelqu'un pourrait ouvrir la fenêtre?
+      message: La qualité de l'air semble insuffisante. Quelqu'un pourrait ouvrir
+        la fenêtre?
       data:
         type: announce
         method: all
 
 - id: letsencrypt-renewal
-  alias: "Let's Encrypt Renewal"
+  alias: Let's Encrypt Renewal
   trigger:
   - platform: time
-    at: '01:23:45'
+    at: "01:23:45"
   action:
   - service: hassio.addon_restart
     data:
       addon: core_letsencrypt
 
-- id: '1565194745362'
-  alias: Restart SC regularly
+- alias: Yamaha allumé par erreur
   trigger:
-  - platform: time_pattern
-    hours: "/6"
-  condition: []
+  - entity_id: media_player.rx_v475
+    from: 'off'
+    platform: state
+    to: 'on'
+  condition:
+  - condition: time
+    after: "22:00:00"
+    before: "07:00:00"
+  - condition: state
+    entity_id: media_player.tele
+    state: 'off'
   action:
-  - data:
-      payload: '1'
-      topic: cmnd/home/living/sc/restart
-    service: mqtt.publish
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.rx_v475
+      
+
+- alias: Fabrice maison
+  trigger:
+  - entity_id: person.fabrice_pipart
+    platform: state
+    from: 'not_home'
+    to: 'home'
+  action:
+  - service: notify.alexa_media
+    data:
+      target: media_player.alexa
+      message: Bienvenu à, la maison Fabrice!
+      data:
+        type: announce
+        method: all
+      

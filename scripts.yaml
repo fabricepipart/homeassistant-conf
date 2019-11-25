@@ -109,3 +109,220 @@ sleep_mac:
   alias: Sleep Mac
   sequence:
   - service: shell_command.sleep_mac
+
+
+activity_wii:
+  alias: Wii
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.rx_v475
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.rx_v475
+      source: AUDIO
+  - service: shell_command.switch_tv_component
+
+activity_ps3:
+  alias: PS3
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.rx_v475
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.rx_v475
+      source: HDMI1
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.sony_bravia_tv
+      source: "HDMI 3/ARC"
+
+activity_netflix:
+  alias: Netflix
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.rx_v475
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.rx_v475
+      source: AV4
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.sony_bravia_tv
+      source: "HDMI 3/ARC"
+  - service: shell_command.switch_tv_netflix
+
+activity_amazon:
+  alias: Prime Video
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.rx_v475
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.rx_v475
+      source: AV4
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.sony_bravia_tv
+      source: "HDMI 3/ARC"
+  - service: shell_command.switch_tv_home
+  - service: shell_command.switch_tv_home
+  - service: shell_command.switch_tv_right
+  - service: shell_command.switch_tv_confirm
+
+activity_play_tv:
+  alias: Play TV
+  sequence:
+  - service: shell_command.switch_tv_play
+
+activity_pause_tv:
+  alias: Pause TV
+  sequence:
+  - service: shell_command.switch_tv_pause
+
+activity_youtube:
+  alias: Youtube
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.rx_v475
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.rx_v475
+      source: AV4
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.sony_bravia_tv
+      source: "HDMI 3/ARC"
+  - service: shell_command.switch_tv_youtube
+
+activity_youtube_kids:
+  alias: Youtube Kids
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.rx_v475
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.rx_v475
+      source: AV4
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.sony_bravia_tv
+      source: "HDMI 3/ARC"
+  - service: shell_command.switch_tv_home
+  - service: shell_command.switch_tv_home
+  - service: shell_command.switch_tv_right
+  - service: shell_command.switch_tv_right
+  - service: shell_command.switch_tv_right
+  - service: shell_command.switch_tv_right
+  - service: shell_command.switch_tv_confirm
+
+activity_box:
+  alias: Box
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.rx_v475
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.rx_v475
+      source: HDMI2
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.sony_bravia_tv
+      source: "HDMI 3/ARC"
+
+activity_plex:
+  alias: Plex
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.rx_v475
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.rx_v475
+      source: HDMI3
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.sony_bravia_tv
+      source: "HDMI 3/ARC"
+
+activity_airplay:
+  alias: Airplay
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.rx_v475
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.rx_v475
+      source: AirPlay
+
+activity_spotify:
+  alias: Spotify
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.rx_v475
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.rx_v475
+      source: Spotify
+
+activity_dlna:
+  alias: iTunes
+  sequence:
+  - service: media_player.turn_on
+    data:
+      entity_id: media_player.rx_v475
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.select_source
+    data:
+      entity_id: media_player.rx_v475
+      source: SERVER
+  
+activity_off:
+  alias: 'Off'
+  sequence:
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.sony_bravia_tv
+  - service: media_player.turn_off
+    data:
+      entity_id: media_player.rx_v475

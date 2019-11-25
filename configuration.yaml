@@ -2,10 +2,6 @@
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
-
 # Text to speech
 tts:
   - platform: google_translate
@@ -54,12 +50,50 @@ neato:
   username: !secret neato_username
   password: !secret neato_password
 
+media_player:
+  - platform: yamaha
+    name: rx_v475
+    source_ignore:
+      - "AV1"
+      - "AV3"
+      - "AV5"
+      - "AV6"
+      - "HDMI4"
+      - "HDMI5"
+      - "USB"
+      - "V-AUX"
+      - "iPod (USB)"
+    source_names:
+      AUDIO: "Wii"
+      AV2: "CD"
+      AV4: "Sony TV"
+      HDMI1: "PS3"
+      HDMI2: "Box"
+      HDMI3: "Plex"
+  - platform: braviatv
+    host: 192.168.69.65
+
 google:
   client_id: !secret gcal_client_id
   client_secret: !secret gcal_client_secret
 
 shell_command:
   sleep_mac: !secret my_sleep_command
+  switch_tv_netflix: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAABoAAAB8Aw==
+  switch_tv_home: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAABgAw==
+  switch_tv_exit: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAABjAw==
+  switch_tv_down: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAB1Aw==
+  switch_tv_up: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAB0Aw==
+  switch_tv_left: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAA0Aw==
+  switch_tv_right: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAzAw==
+  switch_tv_confirm: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAABlAw==
+  switch_tv_wakeup: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAuAw==
+  switch_tv_component: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAKQAAAA2Aw==
+  switch_tv_youtube: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAMQAAABHAw==
+  switch_tv_off: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAvAw==
+  switch_tv_on: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAVAw==
+  switch_tv_play: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAJcAAAAaAw==
+  switch_tv_pause: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAJcAAAAZAw==
 
 lovelace:
   mode: yaml
@@ -258,3 +292,91 @@ sensor:
       - type: network_out
       - type: throughput_network_in
       - type: throughput_network_out
+
+  - platform: waze_travel_time
+    name: "Fabrice to Work"
+    origin: zone.home
+    destination: zone.amadeus_bel_air
+    region: 'EU'
+    vehicle_type: motorcycle
+  - platform: waze_travel_time
+    name: "Fabrice back Home"
+    origin: zone.amadeus_bel_air
+    destination: zone.home
+    region: 'EU'
+    vehicle_type: motorcycle
+  - platform: waze_travel_time
+    name: "Marina to Work"
+    origin: zone.home
+    destination: zone.caf_nice_europe
+    region: 'EU'
+  - platform: waze_travel_time
+    name: "Marina back Home"
+    origin: zone.caf_nice_europe
+    destination: zone.home
+    region: 'EU'
+
+emulated_hue:
+  host_ip: 192.168.69.99
+  listen_port: 80
+  advertise_ip: 192.168.69.99
+  advertise_port: 80
+  expose_by_default: false
+  exposed_domains:
+    - script
+    - switch
+    - light
+  entities:
+    script.activity_plex:
+      name: "Plex"
+      hidden: false
+    script.activity_off:
+      name: "Tout"
+      hidden: false
+    script.sleep_mac:
+      name: "Mac"
+      hidden: false
+    script.activity_wii:
+      name: "Wii"
+      hidden: false
+    script.activity_ps3:
+      name: "PS3"
+      hidden: false
+    script.activity_netflix:
+      name: "Netflix"
+      hidden: false
+    script.activity_amazon:
+      name: "Prime"
+      hidden: false
+    script.activity_youtube:
+      name: "Youtube"
+      hidden: false
+    script.activity_youtube_kids:
+      name: "Youtube kids"
+      hidden: false
+    script.activity_box:
+      name: "Box"
+      hidden: false
+    script.activity_tv_play:
+      name: "Play"
+      hidden: false
+    script.activity_tv_pause:
+      name: "Pause"
+      hidden: false
+    media_player.rx_v475:
+      name: "Ampli"
+      hidden: false
+
+#frontend:
+#  themes: !include themes/clear-dark.yaml
+
+frontend:
+  themes: !include_dir_merge_named themes
+
+
+#https://www.ipaddressguide.com/cidr
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 192.168.69.128/31
+  - platform: bluetooth_tracker
+#  - platform: bluetooth_le_tracker

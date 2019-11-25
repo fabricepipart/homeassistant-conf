@@ -2,7 +2,12 @@ title: Maison
 resources:
   - url: /community_plugin/calendar-card/calendar-card.js
     type: js
+  - url: /community_plugin/mini-media-player/mini-media-player-bundle.js
+    type: module
+
+
 views:
+
   - badges: []
     cards:
       - cards:
@@ -45,28 +50,29 @@ views:
         title: Lumières
         type: horizontal-stack
       - entities:
-          - entity: sensor.salon_sc_temperature
-        title: Température
-        type: glance
+          - entity: person.fabrice_pipart
+          - entity: person.marina_pipart
+        show_header_toggle: false
+        title: Utilisateurs
+        type: entities
       - entities:
+          - entity: sensor.salon_sc_temperature
           - entity: sensor.salon_sc_humidity
-        title: Humidité
-        type: glance
+        hours_to_show: 72
+        refresh_interval: 0
+        type: history-graph
       - entities:
           - entity: sensor.salon_sc_light
           - entity: sensor.salon_sc_airquality
           - entity: sensor.salon_sc_noise
         title: Autres
         type: glance
-      - entities:
-          - entity: sensor.salon_sc_temperature
-          - entity: sensor.salon_sc_humidity
-        hours_to_show: 24
-        refresh_interval: 0
-        type: history-graph
     icon: 'mdi:home'
     path: lumieres
     title: Lumières
+
+
+
   - badges: []
     cards:
       - cards:
@@ -197,6 +203,9 @@ views:
     icon: 'mdi:robot-vacuum-variant'
     panel: false
     title: Aspirateur
+
+
+
   - badges: []
     cards:
       - entity: weather.nice
@@ -214,6 +223,20 @@ views:
         type: glance
       - entity: weather.maison
         type: weather-forecast
+    icon: 'mdi:weather-rainy'
+    panel: false
+    path: meteo
+    title: Météo
+
+  - badges: []
+    cards:
+      - type: custom:calendar-card
+        title: "My Calendar"
+        progressBar: true
+        numberOfDays: 30
+        entities:
+          - calendar.fabrice_pipart_gmail_com
+          - calendar.calendrier_perso
       - entities:
           - entity: switch.alexa_do_not_disturb_switch
           - entity: sensor.alexa_next_alarm
@@ -222,19 +245,185 @@ views:
         show_header_toggle: false
         title: Alexa
         type: entities
-      - type: custom:calendar-card
-        title: "My Calendar"
-        progressBar: true
-        numberOfDays: 30
+      - columns: 2
         entities:
-          - calendar.fabrice_pipart_gmail_com
-          - calendar.calendrier_perso
-    icon: 'mdi:weather-rainy'
-    panel: false
-    path: meteo
-    title: Météo
+          - entity: sensor.fabrice_to_work
+          - entity: sensor.fabrice_back_home
+          - entity: sensor.marina_to_work
+          - entity: sensor.marina_back_home
+        type: glance
+    icon: 'mdi:calendar'
+    path: cal
+    title: Calendrier
+
   - badges: []
     cards:
+      - title: Activités
+        type: horizontal-stack
+        cards:
+          - entity: script.activity_off
+            name: 'Off'
+            icon: 'mdi:power'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_box
+            name: Box
+            icon: 'mdi:television-box'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_netflix
+            name: Netflix
+            icon: 'mdi:netflix'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_plex
+            name: Plex
+            icon: 'mdi:plex'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+      - type: horizontal-stack
+        cards:
+          - entity: script.activity_amazon
+            name: Prime
+            icon: 'mdi:amazon'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_wii
+            name: Wii
+            icon: 'mdi:wii'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_youtube
+            name: Youtube
+            icon: 'mdi:youtube'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_youtube_kids
+            name: Kids
+            icon: 'mdi:youtube'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+      - type: horizontal-stack
+        cards:
+          - entity: script.activity_ps3
+            name: 'PS3'
+            icon: 'mdi:playstation'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_airplay
+            name: 'Airplay'
+            icon: 'mdi:airplay'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_spotify
+            name: Spotify
+            icon: 'mdi:spotify'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_dlna
+            name: iTunes
+            icon: 'mdi:itunes'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+      - title: Contrôles
+        type: horizontal-stack
+        cards:
+          - entity: script.activity_play_tv
+            name: 'Play'
+            icon: 'mdi:play'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.activity_pause_tv
+            name: Pause
+            icon: 'mdi:pause'
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+      - type: custom:mini-media-player
+        entity: media_player.sony_bravia_tv
       - entities:
           - entity: media_player.alexa
           - entity: switch.alexa_shuffle_switch
@@ -242,13 +431,10 @@ views:
         show_header_toggle: false
         title: Alexa
         type: entities
-      - entities:
-          - entity: media_player.plex_openpht
-          - entity: sensor.plex_hackintosh
-        type: entities
     icon: 'mdi:music'
     path: medias
     title: Medias
+
   - badges: []
     cards:
       - cards:
@@ -279,10 +465,74 @@ views:
         show_header_toggle: false
         title: Raspberry
         type: entities
+    icon: 'mdi:network'
+    path: reseau
+    title: Réseau
+
+  - badges: []
+    cards:
+      - columns: 3
+        entities:
+          - entity: sensor.linky_yesterday
+          - entity: sensor.linky_last_month
+          - entity: sensor.linky_last_year
+          - entity: sensor.linky_current_month
+          - entity: sensor.linky_current_year
+        title: Linky
+        type: glance
       - entities:
-          - entity: binary_sensor.updater
+          - entity: sensor.linky_yesterday
+        hours_to_show: 720
+        refresh_interval: 0
+        type: history-graph
+      - entities:
+          - entity: sensor.iphone_de_le_gone_battery_level
+          - entity: sensor.iphone_de_le_gone_battery_state
         show_header_toggle: false
+        title: iPhone
+        type: entities
+    icon: 'mdi:power-plug'
+    path: power
+    title: Electricité
+
+  - badges: []
+    cards:
+      - entities:
+          - binary_sensor.updater
+        show_header_toggle: true
         title: Updater
+        type: entities
+      - entities:
+          - sensor.salon_sc_temperature
+          - sensor.salon_sc_humidity
+          - sensor.salon_sc_airquality
+          - sensor.salon_sc_light
+          - sensor.salon_sc_noise
+        show_header_toggle: true
+        title: Salon
+        type: entities
+      - entities:
+          - automation.sonoff_ips_on_ha_start_up
+          - automation.power_state_on_ha_start_up
+          - automation.tasmota_versions_on_ha_start_up
+          - automation.conchita_en_erreur
+          - automation.conchita_se_decharge
+          - automation.il_pleut
+          - automation.let_s_encrypt_renewal
+          - automation.meteo_du_jour
+          - automation.qualite_de_l_air
+          - automation.redemarrage
+          - automation.temps_de_trajet
+          - automation.risque_de_pluie
+          - automation.yamaha_allume_par_erreur
+        title: Automatisation
+        type: entities
+      - entities:
+          - entity: light.sam
+          - entity: light.salon
+          - entity: light.cleo
+          - entity: light.chambre
+        title: Lumière
         type: entities
       - columns: 3
         entities:
@@ -314,157 +564,11 @@ views:
         show_icon: false
         title: Versions Sonoff
         type: glance
-      - entities:
-          - entity: sensor.iphone_de_le_gone_battery_level
-          - entity: sensor.iphone_de_marina_battery_level
-          - entity: sensor.iphone_de_marina_battery_state
-        show_header_toggle: false
-        title: iPhone
-        type: entities
-      - entities:
-          - entity: automation.power_state_on_ha_start_up
-          - entity: automation.tasmota_versions_on_ha_start_up
-          - entity: automation.sonoff_ips_on_ha_start_up
-          - entity: automation.il_pleut
-          - entity: automation.meteo_du_jour
-          - entity: automation.redemarrage
-          - entity: automation.risque_de_pluie
-        type: entities
-    icon: 'mdi:network'
-    path: reseau
-    title: Réseau
-  - badges: []
-    cards:
-      - entities:
-          - switch.conchita_schedule
-          - sensor.conchita_battery
-          - vacuum.conchita
-        show_header_toggle: true
-        title: Cuisine
-        type: entities
-      - entity: camera.conchita_cleaning_map
-        type: picture-entity
-      - entities:
-          - sensor.neufbox_router_kbyte_sec_sent
-          - sensor.neufbox_router_kbyte_sec_received
-        show_header_toggle: true
-        title: Salon
-        type: entities
+      - entity: media_player.rx_v475
+        type: media-control
       - entity: media_player.tele
         type: media-control
-      - entities:
-          - sun.sun
-          - sensor.nice_weather
-          - sensor.nice_temperature
-          - sensor.nice_wind_speed
-          - sensor.nice_rain_chance
-          - sensor.nice_weather_alert
-          - sensor.nice_uv
-          - sensor.nice_snow_chance
-          - sensor.nice_thunder_chance
-          - sensor.nice_next_rain
-          - sensor.nice_freeze_chance
-        show_header_toggle: true
-        title: Météo
-        type: entities
-      - entity: weather.nice
-        type: weather-forecast
-      - entities:
-          - sensor.salle_a_manger_signal
-          - sensor.salle_a_manger_ip
-          - sensor.salle_a_manger_version
-          - sensor.salon_signal
-          - sensor.salon_ip
-          - sensor.salon_version
-          - sensor.chambre_signal
-          - sensor.chambre_ip
-          - sensor.chambre_version
-          - sensor.chambre_cleo_signal
-          - sensor.chambre_cleo_ip
-          - sensor.chambre_cleo_version
-          - sensor.salon_sc_signal
-          - sensor.salon_sc_ip
-          - sensor.salon_sc_version
-        show_header_toggle: true
-        title: Sonoffs
-        type: entities
-      - entities:
-          - sensor.conchita_battery
-          - switch.conchita_schedule
-          - vacuum.conchita
-          - script.neato_chambre
-          - script.neato_cleo
-          - script.neato_couloir
-          - script.neato_cuisine
-          - script.neato_entree
-          - script.neato_sam
-          - script.neato_sdb
-          - script.neato_table
-          - script.neato_table_basse
-          - script.neato_wc
-        show_header_toggle: true
-        title: Conchita
-        type: entities
-      - entities:
-          - binary_sensor.updater
-        show_header_toggle: true
-        title: Updater
-        type: entities
-      - entities:
-          - entity: person.fabrice_pipart
-          - entity: person.marina_pipart
-        show_header_toggle: true
-        title: Utilisateurs
-        type: entities
-      - entities:
-          - sensor.plex_hackintosh
-        show_header_toggle: true
-        title: Plex
-        type: entities
-      - entity: media_player.plex_openpht
-        type: media-control
-      - entities:
-          - sensor.salon_sc_temperature
-          - sensor.salon_sc_humidity
-          - sensor.salon_sc_airquality
-          - sensor.salon_sc_light
-          - sensor.salon_sc_noise
-        show_header_toggle: true
-        title: Salon
-        type: entities
-      - entities:
-          - sensor.iphone_de_le_gone_battery_level
-        show_header_toggle: true
-        title: iPhone
-        type: entities
-      - entities:
-          - automation.sonoff_ips_on_ha_start_up
-          - automation.power_state_on_ha_start_up
-          - automation.tasmota_versions_on_ha_start_up
-        title: Automatisation
-        type: entities
-      - entities:
-          - entity: light.sam
-          - entity: light.salon
-          - entity: light.cleo
-          - entity: light.chambre
-        title: Lumière
-        type: entities
-      - entity: weather.maison
-        type: weather-forecast
-      - entities:
-          - entity: switch.alexa_do_not_disturb_switch
-          - entity: media_player.alexa
-          - entity: switch.alexa_shuffle_switch
-          - entity: switch.alexa_repeat_switch
-          - entity: sensor.alexa_next_alarm
-          - entity: sensor.alexa_next_reminder
-          - entity: sensor.alexa_next_timer
-        type: entities
-      - entities:
-          - entity: calendar.fabrice_pipart_gmail_com
-        type: entities
     icon: 'mdi:folder-open'
     path: default_view
-    title: Home
+    title: Admin
 
