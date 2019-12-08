@@ -14,27 +14,12 @@ homeassistant:
   customize: !include customize.yaml
 
 discovery:
-
 ios:
 
 http:
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
   base_url: !secret my_home_domain
-
-meteo_france:
-  - city: '06200'
-    monitored_conditions:
-        - rain_chance
-        - freeze_chance
-        - thunder_chance
-        - snow_chance
-        - weather
-        - next_rain
-        - wind_speed
-        - temperature
-        - uv
-        - weather_alert
 
 wemo:
   discovery: false
@@ -50,329 +35,24 @@ neato:
   username: !secret neato_username
   password: !secret neato_password
 
-media_player:
-  - platform: yamaha
-    name: rx_v475
-    source_ignore:
-      - "AV1"
-      - "AV3"
-      - "AV5"
-      - "AV6"
-      - "HDMI4"
-      - "HDMI5"
-      - "USB"
-      - "V-AUX"
-      - "iPod (USB)"
-    source_names:
-      AUDIO: "Wii"
-      AV2: "CD"
-      AV4: "Sony TV"
-      HDMI1: "PS3"
-      HDMI2: "Box"
-      HDMI3: "Plex"
-  - platform: braviatv
-    host: 192.168.69.65
-
 google:
   client_id: !secret gcal_client_id
   client_secret: !secret gcal_client_secret
 
-shell_command:
-  sleep_mac: !secret my_sleep_command
-  switch_tv_netflix: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAABoAAAB8Aw==
-  switch_tv_home: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAABgAw==
-  switch_tv_exit: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAABjAw==
-  switch_tv_down: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAB1Aw==
-  switch_tv_up: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAB0Aw==
-  switch_tv_left: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAA0Aw==
-  switch_tv_right: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAzAw==
-  switch_tv_confirm: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAABlAw==
-  switch_tv_wakeup: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAuAw==
-  switch_tv_component: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAKQAAAA2Aw==
-  switch_tv_youtube: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAMQAAABHAw==
-  switch_tv_off: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAvAw==
-  switch_tv_on: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAVAw==
-  switch_tv_play: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAJcAAAAaAw==
-  switch_tv_pause: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAJcAAAAZAw==
-
 lovelace:
   mode: yaml
 
-light:
-  - platform: mqtt
-    name: "SàM"
-    state_topic: "stat/home/dining/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/dining/light/POWER"
-    availability_topic: "tele/home/dining/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Cléo"
-    state_topic: "stat/home/cleo/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/cleo/light/POWER"
-    availability_topic: "tele/home/cleo/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salon"
-    state_topic: "stat/home/living/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/living/light/POWER"
-    availability_topic: "tele/home/living/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Chambre"
-    state_topic: "stat/home/parents/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/parents/light/POWER"
-    availability_topic: "tele/home/parents/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-
-sensor:
+meteo_france: !include meteo.yaml
+media_player: !include media_player.yaml
+shell_command: !include shell.yaml
+light: !include light.yaml
+sensor: !include sensor.yaml
     
-  - platform: mqtt
-    name: "Salle à Manger (Signal)"
-    state_topic: "tele/home/dining/light/STATE"
-    unit_of_measurement: "%"
-    value_template: "{{value_json['Wifi'].RSSI }}"
-    availability_topic: "tele/home/dining/light/LWT"
-    qos: 0
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salle à Manger (version)"
-    state_topic: "stat/home/dining/light/STATUS2"
-    value_template: "{{value_json['StatusFWR'].Version }}"
-    availability_topic: "tele/home/dining/light/LWT"
-    qos: 0
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salle à Manger (IP)"
-    state_topic: 'stat/home/dining/light/RESULT'
-    value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
-
-  - platform: mqtt
-    name: "Salon (Signal)"
-    state_topic: "tele/home/living/light/STATE"
-    unit_of_measurement: "%"
-    value_template: "{{value_json['Wifi'].RSSI }}"
-    availability_topic: "tele/home/living/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salon (version)"
-    state_topic: "stat/home/living/light/STATUS2"
-    value_template: "{{value_json['StatusFWR'].Version }}"
-    availability_topic: "tele/home/living/light/LWT"
-    qos: 0
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salon (IP)"
-    state_topic: 'stat/home/living/light/RESULT'
-    value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
-
-  - platform: mqtt
-    name: "Chambre (Signal)"
-    state_topic: "tele/home/parents/light/STATE"
-    unit_of_measurement: "%"
-    value_template: "{{value_json['Wifi'].RSSI }}"
-    availability_topic: "tele/home/parents/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Chambre (version)"
-    state_topic: "stat/home/parents/light/STATUS2"
-    value_template: "{{value_json['StatusFWR'].Version }}"
-    availability_topic: "tele/home/parents/light/LWT"
-    qos: 0
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Chambre (IP)"
-    state_topic: 'stat/home/parents/light/RESULT'
-    value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
-
-  - platform: mqtt
-    name: "Chambre Cléo (Signal)"
-    state_topic: "tele/home/cleo/light/STATE"
-    unit_of_measurement: "%"
-    value_template: "{{value_json['Wifi'].RSSI }}"
-    availability_topic: "tele/home/cleo/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Chambre Cléo (version)"
-    state_topic: "stat/home/cleo/light/STATUS2"
-    value_template: "{{value_json['StatusFWR'].Version }}"
-    availability_topic: "tele/home/cleo/light/LWT"
-    qos: 0
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Chambre Cléo (IP)"
-    state_topic: 'stat/home/cleo/light/RESULT'
-    value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
-
-  - platform: mqtt
-    name: "Salon SC (Signal)"
-    state_topic: "tele/home/living/sc/STATE"
-    unit_of_measurement: "%"
-    value_template: "{{value_json['Wifi'].RSSI }}"
-    availability_topic: "tele/home/living/sc/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salon SC (version)"
-    state_topic: "stat/home/living/sc/STATUS2"
-    value_template: "{{value_json['StatusFWR'].Version }}"
-    availability_topic: "tele/home/living/sc/LWT"
-    qos: 0
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salon SC (IP)"
-    state_topic: 'stat/home/living/sc/RESULT'
-    value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
-  - platform: mqtt
-    name: "Salon SC (Temperature)"
-    state_topic: "tele/home/living/sc/SENSOR"
-    value_template: "{{ value_json['SonoffSC'].Temperature | float - 3 }}"
-    unit_of_measurement: "°C"
-    availability_topic: "tele/home/living/sc/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salon SC (Humidity)"
-    state_topic: "tele/home/living/sc/SENSOR"
-    value_template: "{{ value_json['SonoffSC'].Humidity }}"
-    unit_of_measurement: "%"
-    availability_topic: "tele/home/living/sc/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salon SC (Light)"
-    state_topic: "tele/home/living/sc/SENSOR"
-    value_template: "{{ value_json['SonoffSC'].Light }}"
-    unit_of_measurement: "%"
-    availability_topic: "tele/home/living/sc/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salon SC (Noise)"
-    state_topic: "tele/home/living/sc/SENSOR"
-    value_template: "{{ value_json['SonoffSC'].Noise }}"
-    unit_of_measurement: "%"
-    availability_topic: "tele/home/living/sc/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salon SC (AirQuality)"
-    state_topic: "tele/home/living/sc/SENSOR"
-    value_template: "{{ value_json['SonoffSC'].AirQuality }}"
-    unit_of_measurement: "%"
-    availability_topic: "tele/home/living/sc/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-
-  - platform: systemmonitor
-    resources:
-      - type: disk_use_percent
-        arg: /
-      - type: memory_use_percent
-      - type: swap_use_percent
-      - type: processor_use
-      - type: last_boot
-      - type: network_in
-      - type: network_out
-      - type: throughput_network_in
-      - type: throughput_network_out
-
-  - platform: waze_travel_time
-    name: "Fabrice to Work"
-    origin: zone.home
-    destination: zone.amadeus_bel_air
-    region: 'EU'
-    vehicle_type: motorcycle
-  - platform: waze_travel_time
-    name: "Fabrice back Home"
-    origin: zone.amadeus_bel_air
-    destination: zone.home
-    region: 'EU'
-    vehicle_type: motorcycle
-  - platform: waze_travel_time
-    name: "Marina to Work"
-    origin: zone.home
-    destination: zone.caf_nice_europe
-    region: 'EU'
-  - platform: waze_travel_time
-    name: "Marina back Home"
-    origin: zone.caf_nice_europe
-    destination: zone.home
-    region: 'EU'
-
-emulated_hue:
-  host_ip: 192.168.69.99
-  listen_port: 80
-  advertise_ip: 192.168.69.99
-  advertise_port: 80
-  expose_by_default: false
-  exposed_domains:
-    - script
-    - switch
-    - light
-  entities:
-    script.activity_plex:
-      name: "Plex"
-      hidden: false
-    script.activity_off:
-      name: "Tout"
-      hidden: false
-    script.sleep_mac:
-      name: "Mac"
-      hidden: false
-    script.activity_wii:
-      name: "Wii"
-      hidden: false
-    script.activity_ps3:
-      name: "PS3"
-      hidden: false
-    script.activity_netflix:
-      name: "Netflix"
-      hidden: false
-    script.activity_amazon:
-      name: "Prime"
-      hidden: false
-    script.activity_youtube:
-      name: "Youtube"
-      hidden: false
-    script.activity_youtube_kids:
-      name: "Youtube kids"
-      hidden: false
-    script.activity_box:
-      name: "Box"
-      hidden: false
-    script.activity_tv_play:
-      name: "Play"
-      hidden: false
-    script.activity_tv_pause:
-      name: "Pause"
-      hidden: false
-    media_player.rx_v475:
-      name: "Ampli"
-      hidden: false
-
-#frontend:
-#  themes: !include themes/clear-dark.yaml
+alexa:
+  smart_home: !include alexa.yaml
 
 frontend:
   themes: !include_dir_merge_named themes
-
 
 #https://www.ipaddressguide.com/cidr
 device_tracker:
@@ -380,3 +60,10 @@ device_tracker:
     hosts: 192.168.69.128/31
   - platform: bluetooth_tracker
 #  - platform: bluetooth_le_tracker
+
+xiaomi_aqara:
+  discovery_retry: 5
+  gateways:
+    - mac: !secret xiaomi_gateway_mac
+      key: !secret xiaomi_gateway_key
+

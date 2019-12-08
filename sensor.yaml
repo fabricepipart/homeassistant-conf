@@ -1,0 +1,202 @@
+- platform: mqtt
+  name: "Salle à Manger (Signal)"
+  state_topic: "tele/home/dining/light/STATE"
+  unit_of_measurement: "%"
+  value_template: "{{value_json['Wifi'].RSSI }}"
+  availability_topic: "tele/home/dining/light/LWT"
+  qos: 0
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Salle à Manger (version)"
+  state_topic: "stat/home/dining/light/STATUS2"
+  value_template: "{{value_json['StatusFWR'].Version }}"
+  availability_topic: "tele/home/dining/light/LWT"
+  qos: 0
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Salle à Manger (IP)"
+  state_topic: 'stat/home/dining/light/RESULT'
+  value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
+
+- platform: mqtt
+  name: "Salon (Signal)"
+  state_topic: "tele/home/living/light/STATE"
+  unit_of_measurement: "%"
+  value_template: "{{value_json['Wifi'].RSSI }}"
+  availability_topic: "tele/home/living/light/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Salon (version)"
+  state_topic: "stat/home/living/light/STATUS2"
+  value_template: "{{value_json['StatusFWR'].Version }}"
+  availability_topic: "tele/home/living/light/LWT"
+  qos: 0
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Salon (IP)"
+  state_topic: 'stat/home/living/light/RESULT'
+  value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
+
+- platform: mqtt
+  name: "Chambre (Signal)"
+  state_topic: "tele/home/parents/light/STATE"
+  unit_of_measurement: "%"
+  value_template: "{{value_json['Wifi'].RSSI }}"
+  availability_topic: "tele/home/parents/light/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Chambre (version)"
+  state_topic: "stat/home/parents/light/STATUS2"
+  value_template: "{{value_json['StatusFWR'].Version }}"
+  availability_topic: "tele/home/parents/light/LWT"
+  qos: 0
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Chambre (IP)"
+  state_topic: 'stat/home/parents/light/RESULT'
+  value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
+
+- platform: mqtt
+  name: "Chambre Cléo (Signal)"
+  state_topic: "tele/home/cleo/light/STATE"
+  unit_of_measurement: "%"
+  value_template: "{{value_json['Wifi'].RSSI }}"
+  availability_topic: "tele/home/cleo/light/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Chambre Cléo (version)"
+  state_topic: "stat/home/cleo/light/STATUS2"
+  value_template: "{{value_json['StatusFWR'].Version }}"
+  availability_topic: "tele/home/cleo/light/LWT"
+  qos: 0
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Chambre Cléo (IP)"
+  state_topic: 'stat/home/cleo/light/RESULT'
+  value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
+  
+- platform: mqtt
+  name: "S20 (Signal)"
+  state_topic: "tele/home/s20/light/STATE"
+  unit_of_measurement: "%"
+  value_template: "{{value_json['Wifi'].RSSI }}"
+  availability_topic: "tele/home/s20/light/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "S20 (version)"
+  state_topic: "stat/home/s20/light/STATUS2"
+  value_template: "{{value_json['StatusFWR'].Version }}"
+  availability_topic: "tele/home/s20/light/LWT"
+  qos: 0
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "S20 (IP)"
+  state_topic: 'stat/home/s20/light/RESULT'
+  value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
+
+- platform: mqtt
+  name: "Salon SC (Signal)"
+  state_topic: "tele/home/living/sc/STATE"
+  unit_of_measurement: "%"
+  value_template: "{{value_json['Wifi'].RSSI }}"
+  availability_topic: "tele/home/living/sc/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Salon SC (version)"
+  state_topic: "stat/home/living/sc/STATUS2"
+  value_template: "{{value_json['StatusFWR'].Version }}"
+  availability_topic: "tele/home/living/sc/LWT"
+  qos: 0
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Salon SC (IP)"
+  state_topic: 'stat/home/living/sc/RESULT'
+  value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
+- platform: mqtt
+  name: "Salon SC (Temperature)"
+  state_topic: "tele/home/living/sc/SENSOR"
+  value_template: "{{ value_json['SonoffSC'].Temperature | float - 3 }}"
+  unit_of_measurement: "°C"
+  availability_topic: "tele/home/living/sc/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Salon SC (Humidity)"
+  state_topic: "tele/home/living/sc/SENSOR"
+  value_template: "{{ value_json['SonoffSC'].Humidity }}"
+  unit_of_measurement: "%"
+  availability_topic: "tele/home/living/sc/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Salon SC (Light)"
+  state_topic: "tele/home/living/sc/SENSOR"
+  value_template: "{{ value_json['SonoffSC'].Light }}"
+  unit_of_measurement: "%"
+  availability_topic: "tele/home/living/sc/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Salon SC (Noise)"
+  state_topic: "tele/home/living/sc/SENSOR"
+  value_template: "{{ value_json['SonoffSC'].Noise }}"
+  unit_of_measurement: "%"
+  availability_topic: "tele/home/living/sc/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+- platform: mqtt
+  name: "Salon SC (AirQuality)"
+  state_topic: "tele/home/living/sc/SENSOR"
+  value_template: "{{ value_json['SonoffSC'].AirQuality }}"
+  unit_of_measurement: "%"
+  availability_topic: "tele/home/living/sc/LWT"
+  payload_available: "Online"
+  payload_not_available: "Offline"
+
+- platform: systemmonitor
+  resources:
+    - type: disk_use_percent
+      arg: /
+    - type: memory_use_percent
+    - type: swap_use_percent
+    - type: processor_use
+    - type: last_boot
+    - type: network_in
+    - type: network_out
+    - type: throughput_network_in
+    - type: throughput_network_out
+
+- platform: waze_travel_time
+  name: "Fabrice to Work"
+  origin: zone.home
+  destination: zone.amadeus_bel_air
+  region: 'EU'
+  vehicle_type: motorcycle
+- platform: waze_travel_time
+  name: "Fabrice back Home"
+  origin: zone.amadeus_bel_air
+  destination: zone.home
+  region: 'EU'
+  vehicle_type: motorcycle
+- platform: waze_travel_time
+  name: "Marina to Work"
+  origin: zone.home
+  destination: zone.caf_nice_europe
+  region: 'EU'
+- platform: waze_travel_time
+  name: "Marina back Home"
+  origin: zone.caf_nice_europe
+  destination: zone.home
+  region: 'EU'

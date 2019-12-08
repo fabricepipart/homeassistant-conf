@@ -9,69 +9,224 @@ resources:
 views:
 
   - badges: []
+    panel: true
     cards:
-      - cards:
-          - entity: light.sam
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: light.salon
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: light.cleo
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: light.chambre
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-        title: Lumières
-        type: horizontal-stack
-      - entities:
-          - entity: person.fabrice_pipart
-          - entity: person.marina_pipart
-        show_header_toggle: false
-        title: Utilisateurs
-        type: entities
-      - entities:
-          - entity: sensor.salon_sc_temperature
-          - entity: sensor.salon_sc_humidity
-        hours_to_show: 72
-        refresh_interval: 0
-        type: history-graph
-      - entities:
-          - entity: sensor.salon_sc_light
-          - entity: sensor.salon_sc_airquality
-          - entity: sensor.salon_sc_noise
-        title: Autres
-        type: glance
+      - type: horizontal-stack
+        cards:
+          - type: vertical-stack
+            cards:
+              - type: picture-glance
+                title: Salon
+                entities:
+                  - entity: light.salon
+                    show_state: true
+                  - entity: media_player.sony_bravia_tv
+                    icon: mdi:television
+                    show_state: true
+                  - entity: media_player.rx_v475
+                    icon: mdi:audio-video
+                    show_state: true
+                image: https://cdn.apartmenttherapy.info/image/fetch/f_auto,q_auto:eco,c_fit,w_660/https%3A%2F%2Fstorage.googleapis.com%2Fgen-atmedia%2F2%2F2018%2F11%2F479458640eca110b5a4be0f7d758419b395dc2fa.jpeg
+            
+              - type: picture-glance
+                title: Chambre
+                entities:
+                  - entity: light.chambre
+                    show_state: true
+                  - entity: sensor.temperature_158d00044bfdc7
+                    show_state: true
+                  - entity: sensor.humidity_158d00044bfdc7
+                    show_state: true
+                image: http://www.champagne-godme.fr/wp-content/uploads/2019/05/decoration-chambre-parentale-romantique-unique-images-peinture-chambre-parents-avec-couleur-peinture-chambre-parentale-of-decoration-chambre-parentale-romantique.jpg
+            
+              - type: picture-glance
+                title: Cléo
+                entities:
+                  - entity: light.cleo
+                    show_state: true
+                  - entity: sensor.temperature_158d00044606ee
+                    show_state: true
+                  - entity: sensor.humidity_158d00044606ee
+                    show_state: true
+                image: https://www.hubstairs.com/blog/wp-content/uploads/2017/09/mezzanine-chambre-d-enfant.jpg
+          - type: vertical-stack
+            cards:
+              - type: picture-glance
+                title: Salle à Manger
+                entities:
+                  - entity: sensor.temperature_158d0004460790
+                    show_state: true
+                  - entity: sensor.humidity_158d0004460790
+                    show_state: true
+                  - entity: light.sam
+                    show_state: true
+                  - entity: script.sleep_mac
+                    hold_action:
+                      action: more-info
+                    icon: 'mdi:desktop-tower'
+                    tap_action:
+                      action: toggle
+                image: https://www.meubis.be/files/cache/small/files/feniks-eetkamer-salle-a-manger-dining-room-bij-meubis-e1-5b1e9a8653082.jpg
+            
+              - type: picture-glance
+                title: Cuisine
+                entities:
+                  - entity: sensor.temperature_158d00044627b4
+                    show_state: true
+                  - entity: sensor.humidity_158d00044627b4
+                    show_state: true
+                image: https://www.alsacecuisine.fr/public/donnees/cms/sources/pages/hp-03.jpg
+            
+              - type: picture-glance
+                title: Salle de Bain
+                entities:
+                  - entity: sensor.temperature_158d0004465b49
+                    show_state: true
+                  - entity: sensor.humidity_158d0004465b49
+                    show_state: true
+                image: https://www.jacobdelafon.fr/carnet-elegance/wp-content/uploads/2018/08/Salle_de_bains_sous_sol_VOX.jpg
+    
     icon: 'mdi:home'
     path: lumieres
     title: Lumières
 
 
+  - badges: []
+    icon: 'mdi:thermometer'
+    path: sensors
+    title: Sensors
+    cards:
+        
+      - title: Températures
+        type: horizontal-stack
+        cards:
+          - entity: sensor.temperature_158d0004460790
+            name: Salon
+            unit: °C
+            min: 16
+            max: 30
+            severity:
+              green: 20
+              yellow: 24
+              red: 28
+            type: gauge
+          - entity: sensor.temperature_158d00044627b4
+            name: Cuisine
+            unit: °C
+            min: 16
+            max: 30
+            severity:
+              green: 20
+              yellow: 24
+              red: 28
+            type: gauge
+          - entity: sensor.temperature_158d0004465b49
+            name: Salle de bain
+            unit: °C
+            min: 16
+            max: 30
+            severity:
+              green: 22
+              yellow: 25
+              red: 28
+            type: gauge
+      - type: horizontal-stack
+        columns: 3
+        cards:
+          - entity: sensor.temperature_158d00044606ee
+            name: Cléo
+            unit: °C
+            min: 16
+            max: 30
+            severity:
+              green: 21
+              yellow: 22
+              red: 28
+            type: gauge
+          - entity: sensor.temperature_158d00044bfdc7
+            name: Chambre
+            unit: °C
+            min: 16
+            max: 30
+            severity:
+              green: 21
+              yellow: 22
+              red: 28
+            type: gauge
+      - type: history-graph
+        entities:
+          - entity: sensor.temperature_158d0004460790
+            name: Salon
+          - entity: sensor.temperature_158d00044627b4
+            name: Cuisine
+          - entity: sensor.temperature_158d0004465b49
+            name: Salle de bain
+          - entity: sensor.temperature_158d00044606ee
+            name: Cléo
+          - entity: sensor.temperature_158d00044bfdc7
+            name: Chambre
+        hours_to_show: 72
+            
+      - title: Humidité
+        type: horizontal-stack
+        cards:
+          - entity: sensor.humidity_158d0004460790
+            name: Salon
+            unit: '%'
+            severity:
+              green: 40
+              yellow: 55
+              red: 70
+            type: gauge
+          - entity: sensor.humidity_158d00044627b4
+            name: Cuisine
+            unit: '%'
+            severity:
+              green: 40
+              yellow: 55
+              red: 70
+            type: gauge
+          - entity: sensor.humidity_158d0004465b49
+            name: Salle de bain
+            unit: '%'
+            severity:
+              green: 40
+              yellow: 55
+              red: 70
+            type: gauge
+      - type: horizontal-stack
+        columns: 3
+        cards:
+          - entity: sensor.humidity_158d00044606ee
+            name: Cléo
+            unit: '%'
+            severity:
+              green: 40
+              yellow: 55
+              red: 70
+            type: gauge
+          - entity: sensor.humidity_158d00044bfdc7
+            name: Chambre
+            unit: '%'
+            severity:
+              green: 40
+              yellow: 55
+              red: 70
+            type: gauge
+      - type: history-graph
+        entities:
+          - entity: sensor.humidity_158d0004460790
+            name: Salon
+          - entity: sensor.humidity_158d00044627b4
+            name: Cuisine
+          - entity: sensor.humidity_158d0004465b49
+            name: Salle de bain
+          - entity: sensor.humidity_158d00044606ee
+            name: Cléo
+          - entity: sensor.humidity_158d00044bfdc7
+            name: Chambre
+        hours_to_show: 72
+            
 
   - badges: []
     cards:
@@ -230,6 +385,12 @@ views:
 
   - badges: []
     cards:
+      - entities:
+          - entity: person.fabrice_pipart
+          - entity: person.marina_pipart
+        show_header_toggle: false
+        title: Utilisateurs
+        type: entities
       - type: custom:calendar-card
         title: "My Calendar"
         progressBar: true
@@ -424,6 +585,8 @@ views:
             type: entity-button
       - type: custom:mini-media-player
         entity: media_player.sony_bravia_tv
+      - type: custom:mini-media-player
+        entity: media_player.spotify
       - entities:
           - entity: media_player.alexa
           - entity: switch.alexa_shuffle_switch
@@ -568,7 +731,118 @@ views:
         type: media-control
       - entity: media_player.tele
         type: media-control
+      - entities:
+          - entity: sensor.salon_sc_temperature
+          - entity: sensor.salon_sc_humidity
+        hours_to_show: 72
+        refresh_interval: 0
+        type: history-graph
+      - entity: sensor.salon_sc_temperature
+        hours_to_show: 72
+        refresh_interval: 0
+        icon: mdi:thermometer
+        graph: line
+        unit: °C
+        type: sensor
+      - entities:
+          - entity: sensor.salon_sc_light
+          - entity: sensor.salon_sc_airquality
+          - entity: sensor.salon_sc_noise
+        title: Autres
+        type: glance
+            
+      - title: Pression
+        type: horizontal-stack
+        cards:
+          - entity: sensor.pressure_158d0004460790
+            name: Salon hPa
+            unit: hPa
+            min: 10
+            max: 40
+            severity:
+              green: 1000
+              yellow: 1026
+              red: 1030
+            type: gauge
+          - entity: sensor.pressure_158d00044627b4
+            name: Cuisine
+            unit: hPa
+            severity:
+              green: 1000
+              yellow: 1026
+              red: 1030
+            type: gauge
+            
+      - title: Gateway
+        type: horizontal-stack
+        cards:
+         - type: light
+           entity: light.gateway_light_7811dcfaa3ee
+           name: LED
+         - entity: sensor.illumination_7811dcfaa3ee
+           name: Lux
+           unit: lm
+           min: 0
+           max: 1000
+           severity:
+             green: 600
+             yellow: 400
+             red: 200
+           type: gauge
+        hours_to_show: 72
+      - title: Lumières
+        type: horizontal-stack
+        cards:
+          - entity: light.sam
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: light.salon
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: light.cleo
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: light.chambre
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+            
+      - type: history-graph
+        title: Pressions
+        entities:
+          - entity: sensor.pressure_158d0004460790
+            name: Salon
+          - entity: sensor.pressure_158d00044627b4
+            name: Cuisine
+          - entity: sensor.pressure_158d0004465b49
+            name: Salle de bain
+          - entity: sensor.pressure_158d00044606ee
+            name: Cléo
+          - entity: sensor.pressure_158d00044bfdc7
+            name: Chambre
     icon: 'mdi:folder-open'
     path: default_view
     title: Admin
-
