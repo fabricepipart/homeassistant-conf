@@ -11,46 +11,22 @@ views:
   - badges: []
     panel: true
     cards:
-      - type: horizontal-stack
+      - type: vertical-stack
         cards:
-          - type: vertical-stack
+          - type: horizontal-stack
+            columns: 3
             cards:
               - type: picture-glance
-                title: Salon
+                title: Entrée
                 entities:
-                  - entity: light.salon
+                  - entity: light.entree_1
                     show_state: true
-                  - entity: media_player.sony_bravia_tv
-                    icon: mdi:television
+                  - entity: light.entree_2
                     show_state: true
-                  - entity: media_player.rx_v475
-                    icon: mdi:audio-video
+                  - entity: light.entree_3
                     show_state: true
-                image: https://cdn.apartmenttherapy.info/image/fetch/f_auto,q_auto:eco,c_fit,w_660/https%3A%2F%2Fstorage.googleapis.com%2Fgen-atmedia%2F2%2F2018%2F11%2F479458640eca110b5a4be0f7d758419b395dc2fa.jpeg
-            
-              - type: picture-glance
-                title: Chambre
-                entities:
-                  - entity: light.chambre
-                    show_state: true
-                  - entity: sensor.temperature_158d00044bfdc7
-                    show_state: true
-                  - entity: sensor.humidity_158d00044bfdc7
-                    show_state: true
-                image: http://www.champagne-godme.fr/wp-content/uploads/2019/05/decoration-chambre-parentale-romantique-unique-images-peinture-chambre-parents-avec-couleur-peinture-chambre-parentale-of-decoration-chambre-parentale-romantique.jpg
-            
-              - type: picture-glance
-                title: Cléo
-                entities:
-                  - entity: light.cleo
-                    show_state: true
-                  - entity: sensor.temperature_158d00044606ee
-                    show_state: true
-                  - entity: sensor.humidity_158d00044606ee
-                    show_state: true
-                image: https://www.hubstairs.com/blog/wp-content/uploads/2017/09/mezzanine-chambre-d-enfant.jpg
-          - type: vertical-stack
-            cards:
+                image: /local/images/entrance-2.png
+                
               - type: picture-glance
                 title: Salle à Manger
                 entities:
@@ -66,17 +42,43 @@ views:
                     icon: 'mdi:desktop-tower'
                     tap_action:
                       action: toggle
-                image: https://www.meubis.be/files/cache/small/files/feniks-eetkamer-salle-a-manger-dining-room-bij-meubis-e1-5b1e9a8653082.jpg
-            
+                image: /local/images/dining-2.png
+                
               - type: picture-glance
-                title: Cuisine
+                title: Salon
                 entities:
-                  - entity: sensor.temperature_158d00044627b4
+                  - entity: light.salon
                     show_state: true
-                  - entity: sensor.humidity_158d00044627b4
+                  - entity: media_player.sony_bravia_tv
+                    icon: mdi:television
+                    show_state: false
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: more-info
+                  - entity: media_player.rx_v475
+                    icon: mdi:audio-video
+                    show_state: false
+                    tap_action:
+                      action: toggle
+                    hold_action:
+                      action: more-info
+                image: /local/images/living-2.png
+                
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - type: picture-glance
+                title: Cléo
+                entities:
+                  - entity: light.cleo
                     show_state: true
-                image: https://www.alsacecuisine.fr/public/donnees/cms/sources/pages/hp-03.jpg
-            
+                  - entity: sensor.temperature_158d00044606ee
+                    show_state: true
+                  - entity: sensor.humidity_158d00044606ee
+                    show_state: true
+                image: /local/images/kid-4.png
+                
               - type: picture-glance
                 title: Salle de Bain
                 entities:
@@ -84,8 +86,51 @@ views:
                     show_state: true
                   - entity: sensor.humidity_158d0004465b49
                     show_state: true
-                image: https://www.jacobdelafon.fr/carnet-elegance/wp-content/uploads/2018/08/Salle_de_bains_sous_sol_VOX.jpg
-    
+                  - entity: light.salle_de_bain
+                    show_state: true
+                image: /local/images/bathroom-5.png
+            
+              - type: picture-glance
+                title: Chambre
+                entities:
+                  - entity: light.chambre
+                    show_state: true
+                  - entity: sensor.temperature_158d00044bfdc7
+                    show_state: true
+                  - entity: sensor.humidity_158d00044bfdc7
+                    show_state: true
+                image: /local/images/bedroom-4.png
+            
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - type: picture-glance
+                title: Cuisine
+                entities:
+                  - entity: sensor.temperature_158d00044627b4
+                    show_state: true
+                  - entity: sensor.humidity_158d00044627b4
+                    show_state: true
+                  - entity: light.cuisine
+                    show_state: true
+                image: /local/images/kitchen-4.png
+              - type: picture-glance
+                title: Toilettes
+                entities:
+                  - entity: sensor.temperature_158d0004465b49
+                    show_state: true
+                  - entity: sensor.humidity_158d0004465b49
+                    show_state: true
+                image: /local/images/wc-2.png
+              - type: picture-glance
+                title: Couloir
+                entities:
+                  - entity: sensor.temperature_158d0004465b49
+                    show_state: true
+                  - entity: sensor.humidity_158d0004465b49
+                    show_state: true
+                image: /local/images/corridor-2.png
+        
     icon: 'mdi:home'
     path: lumieres
     title: Lumières

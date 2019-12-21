@@ -326,3 +326,29 @@ activity_off:
   - service: media_player.turn_off
     data:
       entity_id: media_player.rx_v475
+
+lights_entrance:
+  alias: 'Lumières entrée'
+  sequence:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/entrance/light1/power
+      payload: '2'
+  - delay:
+      milliseconds: 100
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/entrance/light2/power
+      payload: '2'
+  - delay:
+      milliseconds: 100
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/entrance/light3/power
+      payload: '2'
+      
+      
+      
+      
+      
+      

@@ -56,7 +56,14 @@
       message: Le redémarrage était-il intentionnel?
       title: Redémarrage de Home Assistant
     service: notify.ios_iphone_de_le_gone
-
+  - service: notify.alexa_media_echo_salon
+    data:
+      target: media_player.alexa
+      message: Home Assistant a fini de redémarrer!
+      data:
+        type: announce
+        method: all
+        
 - alias: Risque de pluie
   trigger:
     platform: time
@@ -186,7 +193,7 @@
 - alias: Météo du jour
   trigger:
     platform: time
-    at: "07:00:00"
+    at: "06:58:00"
   condition:
   - condition: time
     weekday:
@@ -463,3 +470,122 @@
     data:
       topic: cmnd/home/parents/light/power
       payload: '2'
+    
+- alias: Lumière Cuisine
+  trigger:
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_158d00031b5437
+      click_type: single
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_158d00031b5437
+      click_type: double
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_158d00031b5437
+      click_type: long
+  action:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/kitchen/light/power
+      payload: '2'
+
+- alias: Lumière entrée
+  trigger:
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_158d000316bbe1
+      click_type: single
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_158d000316bbe1
+      click_type: double
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_left_158d000355939d
+      click_type: single
+  action:
+  - service: script.lights_entrance
+
+- alias: Lumière salle de bain
+  trigger:
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_left_158d00036d0507
+      click_type: single
+  action:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/bathroom/light/power
+      payload: '2'
+
+- alias: Sortir maison
+  trigger:
+  - platform: event
+    event_type: xiaomi_aqara.click
+    event_data:
+      entity_id: binary_sensor.wall_switch_158d000316bbe1
+      click_type: long
+  action:
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/dining/light/power
+      payload: '0'
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/living/light/power
+      payload: '0'
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/parents/light/power
+      payload: '0'
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/cleo/light/power
+      payload: '0'
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/entrance/light1/power
+      payload: '0'
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/entrance/light2/power
+      payload: '0'
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/entrance/light3/power
+      payload: '0'
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/kitchen/light/power
+      payload: '0'
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/s20/light/power
+      payload: '0'
+  - service: mqtt.publish
+    data:
+      topic: cmnd/home/bathroom/light/power
+      payload: '0'
+  - service: light.turn_off
+    entity_id: light.gateway_light_7811dcfaa3ee
+  - service: script.sleep_mac
+  - service: script.activity_off
+  - service: notify.alexa_media
+    data:
+      target:
+        -  media_player.alexa
+        -  media_player.alexa_cuisine
+        -  media_player.echo_de_cleo
+      message: Au revoir!
+      data:
+        type: announce
+        
