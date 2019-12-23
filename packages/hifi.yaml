@@ -1,0 +1,339 @@
+
+###############################################################
+# Media players
+###############################################################
+
+media_player: 
+  - platform: yamaha
+    name: rx_v475
+    source_ignore:
+      - "AV1"
+      - "AV3"
+      - "AV5"
+      - "AV6"
+      - "HDMI4"
+      - "HDMI5"
+      - "USB"
+      - "V-AUX"
+      - "iPod (USB)"
+    source_names:
+      AUDIO: "Wii"
+      AV2: "CD"
+      AV4: "Sony TV"
+      HDMI1: "PS3"
+      HDMI2: "Box"
+      HDMI3: "Plex"
+  - platform: braviatv
+    host: 192.168.69.65
+  - platform: spotify
+    client_id: !secret spotify_clientid
+    client_secret: !secret spotify_secret
+
+
+###############################################################
+# Scripts
+###############################################################
+
+script:
+  
+  sleep_mac:
+    alias: Sleep Mac
+    sequence:
+    - service: shell_command.sleep_mac
+  
+  
+  activity_wii:
+    alias: Wii
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: AUDIO
+    - service: shell_command.switch_tv_component
+  
+  activity_ps3:
+    alias: PS3
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: HDMI1
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.sony_bravia_tv
+        source: "HDMI 3/ARC"
+  
+  activity_netflix:
+    alias: Netflix
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: AV4
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.sony_bravia_tv
+        source: "HDMI 3/ARC"
+    - service: shell_command.switch_tv_netflix
+  
+  activity_amazon:
+    alias: Prime Video
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: AV4
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.sony_bravia_tv
+        source: "HDMI 3/ARC"
+    - service: shell_command.switch_tv_home
+    - service: shell_command.switch_tv_home
+    - service: shell_command.switch_tv_right
+    - service: shell_command.switch_tv_confirm
+  
+  activity_play_tv:
+    alias: Play TV
+    sequence:
+    - service: shell_command.switch_tv_play
+  
+  activity_pause_tv:
+    alias: Pause TV
+    sequence:
+    - service: shell_command.switch_tv_pause
+  
+  activity_youtube:
+    alias: Youtube
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: AV4
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.sony_bravia_tv
+        source: "HDMI 3/ARC"
+    - service: shell_command.switch_tv_youtube
+  
+  activity_youtube_kids:
+    alias: Youtube Kids
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: AV4
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.sony_bravia_tv
+        source: "HDMI 3/ARC"
+    - service: shell_command.switch_tv_home
+    - service: shell_command.switch_tv_home
+    - service: shell_command.switch_tv_right
+    - service: shell_command.switch_tv_right
+    - service: shell_command.switch_tv_right
+    - service: shell_command.switch_tv_right
+    - service: shell_command.switch_tv_confirm
+  
+  activity_box:
+    alias: Box
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: HDMI2
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.sony_bravia_tv
+        source: "HDMI 3/ARC"
+  
+  activity_plex:
+    alias: Plex
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: HDMI3
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.sony_bravia_tv
+        source: "HDMI 3/ARC"
+  
+  activity_airplay:
+    alias: Airplay
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: AirPlay
+  
+  activity_spotify:
+    alias: Spotify
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: Spotify
+  
+  activity_dlna:
+    alias: iTunes
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: SERVER
+    
+  activity_off:
+    alias: 'Off'
+    sequence:
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.rx_v475
+
+        
+###############################################################
+# Automation
+###############################################################
+
+automation:
+
+  - alias: Eteindre Home Cinéma
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_right_158d0003558c12
+        click_type: long
+    action:
+    - service: script.activity_off
+    - service: mqtt.publish
+      data:
+        topic: cmnd/home/living/light/power
+        payload: '0'
+  
+  - alias: Eteindre Mac
+    trigger:
+      platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_left_158d0003558c12
+        click_type: long
+    action:
+    - service: script.sleep_mac
+    - service: mqtt.publish
+      data:
+        topic: cmnd/home/dining/light/power
+        payload: '0'
+        
+  - alias: Yamaha allumé par erreur
+    trigger:
+    - entity_id: media_player.rx_v475
+      from: 'off'
+      platform: state
+      to: 'on'
+    condition:
+    - condition: time
+      after: "22:00:00"
+      before: "07:00:00"
+    - condition: state
+      entity_id: media_player.tele
+      state: 'off'
+    action:
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.rx_v475
+        
+
+  - alias: Sortir maison (HiFi)
+    trigger:
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d000316bbe1
+        click_type: long
+    condition:
+      - condition: state
+        entity_id: alarm_control_panel.maison
+        state: disarmed
+    action:
+    - service: script.sleep_mac
+    - service: script.activity_off
+    - service: notify.alexa_media
+      data:
+        target:
+          -  media_player.alexa
+        message: Au revoir!
+        data:
+          type: announce
+
+      
+        
+        

@@ -23,4 +23,7 @@ script.neato_table_basse:
 script.neato_wc:
   icon: mdi:robot-vacuum-variant
 script.sleep_mac:
-   icon: mdi:sleep
+  icon: mdi:sleep
+binary_sensor.door_window_sensor_158d0003f1b10e:
+  icon: 'mdi:door-closed-lock'
+  

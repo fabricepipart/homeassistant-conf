@@ -12,6 +12,7 @@ script: !include scripts.yaml
 
 homeassistant:
   customize: !include customize.yaml
+  packages: !include_dir_named packages
 
 discovery:
 ios:
@@ -43,9 +44,7 @@ lovelace:
   mode: yaml
 
 meteo_france: !include meteo.yaml
-media_player: !include media_player.yaml
 shell_command: !include shell.yaml
-light: !include light.yaml
 sensor: !include sensor.yaml
     
 alexa:
@@ -66,7 +65,7 @@ xiaomi_aqara:
   gateways:
     - mac: !secret xiaomi_gateway_mac
       key: !secret xiaomi_gateway_key
-
+  
 # plex:
 #   host: 192.168.69.69
 #   port: 32400

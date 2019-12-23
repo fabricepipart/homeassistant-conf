@@ -1,0 +1,265 @@
+###############################################################
+# Lights
+###############################################################
+
+light:
+  - platform: mqtt
+    name: "SàM"
+    state_topic: "stat/home/dining/light/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/dining/light/POWER"
+    availability_topic: "tele/home/dining/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Cléo"
+    state_topic: "stat/home/cleo/light/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/cleo/light/POWER"
+    availability_topic: "tele/home/cleo/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Salon"
+    state_topic: "stat/home/living/light/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/living/light/POWER"
+    availability_topic: "tele/home/living/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Chambre"
+    state_topic: "stat/home/parents/light/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/parents/light/POWER"
+    availability_topic: "tele/home/parents/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "S20"
+    state_topic: "stat/home/s20/light/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/s20/light/POWER"
+    availability_topic: "tele/home/s20/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Entrée 1"
+    state_topic: "stat/home/entrance/light1/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/entrance/light1/POWER"
+    availability_topic: "tele/home/entrance/light1/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Entrée 2"
+    state_topic: "stat/home/entrance/light2/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/entrance/light2/POWER"
+    availability_topic: "tele/home/entrance/light2/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Entrée 3"
+    state_topic: "stat/home/entrance/light3/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/entrance/light3/POWER"
+    availability_topic: "tele/home/entrance/light3/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Cuisine"
+    state_topic: "stat/home/kitchen/light/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/kitchen/light/POWER"
+    availability_topic: "tele/home/kitchen/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Salle de Bain"
+    state_topic: "stat/home/bathroom/light/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/bathroom/light/POWER"
+    availability_topic: "tele/home/bathroom/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Couloir"
+    state_topic: "stat/home/corridor/light/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/corridor/light/POWER"
+    availability_topic: "tele/home/corridor/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+
+
+###############################################################
+# Scripts
+###############################################################
+
+
+    
+###############################################################
+# Automation
+###############################################################
+automation:
+  
+  - alias: Lumière salon
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_right_158d0003558c12
+          click_type: single
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_left_158d0003558c12
+          click_type: double
+    action:
+    - service: light.toggle
+      entity_id: light.salon
+  
+  - alias: Lumière salle à manger
+    trigger:
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_left_158d0003558c12
+          click_type: single
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_left_158d0003558c12
+          click_type: double
+    action:
+    - service: light.toggle
+      entity_id: light.sam
+      
+  - alias: Lumière Cléo
+    trigger:
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d0002f35399
+        click_type: single
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d0002f35399
+        click_type: double
+    action:
+    - service: light.toggle
+      entity_id: light.cleo
+      
+  - alias: Lumière Parents
+    trigger:
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d0002f31e64
+        click_type: single
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d0002f31e64
+        click_type: double
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.switch_158d000407540c
+        click_type: single
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.switch_158d00040803c6
+        click_type: single
+    action:
+    - service: light.toggle
+      entity_id: light.chambre
+      
+  - alias: Lumière Cuisine
+    trigger:
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d00031b5437
+        click_type: single
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d00031b5437
+        click_type: double
+    action:
+    - service: light.toggle
+      entity_id: light.cuisine
+  
+  - alias: Lumière entrée
+    trigger:
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d000316bbe1
+        click_type: single
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d000316bbe1
+        click_type: double
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_left_158d000355939d
+        click_type: single
+    action:
+    - service: light.toggle
+      entity_id: light.entree_1,light.entree_2,light.entree_3
+  
+  - alias: Lumière salle de bain
+    trigger:
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_left_158d00036d0507
+        click_type: single
+    action:
+    - service: light.toggle
+      entity_id: light.salle_de_bain
+  
+  - alias: Lumière couloir
+    trigger:
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d0003057c5b
+        click_type: single
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_right_158d000355939d
+        click_type: single
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_right_158d00036d0507
+        click_type: single
+    action:
+    - service: light.toggle
+      entity_id: light.couloir
+  
+  
+  - alias: Sortir maison (lumières)
+    trigger:
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d000316bbe1
+        click_type: long
+    condition:
+      - condition: state
+        entity_id: alarm_control_panel.maison
+        state: disarmed
+    action:
+    - service: light.turn_off
+      entity_id: group.all_lights
+      

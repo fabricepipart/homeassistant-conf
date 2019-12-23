@@ -25,6 +25,9 @@ views:
                     show_state: true
                   - entity: light.entree_3
                     show_state: true
+                  - entity: binary_sensor.door_window_sensor_158d0003f1b10e
+                    show_state: true
+                    icon: 'mdi:door-closed-lock'
                 image: /local/images/entrance-2.png
                 
               - type: picture-glance
@@ -135,7 +138,30 @@ views:
     path: lumieres
     title: Lumières
 
-
+  - badges:
+      - binary_sensor.door_window_sensor_158d0003f1b10e
+      - light.gateway_light_7811dcfaa3ee
+    icon: 'mdi:alarm-light'
+    path: alarm
+    title: Alarm
+    cards:
+      - type: alarm-panel
+        name: House Alarm
+        entity: alarm_control_panel.maison
+        states:
+          - arm_home
+          - arm_night
+      - title: Alarm
+        type: entities
+        entities:
+        - entity: input_select.sirenes_gateway
+        - entity: input_boolean.sourdine_sirenes_gateway
+        - entity: input_number.gateway_volume
+        - entity: input_number.delai_boucle
+        - entity: binary_sensor.door_window_sensor_158d0003f1b10e
+        - entity: script.jouer_sirene
+        - entity: script.jouer_sirene_boucle
+  
   - badges: []
     icon: 'mdi:thermometer'
     path: sensors
