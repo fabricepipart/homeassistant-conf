@@ -233,12 +233,12 @@ automation:
   - alias: '[Alarme] Armée'
     initial_state: 'on'
     trigger:
-      - platform: state
-        entity_id: alarm_control_panel.maison
-        to: 'armed_away'
-      - platform: state
-        entity_id: alarm_control_panel.maison
-        to: 'armed_night'
+    - platform: state
+      entity_id: alarm_control_panel.maison
+      to: 'armed_away'
+    - platform: state
+      entity_id: alarm_control_panel.maison
+      to: 'armed_night'
     action:
       - service: light.turn_on
         data:
@@ -259,6 +259,7 @@ automation:
             push:
               badge: 5
               thread-id: home-assistant
+          message: Tout est sous contrôle
           title: 'Alarme armée'
       
     
@@ -281,10 +282,12 @@ automation:
     action:
       - service: alarm_control_panel.alarm_trigger
         entity_id: alarm_control_panel.maison
+        data:
+          code: !secret alarm_code
       - service: xiaomi_aqara.play_ringtone
         data:
           gw_mac: !secret xiaomi_gateway_mac
-          ringtone_id: 5
+          ringtone_id: 10
           ringtone_vol: 5
   
   - alias: '[Alarme] Déclenchée'
@@ -352,6 +355,7 @@ automation:
             push:
               badge: 5
               thread-id: home-assistant
+          message: Tout va bien
           title: "[Alarme] Désactivée"
       - delay:
           seconds: .1
@@ -362,7 +366,7 @@ automation:
         data:
           target:
             -  media_player.alexa
-          message: Alarme désactivée
+          message: Alarme désactivée. Bienvenu à la maison!
           data:
             type: announce
       - delay:
