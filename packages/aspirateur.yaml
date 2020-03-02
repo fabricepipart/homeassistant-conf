@@ -144,8 +144,9 @@ automation:
     description: ''
     trigger:
     - entity_id: vacuum.conchita
-      from: error
+      to: error
       platform: state
+      for: "00:10:00"
     condition: []
     action:
     - service: notify.alexa_media_echo_salon

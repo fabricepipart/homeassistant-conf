@@ -222,6 +222,11 @@ automation:
       event_data:
         entity_id: binary_sensor.wall_switch_left_158d00036d0507
         click_type: single
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_left_158d00036d0507
+        click_type: double
     action:
     - service: light.toggle
       entity_id: light.salle_de_bain

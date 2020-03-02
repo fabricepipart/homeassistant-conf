@@ -28,7 +28,7 @@ views:
                   - entity: binary_sensor.door_window_sensor_158d0003f1b10e
                     show_state: true
                     icon: 'mdi:door-closed-lock'
-                image: /local/images/entrance-2.png
+                image: /local/images/small/entrance.png
                 
               - type: picture-glance
                 title: Salle à Manger
@@ -45,7 +45,7 @@ views:
                     icon: 'mdi:desktop-tower'
                     tap_action:
                       action: toggle
-                image: /local/images/dining-2.png
+                image: /local/images/small/dining.png
                 
               - type: picture-glance
                 title: Salon
@@ -66,7 +66,7 @@ views:
                       action: toggle
                     hold_action:
                       action: more-info
-                image: /local/images/living-2.png
+                image: /local/images/small/living.png
                 
           - type: horizontal-stack
             columns: 3
@@ -80,7 +80,7 @@ views:
                     show_state: true
                   - entity: sensor.humidity_158d00044606ee
                     show_state: true
-                image: /local/images/kid-4.png
+                image: /local/images/small/kid.png
                 
               - type: picture-glance
                 title: Salle de Bain
@@ -91,7 +91,10 @@ views:
                     show_state: true
                   - entity: light.salle_de_bain
                     show_state: true
-                image: /local/images/bathroom-5.png
+                  - entity: light.s20
+                    show_state: true
+                    icon: 'mdi:radiator'
+                image: /local/images/small/bathroom1.png
             
               - type: picture-glance
                 title: Chambre
@@ -102,7 +105,7 @@ views:
                     show_state: true
                   - entity: sensor.humidity_158d00044bfdc7
                     show_state: true
-                image: /local/images/bedroom-4.png
+                image: /local/images/small/bedroom.png
             
           - type: horizontal-stack
             columns: 3
@@ -116,23 +119,19 @@ views:
                     show_state: true
                   - entity: light.cuisine
                     show_state: true
-                image: /local/images/kitchen-4.png
+                image: /local/images/small/kitchen.png
               - type: picture-glance
                 title: Toilettes
                 entities:
-                  - entity: sensor.temperature_158d0004465b49
+                  - entity: light.couloir
                     show_state: true
-                  - entity: sensor.humidity_158d0004465b49
-                    show_state: true
-                image: /local/images/wc-2.png
+                image: /local/images/small/wc.png
               - type: picture-glance
                 title: Couloir
                 entities:
-                  - entity: sensor.temperature_158d0004465b49
+                  - entity: light.couloir
                     show_state: true
-                  - entity: sensor.humidity_158d0004465b49
-                    show_state: true
-                image: /local/images/corridor-2.png
+                image: /local/images/small/corridor.png
         
     icon: 'mdi:home'
     path: lumieres
@@ -475,7 +474,23 @@ views:
           - entity: sensor.alexa_next_reminder
           - entity: sensor.alexa_next_timer
         show_header_toggle: false
-        title: Alexa
+        title: Alexa salon
+        type: entities
+      - entities:
+          - entity: switch.alexa_cuisine_do_not_disturb_switch
+          - entity: sensor.alexa_cuisine_next_alarm
+          - entity: sensor.alexa_cuisine_next_reminder
+          - entity: sensor.alexa_cuisine_next_timer
+        show_header_toggle: false
+        title: Alexa cuisine
+        type: entities
+      - entities:
+          - entity: switch.echo_de_cleo_do_not_disturb_switch
+          - entity: sensor.echo_de_cleo_next_alarm
+          - entity: sensor.echo_de_cleo_next_reminder
+          - entity: sensor.echo_de_cleo_next_timer
+        show_header_toggle: false
+        title: Alexa Cléo
         type: entities
       - columns: 2
         entities:
@@ -484,6 +499,7 @@ views:
           - entity: sensor.marina_to_work
           - entity: sensor.marina_back_home
         type: glance
+        title: Trajets
     icon: 'mdi:calendar'
     path: cal
     title: Calendrier
@@ -657,13 +673,23 @@ views:
       - type: custom:mini-media-player
         entity: media_player.sony_bravia_tv
       - type: custom:mini-media-player
+        entity: media_player.rx_v475
+      - type: custom:mini-media-player
+        entity: media_player.tele
+      - type: custom:mini-media-player
         entity: media_player.spotify
       - entities:
           - entity: media_player.alexa
           - entity: switch.alexa_shuffle_switch
           - entity: switch.alexa_repeat_switch
+          - entity: media_player.alexa_cuisine
+          - entity: switch.alexa_cuisine_shuffle_switch
+          - entity: switch.alexa_cuisine_repeat_switch
+          - entity: media_player.echo_de_cleo
+          - entity: switch.echo_de_cleo_shuffle_switch
+          - entity: switch.echo_de_cleo_repeat_switch
         show_header_toggle: false
-        title: Alexa
+        title: Echo de Cléo
         type: entities
     icon: 'mdi:music'
     path: medias
@@ -682,7 +708,7 @@ views:
           tap_action:
             action: toggle
           type: entity-button
-        title: Aspirer zone
+        title: Mac
         type: horizontal-stack
       - entities:
           - entity: sensor.neufbox_router_kbyte_sec_sent
@@ -690,6 +716,12 @@ views:
         show_header_toggle: false
         title: Internet
         type: entities
+      - type: history-graph
+        title: Internet
+        hours_to_show: 72
+        entities:
+          - entity: sensor.neufbox_router_kbyte_sec_sent
+          - entity: sensor.neufbox_router_kbyte_sec_received
       - entities:
           - entity: sensor.processor_use
           - entity: sensor.memory_use_percent
@@ -699,6 +731,106 @@ views:
         show_header_toggle: false
         title: Raspberry
         type: entities
+      - entities:
+          - entity: sensor.salle_a_manger_signal
+          - entity: sensor.salon_signal
+          - entity: sensor.chambre_signal
+          - entity: sensor.chambre_cleo_signal
+          - entity: sensor.couloir_signal
+          - entity: sensor.cuisine_signal
+          - entity: sensor.entree_1_signal
+          - entity: sensor.entree_2_signal
+          - entity: sensor.entree_3_signal
+          - entity: sensor.s20_signal
+          - entity: sensor.salle_de_bain_signal
+        title: Signal Sonoff
+        type: entities
+        
+      - type: history-graph
+        title: Signal Sonoff
+        hours_to_show: 72
+        entities:
+          - entity: sensor.salle_a_manger_signal
+          - entity: sensor.salon_signal
+          - entity: sensor.chambre_signal
+          - entity: sensor.chambre_cleo_signal
+          - entity: sensor.couloir_signal
+          - entity: sensor.cuisine_signal
+          - entity: sensor.entree_1_signal
+          - entity: sensor.entree_2_signal
+          - entity: sensor.entree_3_signal
+          - entity: sensor.s20_signal
+          - entity: sensor.salle_de_bain_signal
+        
+      - type: history-graph
+        title: Battery Xiaomi
+        hours_to_show: 72
+        entities:
+          - entity: sensor.porte_entree
+          - entity: sensor.interrupteur_chambre
+          - entity: sensor.interrupteur_cleo
+          - entity: sensor.interrupteur_couloir
+          - entity: sensor.interrupteur_entree
+          - entity: sensor.interrupteur_cuisine
+          - entity: sensor.interrupteur_salon
+          - entity: sensor.interrupteur_entree_couloir
+          - entity: sensor.interrupteur_sdb
+          - entity: sensor.interrupteur_marina
+          - entity: sensor.interrupteur_fabrice
+          - entity: sensor.temperature_cleo
+          - entity: sensor.temperature_salon
+          - entity: sensor.temperature_cuisine
+          - entity: sensor.temperature_sdb
+          - entity: sensor.temperature_chambre
+      - type: entities
+        title: Battery Xiaomi
+        entities:
+          - entity: sensor.porte_entree
+          - entity: sensor.interrupteur_chambre
+          - entity: sensor.interrupteur_cleo
+          - entity: sensor.interrupteur_couloir
+          - entity: sensor.interrupteur_entree
+          - entity: sensor.interrupteur_cuisine
+          - entity: sensor.interrupteur_salon
+          - entity: sensor.interrupteur_entree_couloir
+          - entity: sensor.interrupteur_sdb
+          - entity: sensor.interrupteur_marina
+          - entity: sensor.interrupteur_fabrice
+          - entity: sensor.temperature_cleo
+          - entity: sensor.temperature_salon
+          - entity: sensor.temperature_cuisine
+          - entity: sensor.temperature_sdb
+          - entity: sensor.temperature_chambre
+          
+      - entities:
+          - entity: sensor.s20_ip
+          - entity: sensor.salle_a_manger_ip
+          - entity: sensor.salon_ip
+          - entity: sensor.chambre_ip
+          - entity: sensor.chambre_cleo_ip
+          - entity: sensor.entree_1_ip
+          - entity: sensor.entree_2_ip
+          - entity: sensor.entree_3_ip
+          - entity: sensor.cuisine_ip
+          - entity: sensor.salle_de_bain_ip
+          - entity: sensor.couloir_ip
+        title: IPs Sonoff
+        type: entities
+      - entities:
+          - entity: sensor.s20_version
+          - entity: sensor.salle_a_manger_version
+          - entity: sensor.salon_version
+          - entity: sensor.chambre_version
+          - entity: sensor.chambre_cleo_version
+          - entity: sensor.entree_1_version
+          - entity: sensor.entree_2_version
+          - entity: sensor.entree_3_version
+          - entity: sensor.cuisine_version
+          - entity: sensor.salle_de_bain_version
+          - entity: sensor.couloir_version
+        title: Versions Sonoff
+        type: entities
+        
     icon: 'mdi:network'
     path: reseau
     title: Réseau
@@ -736,114 +868,16 @@ views:
         show_header_toggle: true
         title: Updater
         type: entities
+        
       - entities:
-          - sensor.salon_sc_temperature
-          - sensor.salon_sc_humidity
-          - sensor.salon_sc_airquality
-          - sensor.salon_sc_light
-          - sensor.salon_sc_noise
-        show_header_toggle: true
-        title: Salon
+          - group.all_automations
+          - group.all_devices
+          - group.all_switches
+          - group.all_lights
+          - group.all_scripts
+        title: All
         type: entities
-      - entities:
-          - automation.sonoff_ips_on_ha_start_up
-          - automation.power_state_on_ha_start_up
-          - automation.tasmota_versions_on_ha_start_up
-          - automation.conchita_en_erreur
-          - automation.conchita_se_decharge
-          - automation.il_pleut
-          - automation.let_s_encrypt_renewal
-          - automation.meteo_du_jour
-          - automation.qualite_de_l_air
-          - automation.redemarrage
-          - automation.temps_de_trajet
-          - automation.risque_de_pluie
-          - automation.yamaha_allume_par_erreur
-        title: Automatisation
-        type: entities
-      - entities:
-          - entity: light.sam
-          - entity: light.salon
-          - entity: light.cleo
-          - entity: light.chambre
-        title: Lumière
-        type: entities
-      - columns: 3
-        entities:
-          - entity: sensor.salon_sc_signal
-          - entity: sensor.salle_a_manger_signal
-          - entity: sensor.salon_signal
-          - entity: sensor.chambre_signal
-          - entity: sensor.chambre_cleo_signal
-        show_icon: false
-        title: Signal Sonoff
-        type: glance
-      - columns: 3
-        entities:
-          - entity: sensor.salle_a_manger_ip
-          - entity: sensor.salon_ip
-          - entity: sensor.salon_sc_ip
-          - entity: sensor.chambre_cleo_ip
-          - entity: sensor.chambre_ip
-        show_icon: false
-        title: IPs Sonoff
-        type: glance
-      - columns: 3
-        entities:
-          - entity: sensor.salle_a_manger_version
-          - entity: sensor.salon_version
-          - entity: sensor.salon_sc_version
-          - entity: sensor.chambre_version
-          - entity: sensor.chambre_cleo_version
-        show_icon: false
-        title: Versions Sonoff
-        type: glance
-      - entity: media_player.rx_v475
-        type: media-control
-      - entity: media_player.tele
-        type: media-control
-      - entities:
-          - entity: sensor.salon_sc_temperature
-          - entity: sensor.salon_sc_humidity
-        hours_to_show: 72
-        refresh_interval: 0
-        type: history-graph
-      - entity: sensor.salon_sc_temperature
-        hours_to_show: 72
-        refresh_interval: 0
-        icon: mdi:thermometer
-        graph: line
-        unit: °C
-        type: sensor
-      - entities:
-          - entity: sensor.salon_sc_light
-          - entity: sensor.salon_sc_airquality
-          - entity: sensor.salon_sc_noise
-        title: Autres
-        type: glance
-            
-      - title: Pression
-        type: horizontal-stack
-        cards:
-          - entity: sensor.pressure_158d0004460790
-            name: Salon hPa
-            unit: hPa
-            min: 10
-            max: 40
-            severity:
-              green: 1000
-              yellow: 1026
-              red: 1030
-            type: gauge
-          - entity: sensor.pressure_158d00044627b4
-            name: Cuisine
-            unit: hPa
-            severity:
-              green: 1000
-              yellow: 1026
-              red: 1030
-            type: gauge
-            
+        
       - title: Gateway
         type: horizontal-stack
         cards:
@@ -861,46 +895,14 @@ views:
              red: 200
            type: gauge
         hours_to_show: 72
-      - title: Lumières
-        type: horizontal-stack
-        cards:
-          - entity: light.sam
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: light.salon
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: light.cleo
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: light.chambre
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
             
+        
+        
+      - entity: media_player.rx_v475
+        type: media-control
+      - entity: media_player.tele
+        type: media-control
+        
       - type: history-graph
         title: Pressions
         entities:

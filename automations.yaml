@@ -36,37 +36,9 @@
   - service: hassio.addon_restart
     data:
       addon: core_letsencrypt
-        
-##################################### Météo
 
-- alias: Météo du jour
-  trigger:
-    platform: time
-    at: "06:58:00"
-  condition:
-  - condition: time
-    weekday:
-    - mon
-    - tue
-    - wed
-    - thu
-    - fri
-  - condition: state
-    entity_id: switch.conchita_schedule
-    state: 'on'
-  action:
-  - service: notify.alexa_media_echo_salon
-    data:
-      target: media_player.alexa
-      message: Bonjour! Aujourd'hui il fait {{ states("sensor.nice_temperature") }}
-        degrés dehors avec {{ states("sensor.nice_wind_speed") }} km/h de vent. Comptez
-        {{ states("sensor.nice_rain_chance") }} % de chances pour qu'il pleuve. Quel
-        temps dehors? {{ states("sensor.nice_weather") }}. Temps de trajet estimé?
-        {{ states("sensor.fabrice_to_work") }} minutes. Bonne journée!
-      data:
-        type: announce
-        method: all
-  id: bca7238164864128b43edb16c3231af9
+
+##################################### Météo
 
 
 - alias: Qualité de l'air

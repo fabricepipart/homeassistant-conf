@@ -1,0 +1,67 @@
+
+
+###############################################################
+# Automation
+###############################################################
+  
+
+        
+automation:
+  - alias: Météo du jour
+    trigger:
+      platform: time
+      at: "06:58:00"
+    condition:
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - wed
+      - thu
+      - fri
+    - condition: state
+      entity_id: switch.conchita_schedule
+      state: 'on'
+    action:
+    - service: notify.alexa_media_echo_salon
+      data:
+        target: media_player.alexa
+        message: Bonjour! Aujourd'hui, c'est {{ states("sensor.nice_weather") }}. Comptez
+          {{ states("sensor.nice_rain_chance") }} % de chances pour qu'il pleuve.
+          Il fait {{ states("sensor.nice_temperature") }}
+          degrés dehors avec {{ states("sensor.nice_wind_speed") }} km/h de vent. Temps de trajet estimé à
+          {{ states("sensor.fabrice_to_work") }} minutes. Bonne journée!
+        data:
+          type: announce
+          method: all
+    id: bca7238164864128b43edb16c3231af9
+  
+  
+  - alias: Réveil Cléo
+    description: ''
+    trigger:
+      platform: time
+      at: "07:00:00"
+    condition:
+    - condition: time
+      weekday:
+      - mon
+      - tue
+      - thu
+      - fri
+    - condition: state
+      entity_id: switch.conchita_schedule
+      state: 'on'
+    action:
+    - service: notify.alexa_media_echo_de_cleo
+      data_template:
+        target: media_player.echo_de_cleo
+        message: >
+         {% set months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"] %}
+         {% set days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]  %}
+         Bonjour! Aujourd'hui, nous sommes le {{ days[now().weekday()] + ' ' + (now().day | string) + ' ' + months[now().month-1] }}. Bonne journée!
+        data:
+          type: announce
+          method: all
+  
+  

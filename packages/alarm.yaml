@@ -7,7 +7,7 @@ alarm_control_panel:
     name: Maison
     code_arm_required: false
     code: !secret alarm_code
-    pending_time: 10
+    pending_time: 30
     delay_time: 0
     trigger_time: 4
     disarmed:
@@ -289,6 +289,9 @@ automation:
           gw_mac: !secret xiaomi_gateway_mac
           ringtone_id: 10
           ringtone_vol: 5
+      - service: light.turn_on
+        data:
+          entity_id: light.entree_1,light.entree_2,light.entree_3
   
   - alias: '[Alarme] Déclenchée'
     initial_state: 'on'
@@ -329,6 +332,9 @@ automation:
           - condition: state
             entity_id: alarm_control_panel.maison
             state: armed_away  
+          - condition: state
+            entity_id: alarm_control_panel.maison
+            state: pending  
     action:
     - service: light.turn_off
       data:
