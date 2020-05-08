@@ -1,0 +1,187 @@
+
+################################################################################
+# Lumières
+################################################################################
+
+badges: []
+panel: true
+icon: 'mdi:home'
+path: lumieres
+title: Lumières
+cards:
+  - type: vertical-stack
+    cards:
+      - type: picture-glance
+        title: Salon
+        entities:
+          - entity: light.salon
+            show_state: true
+          - entity: media_player.sony_bravia_tv
+            icon: mdi:television
+            show_state: false
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+          - entity: media_player.rx_v475
+            icon: mdi:audio-video
+            show_state: false
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+          - entity: script.neato_table_basse
+            icon: 'mdi:robot-vacuum-variant'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+        image: /local/images/small/living.png
+        
+      - type: picture-glance
+        title: Salle à Manger
+        entities:
+          - entity: script.neato_sam
+            icon: 'mdi:robot-vacuum-variant'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+          - entity: sensor.temperature_158d0004460790
+            show_state: true
+          - entity: sensor.humidity_158d0004460790
+            show_state: true
+          - entity: light.sam
+            show_state: true
+          - entity: script.sleep_mac
+            icon: 'mdi:desktop-tower'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+          - entity: script.neato_table
+            icon: 'mdi:robot-vacuum-variant'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+        image: /local/images/small/dining.png
+        
+      - type: picture-glance
+        title: Cuisine
+        entities:
+          - entity: script.neato_cuisine
+            icon: 'mdi:robot-vacuum-variant'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+          - entity: sensor.temperature_158d00044627b4
+            show_state: true
+          - entity: sensor.humidity_158d00044627b4
+            show_state: true
+          - entity: light.cuisine
+            show_state: true
+        image: /local/images/small/kitchen.png
+        
+      - type: picture-glance
+        title: Entrée
+        entities:
+          - entity: script.neato_entree
+            icon: 'mdi:robot-vacuum-variant'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+          - entity: light.entree_1
+            show_state: true
+          - entity: light.entree_2
+            show_state: true
+          - entity: light.entree_3
+            show_state: true
+          - entity: binary_sensor.door_window_sensor_158d0003f1b10e
+            show_state: true
+            icon: 'mdi:door-closed-lock'
+        image: /local/images/small/entrance.png
+        
+      - type: picture-glance
+        title: Couloir
+        entities:
+          - entity: script.neato_couloir
+            icon: 'mdi:robot-vacuum-variant'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+          - entity: light.couloir
+            show_state: true
+        image: /local/images/small/corridor.png
+    
+      - type: picture-glance
+        title: Cléo
+        entities:
+          - entity: script.neato_cleo
+            icon: 'mdi:robot-vacuum-variant'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+          - entity: light.cleo
+            show_state: true
+          - entity: sensor.temperature_158d00044606ee
+            show_state: true
+          - entity: sensor.humidity_158d00044606ee
+            show_state: true
+        image: /local/images/small/kid.png
+        
+      - type: picture-glance
+        title: Chambre
+        entities:
+          - entity: script.neato_chambre
+            icon: 'mdi:robot-vacuum-variant'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+          - entity: light.chambre
+            show_state: true
+          - entity: sensor.temperature_158d00044bfdc7
+            show_state: true
+          - entity: sensor.humidity_158d00044bfdc7
+            show_state: true
+        image: /local/images/small/bedroom.png
+
+      - type: picture-glance
+        title: Salle de Bain
+        entities:
+          - entity: script.neato_sdb
+            icon: 'mdi:robot-vacuum-variant'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+          - entity: sensor.temperature_158d0004465b49
+            show_state: true
+          - entity: sensor.humidity_158d0004465b49
+            show_state: true
+          - entity: light.salle_de_bain
+            show_state: true
+          - entity: light.s20
+            show_state: true
+            icon: 'mdi:radiator'
+        image: /local/images/small/bathroom1.png
+    
+      - type: picture-glance
+        title: Toilettes
+        entities:
+          - entity: script.neato_wc
+            icon: 'mdi:robot-vacuum-variant'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
+          - entity: light.shoes
+            show_state: true
+          - entity: light.wc
+            show_state: true
+        image: /local/images/small/wc.png

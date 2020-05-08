@@ -1,0 +1,77 @@
+badges: []
+icon: 'mdi:folder-open'
+path: default_view
+title: Admin
+cards:
+  - entities:
+      - binary_sensor.updater
+    show_header_toggle: true
+    title: Updater
+    type: entities
+    
+  - entities:
+      - group.all_automations
+      - group.all_devices
+      - group.all_switches
+      - group.all_lights
+      - group.all_scripts
+    title: All
+    type: entities
+    
+  - title: Gateway
+    type: horizontal-stack
+    cards:
+     - type: light
+       entity: light.gateway_light_7811dcfaa3ee
+       name: LED
+     - entity: sensor.illumination_7811dcfaa3ee
+       name: Lux
+       unit: lm
+       min: 0
+       max: 1000
+       severity:
+         green: 600
+         yellow: 400
+         red: 200
+       type: gauge
+    hours_to_show: 72
+        
+    
+    
+  - entity: media_player.rx_v475
+    type: media-control
+  - entity: media_player.tele
+    type: media-control
+    
+  - type: history-graph
+    title: Pressions
+    entities:
+      - entity: sensor.pressure_158d0004460790
+        name: Salon
+      - entity: sensor.pressure_158d00044627b4
+        name: Cuisine
+      - entity: sensor.pressure_158d0004465b49
+        name: Salle de bain
+      - entity: sensor.pressure_158d00044606ee
+        name: Cléo
+      - entity: sensor.pressure_158d00044bfdc7
+        name: Chambre
+  - type: entities
+    title: Battery Xiaomi
+    entities:
+      - entity: sensor.porte_entree
+      - entity: sensor.interrupteur_chambre
+      - entity: sensor.interrupteur_cleo
+      - entity: sensor.interrupteur_couloir
+      - entity: sensor.interrupteur_entree
+      - entity: sensor.interrupteur_cuisine
+      - entity: sensor.interrupteur_salon
+      - entity: sensor.interrupteur_entree_couloir
+      - entity: sensor.interrupteur_sdb
+      - entity: sensor.interrupteur_marina
+      - entity: sensor.interrupteur_fabrice
+      - entity: sensor.temperature_cleo
+      - entity: sensor.temperature_salon
+      - entity: sensor.temperature_cuisine
+      - entity: sensor.temperature_sdb
+      - entity: sensor.temperature_chambre

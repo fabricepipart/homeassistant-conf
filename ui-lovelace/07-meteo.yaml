@@ -1,0 +1,26 @@
+
+################################################################################
+# Météo
+################################################################################
+
+badges: []
+cards:
+  - entity: weather.nice
+    name: Météo France
+    type: weather-forecast
+  - columns: 3
+    entities:
+      - entity: sun.sun
+      - entity: sensor.nice_weather
+      - entity: sensor.nice_temperature
+      - entity: sensor.nice_wind_speed
+      - entity: sensor.nice_rain_chance
+      - entity: sensor.nice_uv
+    show_name: false
+    type: glance
+  - entity: weather.maison
+    type: weather-forecast
+icon: 'mdi:weather-rainy'
+panel: false
+path: meteo
+title: Météo

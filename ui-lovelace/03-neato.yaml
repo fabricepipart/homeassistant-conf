@@ -1,0 +1,136 @@
+
+            
+################################################################################
+# Neato
+################################################################################
+
+badges: []
+cards:
+  - cards:
+      - entity: script.neato_cuisine
+        hold_action:
+          action: more-info
+        icon: 'mdi:robot-vacuum-variant'
+        icon_height: 48px
+        name: Cuisine
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: script.neato_table
+        hold_action:
+          action: more-info
+        icon: 'mdi:robot-vacuum-variant'
+        icon_height: 48px
+        name: Table
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: script.neato_table_basse
+        hold_action:
+          action: more-info
+        icon: 'mdi:robot-vacuum-variant'
+        icon_height: 48px
+        name: T.Basse
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: script.neato_sam
+        hold_action:
+          action: more-info
+        icon: 'mdi:robot-vacuum-variant'
+        icon_height: 48px
+        name: SàM
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: script.neato_chambre
+        hold_action:
+          action: more-info
+        icon: 'mdi:robot-vacuum-variant'
+        icon_height: 48px
+        name: Chambre
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+    title: Aspirer zone
+    type: horizontal-stack
+  - cards:
+      - entity: script.neato_cleo
+        hold_action:
+          action: more-info
+        icon: 'mdi:robot-vacuum-variant'
+        icon_height: 48px
+        name: Cléo
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: script.neato_couloir
+        hold_action:
+          action: more-info
+        icon: 'mdi:robot-vacuum-variant'
+        icon_height: 48px
+        name: Couloir
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: script.neato_entree
+        hold_action:
+          action: more-info
+        icon: 'mdi:robot-vacuum-variant'
+        icon_height: 48px
+        name: Entrée
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: script.neato_sdb
+        hold_action:
+          action: more-info
+        icon: 'mdi:robot-vacuum-variant'
+        icon_height: 48px
+        name: SdB
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+      - entity: script.neato_wc
+        hold_action:
+          action: more-info
+        icon: 'mdi:robot-vacuum-variant'
+        icon_height: 48px
+        name: WC
+        show_icon: true
+        show_name: true
+        tap_action:
+          action: toggle
+        type: entity-button
+    type: horizontal-stack
+  - entities:
+      - entity: switch.conchita_schedule
+      - entity: vacuum.conchita
+      - entity: sensor.conchita_battery
+    title: Conchita
+    type: entities
+  - aspect_ratio: 100%
+    camera_image: camera.conchita_cleaning_map
+    entity: camera.conchita_cleaning_map
+    type: picture-entity
+icon: 'mdi:robot-vacuum-variant'
+panel: false
+title: Aspirateur
