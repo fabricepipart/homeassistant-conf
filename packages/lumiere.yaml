@@ -91,8 +91,40 @@ light:
     availability_topic: "tele/home/corridor/light/LWT"
     payload_available: "Online"
     payload_not_available: "Offline"
+  - platform: mqtt
+    name: "WC"
+    state_topic: "stat/home/wc/light/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/wc/light/POWER"
+    availability_topic: "tele/home/wc/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+  - platform: mqtt
+    name: "Shoes"
+    state_topic: "stat/home/shoes/light/RESULT"
+    state_value_template: "{{ value_json.POWER }}"
+    command_topic: "cmnd/home/shoes/light/POWER"
+    availability_topic: "tele/home/shoes/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
 
-
+  - platform: group
+    name: All lights
+    entities:
+      - light.chambre
+      - light.cleo
+      - light.couloir
+      - light.cuisine
+      - light.entree_1
+      - light.entree_2
+      - light.entree_3
+      - light.gateway_light_7811dcfaa3ee
+      - light.salle_de_bain
+      - light.salon
+      - light.sam
+      - light.wc
+      - light.shoes
+      
 ###############################################################
 # Scripts
 ###############################################################

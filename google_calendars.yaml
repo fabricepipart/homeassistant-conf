@@ -33,3 +33,10 @@
     ignore_availability: true
     name: Week Numbers
     track: true
+
+- cal_id: family13654041962352879833@group.calendar.google.com
+  entities:
+  - device_id: family
+    ignore_availability: true
+    name: Family
+    track: true

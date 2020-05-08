@@ -115,7 +115,7 @@ sensor:
     name: "Couloir (version)"
     state_topic: "stat/home/corridor/light/STATUS2"
     value_template: "{{value_json['StatusFWR'].Version }}"
-    availability_topic: "tele/home/s20/light/LWT"
+    availability_topic: "tele/home/corridor/light/LWT"
     qos: 0
     payload_available: "Online"
     payload_not_available: "Offline"
@@ -267,6 +267,54 @@ sensor:
   - platform: mqtt
     name: "Salle de Bain (IP)"
     state_topic: 'stat/home/bathroom/light/RESULT'
+    value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
+    icon: 'mdi:ip-network'
+  
+  - platform: mqtt
+    name: "WC (Signal)"
+    state_topic: "tele/home/wc/light/STATE"
+    unit_of_measurement: "%"
+    value_template: "{{value_json['Wifi'].RSSI }}"
+    availability_topic: "tele/home/wc/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    icon: 'mdi:access-point'
+  - platform: mqtt
+    name: "WC (version)"
+    state_topic: "stat/home/wc/light/STATUS2"
+    value_template: "{{value_json['StatusFWR'].Version }}"
+    availability_topic: "tele/home/wc/light/LWT"
+    qos: 0
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    icon: 'mdi:xml'
+  - platform: mqtt
+    name: "WC (IP)"
+    state_topic: 'stat/home/wc/light/RESULT'
+    value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
+    icon: 'mdi:ip-network'
+  
+  - platform: mqtt
+    name: "Chaussures (Signal)"
+    state_topic: "tele/home/shoes/light/STATE"
+    unit_of_measurement: "%"
+    value_template: "{{value_json['Wifi'].RSSI }}"
+    availability_topic: "tele/home/shoes/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    icon: 'mdi:access-point'
+  - platform: mqtt
+    name: "Chaussures (version)"
+    state_topic: "stat/home/shoes/light/STATUS2"
+    value_template: "{{value_json['StatusFWR'].Version }}"
+    availability_topic: "tele/home/shoes/light/LWT"
+    qos: 0
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    icon: 'mdi:xml'
+  - platform: mqtt
+    name: "Chaussures (IP)"
+    state_topic: 'stat/home/shoes/light/RESULT'
     value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
     icon: 'mdi:ip-network'
   

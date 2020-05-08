@@ -1,228 +1,299 @@
-
-
 ###############################################################
 # Scripts
 ###############################################################
-  
+
 script:
   neato_cuisine:
     alias: Cuisine
     sequence:
-    - service: vacuum.neato_custom_cleaning
-      data:
-        entity_id: vacuum.conchita
-        mode: 1
-        navigation: 2
-        zone: "Cuisine"
-  
+      - service: neato.custom_cleaning
+        data:
+          entity_id: vacuum.conchita
+          mode: 1
+          navigation: 2
+          zone: "Cuisine"
+
   neato_chambre:
     alias: Chambre
     sequence:
-    - service: vacuum.neato_custom_cleaning
-      data:
-        entity_id: vacuum.conchita
-        mode: 1
-        navigation: 2
-        zone: "Chambre Principale"
-  
+      - service: neato.custom_cleaning
+        data:
+          entity_id: vacuum.conchita
+          mode: 1
+          navigation: 2
+          zone: "Chambre Principale"
+
   neato_sdb:
     alias: SdB
     sequence:
-    - service: vacuum.neato_custom_cleaning
-      data:
-        entity_id: vacuum.conchita
-        mode: 1
-        navigation: 2
-        zone: "Salle De Bains"
-  
+      - service: neato.custom_cleaning
+        data:
+          entity_id: vacuum.conchita
+          mode: 1
+          navigation: 2
+          zone: "Salle De Bains"
+
   neato_couloir:
     alias: Couloir
     sequence:
-    - service: vacuum.neato_custom_cleaning
-      data:
-        entity_id: vacuum.conchita
-        mode: 1
-        navigation: 2
-        zone: "Couloir"
-  
+      - service: neato.custom_cleaning
+        data:
+          entity_id: vacuum.conchita
+          mode: 1
+          navigation: 2
+          zone: "Couloir"
+
   neato_cleo:
     alias: Cléo
     sequence:
-    - service: vacuum.neato_custom_cleaning
-      data:
-        entity_id: vacuum.conchita
-        mode: 1
-        navigation: 2
-        zone: "Chambre Cléo"
-  
+      - service: neato.custom_cleaning
+        data:
+          entity_id: vacuum.conchita
+          mode: 1
+          navigation: 2
+          zone: "Chambre Cléo"
+
   neato_wc:
     alias: Toilettes
     sequence:
-    - service: vacuum.neato_custom_cleaning
-      data:
-        entity_id: vacuum.conchita
-        mode: 1
-        navigation: 2
-        zone: "Toilettes"
-  
+      - service: neato.custom_cleaning
+        data:
+          entity_id: vacuum.conchita
+          mode: 1
+          navigation: 2
+          zone: "Toilettes"
+
   neato_entree:
     alias: Entrée
     sequence:
-    - service: vacuum.neato_custom_cleaning
-      data:
-        entity_id: vacuum.conchita
-        mode: 1
-        navigation: 2
-        zone: "Entrée"
-  
+      - service: neato.custom_cleaning
+        data:
+          entity_id: vacuum.conchita
+          mode: 1
+          navigation: 2
+          zone: "Entrée"
+
   neato_table:
     alias: Table
     sequence:
-    - service: vacuum.neato_custom_cleaning
-      data:
-        entity_id: vacuum.conchita
-        mode: 1
-        navigation: 2
-        zone: "Table"
-  
+      - service: neato.custom_cleaning
+        data:
+          entity_id: vacuum.conchita
+          mode: 1
+          navigation: 2
+          zone: "Table"
+
   neato_sam:
     alias: SàM
     sequence:
-    - service: vacuum.neato_custom_cleaning
-      data:
-        entity_id: vacuum.conchita
-        mode: 1
-        navigation: 2
-        zone: "Salle a Manger"
-  
+      - service: neato.custom_cleaning
+        data:
+          entity_id: vacuum.conchita
+          mode: 1
+          navigation: 2
+          zone: "Salle a Manger"
+
   neato_table_basse:
     alias: Table basse
     sequence:
-    - service: vacuum.neato_custom_cleaning
-      data:
-        entity_id: vacuum.conchita
-        mode: 1
-        navigation: 2
-        zone: "Table basse"
-
+      - service: neato.custom_cleaning
+        data:
+          entity_id: vacuum.conchita
+          mode: 1
+          navigation: 2
+          zone: "Table basse"
 
 ###############################################################
 # Automation
 ###############################################################
 
 automation:
+  ################### Programmation ###################
 
-  - id: '1572943897953'
+  - alias: Neato Cuisine (Programmation)
+    trigger:
+      platform: time
+      #at: "07:10:00"
+      at: "13:30:00"
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - thu
+          - fri
+      - condition: state
+        entity_id: switch.conchita_schedule
+        state: "on"
+    action:
+      - service: script.neato_cuisine
+
+  - alias: Neato Table basse (Programmation)
+    trigger:
+      platform: time
+      #      at: "07:35:00"
+      at: "08:20:00"
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - thu
+          - fri
+      - condition: state
+        entity_id: switch.conchita_schedule
+        state: "on"
+    action:
+      - service: script.neato_table_basse
+
+  - alias: Neato Entrée (Programmation)
+    trigger:
+      platform: time
+      #      at: "07:45:00"
+      at: "08:45:00"
+    condition:
+      - condition: time
+        weekday:
+          #      - tue
+          - wed
+      - condition: state
+        entity_id: switch.conchita_schedule
+        state: "on"
+    action:
+      - service: script.neato_entree
+
+  - alias: Neato Couloir (Programmation)
+    trigger:
+      platform: time
+      #      at: "08:10:00"
+      at: "09:10:00"
+    condition:
+      - condition: time
+        weekday:
+          #      - tue
+          - wed
+      - condition: state
+        entity_id: switch.conchita_schedule
+        state: "on"
+    action:
+      - service: script.neato_couloir
+
+  ################### Erreurs ###################
+
+  - id: "1572943897953"
     alias: Conchita se decharge
-    description: ''
+    description: ""
     trigger:
-    - entity_id: sensor.conchita_battery
-      from: '1'
-      platform: state
-      to: '80'
+      - entity_id: sensor.conchita_battery
+        from: "1"
+        platform: state
+        to: "80"
     condition: []
     action:
-    - service: notify.ios_iphone_de_le_gone
-      data:
+      - service: notify.mobile_app_iphone_de_le_gone
         data:
-          push:
-            badge: 5
-            thread-id: home-assistant
-        message: Quelqu'un pourrait la remettre sur sa base?
-        title: Conchita se décharge anormalement
-    - service: notify.alexa_media_echo_salon
-      data:
-        target: media_player.alexa
-        message: Conchita se décharge anormalement. Quelqu'un pourrait la remettre sur
-          sa base?
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
+          message: Quelqu'un pourrait la remettre sur sa base?
+          title: Conchita se décharge anormalement
+      - service: notify.alexa_media_echo_salon
         data:
-          type: announce
-          method: all
-  
-  - id: '1572943972632'
+          target: media_player.alexa
+          message:
+            Conchita se décharge anormalement. Quelqu'un pourrait la remettre sur
+            sa base?
+          data:
+            type: announce
+            method: all
+
+  - id: "1572943972632"
     alias: Conchita en erreur
-    description: ''
+    description: ""
     trigger:
-    - entity_id: vacuum.conchita
-      to: error
-      platform: state
-      for: "00:10:00"
+      - entity_id: vacuum.conchita
+        to: error
+        platform: state
+        for: "00:10:00"
     condition: []
     action:
-    - service: notify.alexa_media_echo_salon
-      data:
-        target: media_player.alexa
-        message: Conchita a un soucis, quelqu'un veut bien l'aider?
+      - service: notify.alexa_media_echo_salon
         data:
-          type: announce
-          method: all
-          
+          target: media_player.alexa
+          message: Conchita a un soucis, quelqu'un veut bien l'aider?
+          data:
+            type: announce
+            method: all
+
+  ################### Boutons ###################
+
   - alias: Aspirateur Salle à manger et salon
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_both_158d0003558c12
-        click_type: long_both
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_both_158d0003558c12
+          click_type: long_both
     action:
-    - service: script.neato_sam
-      
+      - service: script.neato_sam
+
   - alias: Aspirateur Cléo
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0002f35399
-        click_type: long
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_158d0002f35399
+          click_type: long
     action:
-    - service: script.neato_cleo
-      
+      - service: script.neato_cleo
+
   - alias: Aspirateur Parents
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0002f31e64
-        click_type: long
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_158d0002f31e64
+          click_type: long
     action:
-    - service: script.neato_chambre
-      
+      - service: script.neato_chambre
+
   - alias: Aspirateur Cuisine
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d00031b5437
-        click_type: long
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_158d00031b5437
+          click_type: long
     action:
-    - service: script.neato_cuisine
-  
+      - service: script.neato_cuisine
+
   - alias: Aspirateur entrée
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_left_158d000355939d
-        click_type: long
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_left_158d000355939d
+          click_type: long
     action:
-    - service: script.neato_entree
-  
+      - service: script.neato_entree
+
   - alias: Aspirateur couloir
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_right_158d000355939d
-        click_type: long
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_right_158d00036d0507
-        click_type: long
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0003057c5b
-        click_type: long
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_right_158d000355939d
+          click_type: long
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_right_158d00036d0507
+          click_type: long
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_158d0003057c5b
+          click_type: long
     action:
-    - service: script.neato_couloir
+      - service: script.neato_couloir

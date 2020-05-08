@@ -1,4 +1,3 @@
-
 ###############################################################
 # Alarm
 ###############################################################
@@ -15,17 +14,16 @@ alarm_control_panel:
     armed_night:
       pending_time: 0
       delay_time: 0
-      
+
 ###############################################################
 # Inputs
-###############################################################  
-
+###############################################################
 
 ### Input select pour choisir le son a jouer ###
 input_select:
-  sirenes_gateway:    
+  sirenes_gateway:
     name: Sirènes
-    options: 
+    options:
       - "0 - Police car 1"
       - "1 - Police car 2"
       - "2 - Accident"
@@ -35,17 +33,17 @@ input_select:
       - "6 - Battle"
       - "7 - Air raid"
       - "8 - Bark"
-  #    - "9 - None"
+      #    - "9 - None"
       - "10 - Doorbell"
       - "11 - Knock at a door"
       - "12 - Amuse"
       - "13 - Alarm clock"
-  #    - "14 - None"
-  #    - "15 - None"
-  #    - "16 - None"
-  #    - "17 - None"
-  #    - "18 - None"
-  #    - "19 - None"
+      #    - "14 - None"
+      #    - "15 - None"
+      #    - "16 - None"
+      #    - "17 - None"
+      #    - "18 - None"
+      #    - "19 - None"
       - "20 - MiMix"
       - "21 - Enthusiastic"
       - "22 - GuitarClassic"
@@ -56,15 +54,15 @@ input_select:
       - "27 - MusicBox"
       - "28 - Orange"
       - "29 - Thinker"
-    initial: "1 - Police car 2"    
-    icon: mdi:alarm-bell 
+    initial: "1 - Police car 2"
+    icon: mdi:alarm-bell
 
 ### Input boolean pour couper le son du gateway ###
 input_boolean:
   sourdine_sirenes_gateway:
     name: Muet
     icon: mdi:volume-off
-  
+
 ### Input slider pour controler le volu me du gateway ###
 input_number:
   gateway_volume:
@@ -74,7 +72,7 @@ input_number:
     max: 100
     step: 1
     icon: mdi:volume-high
-### Input slider pour controler le delai de la boucle ###
+  ### Input slider pour controler le delai de la boucle ###
   delai_boucle:
     name: "Délai boucle"
     initial: 1
@@ -97,31 +95,31 @@ script:
           gw_mac: !secret xiaomi_gateway_mac
           ringtone_id: "{{ states.input_select.sirenes_gateway.state.split('-')[0] }}"
           ringtone_vol: "{{ states.input_number.gateway_volume.state|int }}"
-  
+
   jouer_sirene_boucle:
     alias: "[Alarme] Jouer sirène en boucle"
     sequence:
       - condition: state
         entity_id: input_boolean.sourdine_sirenes_gateway
-        state: 'off'
+        state: "off"
       - service: xiaomi_aqara.play_ringtone
         data_template:
           gw_mac: !secret xiaomi_gateway_mac
           ringtone_id: "{{ states.input_select.sirenes_gateway.state.split('-')[0] }}"
           ringtone_vol: "{{ states.input_number.gateway_volume.state|int }}"
-      - delay: '00:00:{{ states.input_number.delai_boucle.state | int }}'
+      - delay: "00:00:{{ states.input_number.delai_boucle.state | int }}"
       - service: script.boucle_sirene
-  
+
   boucle_sirene:
     alias: "[Alarme] Boucle de sirène"
     sequence:
       - condition: state
         entity_id: input_boolean.sourdine_sirenes_gateway
-        state: 'off'
-      - delay: '00:00:{{ states.input_number.delai_boucle.state | int }}'
-      - service: script.jouer_sirene_boucle    
-      
-  ### Scripts pour les deux automatisations du input_boolean ###        
+        state: "off"
+      - delay: "00:00:{{ states.input_number.delai_boucle.state | int }}"
+      - service: script.jouer_sirene_boucle
+
+  ### Scripts pour les deux automatisations du input_boolean ###
   sourdine_sirene:
     alias: "[Alarme] Mettre le son de la sirène en sourdine"
     sequence:
@@ -130,7 +128,7 @@ script:
           gw_mac: !secret xiaomi_gateway_mac
           ringtone_id: "{{ states.input_select.sirenes_gateway.state.split('-')[0] }}"
           ringtone_vol: "0"
-          
+
   activer_son_sirene:
     alias: "[Alarme] Activer le son de la sirène"
     sequence:
@@ -138,8 +136,7 @@ script:
         data_template:
           gw_mac: !secret xiaomi_gateway_mac
           ringtone_id: "{{ states.input_select.sirenes_gateway.state.split('-')[0] }}"
-          ringtone_vol: "{{ states.input_slider.gateway_volume.state|int }}"             
-                 
+          ringtone_vol: "{{ states.input_slider.gateway_volume.state|int }}"
 
 ###############################################################
 # Automation
@@ -147,98 +144,96 @@ script:
 automation:
   - alias: Porte ouverte
     trigger:
-    - platform: state
-      entity_id: binary_sensor.door_window_sensor_158d0003f1b10e
-      from: "off"
-      to: "on"
+      - platform: state
+        entity_id: binary_sensor.door_window_sensor_158d0003f1b10e
+        from: "off"
+        to: "on"
     condition:
       - condition: state
         entity_id: alarm_control_panel.maison
         state: disarmed
     action:
-    - service: light.turn_on
-      data:
-        entity_id: light.gateway_light_7811dcfaa3ee
-        color_name: yellow
-        brightness_pct: 100
-      
+      - service: light.turn_on
+        data:
+          entity_id: light.gateway_light_7811dcfaa3ee
+          color_name: yellow
+          brightness_pct: 100
+
   - alias: Porte fermée
     trigger:
-    - platform: state
-      entity_id: binary_sensor.door_window_sensor_158d0003f1b10e
-      from: "on"
-      to: "off"
+      - platform: state
+        entity_id: binary_sensor.door_window_sensor_158d0003f1b10e
+        from: "on"
+        to: "off"
     condition:
       - condition: state
         entity_id: alarm_control_panel.maison
         state: disarmed
     action:
-    - service: light.turn_off
-      data:
-        entity_id: light.gateway_light_7811dcfaa3ee
-   
-  ### Automatisations pour le input_boolean ### 
-  - alias: '[Alarme] Boolean Sirène en sourdine'
+      - service: light.turn_off
+        data:
+          entity_id: light.gateway_light_7811dcfaa3ee
+
+  ### Automatisations pour le input_boolean ###
+  - alias: "[Alarme] Boolean Sirène en sourdine"
     initial_state: on
     trigger:
       - platform: state
         entity_id: input_boolean.sourdine_sirenes_gateway
-        to: 'on'
+        to: "on"
     action:
       - service: xiaomi_aqara.stop_ringtone
         data:
           gw_mac: !secret xiaomi_gateway_mac
       - service: script.turn_on
         entity_id: script.sourdine_sirene
-        
-  - alias: '[Alarme] Boolean Sirène son activé'
+
+  - alias: "[Alarme] Boolean Sirène son activé"
     initial_state: on
     trigger:
       - platform: state
         entity_id: input_boolean.sourdine_sirenes_gateway
-        to: 'off'
+        to: "off"
     action:
       - service: script.turn_on
-        entity_id: script.activer_son_sirene     
+        entity_id: script.activer_son_sirene
 
-
-  
-############### Armer ############### 
+  ############### Armer ###############
 
   - alias: "Armer alarme"
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d000316bbe1
-        click_type: long
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_158d000316bbe1
+          click_type: long
     condition:
       - condition: state
         entity_id: alarm_control_panel.maison
         state: disarmed
       - condition: state
         entity_id: binary_sensor.door_window_sensor_158d0003f1b10e
-        state: 'on'
+        state: "on"
     action:
       - delay:
           seconds: 1
       - service: light.turn_on
         data:
           entity_id: light.gateway_light_7811dcfaa3ee
-          rgb_color: [255,63,0]
+          rgb_color: [255, 63, 0]
           brightness_pct: 100
       - service: alarm_control_panel.alarm_arm_away
         entity_id: alarm_control_panel.maison
-      
-  - alias: '[Alarme] Armée'
-    initial_state: 'on'
+
+  - alias: "[Alarme] Armée"
+    initial_state: "on"
     trigger:
-    - platform: state
-      entity_id: alarm_control_panel.maison
-      to: 'armed_away'
-    - platform: state
-      entity_id: alarm_control_panel.maison
-      to: 'armed_night'
+      - platform: state
+        entity_id: alarm_control_panel.maison
+        to: "armed_away"
+      - platform: state
+        entity_id: alarm_control_panel.maison
+        to: "armed_night"
     action:
       - service: light.turn_on
         data:
@@ -248,37 +243,36 @@ automation:
       - service: notify.alexa_media
         data:
           target:
-            -  media_player.alexa
+            - media_player.alexa
           message: Alarme activée
           data:
             type: announce
-      - service: notify.ios_iphone_de_le_gone
-        alias: 'Notification alarme armée'
+      - service: notify.mobile_app_iphone_de_le_gone
+        alias: "Notification alarme armée"
         data:
           data:
             push:
               badge: 5
               thread-id: home-assistant
           message: Tout est sous contrôle
-          title: 'Alarme armée'
-      
-    
-############### Déclencher ############### 
-  
-  - alias: 'Déclencher alarme'
+          title: "Alarme armée"
+
+  ############### Déclencher ###############
+
+  - alias: "Déclencher alarme"
     trigger:
       platform: state
       entity_id: binary_sensor.door_window_sensor_158d0003f1b10e
-      to: 'on'
+      to: "on"
     condition:
       - condition: or
-        conditions:  
+        conditions:
           - condition: state
             entity_id: alarm_control_panel.maison
             state: armed_night
           - condition: state
             entity_id: alarm_control_panel.maison
-            state: armed_away     
+            state: armed_away
     action:
       - service: alarm_control_panel.alarm_trigger
         entity_id: alarm_control_panel.maison
@@ -292,20 +286,20 @@ automation:
       - service: light.turn_on
         data:
           entity_id: light.entree_1,light.entree_2,light.entree_3
-  
-  - alias: '[Alarme] Déclenchée'
-    initial_state: 'on'
+
+  - alias: "[Alarme] Déclenchée"
+    initial_state: "on"
     trigger:
       platform: state
       entity_id: alarm_control_panel.maison
-      to: 'triggered'
+      to: "triggered"
     action:
       - service: script.turn_on
         entity_id: script.jouer_sirene_boucle
       - delay:
           seconds: .1
-      - service: notify.ios_iphone_de_le_gone
-        alias: 'Notification alarme déclenchée'
+      - service: notify.mobile_app_iphone_de_le_gone
+        alias: "Notification alarme déclenchée"
         data:
           data:
             push:
@@ -313,49 +307,49 @@ automation:
               thread-id: home-assistant
           message: Déclenchement de la sirène
           title: "[Alarme] Déclenchée"
-     
-############### Désarmer ############### 
+
+  ############### Désarmer ###############
 
   - alias: "Désactiver alarme"
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d000316bbe1
-        click_type: long
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_158d000316bbe1
+          click_type: long
     condition:
       - condition: or
-        conditions:  
+        conditions:
           - condition: state
             entity_id: alarm_control_panel.maison
             state: armed_night
           - condition: state
             entity_id: alarm_control_panel.maison
-            state: armed_away  
+            state: armed_away
           - condition: state
             entity_id: alarm_control_panel.maison
-            state: pending  
-    action:
-    - service: light.turn_off
-      data:
-        entity_id: light.gateway_light_7811dcfaa3ee
-    - service: alarm_control_panel.alarm_disarm
-      entity_id: alarm_control_panel.maison
-      data:
-        code: !secret alarm_code
-      
-  - alias: '[Alarme] Désactivée'
-    initial_state: 'on'
-    trigger:
-      platform: state
-      entity_id: alarm_control_panel.maison
-      to: 'disarmed'
+            state: pending
     action:
       - service: light.turn_off
         data:
           entity_id: light.gateway_light_7811dcfaa3ee
-      - service: notify.ios_iphone_de_le_gone
-        alias: 'Notification alarme déclenchée'
+      - service: alarm_control_panel.alarm_disarm
+        entity_id: alarm_control_panel.maison
+        data:
+          code: !secret alarm_code
+
+  - alias: "[Alarme] Désactivée"
+    initial_state: "on"
+    trigger:
+      platform: state
+      entity_id: alarm_control_panel.maison
+      to: "disarmed"
+    action:
+      - service: light.turn_off
+        data:
+          entity_id: light.gateway_light_7811dcfaa3ee
+      - service: notify.mobile_app_iphone_de_le_gone
+        alias: "Notification alarme déclenchée"
         data:
           data:
             push:
@@ -371,14 +365,12 @@ automation:
       - service: notify.alexa_media
         data:
           target:
-            -  media_player.alexa
+            - media_player.alexa
           message: Alarme désactivée. Bienvenu à la maison!
           data:
             type: announce
       - delay:
-          seconds: 10        
+          seconds: 10
       - service: input_boolean.turn_off
-        data:   
+        data:
           entity_id: input_boolean.sourdine_sirenes_gateway
-    
-      

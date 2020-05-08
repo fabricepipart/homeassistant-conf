@@ -1,0 +1,38 @@
+homekit:
+  auto_start: false
+  filter:
+    include_domains:
+      - cover
+      - light
+      - script
+      - media_player
+      - sensor
+      - switch
+    include_entities:
+      - light.gateway_light_7811dcfaa3ee
+    exclude_entities:
+      - switch.alexa_cuisine_do_not_disturb_switch
+      - switch.alexa_cuisine_repeat_switch
+      - switch.alexa_cuisine_shuffle_switch
+      - switch.alexa_do_not_disturb_switch
+      - switch.alexa_repeat_switch
+      - switch.alexa_shuffle_switch
+      - switch.echo_de_cleo_do_not_disturb_switch
+      - switch.echo_de_cleo_repeat_switch
+      - switch.echo_de_cleo_shuffle_switch
+      - switch.tous_alexa_do_not_disturb_switch
+      - switch.tous_alexa_repeat_switch
+      - switch.tous_alexa_shuffle_switch
+      - automation.sonoff_ips_on_ha_start_up
+      
+      
+      
+      
+automation:
+  - alias: 'Start HomeKit'
+    trigger:
+      - platform: homeassistant
+        event: start
+    action:
+      - delay: 00:05  # Waits 5 minutes
+      - service: homekit.start

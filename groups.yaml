@@ -1,7 +1,0 @@
-# sonoff:
-#   name: "Sonoff Tasmota"
-#   control: hidden
-#   entities:
-#     - script.get_sonoff_ip
-#     - sensor.sonoff_ip
-

@@ -4,162 +4,204 @@ resources:
     type: js
   - url: /community_plugin/mini-media-player/mini-media-player-bundle.js
     type: module
-
-
+  - url: /community_plugin/spotify-card/spotify-card.js
+    type: module
+  - url: /community_plugin/spotify-playlist-card/spotify-playlist-card.js
+    type: js
+    
+   
+    
 views:
+################################################################################
+# Lumières
+################################################################################
 
   - badges: []
     panel: true
-    cards:
-      - type: vertical-stack
-        cards:
-          - type: horizontal-stack
-            columns: 3
-            cards:
-              - type: picture-glance
-                title: Entrée
-                entities:
-                  - entity: light.entree_1
-                    show_state: true
-                  - entity: light.entree_2
-                    show_state: true
-                  - entity: light.entree_3
-                    show_state: true
-                  - entity: binary_sensor.door_window_sensor_158d0003f1b10e
-                    show_state: true
-                    icon: 'mdi:door-closed-lock'
-                image: /local/images/small/entrance.png
-                
-              - type: picture-glance
-                title: Salle à Manger
-                entities:
-                  - entity: sensor.temperature_158d0004460790
-                    show_state: true
-                  - entity: sensor.humidity_158d0004460790
-                    show_state: true
-                  - entity: light.sam
-                    show_state: true
-                  - entity: script.sleep_mac
-                    hold_action:
-                      action: more-info
-                    icon: 'mdi:desktop-tower'
-                    tap_action:
-                      action: toggle
-                image: /local/images/small/dining.png
-                
-              - type: picture-glance
-                title: Salon
-                entities:
-                  - entity: light.salon
-                    show_state: true
-                  - entity: media_player.sony_bravia_tv
-                    icon: mdi:television
-                    show_state: false
-                    tap_action:
-                      action: toggle
-                    hold_action:
-                      action: more-info
-                  - entity: media_player.rx_v475
-                    icon: mdi:audio-video
-                    show_state: false
-                    tap_action:
-                      action: toggle
-                    hold_action:
-                      action: more-info
-                image: /local/images/small/living.png
-                
-          - type: horizontal-stack
-            columns: 3
-            cards:
-              - type: picture-glance
-                title: Cléo
-                entities:
-                  - entity: light.cleo
-                    show_state: true
-                  - entity: sensor.temperature_158d00044606ee
-                    show_state: true
-                  - entity: sensor.humidity_158d00044606ee
-                    show_state: true
-                image: /local/images/small/kid.png
-                
-              - type: picture-glance
-                title: Salle de Bain
-                entities:
-                  - entity: sensor.temperature_158d0004465b49
-                    show_state: true
-                  - entity: sensor.humidity_158d0004465b49
-                    show_state: true
-                  - entity: light.salle_de_bain
-                    show_state: true
-                  - entity: light.s20
-                    show_state: true
-                    icon: 'mdi:radiator'
-                image: /local/images/small/bathroom1.png
-            
-              - type: picture-glance
-                title: Chambre
-                entities:
-                  - entity: light.chambre
-                    show_state: true
-                  - entity: sensor.temperature_158d00044bfdc7
-                    show_state: true
-                  - entity: sensor.humidity_158d00044bfdc7
-                    show_state: true
-                image: /local/images/small/bedroom.png
-            
-          - type: horizontal-stack
-            columns: 3
-            cards:
-              - type: picture-glance
-                title: Cuisine
-                entities:
-                  - entity: sensor.temperature_158d00044627b4
-                    show_state: true
-                  - entity: sensor.humidity_158d00044627b4
-                    show_state: true
-                  - entity: light.cuisine
-                    show_state: true
-                image: /local/images/small/kitchen.png
-              - type: picture-glance
-                title: Toilettes
-                entities:
-                  - entity: light.couloir
-                    show_state: true
-                image: /local/images/small/wc.png
-              - type: picture-glance
-                title: Couloir
-                entities:
-                  - entity: light.couloir
-                    show_state: true
-                image: /local/images/small/corridor.png
-        
     icon: 'mdi:home'
     path: lumieres
     title: Lumières
-
-  - badges:
-      - binary_sensor.door_window_sensor_158d0003f1b10e
-      - light.gateway_light_7811dcfaa3ee
-    icon: 'mdi:alarm-light'
-    path: alarm
-    title: Alarm
     cards:
-      - type: alarm-panel
-        name: House Alarm
-        entity: alarm_control_panel.maison
-        states:
-          - arm_home
-          - arm_night
-      - title: Alarm
-        type: entities
-        entities:
-        - entity: input_select.sirenes_gateway
-        - entity: input_boolean.sourdine_sirenes_gateway
-        - entity: input_number.gateway_volume
-        - entity: input_number.delai_boucle
-        - entity: binary_sensor.door_window_sensor_158d0003f1b10e
-        - entity: script.jouer_sirene
-        - entity: script.jouer_sirene_boucle
+      - type: vertical-stack
+        cards:
+          - type: picture-glance
+            title: Salon
+            entities:
+              - entity: light.salon
+                show_state: true
+              - entity: media_player.sony_bravia_tv
+                icon: mdi:television
+                show_state: false
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - entity: media_player.rx_v475
+                icon: mdi:audio-video
+                show_state: false
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - entity: script.neato_table_basse
+                icon: 'mdi:robot-vacuum-variant'
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+            image: /local/images/small/living.png
+            
+          - type: picture-glance
+            title: Salle à Manger
+            entities:
+              - entity: script.neato_sam
+                icon: 'mdi:robot-vacuum-variant'
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - entity: sensor.temperature_158d0004460790
+                show_state: true
+              - entity: sensor.humidity_158d0004460790
+                show_state: true
+              - entity: light.sam
+                show_state: true
+              - entity: script.sleep_mac
+                icon: 'mdi:desktop-tower'
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - entity: script.neato_table
+                icon: 'mdi:robot-vacuum-variant'
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+            image: /local/images/small/dining.png
+            
+          - type: picture-glance
+            title: Cuisine
+            entities:
+              - entity: script.neato_cuisine
+                icon: 'mdi:robot-vacuum-variant'
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - entity: sensor.temperature_158d00044627b4
+                show_state: true
+              - entity: sensor.humidity_158d00044627b4
+                show_state: true
+              - entity: light.cuisine
+                show_state: true
+            image: /local/images/small/kitchen.png
+            
+          - type: picture-glance
+            title: Entrée
+            entities:
+              - entity: script.neato_entree
+                icon: 'mdi:robot-vacuum-variant'
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - entity: light.entree_1
+                show_state: true
+              - entity: light.entree_2
+                show_state: true
+              - entity: light.entree_3
+                show_state: true
+              - entity: binary_sensor.door_window_sensor_158d0003f1b10e
+                show_state: true
+                icon: 'mdi:door-closed-lock'
+            image: /local/images/small/entrance.png
+            
+          - type: picture-glance
+            title: Couloir
+            entities:
+              - entity: script.neato_couloir
+                icon: 'mdi:robot-vacuum-variant'
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - entity: light.couloir
+                show_state: true
+            image: /local/images/small/corridor.png
+        
+          - type: picture-glance
+            title: Cléo
+            entities:
+              - entity: script.neato_cleo
+                icon: 'mdi:robot-vacuum-variant'
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - entity: light.cleo
+                show_state: true
+              - entity: sensor.temperature_158d00044606ee
+                show_state: true
+              - entity: sensor.humidity_158d00044606ee
+                show_state: true
+            image: /local/images/small/kid.png
+            
+          - type: picture-glance
+            title: Chambre
+            entities:
+              - entity: script.neato_chambre
+                icon: 'mdi:robot-vacuum-variant'
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - entity: light.chambre
+                show_state: true
+              - entity: sensor.temperature_158d00044bfdc7
+                show_state: true
+              - entity: sensor.humidity_158d00044bfdc7
+                show_state: true
+            image: /local/images/small/bedroom.png
+    
+          - type: picture-glance
+            title: Salle de Bain
+            entities:
+              - entity: script.neato_sdb
+                icon: 'mdi:robot-vacuum-variant'
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - entity: sensor.temperature_158d0004465b49
+                show_state: true
+              - entity: sensor.humidity_158d0004465b49
+                show_state: true
+              - entity: light.salle_de_bain
+                show_state: true
+              - entity: light.s20
+                show_state: true
+                icon: 'mdi:radiator'
+            image: /local/images/small/bathroom1.png
+        
+          - type: picture-glance
+            title: Toilettes
+            entities:
+              - entity: script.neato_wc
+                icon: 'mdi:robot-vacuum-variant'
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - entity: light.shoes
+                show_state: true
+              - entity: light.wc
+                show_state: true
+            image: /local/images/small/wc.png
+
+################################################################################
+# Sensors
+################################################################################
   
   - badges: []
     icon: 'mdi:thermometer'
@@ -297,6 +339,9 @@ views:
             name: Chambre
         hours_to_show: 72
             
+################################################################################
+# Neato
+################################################################################
 
   - badges: []
     cards:
@@ -431,6 +476,481 @@ views:
 
 
 
+################################################################################
+# Home cinema
+################################################################################
+
+  - badges: []
+    icon: 'mdi:remote-tv'
+    path: medias
+    title: Home cinema
+    cards:
+                
+      - title: Media players
+        type: vertical-stack
+        cards:
+          - title: TV
+            type: custom:mini-media-player
+            entity: media_player.sony_bravia_tv
+          - type: custom:mini-media-player
+            entity: media_player.rx_v475
+            
+      - title: Activités
+        type: vertical-stack
+        cards:
+          - type: horizontal-stack
+            columns: 4
+            cards:
+              - entity: script.activity_off
+                name: 'Off'
+                icon: 'mdi:power'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: script.activity_box
+                name: Box
+                icon: 'mdi:television-box'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: script.activity_netflix
+                name: Netflix
+                icon: 'mdi:netflix'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: script.activity_plex
+                name: Plex
+                icon: 'mdi:plex'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+          - type: horizontal-stack
+            cards:
+              - entity: script.activity_amazon
+                name: Prime
+                icon: 'mdi:amazon'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: script.activity_wii
+                name: Wii
+                icon: 'mdi:wii'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: script.activity_youtube
+                name: Youtube
+                icon: 'mdi:youtube'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: script.activity_youtube_kids
+                name: Kids
+                icon: 'mdi:youtube'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+          - type: horizontal-stack
+            cards:
+              - entity: script.activity_ps3
+                name: 'PS3'
+                icon: 'mdi:playstation'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: script.activity_airplay
+                name: 'Airplay'
+                icon: 'mdi:airplay'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: script.activity_spotify
+                name: Spotify
+                icon: 'mdi:spotify'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+              - entity: script.activity_dlna
+                name: iTunes
+                icon: 'mdi:itunes'
+                hold_action:
+                  action: more-info
+                icon_height: 48px
+                show_icon: true
+                show_name: true
+                tap_action:
+                  action: toggle
+                type: entity-button
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - entity: script.activity_play_tv
+                icon: 'mdi:rewind'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+              - entity: script.activity_play_tv
+                icon: 'mdi:play'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+              - entity: script.activity_pause_tv
+                icon: 'mdi:fast-forward'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - entity: script.activity_play_tv
+                icon: 'mdi:keyboard-return'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+              - entity: script.activity_play_tv
+                icon: 'mdi:pause'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+              - entity: script.activity_pause_tv
+                icon: 'mdi:stop'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - entity: script.activity_play_tv
+                icon: 'mdi:blank'
+                icon_height: 16px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:blank'
+                icon_height: 16px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:blank'
+                icon_height: 16px
+                show_name: false
+                type: entity-button
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - entity: script.activity_play_tv
+                icon: 'mdi:blank'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:menu-up'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+              - entity: script.volume_up
+                icon: 'mdi:volume-plus'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - entity: script.activity_play_tv
+                icon: 'mdi:menu-left'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+              - entity: script.activity_play_tv
+                icon: 'mdi:image-filter-center-focus-strong'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+              - entity: script.volume_up
+                icon: 'mdi:menu-right'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - entity: script.activity_play_tv
+                icon: 'mdi:blank'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:menu-down'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+              - entity: script.volume_up
+                icon: 'mdi:volume-minus'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                tap_action:
+                  action: toggle
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - entity: script.activity_play_tv
+                icon: 'mdi:blank'
+                icon_height: 16px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:blank'
+                icon_height: 16px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:blank'
+                icon_height: 16px
+                show_name: false
+                type: entity-button
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - entity: script.activity_play_tv
+                icon: 'mdi:numeric-1'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:numeric-2'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:numeric-3'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - entity: script.activity_play_tv
+                icon: 'mdi:numeric-4'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:numeric-5'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:numeric-6'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - entity: script.activity_play_tv
+                icon: 'mdi:numeric-7'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:numeric-8'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:numeric-9'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - entity: script.activity_play_tv
+                icon: 'mdi:blank'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:numeric-0'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+              - entity: script.activity_play_tv
+                icon: 'mdi:blank'
+                icon_height: 24px
+                show_name: false
+                type: entity-button
+                
+################################################################################
+# Music
+################################################################################
+  - badges: []
+    icon: 'mdi:music'
+    path: music
+    title: Music
+    panel: true
+    cards:
+      - type: horizontal-stack
+        column: 2
+        cards:
+          - title: Spotify
+            type: vertical-stack
+            cards:
+              - type: custom:mini-media-player
+                entity: media_player.spotify_fabrice_pipart
+              - type: "custom:spotify-playlist-card"
+                sensor: sensor.spotifyplaylist
+                playback_method: spotify
+#                speaker_entity: " media_player.rx_v475"
+                speaker_entity: "media_player.spotify"
+                show_playlist_titles: true
+                shuffle: true
+                columns: 3
+    
+          - title: Alexa
+            type: vertical-stack
+            cards:
+              - title: Echo Salon
+                show_header_toggle: false
+                type: entities
+                entities:
+                  - entity: media_player.alexa
+                  - entity: switch.alexa_shuffle_switch
+                  - entity: switch.alexa_repeat_switch
+              - title: Echo Cuisine
+                show_header_toggle: false
+                type: entities
+                entities:
+                  - entity: media_player.alexa_cuisine
+                  - entity: switch.alexa_cuisine_shuffle_switch
+                  - entity: switch.alexa_cuisine_repeat_switch
+              - title: Echo Cléo
+                show_header_toggle: false
+                type: entities
+                entities:
+                  - entity: media_player.echo_de_cleo
+                  - entity: switch.echo_de_cleo_shuffle_switch
+                  - entity: switch.echo_de_cleo_repeat_switch
+            
+            
+           
+
+################################################################################
+# Alarme
+################################################################################
+
+  - badges:
+      - binary_sensor.door_window_sensor_158d0003f1b10e
+      - light.gateway_light_7811dcfaa3ee
+      - binary_sensor.water_leak_sensor_158d0004235284
+      - binary_sensor.water_leak_sensor_158d00045a0d75
+    icon: 'mdi:alarm-light'
+    path: alarm
+    title: Alarm
+    cards:
+      - type: alarm-panel
+        name: House Alarm
+        entity: alarm_control_panel.maison
+        states:
+          - arm_home
+          - arm_night
+      - title: Alarm
+        type: entities
+        entities:
+        - entity: input_select.sirenes_gateway
+        - entity: input_boolean.sourdine_sirenes_gateway
+        - entity: input_number.gateway_volume
+        - entity: input_number.delai_boucle
+        - entity: binary_sensor.door_window_sensor_158d0003f1b10e
+        - entity: script.jouer_sirene
+        - entity: script.jouer_sirene_boucle
+
+
+################################################################################
+# Météo
+################################################################################
+
   - badges: []
     cards:
       - entity: weather.nice
@@ -452,6 +972,10 @@ views:
     panel: false
     path: meteo
     title: Météo
+
+################################################################################
+# Calendrier
+################################################################################
 
   - badges: []
     cards:
@@ -504,286 +1028,180 @@ views:
     path: cal
     title: Calendrier
 
-  - badges: []
-    cards:
-      - title: Activités
-        type: horizontal-stack
-        cards:
-          - entity: script.activity_off
-            name: 'Off'
-            icon: 'mdi:power'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: script.activity_box
-            name: Box
-            icon: 'mdi:television-box'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: script.activity_netflix
-            name: Netflix
-            icon: 'mdi:netflix'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: script.activity_plex
-            name: Plex
-            icon: 'mdi:plex'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-      - type: horizontal-stack
-        cards:
-          - entity: script.activity_amazon
-            name: Prime
-            icon: 'mdi:amazon'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: script.activity_wii
-            name: Wii
-            icon: 'mdi:wii'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: script.activity_youtube
-            name: Youtube
-            icon: 'mdi:youtube'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: script.activity_youtube_kids
-            name: Kids
-            icon: 'mdi:youtube'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-      - type: horizontal-stack
-        cards:
-          - entity: script.activity_ps3
-            name: 'PS3'
-            icon: 'mdi:playstation'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: script.activity_airplay
-            name: 'Airplay'
-            icon: 'mdi:airplay'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: script.activity_spotify
-            name: Spotify
-            icon: 'mdi:spotify'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: script.activity_dlna
-            name: iTunes
-            icon: 'mdi:itunes'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-      - title: Contrôles
-        type: horizontal-stack
-        cards:
-          - entity: script.activity_play_tv
-            name: 'Play'
-            icon: 'mdi:play'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: script.activity_pause_tv
-            name: Pause
-            icon: 'mdi:pause'
-            hold_action:
-              action: more-info
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-      - type: custom:mini-media-player
-        entity: media_player.sony_bravia_tv
-      - type: custom:mini-media-player
-        entity: media_player.rx_v475
-      - type: custom:mini-media-player
-        entity: media_player.tele
-      - type: custom:mini-media-player
-        entity: media_player.spotify
-      - entities:
-          - entity: media_player.alexa
-          - entity: switch.alexa_shuffle_switch
-          - entity: switch.alexa_repeat_switch
-          - entity: media_player.alexa_cuisine
-          - entity: switch.alexa_cuisine_shuffle_switch
-          - entity: switch.alexa_cuisine_repeat_switch
-          - entity: media_player.echo_de_cleo
-          - entity: switch.echo_de_cleo_shuffle_switch
-          - entity: switch.echo_de_cleo_repeat_switch
-        show_header_toggle: false
-        title: Echo de Cléo
-        type: entities
-    icon: 'mdi:music'
-    path: medias
-    title: Medias
+################################################################################
+# Réseau
+################################################################################
 
   - badges: []
-    cards:
-      - cards:
-        - entity: script.sleep_mac
-          hold_action:
-            action: more-info
-          icon: 'mdi:sleep'
-          icon_height: 48px
-          show_icon: true
-          show_name: true
-          tap_action:
-            action: toggle
-          type: entity-button
-        title: Mac
-        type: horizontal-stack
-      - entities:
-          - entity: sensor.neufbox_router_kbyte_sec_sent
-          - entity: sensor.neufbox_router_kbyte_sec_received
-        show_header_toggle: false
+    panel: true
+    icon: 'mdi:network'
+    path: reseau
+    title: Réseau
+    cards: 
+    - type: vertical-stack
+      cards:
+      
+      - type: horizontal-stack
+        columns: 2
+        title: Ordinateur
+        cards:
+        - type: vertical-stack
+          cards:
+          - entity: script.sleep_mac
+            hold_action:
+              action: more-info
+            icon: 'mdi:sleep'
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+            title: Mac
+
+          - type: horizontal-stack
+            title: Imprimante
+            columns: 2
+            cards:
+            - entity: sensor.canon_mx470_series_black
+              name: Noir
+              unit: '%'
+              min: 0
+              max: 100
+              severity:
+                green: 50
+                yellow: 25
+                red: 5
+              type: gauge
+            - entity: sensor.canon_mx470_series_color
+              name: Couleur
+              unit: '%'
+              min: 0
+              max: 100
+              severity:
+                green: 50
+                yellow: 25
+                red: 5
+              type: gauge
+
+
+
+
+        - entities:
+            - entity: sensor.processor_use
+            - entity: sensor.memory_use_percent
+            - entity: sensor.swap_use_percent
+            - entity: sensor.last_boot
+            - entity: sensor.disk_use_percent
+          show_header_toggle: false
+          title: Raspberry
+          type: entities
+            
+      
+      
+      - type: vertical-stack
         title: Internet
-        type: entities
-      - type: history-graph
-        title: Internet
-        hours_to_show: 72
-        entities:
-          - entity: sensor.neufbox_router_kbyte_sec_sent
-          - entity: sensor.neufbox_router_kbyte_sec_received
-      - entities:
-          - entity: sensor.processor_use
-          - entity: sensor.memory_use_percent
-          - entity: sensor.swap_use_percent
-          - entity: sensor.last_boot
-          - entity: sensor.disk_use_percent
-        show_header_toggle: false
-        title: Raspberry
-        type: entities
-      - entities:
-          - entity: sensor.salle_a_manger_signal
-          - entity: sensor.salon_signal
-          - entity: sensor.chambre_signal
-          - entity: sensor.chambre_cleo_signal
-          - entity: sensor.couloir_signal
-          - entity: sensor.cuisine_signal
-          - entity: sensor.entree_1_signal
-          - entity: sensor.entree_2_signal
-          - entity: sensor.entree_3_signal
-          - entity: sensor.s20_signal
-          - entity: sensor.salle_de_bain_signal
-        title: Signal Sonoff
-        type: entities
+        cards:
+        - type: horizontal-stack
+          columns: 2
+          cards:
+            - entity: sensor.neufbox_router_kib_sec_received
+              name: Download
+              unit: kiB/s
+              min: 0
+              max: 10000
+              severity:
+                green: 100
+                yellow: 1000
+                red: 5000
+              type: gauge
+            - entity: sensor.neufbox_router_kib_sec_sent
+              name: Upload
+              unit: kiB/s
+              min: 0
+              max: 10000
+              severity:
+                green: 100
+                yellow: 1000
+                red: 5000
+              type: gauge
+        - type: history-graph
+          hours_to_show: 1
+          entities:
+            - entity: sensor.neufbox_router_kib_sec_sent
+            - entity: sensor.neufbox_router_kib_sec_received
+      
+      - type: vertical-stack
+        title: Sonoff
+        cards:
+        - type: history-graph
+          hours_to_show: 24
+          entities:
+            - entity: sensor.salle_a_manger_signal
+            - entity: sensor.salon_signal
+            - entity: sensor.chambre_signal
+            - entity: sensor.chambre_cleo_signal
+            - entity: sensor.couloir_signal
+            - entity: sensor.cuisine_signal
+            - entity: sensor.entree_1_signal
+            - entity: sensor.entree_2_signal
+            - entity: sensor.entree_3_signal
+            - entity: sensor.wc_signal
+            - entity: sensor.chaussures_signal
+            - entity: sensor.salle_de_bain_signal
+        - type: horizontal-stack
+          columns: 3
+          cards:
+          - title: Signal Sonoff
+            type: entities
+            entities:
+            - entity: sensor.salle_a_manger_signal
+            - entity: sensor.salon_signal
+            - entity: sensor.chambre_signal
+            - entity: sensor.chambre_cleo_signal
+            - entity: sensor.couloir_signal
+            - entity: sensor.cuisine_signal
+            - entity: sensor.entree_1_signal
+            - entity: sensor.entree_2_signal
+            - entity: sensor.entree_3_signal
+            - entity: sensor.wc_signal
+            - entity: sensor.chaussures_signal
+            - entity: sensor.salle_de_bain_signal
+          - title: IPs Sonoff
+            type: entities
+            entities:
+            - entity: sensor.salle_a_manger_ip
+            - entity: sensor.salon_ip
+            - entity: sensor.chambre_ip
+            - entity: sensor.chambre_cleo_ip
+            - entity: sensor.couloir_ip
+            - entity: sensor.cuisine_ip
+            - entity: sensor.entree_1_ip
+            - entity: sensor.entree_2_ip
+            - entity: sensor.entree_3_ip
+            - entity: sensor.wc_ip
+            - entity: sensor.chaussures_ip
+            - entity: sensor.salle_de_bain_ip
+          - title: Versions Sonoff
+            type: entities
+            entities:
+            - entity: sensor.salle_a_manger_version
+            - entity: sensor.salon_version
+            - entity: sensor.chambre_version
+            - entity: sensor.chambre_cleo_version
+            - entity: sensor.couloir_version
+            - entity: sensor.cuisine_version
+            - entity: sensor.entree_1_version
+            - entity: sensor.entree_2_version
+            - entity: sensor.entree_3_version
+            - entity: sensor.wc_version
+            - entity: sensor.chaussures_version
+            - entity: sensor.salle_de_bain_version
         
-      - type: history-graph
-        title: Signal Sonoff
-        hours_to_show: 72
-        entities:
-          - entity: sensor.salle_a_manger_signal
-          - entity: sensor.salon_signal
-          - entity: sensor.chambre_signal
-          - entity: sensor.chambre_cleo_signal
-          - entity: sensor.couloir_signal
-          - entity: sensor.cuisine_signal
-          - entity: sensor.entree_1_signal
-          - entity: sensor.entree_2_signal
-          - entity: sensor.entree_3_signal
-          - entity: sensor.s20_signal
-          - entity: sensor.salle_de_bain_signal
         
       - type: history-graph
         title: Battery Xiaomi
         hours_to_show: 72
-        entities:
-          - entity: sensor.porte_entree
-          - entity: sensor.interrupteur_chambre
-          - entity: sensor.interrupteur_cleo
-          - entity: sensor.interrupteur_couloir
-          - entity: sensor.interrupteur_entree
-          - entity: sensor.interrupteur_cuisine
-          - entity: sensor.interrupteur_salon
-          - entity: sensor.interrupteur_entree_couloir
-          - entity: sensor.interrupteur_sdb
-          - entity: sensor.interrupteur_marina
-          - entity: sensor.interrupteur_fabrice
-          - entity: sensor.temperature_cleo
-          - entity: sensor.temperature_salon
-          - entity: sensor.temperature_cuisine
-          - entity: sensor.temperature_sdb
-          - entity: sensor.temperature_chambre
-      - type: entities
-        title: Battery Xiaomi
         entities:
           - entity: sensor.porte_entree
           - entity: sensor.interrupteur_chambre
@@ -802,40 +1220,15 @@ views:
           - entity: sensor.temperature_sdb
           - entity: sensor.temperature_chambre
           
-      - entities:
-          - entity: sensor.s20_ip
-          - entity: sensor.salle_a_manger_ip
-          - entity: sensor.salon_ip
-          - entity: sensor.chambre_ip
-          - entity: sensor.chambre_cleo_ip
-          - entity: sensor.entree_1_ip
-          - entity: sensor.entree_2_ip
-          - entity: sensor.entree_3_ip
-          - entity: sensor.cuisine_ip
-          - entity: sensor.salle_de_bain_ip
-          - entity: sensor.couloir_ip
-        title: IPs Sonoff
-        type: entities
-      - entities:
-          - entity: sensor.s20_version
-          - entity: sensor.salle_a_manger_version
-          - entity: sensor.salon_version
-          - entity: sensor.chambre_version
-          - entity: sensor.chambre_cleo_version
-          - entity: sensor.entree_1_version
-          - entity: sensor.entree_2_version
-          - entity: sensor.entree_3_version
-          - entity: sensor.cuisine_version
-          - entity: sensor.salle_de_bain_version
-          - entity: sensor.couloir_version
-        title: Versions Sonoff
-        type: entities
-        
-    icon: 'mdi:network'
-    path: reseau
-    title: Réseau
+
+################################################################################
+# Electricité
+################################################################################
 
   - badges: []
+    icon: 'mdi:power-plug'
+    path: power
+    title: Electricité
     cards:
       - columns: 3
         entities:
@@ -857,9 +1250,10 @@ views:
         show_header_toggle: false
         title: iPhone
         type: entities
-    icon: 'mdi:power-plug'
-    path: power
-    title: Electricité
+
+################################################################################
+# Autres
+################################################################################
 
   - badges: []
     cards:
@@ -916,6 +1310,25 @@ views:
             name: Cléo
           - entity: sensor.pressure_158d00044bfdc7
             name: Chambre
+      - type: entities
+        title: Battery Xiaomi
+        entities:
+          - entity: sensor.porte_entree
+          - entity: sensor.interrupteur_chambre
+          - entity: sensor.interrupteur_cleo
+          - entity: sensor.interrupteur_couloir
+          - entity: sensor.interrupteur_entree
+          - entity: sensor.interrupteur_cuisine
+          - entity: sensor.interrupteur_salon
+          - entity: sensor.interrupteur_entree_couloir
+          - entity: sensor.interrupteur_sdb
+          - entity: sensor.interrupteur_marina
+          - entity: sensor.interrupteur_fabrice
+          - entity: sensor.temperature_cleo
+          - entity: sensor.temperature_salon
+          - entity: sensor.temperature_cuisine
+          - entity: sensor.temperature_sdb
+          - entity: sensor.temperature_chambre
     icon: 'mdi:folder-open'
     path: default_view
     title: Admin

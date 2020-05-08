@@ -91,3 +91,19 @@ sensor:
         value_template: "{{ states.sensor.temperature_158d00044bfdc7.attributes.battery_level }}"
         icon_template: 'mdi:battery-medium'
 ########################## Mouvement ##########################
+
+
+########################## Ouvertures ##########################
+      fuite_cuisine:
+        friendly_name: Fuite cuisine
+        unit_of_measurement: '%'
+        value_template: "{{ states.binary_sensor.water_leak_sensor_158d0004235284.attributes.battery_level }}"
+        icon_template: 'mdi:battery-medium'
+        
+      fuite_sdb:
+        friendly_name: Fuite SdB
+        unit_of_measurement: '%'
+        value_template: "{{ states.binary_sensor.water_leak_sensor_158d00045a0d75.attributes.battery_level }}"
+        icon_template: 'mdi:battery-medium'
+        
+        

@@ -1,5 +1,23 @@
 
 ###############################################################
+# Spotify
+###############################################################
+
+spotify:
+  client_id: !secret spotify_clientid
+  client_secret: !secret spotify_secret
+
+###############################################################
+# Sensor
+###############################################################
+
+#sensor:
+#  - platform: spotify-playlist-sensor
+#    client_id: !secret spotify_playlist_sensor_clientid
+#    client_secret: !secret spotify_playlist_sensor_secret
+
+
+###############################################################
 # Media players
 ###############################################################
 

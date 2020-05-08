@@ -1,163 +1,175 @@
-
 ###############################################################
 # Sensors
 ###############################################################
 
 sensor:
-  
   - platform: waze_travel_time
     name: "Fabrice to Work"
     origin: zone.home
     destination: zone.amadeus_bel_air
-    region: 'EU'
+    region: "EU"
     vehicle_type: motorcycle
   - platform: waze_travel_time
     name: "Fabrice back Home"
     origin: zone.amadeus_bel_air
     destination: zone.home
-    region: 'EU'
+    region: "EU"
     vehicle_type: motorcycle
   - platform: waze_travel_time
     name: "Marina to Work"
     origin: zone.home
     destination: zone.caf_nice_europe
-    region: 'EU'
+    region: "EU"
   - platform: waze_travel_time
     name: "Marina back Home"
     origin: zone.caf_nice_europe
     destination: zone.home
-    region: 'EU'
+    region: "EU"
 
 ###############################################################
 # Automation
 ###############################################################
 
 automation:
-
-  
   - alias: Risque de pluie
     trigger:
       platform: time
       at: "07:30:00"
     condition:
-    - condition: time
-      weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-    - condition: state
-      entity_id: switch.conchita_schedule
-      state: 'on'
-    - condition: numeric_state
-      entity_id: sensor.nice_rain_chance
-      above: 20
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+      - condition: state
+        entity_id: switch.conchita_schedule
+        state: "on"
+      - condition: numeric_state
+        entity_id: sensor.nice_rain_chance
+        above: 20
     action:
-    - alias: ''
-      data:
+      - alias: ""
         data:
-          push:
-            badge: 5
-            thread-id: home-assistant
-        message: Pense à prendre ton blouson de moto étanche
-        title: Risque de pluie
-      service: notify.ios_iphone_de_le_gone
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
+          message: Pense à prendre ton blouson de moto étanche
+          title: Risque de pluie
+        service: notify.mobile_app_iphone_de_le_gone
     id: 6fbc85b1b12f43ff83421c7e0879c21b
-  
+
   - alias: Il pleut
     trigger:
       platform: time
       at: "07:25:00"
     condition:
-    - condition: time
-      weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-    - condition: state
-      entity_id: switch.conchita_schedule
-      state: 'on'
-    - condition: state
-      entity_id: sensor.nice_weather
-      state: Pluie
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+      - condition: state
+        entity_id: switch.conchita_schedule
+        state: "on"
+      - condition: state
+        entity_id: sensor.nice_weather
+        state: Pluie
     action:
-    - alias: ''
-      data:
+      - alias: ""
         data:
-          push:
-            badge: 5
-            thread-id: home-assistant
-        message: Habillez vous en conséquence
-        title: Il pleut dehors
-      service: notify.ios_iphone_de_le_gone
-    - service: notify.alexa_media_echo_salon
-      data:
-        target: media_player.alexa
-        message: Attention, il pleut dehors.
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
+          message: Habillez vous en conséquence
+          title: Il pleut dehors
+        service: notify.mobile_app_iphone_de_le_gone
+      - service: notify.alexa_media_echo_salon
         data:
-          type: announce
-          method: all
+          target: media_player.alexa
+          message: Attention, il pleut dehors.
+          data:
+            type: announce
+            method: all
     id: 41d536435d6346bca25d4eabb55c7d35
 
-##################################### Trajets
+  ##################################### Trajets
+
+  - alias: Fabrice maison
+    trigger:
+      - entity_id: person.fabrice_pipart
+        platform: state
+        from: "not_home"
+        to: "home"
+    action:
+      - service: notify.alexa_media_echo_salon
+        data:
+          target: media_player.alexa
+          message: Bienvenu à la maison Fabrice!
+          data:
+            type: announce
+            method: all
+
   - alias: Temps de trajet
     trigger:
       platform: time
       at: "07:32:00"
     condition:
-    - condition: time
-      weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-    - condition: state
-      entity_id: switch.conchita_schedule
-      state: 'on'
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+      - condition: state
+        entity_id: switch.conchita_schedule
+        state: "on"
     action:
-    - alias: ''
-      service: notify.ios_iphone_de_le_gone
-      data:
-        message: '{{ states(''sensor.fabrice_to_work'') }} minutes'
-        title: Temps de trajet estimé
+      - alias: ""
+        service: notify.mobile_app_iphone_de_le_gone
         data:
-          push:
-            badge: 5
-            thread-id: home-assistant
-    - service: notify.alexa_media_echo_salon
-      data:
-        target: media_player.alexa
-        message: Temps de trajet estimé à {{ states('sensor.fabrice_to_work') }} minutes
+          message: "{{ states('sensor.fabrice_to_work') }} minutes"
+          title: Temps de trajet estimé
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
+      - service: notify.alexa_media_echo_salon
         data:
-          type: announce
-          method: all
-  
+          target: media_player.alexa
+          message: Temps de trajet estimé à {{ states('sensor.fabrice_to_work') }} minutes
+          data:
+            type: announce
+            method: all
+
   - alias: Temps de trajet retour
     trigger:
       platform: time
       at: "18:00:00"
     condition:
-    - condition: time
-      weekday:
-      - mon
-      - tue
-      - wed
-      - thu
-      - fri
-    - condition: state
-      entity_id: switch.conchita_schedule
-      state: 'on'
+      - condition: time
+        weekday:
+          - mon
+          - tue
+          - wed
+          - thu
+          - fri
+      - condition: state
+        entity_id: switch.conchita_schedule
+        state: "on"
     action:
-    - alias: ''
-      service: notify.ios_iphone_de_le_gone
-      data:
-        message: '{{ states(''sensor.fabrice_to_work'') }} minutes'
-        title: Temps de trajet estimé
+      - alias: ""
+        service: notify.mobile_app_iphone_de_le_gone
         data:
-          push:
-            badge: 5
-            thread-id: home-assistant
+          message: "{{ states('sensor.fabrice_to_work') }} minutes"
+          title: Temps de trajet estimé
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
