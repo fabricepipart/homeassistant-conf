@@ -1,12 +1,12 @@
 title: Maison
 resources:
-  - url: /community_plugin/calendar-card/calendar-card.js
+  - url: /hacsfiles/calendar-card/calendar-card.js
     type: js
-  - url: /community_plugin/mini-media-player/mini-media-player-bundle.js
+  - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
     type: module
-  - url: /community_plugin/spotify-card/spotify-card.js
+  - url: /hacsfiles/spotify-card/spotify-card.js
     type: module
-  - url: /community_plugin/spotify-playlist-card/spotify-playlist-card.js
+  - url: /hacsfiles/spotify-playlist-card/spotify-playlist-card.js
     type: js
-    
+
 views: !include_dir_list ui-lovelace/

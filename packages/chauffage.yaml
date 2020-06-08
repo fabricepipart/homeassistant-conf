@@ -4,6 +4,39 @@
 ###############################################################
 automation:
 
+  - alias: Humidité SdB
+    description: "Humidité SdB"
+    trigger:
+    - entity_id: sensor.humidity_158d0004465b49
+      above: 80
+      platform: numeric_state
+      for:
+        minutes: 30
+    condition: []
+    action:
+    - service: notify.mobile_app_iphone_de_le_gone
+      data:
+        data:
+          push:
+            badge: 5
+            thread-id: home-assistant
+        message: Quelqu'un pourrait ouvrir la fenêtre?
+        title: Il y a trop d'humidité dans la Salle de Bain
+    - service: notify.alexa_media_echo_salon
+      data:
+        target: media_player.alexa
+        message:
+          Il y a trop d'humidité dans la Salle de Bain. Quelqu'un pourrait ouvrir la fenêtre?
+        data:
+          type: announce
+          method: all
+
+
+
+
+
+
+
   - alias: Chauffage SdB On
     trigger:
     - entity_id: light.salle_de_bain
@@ -48,5 +81,4 @@ automation:
     action:
     - service: light.turn_off
       entity_id: light.s20
-      
       

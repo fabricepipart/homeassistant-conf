@@ -16,10 +16,7 @@ ios:
 http:
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
-  base_url: !secret my_home_domain
-
-wemo:
-  discovery: false
+  #base_url: !secret my_home_domain
 
 mqtt:
   broker: !secret mosquitto_ip

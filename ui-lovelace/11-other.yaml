@@ -1,5 +1,5 @@
 badges: []
-icon: 'mdi:folder-open'
+icon: "mdi:folder-open"
 path: default_view
 title: Admin
 cards:
@@ -8,7 +8,7 @@ cards:
     show_header_toggle: true
     title: Updater
     type: entities
-    
+
   - entities:
       - group.all_automations
       - group.all_devices
@@ -17,32 +17,30 @@ cards:
       - group.all_scripts
     title: All
     type: entities
-    
+
   - title: Gateway
     type: horizontal-stack
     cards:
-     - type: light
-       entity: light.gateway_light_7811dcfaa3ee
-       name: LED
-     - entity: sensor.illumination_7811dcfaa3ee
-       name: Lux
-       unit: lm
-       min: 0
-       max: 1000
-       severity:
-         green: 600
-         yellow: 400
-         red: 200
-       type: gauge
+      - type: light
+        entity: light.gateway_light_7811dcfaa3ee
+        name: LED
+      - entity: sensor.illumination_7811dcfaa3ee
+        name: Lux
+        unit: lm
+        min: 0
+        max: 1000
+        severity:
+          green: 600
+          yellow: 400
+          red: 200
+        type: gauge
     hours_to_show: 72
-        
-    
-    
+
   - entity: media_player.rx_v475
     type: media-control
   - entity: media_player.tele
     type: media-control
-    
+
   - type: history-graph
     title: Pressions
     entities:
@@ -75,3 +73,5 @@ cards:
       - entity: sensor.temperature_cuisine
       - entity: sensor.temperature_sdb
       - entity: sensor.temperature_chambre
+      - entity: sensor.fuite_sdb
+      - entity: sensor.fuite_cuisine

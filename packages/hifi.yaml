@@ -59,6 +59,11 @@ script:
     sequence:
     - service: shell_command.sleep_mac
   
+  bt_mac:
+    alias: Bluetooth Mac
+    sequence:
+    - service: shell_command.bt_mac
+    
   volume_up:
     alias: Volume Up
     sequence:

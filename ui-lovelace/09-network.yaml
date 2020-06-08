@@ -1,193 +1,201 @@
-
-
 ################################################################################
 # Réseau
 ################################################################################
 
 badges: []
 panel: true
-icon: 'mdi:network'
+icon: "mdi:network"
 path: reseau
 title: Réseau
-cards: 
-- type: vertical-stack
-  cards:
-  
-  - type: horizontal-stack
-    columns: 2
-    title: Ordinateur
+cards:
+  - type: vertical-stack
     cards:
-    - type: vertical-stack
-      cards:
-      - entity: script.sleep_mac
-        hold_action:
-          action: more-info
-        icon: 'mdi:sleep'
-        icon_height: 48px
-        show_icon: true
-        show_name: true
-        tap_action:
-          action: toggle
-        type: entity-button
-        title: Mac
-
       - type: horizontal-stack
-        title: Imprimante
         columns: 2
+        title: Ordinateur
         cards:
-        - entity: sensor.canon_mx470_series_black
-          name: Noir
-          unit: '%'
-          min: 0
-          max: 100
-          severity:
-            green: 50
-            yellow: 25
-            red: 5
-          type: gauge
-        - entity: sensor.canon_mx470_series_color
-          name: Couleur
-          unit: '%'
-          min: 0
-          max: 100
-          severity:
-            green: 50
-            yellow: 25
-            red: 5
-          type: gauge
+          - type: vertical-stack
+            cards:
+              - type: horizontal-stack
+                title: Imprimante
+                columns: 2
+                cards:
+                  - entity: script.sleep_mac
+                    hold_action:
+                      action: more-info
+                    icon: "mdi:sleep"
+                    icon_height: 48px
+                    show_icon: true
+                    show_name: true
+                    tap_action:
+                      action: toggle
+                    type: entity-button
+                    title: Mac
+                  - entity: script.bt_mac
+                    hold_action:
+                      action: more-info
+                    icon: "mdi:bluetooth"
+                    icon_height: 48px
+                    show_icon: true
+                    show_name: true
+                    tap_action:
+                      action: toggle
+                    type: entity-button
+                    title: Bluetooth Mac
 
+              - type: horizontal-stack
+                title: Imprimante
+                columns: 2
+                cards:
+                  - entity: sensor.canon_mx470_series_black
+                    name: Noir
+                    unit: "%"
+                    min: 0
+                    max: 100
+                    severity:
+                      green: 50
+                      yellow: 25
+                      red: 5
+                    type: gauge
+                  - entity: sensor.canon_mx470_series_color
+                    name: Couleur
+                    unit: "%"
+                    min: 0
+                    max: 100
+                    severity:
+                      green: 50
+                      yellow: 25
+                      red: 5
+                    type: gauge
 
+          - entities:
+              - entity: sensor.processor_use
+              - entity: sensor.memory_use_percent
+              - entity: sensor.swap_use_percent
+              - entity: sensor.last_boot
+              - entity: sensor.disk_use_percent
+            show_header_toggle: false
+            title: Raspberry
+            type: entities
 
+      - type: vertical-stack
+        title: Internet
+        cards:
+          - type: horizontal-stack
+            columns: 2
+            cards:
+              - entity: sensor.neufbox_router_kib_s_received
+                name: Download
+                unit: kiB/s
+                min: 0
+                max: 10000
+                severity:
+                  green: 100
+                  yellow: 1000
+                  red: 5000
+                type: gauge
+              - entity: sensor.neufbox_router_kib_s_sent
+                name: Upload
+                unit: kiB/s
+                min: 0
+                max: 10000
+                severity:
+                  green: 100
+                  yellow: 1000
+                  red: 5000
+                type: gauge
+          - type: history-graph
+            hours_to_show: 1
+            entities:
+              - entity: sensor.neufbox_router_kib_sec_sent
+              - entity: sensor.neufbox_router_kib_sec_received
 
-    - entities:
-        - entity: sensor.processor_use
-        - entity: sensor.memory_use_percent
-        - entity: sensor.swap_use_percent
-        - entity: sensor.last_boot
-        - entity: sensor.disk_use_percent
-      show_header_toggle: false
-      title: Raspberry
-      type: entities
-        
-  
-  
-  - type: vertical-stack
-    title: Internet
-    cards:
-    - type: horizontal-stack
-      columns: 2
-      cards:
-        - entity: sensor.neufbox_router_kib_sec_received
-          name: Download
-          unit: kiB/s
-          min: 0
-          max: 10000
-          severity:
-            green: 100
-            yellow: 1000
-            red: 5000
-          type: gauge
-        - entity: sensor.neufbox_router_kib_sec_sent
-          name: Upload
-          unit: kiB/s
-          min: 0
-          max: 10000
-          severity:
-            green: 100
-            yellow: 1000
-            red: 5000
-          type: gauge
-    - type: history-graph
-      hours_to_show: 1
-      entities:
-        - entity: sensor.neufbox_router_kib_sec_sent
-        - entity: sensor.neufbox_router_kib_sec_received
-  
-  - type: vertical-stack
-    title: Sonoff
-    cards:
-    - type: history-graph
-      hours_to_show: 24
-      entities:
-        - entity: sensor.salle_a_manger_signal
-        - entity: sensor.salon_signal
-        - entity: sensor.chambre_signal
-        - entity: sensor.chambre_cleo_signal
-        - entity: sensor.couloir_signal
-        - entity: sensor.cuisine_signal
-        - entity: sensor.entree_1_signal
-        - entity: sensor.entree_2_signal
-        - entity: sensor.entree_3_signal
-        - entity: sensor.wc_signal
-        - entity: sensor.chaussures_signal
-        - entity: sensor.salle_de_bain_signal
-    - type: horizontal-stack
-      columns: 3
-      cards:
-      - title: Signal Sonoff
-        type: entities
+      - type: vertical-stack
+        title: Sonoff
+        cards:
+          - type: history-graph
+            hours_to_show: 24
+            entities:
+              - entity: sensor.salle_a_manger_signal
+              - entity: sensor.salon_signal
+              - entity: sensor.chambre_signal
+              - entity: sensor.chambre_cleo_signal
+              - entity: sensor.couloir_signal
+              - entity: sensor.cuisine_signal
+              - entity: sensor.entree_1_signal
+              - entity: sensor.entree_2_signal
+              - entity: sensor.entree_3_signal
+              - entity: sensor.wc_signal
+              - entity: sensor.chaussures_signal
+              - entity: sensor.salle_de_bain_signal
+          - type: horizontal-stack
+            columns: 3
+            cards:
+              - title: Signal Sonoff
+                type: entities
+                entities:
+                  - entity: sensor.salle_a_manger_signal
+                  - entity: sensor.salon_signal
+                  - entity: sensor.chambre_signal
+                  - entity: sensor.chambre_cleo_signal
+                  - entity: sensor.couloir_signal
+                  - entity: sensor.cuisine_signal
+                  - entity: sensor.entree_1_signal
+                  - entity: sensor.entree_2_signal
+                  - entity: sensor.entree_3_signal
+                  - entity: sensor.wc_signal
+                  - entity: sensor.chaussures_signal
+                  - entity: sensor.salle_de_bain_signal
+              - title: IPs Sonoff
+                type: entities
+                entities:
+                  - entity: sensor.salle_a_manger_ip
+                  - entity: sensor.salon_ip
+                  - entity: sensor.chambre_ip
+                  - entity: sensor.chambre_cleo_ip
+                  - entity: sensor.couloir_ip
+                  - entity: sensor.cuisine_ip
+                  - entity: sensor.entree_1_ip
+                  - entity: sensor.entree_2_ip
+                  - entity: sensor.entree_3_ip
+                  - entity: sensor.wc_ip
+                  - entity: sensor.chaussures_ip
+                  - entity: sensor.salle_de_bain_ip
+              - title: Versions Sonoff
+                type: entities
+                entities:
+                  - entity: sensor.salle_a_manger_version
+                  - entity: sensor.salon_version
+                  - entity: sensor.chambre_version
+                  - entity: sensor.chambre_cleo_version
+                  - entity: sensor.couloir_version
+                  - entity: sensor.cuisine_version
+                  - entity: sensor.entree_1_version
+                  - entity: sensor.entree_2_version
+                  - entity: sensor.entree_3_version
+                  - entity: sensor.wc_version
+                  - entity: sensor.chaussures_version
+                  - entity: sensor.salle_de_bain_version
+
+      - type: history-graph
+        title: Battery Xiaomi
+        hours_to_show: 72
         entities:
-        - entity: sensor.salle_a_manger_signal
-        - entity: sensor.salon_signal
-        - entity: sensor.chambre_signal
-        - entity: sensor.chambre_cleo_signal
-        - entity: sensor.couloir_signal
-        - entity: sensor.cuisine_signal
-        - entity: sensor.entree_1_signal
-        - entity: sensor.entree_2_signal
-        - entity: sensor.entree_3_signal
-        - entity: sensor.wc_signal
-        - entity: sensor.chaussures_signal
-        - entity: sensor.salle_de_bain_signal
-      - title: IPs Sonoff
-        type: entities
-        entities:
-        - entity: sensor.salle_a_manger_ip
-        - entity: sensor.salon_ip
-        - entity: sensor.chambre_ip
-        - entity: sensor.chambre_cleo_ip
-        - entity: sensor.couloir_ip
-        - entity: sensor.cuisine_ip
-        - entity: sensor.entree_1_ip
-        - entity: sensor.entree_2_ip
-        - entity: sensor.entree_3_ip
-        - entity: sensor.wc_ip
-        - entity: sensor.chaussures_ip
-        - entity: sensor.salle_de_bain_ip
-      - title: Versions Sonoff
-        type: entities
-        entities:
-        - entity: sensor.salle_a_manger_version
-        - entity: sensor.salon_version
-        - entity: sensor.chambre_version
-        - entity: sensor.chambre_cleo_version
-        - entity: sensor.couloir_version
-        - entity: sensor.cuisine_version
-        - entity: sensor.entree_1_version
-        - entity: sensor.entree_2_version
-        - entity: sensor.entree_3_version
-        - entity: sensor.wc_version
-        - entity: sensor.chaussures_version
-        - entity: sensor.salle_de_bain_version
-    
-    
-  - type: history-graph
-    title: Battery Xiaomi
-    hours_to_show: 72
-    entities:
-      - entity: sensor.porte_entree
-      - entity: sensor.interrupteur_chambre
-      - entity: sensor.interrupteur_cleo
-      - entity: sensor.interrupteur_couloir
-      - entity: sensor.interrupteur_entree
-      - entity: sensor.interrupteur_cuisine
-      - entity: sensor.interrupteur_salon
-      - entity: sensor.interrupteur_entree_couloir
-      - entity: sensor.interrupteur_sdb
-      - entity: sensor.interrupteur_marina
-      - entity: sensor.interrupteur_fabrice
-      - entity: sensor.temperature_cleo
-      - entity: sensor.temperature_salon
-      - entity: sensor.temperature_cuisine
-      - entity: sensor.temperature_sdb
-      - entity: sensor.temperature_chambre
+          - entity: sensor.porte_entree
+          - entity: sensor.interrupteur_chambre
+          - entity: sensor.interrupteur_cleo
+          - entity: sensor.interrupteur_couloir
+          - entity: sensor.interrupteur_entree
+          - entity: sensor.interrupteur_cuisine
+          - entity: sensor.interrupteur_salon
+          - entity: sensor.interrupteur_entree_couloir
+          - entity: sensor.interrupteur_sdb
+          - entity: sensor.interrupteur_marina
+          - entity: sensor.interrupteur_fabrice
+          - entity: sensor.temperature_cleo
+          - entity: sensor.temperature_salon
+          - entity: sensor.temperature_cuisine
+          - entity: sensor.temperature_sdb
+          - entity: sensor.temperature_chambre
+          - entity: sensor.fuite_sdb
+          - entity: sensor.fuite_cuisine

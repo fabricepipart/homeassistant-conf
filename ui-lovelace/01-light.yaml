@@ -59,6 +59,12 @@ cards:
               action: toggle
             hold_action:
               action: more-info
+          - entity: script.bt_mac
+            icon: 'mdi:bluetooth'
+            tap_action:
+              action: toggle
+            hold_action:
+              action: more-info
           - entity: script.neato_table
             icon: 'mdi:robot-vacuum-variant'
             tap_action:
