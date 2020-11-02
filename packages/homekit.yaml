@@ -5,7 +5,6 @@ homekit:
       - cover
       - light
       - script
-      - media_player
       - sensor
       - switch
     include_entities:
@@ -24,15 +23,12 @@ homekit:
       - switch.tous_alexa_repeat_switch
       - switch.tous_alexa_shuffle_switch
       - automation.sonoff_ips_on_ha_start_up
-      
-      
-      
-      
+
 automation:
-  - alias: 'Start HomeKit'
+  - alias: "Start HomeKit"
     trigger:
       - platform: homeassistant
         event: start
     action:
-      - delay: 00:05  # Waits 5 minutes
+      - delay: 00:05 # Waits 5 minutes
       - service: homekit.start

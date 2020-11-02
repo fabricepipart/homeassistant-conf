@@ -1,0 +1,458 @@
+
+################################################################################
+# Floorplan
+################################################################################
+
+badges: []
+panel: true
+icon: 'mdi:home'
+path: home
+title: Home
+cards:
+  - image: /local/images/floorplan/night-2.jpg
+    type: picture-elements
+    elements:
+    
+#----------------- Lights ----------------- 
+      - entity: light.salon
+        style:
+          left: 37.5%
+          top: 16.5%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.sam
+        style:
+          left: 45.7%
+          top: 51.7%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.cuisine
+        style:
+          left: 29.7%
+          top: 84.2%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.entree_1
+        style:
+          left: 84.4%
+          top: 67%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.entree_2
+        style:
+          left: 64.8%
+          top: 67%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.entree_3
+        style:
+          left: 45.7%
+          top: 67%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.couloir
+        style:
+          left: 32.4%
+          top: 54%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.cleo
+        style:
+          left: 16.9%
+          top: 64.8%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.chambre
+        style:
+          left: 18.3%
+          top: 17%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.salle_de_bain
+        style:
+          left: 18%
+          top: 40.5%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.shoes
+        style:
+          left: 61%
+          top: 83%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.wc
+        style:
+          left: 62%
+          top: 93.8%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+      - entity: light.wc_wall
+        style:
+          left: 54.5%
+          top: 93.8%
+          "--paper-item-icon-color": blue
+        tap_action:
+          action: toggle
+        type: state-icon
+#----------------- Neato ----------------- 
+      - entity: script.neato_couloir
+        icon: 'mdi:robot-vacuum-variant'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 32.7%
+          top: 65%
+          "--paper-item-icon-color": green
+        type: state-icon
+      - entity: script.neato_cleo
+        icon: 'mdi:robot-vacuum-variant'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 17%
+          top: 56%
+          "--paper-item-icon-color": green
+        type: state-icon
+      - entity: script.neato_chambre
+        icon: 'mdi:robot-vacuum-variant'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 31%
+          top: 30%
+          "--paper-item-icon-color": green
+        type: state-icon
+      - entity: script.neato_sdb
+        icon: 'mdi:robot-vacuum-variant'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 24%
+          top: 46%
+          "--paper-item-icon-color": green
+        type: state-icon
+      - entity: script.neato_wc
+        icon: 'mdi:robot-vacuum-variant'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 69%
+          top: 93.6%
+          "--paper-item-icon-color": green
+        type: state-icon
+      - entity: script.neato_cuisine
+        icon: 'mdi:robot-vacuum-variant'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 20%
+          top: 82%
+          "--paper-item-icon-color": green
+        type: state-icon
+      - entity: script.neato_stop
+        icon: 'mdi:home-import-outline'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 40%
+          top: 82%
+          "--paper-item-icon-color": green
+        type: state-icon
+      - entity: script.neato_entree
+        icon: 'mdi:robot-vacuum-variant'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 56%
+          top: 70%
+          "--paper-item-icon-color": green
+        type: state-icon
+      - entity: script.neato_table_basse
+        icon: 'mdi:robot-vacuum-variant'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 48.1%
+          top: 27.1%
+          "--paper-item-icon-color": green
+        type: state-icon
+      - entity: script.neato_sam
+        icon: 'mdi:robot-vacuum-variant'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 46.3%
+          top: 42%
+          "--paper-item-icon-color": green
+        type: state-icon
+      - entity: script.neato_table
+        icon: 'mdi:robot-vacuum-variant'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 56%
+          top: 51%
+          "--paper-item-icon-color": green
+        type: state-icon
+#----------------- Autre ----------------- 
+      - entity: binary_sensor.door_window_sensor_158d0003f1b10e
+        icon: 'mdi:door-closed-lock'
+        style:
+          left: 92%
+          top: 71%
+        type: state-icon
+#----------------- Temperatures ----------------- 
+        
+      - type: state-badge
+        entity: sensor.temperature_158d0004460790
+        style:
+          color: rgba(0,0,0,0)
+          left: 53.5%
+          top: 17%
+          font-size: 10px
+      - type: state-badge
+        entity: sensor.temperature_158d00044627b4
+        style:
+          color: rgba(0,0,0,0)
+          left: 43%
+          top: 96%
+          font-size: 10px
+      - type: state-badge
+        entity: sensor.temperature_158d0004465b49
+        style:
+          color: rgba(0,0,0,0)
+          left: 7%
+          top: 36%
+          font-size: 10px
+      - type: state-badge
+        entity: sensor.temperature_158d00044606ee
+        style:
+          color: rgba(0,0,0,0)
+          left: 7%
+          top: 70%
+          font-size: 10px
+      - type: state-badge
+        entity: sensor.temperature_158d00044bfdc7
+        style:
+          color: rgba(0,0,0,0)
+          left: 15%
+          top: 7.5%
+          font-size: 10px
+
+        
+#----------------- Inputs ----------------- 
+      - entity: input_boolean.vacations
+        style:
+          left: 90%
+          top: 85%
+        tap_action:
+          action: toggle
+        type: state-icon
+      - type: custom:text-element
+        text: "Vacations"
+        style:
+          left: 90%
+          top: 90%
+#----------------- People ----------------- 
+      - type: state-badge
+        entity: person.fabrice_pipart
+        style:
+          color: rgba(0,0,0,0)
+          left: 80%
+          top: 10%
+          font-size: 10px
+      - type: state-badge
+        entity: person.marina_pipart
+        style:
+          color: rgba(0,0,0,0)
+          left: 90%
+          top: 10%
+          font-size: 10px
+
+#----------------- Activities ----------------- 
+
+#----------------- HiFi ----------------- 
+      - entity: media_player.sony_bravia_tv
+        icon: mdi:television
+        show_state: false
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 57.2%
+          top: 28%
+          "--paper-item-icon-color": purple
+        type: state-icon
+      - entity: media_player.rx_v475
+        icon: mdi:audio-video
+        show_state: false
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 57.2%
+          top: 34%
+          "--paper-item-icon-color": purple
+        type: state-icon
+      - entity: script.sleep_mac
+        icon: 'mdi:desktop-tower'
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 43%
+          top: 61%
+          "--paper-item-icon-color": purple
+        type: state-icon
+        
+        
+      - entity: script.activity_off
+        icon: "mdi:power"
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 68%
+          top: 28%
+          "--paper-item-icon-color": purple
+        type: state-icon
+      - entity: switch.netflix
+        icon: "mdi:netflix"
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 68%
+          top: 36%
+          "--paper-item-icon-color": purple
+        type: state-icon
+      - entity: switch.plex
+        icon: "mdi:plex"
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 68%
+          top: 44%
+          "--paper-item-icon-color": purple
+        type: state-icon
+      - entity: switch.youtube
+        icon: "mdi:youtube"
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 68%
+          top: 52%
+          "--paper-item-icon-color": purple
+        type: state-icon
+        
+      - entity: switch.spotify
+        icon: "mdi:spotify"
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 76%
+          top: 28%
+          "--paper-item-icon-color": purple
+        type: state-icon
+      - entity: switch.box
+        icon: "mdi:television-box"
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 76%
+          top: 36%
+          "--paper-item-icon-color": purple
+        type: state-icon
+      - entity: switch.switch
+        icon: "mdi:nintendo-switch"
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 76%
+          top: 44%
+          "--paper-item-icon-color": purple
+        type: state-icon
+      - entity: switch.amazon
+        icon: "mdi:amazon"
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 76%
+          top: 52%
+          "--paper-item-icon-color": purple
+        type: state-icon
+
+
+
+
+
+
+
+
+
+
+
+  

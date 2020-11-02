@@ -43,9 +43,6 @@ automation:
           - wed
           - thu
           - fri
-      - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
       - condition: numeric_state
         entity_id: sensor.nice_rain_chance
         above: 20
@@ -74,8 +71,8 @@ automation:
           - thu
           - fri
       - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
+        entity_id: input_boolean.vacations
+        state: "off"
       - condition: state
         entity_id: sensor.nice_weather
         state: Pluie
@@ -128,8 +125,8 @@ automation:
           - thu
           - fri
       - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
+        entity_id: input_boolean.vacations
+        state: "off"
     action:
       - alias: ""
         service: notify.mobile_app_iphone_de_le_gone
@@ -161,8 +158,8 @@ automation:
           - thu
           - fri
       - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
+        entity_id: input_boolean.vacations
+        state: "off"
     action:
       - alias: ""
         service: notify.mobile_app_iphone_de_le_gone

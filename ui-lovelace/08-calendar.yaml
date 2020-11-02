@@ -3,9 +3,12 @@
 # Calendrier
 ################################################################################
 
-badges: []
+badges:
+  - person.fabrice_pipart
+  - person.marina_pipart
 cards:
   - entities:
+      - entity: input_boolean.vacations
       - entity: person.fabrice_pipart
       - entity: person.marina_pipart
     show_header_toggle: false

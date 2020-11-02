@@ -15,56 +15,82 @@ cards:
         
       - type: horizontal-stack
         cards:
-          - entity: sensor.temperature_158d0004460790
-            name: Salon
-            unit: °C
-            min: 16
-            max: 30
-            severity:
-              green: 20
-              yellow: 24
-              red: 28
-            type: gauge
-          - entity: sensor.temperature_158d00044627b4
-            name: Cuisine
-            unit: °C
-            min: 16
-            max: 30
-            severity:
-              green: 20
-              yellow: 24
-              red: 28
-            type: gauge
-          - entity: sensor.temperature_158d0004465b49
-            name: Salle de bain
-            unit: °C
-            min: 16
-            max: 30
-            severity:
-              green: 22
-              yellow: 25
-              red: 28
-            type: gauge
-          - entity: sensor.temperature_158d00044606ee
-            name: Cléo
-            unit: °C
-            min: 16
-            max: 30
-            severity:
-              green: 21
-              yellow: 22
-              red: 28
-            type: gauge
-          - entity: sensor.temperature_158d00044bfdc7
-            name: Chambre
-            unit: °C
-            min: 16
-            max: 30
-            severity:
-              green: 21
-              yellow: 22
-              red: 28
-            type: gauge
+        - type: custom:mini-graph-card
+          name: Salon
+          hour24: true
+          entities:
+          - sensor.temperature_158d0004460790
+          lower_bound: 20
+          color_thresholds:
+          - value: 20
+            color: blue
+          - value: 24
+            color: green
+          - value: 26
+            color: orange
+          - value: 28
+            color: red
+        - type: custom:mini-graph-card
+          name: Cuisine
+          hour24: true
+          entities:
+          - sensor.temperature_158d00044627b4
+          lower_bound: 20
+          color_thresholds:
+          - value: 20
+            color: blue
+          - value: 23
+            color: green
+          - value: 26
+            color: orange
+          - value: 28
+            color: red
+        - type: custom:mini-graph-card
+          name: Salle de bain
+          hour24: true
+          entities:
+           - sensor.temperature_158d0004465b49
+          lower_bound: 20
+          color_thresholds:
+           - value: 22
+             color: blue
+           - value: 25
+             color: green
+           - value: 27
+             color: orange
+           - value: 30
+             color: red
+        - type: custom:mini-graph-card
+          name: Cléo
+          hour24: true
+          entities:
+           - sensor.temperature_158d00044606ee
+          lower_bound: 20
+          color_thresholds:
+           - value: 20
+             color: blue
+           - value: 21
+             color: green
+           - value: 24
+             color: orange
+           - value: 28
+             color: red
+        - type: custom:mini-graph-card
+          name: Chambre
+          hour24: true
+          entities:
+           - sensor.temperature_158d00044bfdc7
+          lower_bound: 20
+          upper_bound: 30
+          color_thresholds:
+           - value: 20
+             color: blue
+           - value: 21
+             color: green
+           - value: 24
+             color: orange
+           - value: 28
+             color: red
       - type: history-graph
         entities:
           - entity: sensor.temperature_158d0004460790
@@ -78,50 +104,85 @@ cards:
           - entity: sensor.temperature_158d00044bfdc7
             name: Chambre
         hours_to_show: 32
-            
-      - title: Humidité
-        type: horizontal-stack
+
+      - type: horizontal-stack
         cards:
-          - entity: sensor.humidity_158d0004460790
-            name: Salon
-            unit: '%'
-            severity:
-              green: 40
-              yellow: 55
-              red: 70
-            type: gauge
-          - entity: sensor.humidity_158d00044627b4
-            name: Cuisine
-            unit: '%'
-            severity:
-              green: 40
-              yellow: 55
-              red: 70
-            type: gauge
-          - entity: sensor.humidity_158d0004465b49
-            name: Salle de bain
-            unit: '%'
-            severity:
-              green: 40
-              yellow: 55
-              red: 70
-            type: gauge
-          - entity: sensor.humidity_158d00044606ee
-            name: Cléo
-            unit: '%'
-            severity:
-              green: 40
-              yellow: 55
-              red: 70
-            type: gauge
-          - entity: sensor.humidity_158d00044bfdc7
-            name: Chambre
-            unit: '%'
-            severity:
-              green: 40
-              yellow: 55
-              red: 70
-            type: gauge
+        - type: custom:mini-graph-card
+          name: Salon
+          hour24: true
+          entities:
+          - sensor.humidity_158d0004460790
+          lower_bound: 40
+          color_thresholds:
+          - value: 40
+            color: blue
+          - value: 50
+            color: green
+          - value: 60
+            color: orange
+          - value: 70
+            color: red
+        - type: custom:mini-graph-card
+          name: Cuisine
+          hour24: true
+          entities:
+          - sensor.humidity_158d00044627b4
+          lower_bound: 40
+          color_thresholds:
+          - value: 40
+            color: blue
+          - value: 50
+            color: green
+          - value: 60
+            color: orange
+          - value: 70
+            color: red
+        - type: custom:mini-graph-card
+          name: Salle de bain
+          hour24: true
+          entities:
+          - sensor.humidity_158d0004465b49
+          lower_bound: 40
+          color_thresholds:
+          - value: 40
+            color: blue
+          - value: 50
+            color: green
+          - value: 60
+            color: orange
+          - value: 70
+            color: red
+        - type: custom:mini-graph-card
+          name: Cléo
+          hour24: true
+          entities:
+          - sensor.humidity_158d00044606ee
+          lower_bound: 40
+          color_thresholds:
+          - value: 40
+            color: blue
+          - value: 50
+            color: green
+          - value: 60
+            color: orange
+          - value: 70
+            color: red
+        - type: custom:mini-graph-card
+          name: Chambre
+          hour24: true
+          entities:
+          - sensor.humidity_158d00044bfdc7
+          lower_bound: 40
+          color_thresholds:
+          - value: 40
+            color: blue
+          - value: 50
+            color: green
+          - value: 60
+            color: orange
+          - value: 70
+            color: red
+
       - type: history-graph
         entities:
           - entity: sensor.humidity_158d0004460790

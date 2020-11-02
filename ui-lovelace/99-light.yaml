@@ -65,12 +65,12 @@ cards:
               action: toggle
             hold_action:
               action: more-info
-          - entity: script.neato_table
-            icon: 'mdi:robot-vacuum-variant'
-            tap_action:
-              action: toggle
-            hold_action:
-              action: more-info
+        #   - entity: script.neato_table
+        #     icon: 'mdi:robot-vacuum-variant'
+        #     tap_action:
+        #       action: toggle
+        #     hold_action:
+        #       action: more-info
         image: /local/images/small/dining.png
         
       - type: picture-glance

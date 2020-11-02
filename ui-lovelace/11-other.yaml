@@ -36,11 +36,6 @@ cards:
         type: gauge
     hours_to_show: 72
 
-  - entity: media_player.rx_v475
-    type: media-control
-  - entity: media_player.tele
-    type: media-control
-
   - type: history-graph
     title: Pressions
     entities:

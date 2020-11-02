@@ -8,10 +8,15 @@ automation:
     description: "Humidité SdB"
     trigger:
     - entity_id: sensor.humidity_158d0004465b49
-      above: 80
+      above: 90
       platform: numeric_state
       for:
         minutes: 30
+    - entity_id: sensor.humidity_158d0004465b49
+      above: 80
+      platform: numeric_state
+      for:
+        minutes: 60
     condition: []
     action:
     - service: notify.mobile_app_iphone_de_le_gone

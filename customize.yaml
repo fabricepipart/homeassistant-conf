@@ -27,3 +27,23 @@ script.sleep_mac:
 binary_sensor.door_window_sensor_158d0003f1b10e:
   icon: 'mdi:door-closed-lock'
   
+  
+  
+  
+  
+  
+switch.netflix:
+  icon: "mdi:netflix"
+switch.plex:
+  icon: "mdi:plex"
+# switch.youtube
+#  icon: "youtube"
+switch.spotify:
+  icon: "mdi:spotify"
+switch.box:
+  icon: "mdi:television-box"
+switch.switch:
+  icon: "mdi:nintendo-switch"
+# switch.amazon
+#  icon: "mdi:amazon"
+  

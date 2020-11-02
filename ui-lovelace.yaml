@@ -8,5 +8,9 @@ resources:
     type: module
   - url: /hacsfiles/spotify-playlist-card/spotify-playlist-card.js
     type: js
+  - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+    type: module
+  - url: /hacsfiles/text-element/text-element.js
+    type: module
 
 views: !include_dir_list ui-lovelace/

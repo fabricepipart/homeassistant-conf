@@ -42,7 +42,7 @@ media_player:
       HDMI2: "Box"
       HDMI3: "Plex"
   - platform: braviatv
-    host: 192.168.69.65
+    host: 192.168.1.65
   - platform: spotify
     client_id: !secret spotify_clientid
     client_secret: !secret spotify_secret
@@ -97,6 +97,24 @@ script:
   
   activity_ps3:
     alias: PS3
+    sequence:
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.rx_v475
+    - service: media_player.turn_on
+      data:
+        entity_id: media_player.sony_bravia_tv
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: HDMI1
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.sony_bravia_tv
+        source: "HDMI 3/ARC"
+  
+  activity_switch:
+    alias: Switch
     sequence:
     - service: media_player.turn_on
       data:
@@ -325,6 +343,27 @@ automation:
       data:
         topic: cmnd/home/living/light/power
         payload: '0'
+        
+  - alias: Son Netflix
+    trigger:
+      platform: template
+      value_template: "{{ state_attr('media_player.rx_v475','source')  }}"
+    condition:
+    - condition: state
+      entity_id: media_player.tele
+      state: 'on'
+    - condition: state
+      entity_id: media_player.rx_v475
+      state: 'on'
+    - condition: template
+      value_template: '{{ state_attr("media_player.rx_v475", "source") == "AV1" }}'
+    - condition: template
+      value_template: '{{ state_attr("media_player.sony_bravia_tv", "source") == "HDMI 3/ARC" }}'
+    action:
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.rx_v475
+        source: AV4
   
   - alias: Eteindre Mac
     trigger:
@@ -372,7 +411,7 @@ automation:
         state: disarmed
     action:
     - service: script.sleep_mac
-    - service: script.activity_off
+    #- service: script.activity_off
     - service: notify.alexa_media
       data:
         target:
@@ -380,6 +419,42 @@ automation:
         message: Au revoir!
         data:
           type: announce
+
+  - alias: TV pas sur Box
+    trigger:
+    - platform: template
+      value_template: "{{ is_state_attr('media_player.rx_v475','source','Box') }}"
+    condition:
+      condition: not
+      conditions:
+        - condition: state
+          entity_id: media_player.sony_bravia_tv
+          state: "HDMI 3/ARC"
+          attribute: source
+    action:
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.sony_bravia_tv
+        source: "HDMI 3/ARC"
+
+      
+
+  - alias: TV pas sur Switch
+    trigger:
+    - platform: template
+      value_template: "{{ is_state_attr('media_player.rx_v475','source','PS3') }}"
+    condition:
+      condition: not
+      conditions:
+        - condition: state
+          entity_id: media_player.sony_bravia_tv
+          state: "HDMI 3/ARC"
+          attribute: source
+    action:
+    - service: media_player.select_source
+      data:
+        entity_id: media_player.sony_bravia_tv
+        source: "HDMI 3/ARC"
 
       
         

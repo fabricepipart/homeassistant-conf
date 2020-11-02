@@ -295,6 +295,30 @@ sensor:
     icon: 'mdi:ip-network'
   
   - platform: mqtt
+    name: "WC Wall (Signal)"
+    state_topic: "tele/home/wc-wall/light/STATE"
+    unit_of_measurement: "%"
+    value_template: "{{value_json['Wifi'].RSSI }}"
+    availability_topic: "tele/home/wc-wall/light/LWT"
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    icon: 'mdi:access-point'
+  - platform: mqtt
+    name: "WC Wall (version)"
+    state_topic: "stat/home/wc-wall/light/STATUS2"
+    value_template: "{{value_json['StatusFWR'].Version }}"
+    availability_topic: "tele/home/wc-wall/light/LWT"
+    qos: 0
+    payload_available: "Online"
+    payload_not_available: "Offline"
+    icon: 'mdi:xml'
+  - platform: mqtt
+    name: "WC Wall (IP)"
+    state_topic: 'stat/home/wc-wall/light/RESULT'
+    value_template: "{{ value_json.IPAddress1.split(' (')[1].replace('(','').replace(')','') }}"
+    icon: 'mdi:ip-network'
+  
+  - platform: mqtt
     name: "Chaussures (Signal)"
     state_topic: "tele/home/shoes/light/STATE"
     unit_of_measurement: "%"

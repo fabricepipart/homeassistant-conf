@@ -126,6 +126,7 @@ cards:
               - entity: sensor.entree_2_signal
               - entity: sensor.entree_3_signal
               - entity: sensor.wc_signal
+              - entity: sensor.wc_wall_signal
               - entity: sensor.chaussures_signal
               - entity: sensor.salle_de_bain_signal
           - type: horizontal-stack
@@ -144,6 +145,7 @@ cards:
                   - entity: sensor.entree_2_signal
                   - entity: sensor.entree_3_signal
                   - entity: sensor.wc_signal
+                  - entity: sensor.wc_wall_signal
                   - entity: sensor.chaussures_signal
                   - entity: sensor.salle_de_bain_signal
               - title: IPs Sonoff
@@ -159,6 +161,7 @@ cards:
                   - entity: sensor.entree_2_ip
                   - entity: sensor.entree_3_ip
                   - entity: sensor.wc_ip
+                  - entity: sensor.wc_wall_ip
                   - entity: sensor.chaussures_ip
                   - entity: sensor.salle_de_bain_ip
               - title: Versions Sonoff
@@ -174,6 +177,7 @@ cards:
                   - entity: sensor.entree_2_version
                   - entity: sensor.entree_3_version
                   - entity: sensor.wc_version
+                  - entity: sensor.wc_wall_version
                   - entity: sensor.chaussures_version
                   - entity: sensor.salle_de_bain_version
 

@@ -1,16 +1,12 @@
-
-
-
 ################################################################################
 # Home cinema
 ################################################################################
 
 badges: []
-icon: 'mdi:remote-tv'
+icon: "mdi:remote-tv"
 path: medias
 title: Home cinema
 cards:
-            
   - title: Media players
     type: vertical-stack
     cards:
@@ -19,7 +15,22 @@ cards:
         entity: media_player.sony_bravia_tv
       - type: custom:mini-media-player
         entity: media_player.rx_v475
-        
+      - entity: media_player.rx_v475
+        type: media-control
+      - entity: media_player.tele
+        type: media-control              
+      - type: entities
+        title: Activities
+        show_header_toggle: false
+        entities:
+        - entity: switch.netflix
+        - entity: switch.plex
+        #- entity: switch.youtube
+        - entity: switch.spotify
+        - entity: switch.box
+        - entity: switch.switch
+        #- entity: switch.amazon
+
   - title: Activités
     type: vertical-stack
     cards:
@@ -27,8 +38,8 @@ cards:
         columns: 4
         cards:
           - entity: script.activity_off
-            name: 'Off'
-            icon: 'mdi:power'
+            name: "Off"
+            icon: "mdi:power"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -39,7 +50,7 @@ cards:
             type: entity-button
           - entity: script.activity_box
             name: Box
-            icon: 'mdi:television-box'
+            icon: "mdi:television-box"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -50,7 +61,7 @@ cards:
             type: entity-button
           - entity: script.activity_netflix
             name: Netflix
-            icon: 'mdi:netflix'
+            icon: "mdi:netflix"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -61,7 +72,7 @@ cards:
             type: entity-button
           - entity: script.activity_plex
             name: Plex
-            icon: 'mdi:plex'
+            icon: "mdi:plex"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -74,7 +85,7 @@ cards:
         cards:
           - entity: script.activity_amazon
             name: Prime
-            icon: 'mdi:amazon'
+            icon: "mdi:amazon"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -85,7 +96,7 @@ cards:
             type: entity-button
           - entity: script.activity_wii
             name: Wii
-            icon: 'mdi:wii'
+            icon: "mdi:wii"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -96,7 +107,7 @@ cards:
             type: entity-button
           - entity: script.activity_youtube
             name: Youtube
-            icon: 'mdi:youtube'
+            icon: "mdi:youtube"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -107,7 +118,7 @@ cards:
             type: entity-button
           - entity: script.activity_youtube_kids
             name: Kids
-            icon: 'mdi:youtube'
+            icon: "mdi:youtube"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -119,8 +130,8 @@ cards:
       - type: horizontal-stack
         cards:
           - entity: script.activity_ps3
-            name: 'PS3'
-            icon: 'mdi:playstation'
+            name: "PS3"
+            icon: "mdi:playstation"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -130,8 +141,8 @@ cards:
               action: toggle
             type: entity-button
           - entity: script.activity_airplay
-            name: 'Airplay'
-            icon: 'mdi:airplay'
+            name: "Airplay"
+            icon: "mdi:airplay"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -142,7 +153,7 @@ cards:
             type: entity-button
           - entity: script.activity_spotify
             name: Spotify
-            icon: 'mdi:spotify'
+            icon: "mdi:spotify"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -153,7 +164,7 @@ cards:
             type: entity-button
           - entity: script.activity_dlna
             name: iTunes
-            icon: 'mdi:itunes'
+            icon: "mdi:itunes"
             hold_action:
               action: more-info
             icon_height: 48px
@@ -166,45 +177,21 @@ cards:
         columns: 3
         cards:
           - entity: script.activity_play_tv
-            icon: 'mdi:rewind'
+            icon: "mdi:rewind"
             icon_height: 24px
             show_name: false
             type: entity-button
             tap_action:
               action: toggle
           - entity: script.activity_play_tv
-            icon: 'mdi:play'
-            icon_height: 24px
-            show_name: false
-            type: entity-button
-            tap_action:
-              action: toggle
-          - entity: script.activity_pause_tv
-            icon: 'mdi:fast-forward'
-            icon_height: 24px
-            show_name: false
-            type: entity-button
-            tap_action:
-              action: toggle
-      - type: horizontal-stack
-        columns: 3
-        cards:
-          - entity: script.activity_play_tv
-            icon: 'mdi:keyboard-return'
-            icon_height: 24px
-            show_name: false
-            type: entity-button
-            tap_action:
-              action: toggle
-          - entity: script.activity_play_tv
-            icon: 'mdi:pause'
+            icon: "mdi:play"
             icon_height: 24px
             show_name: false
             type: entity-button
             tap_action:
               action: toggle
           - entity: script.activity_pause_tv
-            icon: 'mdi:stop'
+            icon: "mdi:fast-forward"
             icon_height: 24px
             show_name: false
             type: entity-button
@@ -214,17 +201,41 @@ cards:
         columns: 3
         cards:
           - entity: script.activity_play_tv
-            icon: 'mdi:blank'
+            icon: "mdi:keyboard-return"
+            icon_height: 24px
+            show_name: false
+            type: entity-button
+            tap_action:
+              action: toggle
+          - entity: script.activity_play_tv
+            icon: "mdi:pause"
+            icon_height: 24px
+            show_name: false
+            type: entity-button
+            tap_action:
+              action: toggle
+          - entity: script.activity_pause_tv
+            icon: "mdi:stop"
+            icon_height: 24px
+            show_name: false
+            type: entity-button
+            tap_action:
+              action: toggle
+      - type: horizontal-stack
+        columns: 3
+        cards:
+          - entity: script.activity_play_tv
+            icon: "mdi:blank"
             icon_height: 16px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:blank'
+            icon: "mdi:blank"
             icon_height: 16px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:blank'
+            icon: "mdi:blank"
             icon_height: 16px
             show_name: false
             type: entity-button
@@ -232,19 +243,19 @@ cards:
         columns: 3
         cards:
           - entity: script.activity_play_tv
-            icon: 'mdi:blank'
+            icon: "mdi:blank"
             icon_height: 24px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:menu-up'
+            icon: "mdi:menu-up"
             icon_height: 24px
             show_name: false
             type: entity-button
             tap_action:
               action: toggle
           - entity: script.volume_up
-            icon: 'mdi:volume-plus'
+            icon: "mdi:volume-plus"
             icon_height: 24px
             show_name: false
             type: entity-button
@@ -254,43 +265,21 @@ cards:
         columns: 3
         cards:
           - entity: script.activity_play_tv
-            icon: 'mdi:menu-left'
+            icon: "mdi:menu-left"
             icon_height: 24px
             show_name: false
             type: entity-button
             tap_action:
               action: toggle
           - entity: script.activity_play_tv
-            icon: 'mdi:image-filter-center-focus-strong'
-            icon_height: 24px
-            show_name: false
-            type: entity-button
-            tap_action:
-              action: toggle
-          - entity: script.volume_up
-            icon: 'mdi:menu-right'
-            icon_height: 24px
-            show_name: false
-            type: entity-button
-            tap_action:
-              action: toggle
-      - type: horizontal-stack
-        columns: 3
-        cards:
-          - entity: script.activity_play_tv
-            icon: 'mdi:blank'
-            icon_height: 24px
-            show_name: false
-            type: entity-button
-          - entity: script.activity_play_tv
-            icon: 'mdi:menu-down'
+            icon: "mdi:image-filter-center-focus-strong"
             icon_height: 24px
             show_name: false
             type: entity-button
             tap_action:
               action: toggle
           - entity: script.volume_up
-            icon: 'mdi:volume-minus'
+            icon: "mdi:menu-right"
             icon_height: 24px
             show_name: false
             type: entity-button
@@ -300,17 +289,39 @@ cards:
         columns: 3
         cards:
           - entity: script.activity_play_tv
-            icon: 'mdi:blank'
+            icon: "mdi:blank"
+            icon_height: 24px
+            show_name: false
+            type: entity-button
+          - entity: script.activity_play_tv
+            icon: "mdi:menu-down"
+            icon_height: 24px
+            show_name: false
+            type: entity-button
+            tap_action:
+              action: toggle
+          - entity: script.volume_up
+            icon: "mdi:volume-minus"
+            icon_height: 24px
+            show_name: false
+            type: entity-button
+            tap_action:
+              action: toggle
+      - type: horizontal-stack
+        columns: 3
+        cards:
+          - entity: script.activity_play_tv
+            icon: "mdi:blank"
             icon_height: 16px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:blank'
+            icon: "mdi:blank"
             icon_height: 16px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:blank'
+            icon: "mdi:blank"
             icon_height: 16px
             show_name: false
             type: entity-button
@@ -318,17 +329,17 @@ cards:
         columns: 3
         cards:
           - entity: script.activity_play_tv
-            icon: 'mdi:numeric-1'
+            icon: "mdi:numeric-1"
             icon_height: 24px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:numeric-2'
+            icon: "mdi:numeric-2"
             icon_height: 24px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:numeric-3'
+            icon: "mdi:numeric-3"
             icon_height: 24px
             show_name: false
             type: entity-button
@@ -336,17 +347,17 @@ cards:
         columns: 3
         cards:
           - entity: script.activity_play_tv
-            icon: 'mdi:numeric-4'
+            icon: "mdi:numeric-4"
             icon_height: 24px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:numeric-5'
+            icon: "mdi:numeric-5"
             icon_height: 24px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:numeric-6'
+            icon: "mdi:numeric-6"
             icon_height: 24px
             show_name: false
             type: entity-button
@@ -354,17 +365,17 @@ cards:
         columns: 3
         cards:
           - entity: script.activity_play_tv
-            icon: 'mdi:numeric-7'
+            icon: "mdi:numeric-7"
             icon_height: 24px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:numeric-8'
+            icon: "mdi:numeric-8"
             icon_height: 24px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:numeric-9'
+            icon: "mdi:numeric-9"
             icon_height: 24px
             show_name: false
             type: entity-button
@@ -372,18 +383,17 @@ cards:
         columns: 3
         cards:
           - entity: script.activity_play_tv
-            icon: 'mdi:blank'
+            icon: "mdi:blank"
             icon_height: 24px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:numeric-0'
+            icon: "mdi:numeric-0"
             icon_height: 24px
             show_name: false
             type: entity-button
           - entity: script.activity_play_tv
-            icon: 'mdi:blank'
+            icon: "mdi:blank"
             icon_height: 24px
             show_name: false
             type: entity-button
-            
