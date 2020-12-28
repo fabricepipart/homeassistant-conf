@@ -292,21 +292,6 @@ automation:
     - service: light.toggle
       entity_id: light.couloir
   
-  - alias: Sortir maison (lumières)
-    trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d000316bbe1
-        click_type: long
-    condition:
-      - condition: state
-        entity_id: alarm_control_panel.maison
-        state: disarmed
-    action:
-    - service: light.turn_off
-      entity_id: group.all_lights
-      
       
   - alias: Lumière chaussures
     trigger:
@@ -331,11 +316,6 @@ automation:
       event_data:
         entity_id: binary_sensor.wall_switch_158d0005220048
         click_type: single
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0005220048
-        click_type: double
     condition:
       condition: not
       conditions:
@@ -355,11 +335,6 @@ automation:
       event_data:
         entity_id: binary_sensor.wall_switch_158d0005220048
         click_type: single
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0005220048
-        click_type: double
     condition:
       condition: time
       after: '22:00:00'
@@ -368,6 +343,31 @@ automation:
     - service: light.toggle
       entity_id: light.wc_wall
 
+  - alias: Lumière WC resync
+    trigger:
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d0005220048
+        click_type: double
+    action:
+    - service: light.toggle
+      entity_id: light.wc_wall
 
 
+  - alias: Sortir maison (lumières)
+    trigger:
+    - platform: event
+      event_type: xiaomi_aqara.click
+      event_data:
+        entity_id: binary_sensor.wall_switch_158d000316bbe1
+        click_type: long
+    condition:
+      - condition: state
+        entity_id: alarm_control_panel.maison
+        state: disarmed
+    action:
+    - service: light.turn_off
+      entity_id: group.all_lights
+      
 

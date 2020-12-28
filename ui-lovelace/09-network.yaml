@@ -11,104 +11,97 @@ cards:
   - type: vertical-stack
     cards:
       - type: horizontal-stack
-        columns: 2
-        title: Ordinateur
+        #title: Raspberry
         cards:
-          - type: vertical-stack
-            cards:
-              - type: horizontal-stack
-                title: Imprimante
-                columns: 2
-                cards:
-                  - entity: script.sleep_mac
-                    hold_action:
-                      action: more-info
-                    icon: "mdi:sleep"
-                    icon_height: 48px
-                    show_icon: true
-                    show_name: true
-                    tap_action:
-                      action: toggle
-                    type: entity-button
-                    title: Mac
-                  - entity: script.bt_mac
-                    hold_action:
-                      action: more-info
-                    icon: "mdi:bluetooth"
-                    icon_height: 48px
-                    show_icon: true
-                    show_name: true
-                    tap_action:
-                      action: toggle
-                    type: entity-button
-                    title: Bluetooth Mac
-
-              - type: horizontal-stack
-                title: Imprimante
-                columns: 2
-                cards:
-                  - entity: sensor.canon_mx470_series_black
-                    name: Noir
-                    unit: "%"
-                    min: 0
-                    max: 100
-                    severity:
-                      green: 50
-                      yellow: 25
-                      red: 5
-                    type: gauge
-                  - entity: sensor.canon_mx470_series_color
-                    name: Couleur
-                    unit: "%"
-                    min: 0
-                    max: 100
-                    severity:
-                      green: 50
-                      yellow: 25
-                      red: 5
-                    type: gauge
-
-          - entities:
-              - entity: sensor.processor_use
-              - entity: sensor.memory_use_percent
-              - entity: sensor.swap_use_percent
-              - entity: sensor.last_boot
-              - entity: sensor.disk_use_percent
-            show_header_toggle: false
-            title: Raspberry
-            type: entities
-
-      - type: vertical-stack
-        title: Internet
-        cards:
-          - type: horizontal-stack
-            columns: 2
-            cards:
-              - entity: sensor.neufbox_router_kib_s_received
-                name: Download
-                unit: kiB/s
-                min: 0
-                max: 10000
-                severity:
-                  green: 100
-                  yellow: 1000
-                  red: 5000
-                type: gauge
-              - entity: sensor.neufbox_router_kib_s_sent
-                name: Upload
-                unit: kiB/s
-                min: 0
-                max: 10000
-                severity:
-                  green: 100
-                  yellow: 1000
-                  red: 5000
-                type: gauge
-          - type: history-graph
-            hours_to_show: 1
+          - type: custom:mini-graph-card
+            hour24: true
             entities:
-              - entity: sensor.neufbox_router_kib_sec_sent
-              - entity: sensor.neufbox_router_kib_sec_received
+              - sensor.processor_use
+          - type: custom:mini-graph-card
+            hour24: true
+            entities:
+              - sensor.memory_use_percent
+          - type: custom:mini-graph-card
+            hour24: true
+            entities:
+              - sensor.swap_use_percent
+          - type: custom:mini-graph-card
+            hour24: true
+            entities:
+              - sensor.disk_use_percent
+              
+          - entity: sensor.last_boot
+            hold_action:
+              action: more-info
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+            
+          - entity: sensor.last_boot
+            name: Last boot
+            type: gauge
+            
+      - type: horizontal-stack
+        cards:
+          - entity: sensor.r7000_gateway_kib_s_received
+            name: Download
+            unit: kiB/s
+            min: 0
+            max: 10000
+            severity:
+              green: 100
+              yellow: 1000
+              red: 5000
+            type: gauge
+          - entity: sensor.r7000_gateway_kib_s_sent
+            name: Upload
+            unit: kiB/s
+            min: 0
+            max: 10000
+            severity:
+              green: 100
+              yellow: 1000
+              red: 5000
+            type: gauge
+          - entity: script.sleep_mac
+            hold_action:
+              action: more-info
+            icon: "mdi:sleep"
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.bt_mac
+            hold_action:
+              action: more-info
+            icon: "mdi:bluetooth"
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+
+      - type: custom:mini-graph-card
+        hours_to_show: 1
+        points_per_hour: 100
+        line_width: 2
+        entities:
+          - entity: sensor.r7000_gateway_kib_s_sent
+          - entity: sensor.r7000_gateway_kib_s_received
+      - type: history-graph
+        hours_to_show: 1
+        entities:
+          - entity: sensor.r7000_gateway_kib_s_sent
+          - entity: sensor.r7000_gateway_kib_s_received
+            
+            
+
 
       - type: vertical-stack
         title: Sonoff

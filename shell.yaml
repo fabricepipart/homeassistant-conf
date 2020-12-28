@@ -1,18 +1,18 @@
 sleep_mac: !secret my_sleep_command
 bt_mac: !secret bt_toogle_command
 
-switch_tv_netflix: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAABoAAAB8Aw==
-switch_tv_home: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAABgAw==
-switch_tv_exit: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAABjAw==
-switch_tv_down: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAB1Aw==
-switch_tv_up: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAB0Aw==
-switch_tv_left: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAA0Aw==
-switch_tv_right: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAzAw==
-switch_tv_confirm: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAABlAw==
-switch_tv_wakeup: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAuAw==
-switch_tv_component: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAKQAAAA2Aw==
-switch_tv_youtube: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAMQAAABHAw==
-switch_tv_off: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAvAw==
-switch_tv_on: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAQAAAAEAAAAVAw==
-switch_tv_play: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAJcAAAAaAw==
-switch_tv_pause: /config/additional_scripts/send_command.sh 192.168.69.65 AAAAAgAAAJcAAAAZAw==
+switch_tv_netflix: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAgAAABoAAAB8Aw==
+switch_tv_home: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAQAAAAEAAABgAw==
+switch_tv_exit: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAQAAAAEAAABjAw==
+switch_tv_down: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAQAAAAEAAAB1Aw==
+switch_tv_up: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAQAAAAEAAAB0Aw==
+switch_tv_left: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAQAAAAEAAAA0Aw==
+switch_tv_right: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAQAAAAEAAAAzAw==
+switch_tv_confirm: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAQAAAAEAAABlAw==
+switch_tv_wakeup: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAQAAAAEAAAAuAw==
+switch_tv_component: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAgAAAKQAAAA2Aw==
+switch_tv_youtube: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAgAAAMQAAABHAw==
+switch_tv_off: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAQAAAAEAAAAvAw==
+switch_tv_on: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAQAAAAEAAAAVAw==
+switch_tv_play: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAgAAAJcAAAAaAw==
+switch_tv_pause: /config/additional_scripts/send_command.sh 192.168.1.65 AAAAAgAAAJcAAAAZAw==

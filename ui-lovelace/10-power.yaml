@@ -10,20 +10,9 @@ icon: 'mdi:power-plug'
 path: power
 title: Electricité
 cards:
-  - columns: 3
-    entities:
-      - entity: sensor.linky_yesterday
-      - entity: sensor.linky_last_month
-      - entity: sensor.linky_last_year
-      - entity: sensor.linky_current_month
-      - entity: sensor.linky_current_year
-    title: Linky
-    type: glance
-  - entities:
-      - entity: sensor.linky_yesterday
-    hours_to_show: 720
-    refresh_interval: 0
-    type: history-graph
+  - type: 'custom:content-card-linky'
+    entity: sensor.myenedis_25409551346900
+    showInTableUnit: false
   - entities:
       - entity: sensor.iphone_de_le_gone_battery_level
       - entity: sensor.iphone_de_le_gone_battery_state

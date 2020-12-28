@@ -12,5 +12,7 @@ resources:
     type: module
   - url: /hacsfiles/text-element/text-element.js
     type: module
+  - url: /hacsfiles/content-card-linky/content-card-linky.js
+    type: module
 
 views: !include_dir_list ui-lovelace/

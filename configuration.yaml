@@ -35,7 +35,7 @@ google:
 lovelace:
   mode: yaml
 
-meteo_france: !include meteo.yaml
+#meteo_france: !include meteo.yaml
 shell_command: !include shell.yaml
 sensor: !include sensor.yaml
 
@@ -62,12 +62,12 @@ xiaomi_aqara:
   gateways:
     - mac: !secret xiaomi_gateway_mac
       key: !secret xiaomi_gateway_key
-# plex:
-#   host: 192.168.69.69
-#   port: 32400
-#   token: !secret plex_token
-#   ssl: true
-#   verify_ssl: false
-#   media_player:
-#     use_episode_art: true
-#     show_all_controls: false
+plex:
+  host: 192.168.1.69
+  port: 32400
+  token: !secret plex_token
+  ssl: true
+  verify_ssl: false
+  media_player:
+    use_episode_art: true
+    show_all_controls: false

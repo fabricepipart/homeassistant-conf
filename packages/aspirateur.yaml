@@ -129,7 +129,7 @@ automation:
   - alias: Neato Cuisine (Programmation Ecole)
     trigger:
       platform: time
-      at: "07:10:00"
+      at: "07:30:00"
     condition:
       - condition: time
         weekday:
@@ -149,7 +149,7 @@ automation:
   - alias: Neato Table basse (Programmation Ecole)
     trigger:
       platform: time
-      at: "07:35:00"
+      at: "08:15:00"
     condition:
       - condition: time
         weekday:
@@ -169,13 +169,11 @@ automation:
   - alias: Neato Entrée (Programmation)
     trigger:
       platform: time
-      #      at: "07:45:00"
-      at: "08:45:00"
+      at: "08:30:00"
     condition:
       - condition: time
         weekday:
-          #      - tue
-          - wed
+          - tue
       - condition: state
         entity_id: switch.conchita_schedule
         state: "on"
@@ -188,13 +186,11 @@ automation:
   - alias: Neato Couloir (Programmation)
     trigger:
       platform: time
-      #      at: "08:10:00"
-      at: "09:10:00"
+      at: "08:30:00"
     condition:
       - condition: time
         weekday:
-          #      - tue
-          - wed
+          - thu
       - condition: state
         entity_id: switch.conchita_schedule
         state: "on"
@@ -300,6 +296,11 @@ automation:
         event_type: xiaomi_aqara.click
         event_data:
           entity_id: binary_sensor.wall_switch_left_158d000355939d
+          click_type: long
+      - platform: event
+        event_type: xiaomi_aqara.click
+        event_data:
+          entity_id: binary_sensor.wall_switch_158d00054418a2
           click_type: long
     action:
       - service: script.neato_entree
