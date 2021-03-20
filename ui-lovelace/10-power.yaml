@@ -1,16 +1,13 @@
-
-          
-
 ################################################################################
 # Electricité
 ################################################################################
 
 badges: []
-icon: 'mdi:power-plug'
+icon: "mdi:power-plug"
 path: power
 title: Electricité
 cards:
-  - type: 'custom:content-card-linky'
+  - type: "custom:content-card-linky"
     entity: sensor.myenedis_25409551346900
     showInTableUnit: false
   - entities:
@@ -20,3 +17,68 @@ cards:
     title: iPhone
     type: entities
 
+  - title: Gateway
+    type: horizontal-stack
+    cards:
+      - type: light
+        entity: light.gateway_light_7811dcfaa3ee
+        name: LED
+      - entity: sensor.illumination_7811dcfaa3ee
+        name: Lux
+        unit: lm
+        min: 0
+        max: 1000
+        severity:
+          green: 600
+          yellow: 400
+          red: 200
+        type: gauge
+
+  - type: history-graph
+    title: Battery Xiaomi
+    hours_to_show: 72
+    entities:
+      - entity: sensor.xiaomi_porte_battery
+      - entity: sensor.xiaomi_bedroom_battery
+      - entity: sensor.xiaomi_cleo_battery
+      - entity: sensor.xiaomi_couloir_battery
+      - entity: sensor.xiaomi_entree_battery
+      - entity: sensor.xiaomi_cuisine_battery
+      - entity: sensor.xiaomi_sam_battery
+      - entity: sensor.xiaomi_entree_couloir_battery
+      - entity: sensor.xiaomi_sdb_battery
+      - entity: sensor.xiaomi_marina_battery
+      - entity: sensor.xiaomi_fabrice_battery
+      - entity: sensor.xiaomi_shoes_battery
+      - entity: sensor.xiaomi_wc_battery
+      - entity: sensor.xiaomi_temp_cleo_battery
+      - entity: sensor.xiaomi_temp_sam_battery
+      - entity: sensor.xiaomi_temp_cuisine_battery
+      - entity: sensor.xiaomi_temp_sdb_battery
+      - entity: sensor.xiaomi_temp_chambre_battery
+      - entity: sensor.xiaomi_fuite_sdb_battery
+      - entity: sensor.xiaomi_fuite_cuisine_battery
+
+  - type: entities
+    title: Battery Xiaomi
+    entities:
+      - entity: sensor.xiaomi_porte_battery
+      - entity: sensor.xiaomi_bedroom_battery
+      - entity: sensor.xiaomi_cleo_battery
+      - entity: sensor.xiaomi_couloir_battery
+      - entity: sensor.xiaomi_entree_battery
+      - entity: sensor.xiaomi_cuisine_battery
+      - entity: sensor.xiaomi_sam_battery
+      - entity: sensor.xiaomi_entree_couloir_battery
+      - entity: sensor.xiaomi_sdb_battery
+      - entity: sensor.xiaomi_marina_battery
+      - entity: sensor.xiaomi_fabrice_battery
+      - entity: sensor.xiaomi_shoes_battery
+      - entity: sensor.xiaomi_wc_battery
+      - entity: sensor.xiaomi_temp_cleo_battery
+      - entity: sensor.xiaomi_temp_sam_battery
+      - entity: sensor.xiaomi_temp_cuisine_battery
+      - entity: sensor.xiaomi_temp_sdb_battery
+      - entity: sensor.xiaomi_temp_chambre_battery
+      - entity: sensor.xiaomi_fuite_sdb_battery
+      - entity: sensor.xiaomi_fuite_cuisine_battery

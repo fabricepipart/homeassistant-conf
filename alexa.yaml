@@ -54,34 +54,34 @@ entity_config:
     name: "Play"
   script.activity_tv_pause:
     name: "Pause"
-  sensor.temperature_158d0004460790:
+  sensor.xiaomi_temp_sam_temperature:
     name: Température Salon
     display_categories: TEMPERATURE_SENSOR
-  sensor.temperature_158d00044627b4:
+  sensor.xiaomi_temp_cuisine_temperature:
     name: Température Cuisine
     display_categories: TEMPERATURE_SENSOR
-  sensor.temperature_158d0004465b49:
+  sensor.xiaomi_temp_sdb_temperature:
     name: Température Salle de bain
     display_categories: TEMPERATURE_SENSOR
-  sensor.temperature_158d00044606ee:
+  sensor.xiaomi_temp_cleo_temperature:
     name: Température Cléo
     display_categories: TEMPERATURE_SENSOR
-  sensor.temperature_158d00044bfdc7:
+  sensor.xiaomi_temp_chambre_temperature:
     name: Température Chambre
     display_categories: TEMPERATURE_SENSOR
-  sensor.humidity_158d0004460790:
+  sensor.xiaomi_temp_sam_humidity:
     name: Humidité Salon
     display_categories: TEMPERATURE_SENSOR
-  sensor.humidity_158d00044627b4:
+  sensor.xiaomi_temp_cuisine_humidity:
     name: Humidité Cuisine
     display_categories: TEMPERATURE_SENSOR
-  sensor.humidity_158d0004465b49:
+  sensor.xiaomi_temp_sdb_humidity:
     name: Humidité Salle de bain
     display_categories: TEMPERATURE_SENSOR
-  sensor.humidity_158d00044606ee:
+  sensor.xiaomi_temp_cleo_humidity:
     name: Humidité Cléo
     display_categories: TEMPERATURE_SENSOR
-  sensor.humidity_158d00044bfdc7:
+  sensor.xiaomi_temp_chambre_humidity:
     name: Humidité Chambre
     display_categories: TEMPERATURE_SENSOR
   media_player.rx_v475:

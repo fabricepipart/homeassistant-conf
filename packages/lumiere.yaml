@@ -117,257 +117,284 @@ light:
     payload_not_available: "Offline"
 
   - platform: group
-    name: All lights
+    name: Groupe entree
     entities:
-      - light.chambre
-      - light.cleo
-      - light.couloir
-      - light.cuisine
       - light.entree_1
       - light.entree_2
       - light.entree_3
-      - light.gateway_light_7811dcfaa3ee
-      - light.salle_de_bain
-      - light.salon
-      - light.sam
-      - light.wc
-      - light.shoes
-      
+
 ###############################################################
 # Scripts
 ###############################################################
 
-
-    
 ###############################################################
 # Automation
 ###############################################################
 automation:
-  
+  # ----- SaM et Salon
+
   - alias: Lumière salon
     trigger:
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_right_158d0003558c12
-          click_type: single
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_left_158d0003558c12
-          click_type: double
+      - platform: state
+        entity_id: sensor.xiaomi_sam_action
+        to: "single_right"
     action:
-    - service: light.toggle
-      entity_id: light.salon
-  
+      - service: light.toggle
+        entity_id: light.salon
+
+  - alias: Lumière salon indirecte
+    trigger:
+      - platform: state
+        entity_id: sensor.xiaomi_sam_action
+        to: "double_right"
+    action:
+      - entity_id: switch.osram_tv
+        service: switch.toggle
+
   - alias: Lumière salle à manger
     trigger:
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_left_158d0003558c12
-          click_type: single
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_left_158d0003558c12
-          click_type: double
+      - platform: state
+        entity_id: sensor.xiaomi_sam_action
+        to: "single_left"
     action:
-    - service: light.toggle
-      entity_id: light.sam
-      
+      - service: light.toggle
+        entity_id: light.sam
+
+  - alias: Lumière salle à manger indirecte
+    trigger:
+      - platform: state
+        entity_id: sensor.xiaomi_sam_action
+        to: "double_left"
+    action:
+      - entity_id: switch.osram_bureau
+        service: switch.toggle
+
+  # ----- Cleo
+
   - alias: Lumière Cléo
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0002f35399
-        click_type: single
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0002f35399
-        click_type: double
+      - platform: state
+        entity_id: sensor.xiaomi_cleo_action
+        to: "single"
     action:
-    - service: light.toggle
-      entity_id: light.cleo
-      
-  - alias: Lumière Parents
+      - service: light.toggle
+        entity_id: light.cleo
+
+  - alias: Lumière Cléo indirecte
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0002f31e64
-        click_type: single
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0002f31e64
-        click_type: double
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.switch_158d000407540c
-        click_type: single
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.switch_158d00040803c6
-        click_type: single
+      - platform: state
+        entity_id: sensor.xiaomi_cleo_action
+        to: "double"
     action:
-    - service: light.toggle
-      entity_id: light.chambre
-      
+      - entity_id: switch.osram_cleo
+        service: switch.toggle
+
+  # ----- Chambre
+
+  - alias: Lumière lit Parents
+    trigger:
+      - platform: state
+        entity_id: sensor.xiaomi_bedroom_action
+        to: "single"
+      - platform: state
+        entity_id: sensor.xiaomi_marina_action
+        to: "single"
+      - platform: state
+        entity_id: sensor.xiaomi_fabrice_action
+        to: "single"
+    action:
+      - service: light.toggle
+        entity_id: light.chambre
+
+  - alias: Lumière lit Parents indirect
+    trigger:
+      - platform: state
+        entity_id: sensor.xiaomi_bedroom_action
+        to: "double"
+      - platform: state
+        entity_id: sensor.xiaomi_marina_action
+        to: "double"
+      - platform: state
+        entity_id: sensor.xiaomi_fabrice_action
+        to: "hold"
+      - platform: state
+        entity_id: sensor.xiaomi_marina_action
+        to: "hold"
+      - platform: state
+        entity_id: sensor.xiaomi_fabrice_action
+        to: "double"
+      - platform: state
+        entity_id: sensor.xiaomi_shoes_action
+        to: "double"
+    action:
+      - entity_id: switch.osram_chambre
+        service: switch.toggle
+
+  # ----- Cuisine
+
   - alias: Lumière Cuisine
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d00031b5437
-        click_type: single
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d00031b5437
-        click_type: double
+      - platform: state
+        entity_id: sensor.xiaomi_cuisine_action
+        to: "single"
+      - platform: state
+        entity_id: sensor.xiaomi_cuisine_action
+        to: "double"
     action:
-    - service: light.toggle
-      entity_id: light.cuisine
-  
+      - service: light.toggle
+        entity_id: light.cuisine
+
+  # ----- Entrée
+
   - alias: Lumière entrée
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d000316bbe1
-        click_type: single
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d000316bbe1
-        click_type: double
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_left_158d000355939d
-        click_type: single
+      - platform: state
+        entity_id: sensor.xiaomi_entree_action
+        to: "single"
+      - platform: state
+        entity_id: sensor.xiaomi_entree_couloir_action
+        to: "single_left"
     action:
-    - service: light.toggle
-      entity_id: light.entree_1,light.entree_2,light.entree_3
-  
+      - service: light.toggle
+        entity_id: light.entree_1,light.entree_2,light.entree_3
+
+  # ----- SDB
+
   - alias: Lumière salle de bain
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_left_158d00036d0507
-        click_type: single
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_left_158d00036d0507
-        click_type: double
+      - platform: state
+        entity_id: sensor.xiaomi_sdb_action
+        to: "single_left"
+      - platform: state
+        entity_id: sensor.xiaomi_sdb_action
+        to: "double_left"
     action:
-    - service: light.toggle
-      entity_id: light.salle_de_bain
-  
+      - service: light.toggle
+        entity_id: light.salle_de_bain
+
+  # ----- Couloir
   - alias: Lumière couloir
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0003057c5b
-        click_type: single
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_right_158d000355939d
-        click_type: single
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_right_158d00036d0507
-        click_type: single
+      - platform: state
+        entity_id: sensor.xiaomi_couloir_action
+        to: "single"
+      - platform: state
+        entity_id: sensor.xiaomi_entree_couloir_action
+        to: "single_right"
+      - platform: state
+        entity_id: sensor.xiaomi_sdb_action
+        to: "single_right"
     action:
-    - service: light.toggle
-      entity_id: light.couloir
-  
-      
+      - service: light.toggle
+        entity_id: light.couloir
+      - service: timer.start
+        data:
+          entity_id: timer.couloir
+
+  - alias: Lumière couloir auto off
+    trigger:
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.couloir
+    action:
+      service: light.turn_off
+      data:
+        entity_id:
+          - light.couloir
+
+  # ----- Chaussures
   - alias: Lumière chaussures
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d00054418a2
-        click_type: single
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d00054418a2
-        click_type: double
+      - platform: state
+        entity_id: sensor.xiaomi_shoes_action
+        to: "single"
     action:
-    - service: light.toggle
-      entity_id: light.shoes
-      
+      - service: light.toggle
+        entity_id: light.shoes
+      - service: timer.start
+        data:
+          entity_id: timer.chaussures
+
+  - alias: Lumière chaussures auto off
+    trigger:
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.chaussures
+    action:
+      service: light.turn_off
+      data:
+        entity_id:
+          - light.shoes
+
+  # ----- WC
   - alias: Lumière WC
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0005220048
-        click_type: single
+      - platform: state
+        entity_id: sensor.xiaomi_wc_action
+        to: "single"
+      - platform: state
+        entity_id: sensor.xiaomi_wc_action
+        to: "double"
     condition:
       condition: not
       conditions:
         - condition: time
-          after: '22:00:00'
-          before: '08:00:00'
+          after: "22:00:00"
+          before: "08:00:00"
     action:
-    - service: light.toggle
-      entity_id: light.wc
-    - service: light.toggle
-      entity_id: light.wc_wall
-      
+      - service: light.toggle
+        entity_id: light.wc
+      - service: light.toggle
+        entity_id: light.wc_wall
+
   - alias: Lumière WC nuit
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0005220048
-        click_type: single
+      - platform: state
+        entity_id: sensor.xiaomi_wc_action
+        to: "single"
+      - platform: state
+        entity_id: sensor.xiaomi_wc_action
+        to: "double"
     condition:
       condition: time
-      after: '22:00:00'
-      before: '08:00:00'
+      after: "22:00:00"
+      before: "08:00:00"
     action:
-    - service: light.toggle
-      entity_id: light.wc_wall
+      - service: light.toggle
+        entity_id: light.wc_wall
 
-  - alias: Lumière WC resync
+  - alias: Lumière WC resync off
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d0005220048
-        click_type: double
+      - platform: state
+        entity_id: sensor.xiaomi_wc_action
+        to: "hold"
     action:
-    - service: light.toggle
-      entity_id: light.wc_wall
+      - service: light.turn_off
+        entity_id: light.wc_wall, light.wc
 
+  # ----- All
 
   - alias: Sortir maison (lumières)
     trigger:
-    - platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_158d000316bbe1
-        click_type: long
+      - platform: state
+        entity_id: sensor.xiaomi_entree_action
+        to: "hold"
     condition:
       - condition: state
         entity_id: alarm_control_panel.maison
         state: disarmed
     action:
-    - service: light.turn_off
-      entity_id: group.all_lights
-      
+      - service: light.turn_off
+        entity_id: all
 
+###############################################################
+# Timer
+###############################################################
+
+timer:
+  chaussures:
+    duration: "00:01:00"
+  couloir:
+    duration: "00:01:00"

@@ -7,7 +7,7 @@ alarm_control_panel:
     code_arm_required: false
     code: !secret alarm_code
     arming_time: 30
-    delay_time: 30 
+    delay_time: 30
     trigger_time: 4
     disarmed:
       trigger_time: 0
@@ -145,7 +145,7 @@ automation:
   - alias: Porte ouverte
     trigger:
       - platform: state
-        entity_id: binary_sensor.door_window_sensor_158d0003f1b10e
+        entity_id: binary_sensor.xiaomi_porte_contact
         from: "off"
         to: "on"
     condition:
@@ -162,7 +162,7 @@ automation:
   - alias: Porte fermée
     trigger:
       - platform: state
-        entity_id: binary_sensor.door_window_sensor_158d0003f1b10e
+        entity_id: binary_sensor.xiaomi_porte_contact
         from: "on"
         to: "off"
     condition:
@@ -202,17 +202,15 @@ automation:
 
   - alias: "Armer alarme"
     trigger:
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_158d000316bbe1
-          click_type: long
+      - platform: state
+        entity_id: sensor.xiaomi_entree_action
+        to: "hold"
     condition:
       - condition: state
         entity_id: alarm_control_panel.maison
         state: disarmed
       - condition: state
-        entity_id: binary_sensor.door_window_sensor_158d0003f1b10e
+        entity_id: binary_sensor.xiaomi_porte_contact
         state: "on"
     action:
       - delay:
@@ -243,7 +241,8 @@ automation:
       - service: notify.alexa_media
         data:
           target:
-            - media_player.alexa
+            - media_player.echo_salon
+            - media_player.echo_cuisine
           message: Alarme activée
           data:
             type: announce
@@ -262,7 +261,7 @@ automation:
   - alias: "Déclencher alarme"
     trigger:
       platform: state
-      entity_id: binary_sensor.door_window_sensor_158d0003f1b10e
+      entity_id: binary_sensor.xiaomi_porte_contact
       to: "on"
     condition:
       - condition: or
@@ -312,11 +311,9 @@ automation:
 
   - alias: "Désactiver alarme"
     trigger:
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_158d000316bbe1
-          click_type: long
+      - platform: state
+        entity_id: sensor.xiaomi_entree_action
+        to: "hold"
     condition:
       - condition: or
         conditions:
@@ -365,7 +362,8 @@ automation:
       - service: notify.alexa_media
         data:
           target:
-            - media_player.alexa
+            - media_player.echo_salon
+            - media_player.echo_cuisine
           message: Alarme désactivée. Bienvenu à la maison!
           data:
             type: announce

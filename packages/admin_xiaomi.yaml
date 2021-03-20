@@ -1,4 +1,3 @@
-
 ###############################################################
 # Sensors
 ###############################################################
@@ -6,104 +5,32 @@
 sensor:
   - platform: template
     sensors:
-########################## Ouvertures ##########################
-      porte_entree:
-        friendly_name: Porte entrée
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.door_window_sensor_158d0003f1b10e.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-########################## Interrupteur ##########################
-      interrupteur_chambre:
-        friendly_name: Interrupteur chambre
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.wall_switch_158d0002f31e64.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-      interrupteur_cleo:
-        friendly_name: Interrupteur Cléo
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.wall_switch_158d0002f35399.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-      interrupteur_couloir:
-        friendly_name: Interrupteur couloir
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.wall_switch_158d0003057c5b.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-      interrupteur_entree:
-        friendly_name: Interrupteur entrée
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.wall_switch_158d000316bbe1.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-      interrupteur_cuisine:
-        friendly_name: Interrupteur Cuisine
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.wall_switch_158d00031b5437.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-      interrupteur_salon:
-        friendly_name: Interrupteur salon double
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.wall_switch_both_158d0003558c12.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-      interrupteur_entree_couloir:
-        friendly_name: Interrupteur entrée / couloir
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.wall_switch_both_158d000355939d.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-      interrupteur_sdb:
-        friendly_name: Interrupteur salle de bain
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.wall_switch_both_158d00036d0507.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-########################## Bouton ##########################
-      interrupteur_marina:
-        friendly_name: Interrupteur Marina
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.switch_158d000407540c.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-      interrupteur_fabrice:
-        friendly_name: Interrupteur Fabrice
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.switch_158d00040803c6.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-########################## Température ##########################
+      ########################## Ouvertures ##########################
+
+      ########################## Température ##########################
       temperature_cleo:
         friendly_name: Température Cléo
-        unit_of_measurement: '%'
-        value_template: "{{ states.sensor.temperature_158d00044606ee.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
+        unit_of_measurement: "%"
+        value_template: "{{ states('sensor.xiaomi_temp_cleo_temperature') | round(1) }}"
+        icon_template: "mdi:battery-medium"
       temperature_salon:
         friendly_name: Température Salon
-        unit_of_measurement: '%'
-        value_template: "{{ states.sensor.temperature_158d0004460790.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
+        unit_of_measurement: "%"
+        value_template: "{{ states('sensor.xiaomi_temp_sam_temperature') | round(1) }}"
+        icon_template: "mdi:battery-medium"
       temperature_cuisine:
         friendly_name: Température Cuisine
-        unit_of_measurement: '%'
-        value_template: "{{ states.sensor.temperature_158d00044627b4.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
+        unit_of_measurement: "%"
+        value_template: "{{ states('sensor.xiaomi_temp_cuisine_temperature') | round(1) }}"
+        icon_template: "mdi:battery-medium"
       temperature_sdb:
         friendly_name: Température salle de bain
-        unit_of_measurement: '%'
-        value_template: "{{ states.sensor.temperature_158d0004465b49.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
+        unit_of_measurement: "%"
+        value_template: "{{ states('sensor.xiaomi_temp_sdb_temperature') | round(1) }}"
+        icon_template: "mdi:battery-medium"
       temperature_chambre:
         friendly_name: Température chambre
-        unit_of_measurement: '%'
-        value_template: "{{ states.sensor.temperature_158d00044bfdc7.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-########################## Mouvement ##########################
-
-
-########################## Ouvertures ##########################
-      fuite_cuisine:
-        friendly_name: Fuite cuisine
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.water_leak_sensor_158d0004235284.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-        
-      fuite_sdb:
-        friendly_name: Fuite SdB
-        unit_of_measurement: '%'
-        value_template: "{{ states.binary_sensor.water_leak_sensor_158d00045a0d75.attributes.battery_level }}"
-        icon_template: 'mdi:battery-medium'
-        
-        
+        unit_of_measurement: "%"
+        value_template: "{{ states('sensor.xiaomi_temp_chambre_temperature') | round(1) }}"
+        icon_template: "mdi:battery-medium"
+      ########################## Mouvement ##########################

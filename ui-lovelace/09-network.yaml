@@ -29,21 +29,37 @@ cards:
             hour24: true
             entities:
               - sensor.disk_use_percent
-              
-          - entity: sensor.last_boot
+      - type: horizontal-stack
+        cards:
+          - title: Last boot
+            type: markdown
+            entity_id: sensor.last_boot
+            content: "{{ (as_timestamp(now()) - as_timestamp(states('sensor.last_boot')) | int ) | timestamp_custom('%d days %H hours', false)}}"
+          - type: custom:mini-graph-card
+            hour24: true
+            entities:
+              - sensor.db_size
+          - entity: script.sleep_mac
             hold_action:
               action: more-info
+            icon: "mdi:sleep"
             icon_height: 48px
             show_icon: true
             show_name: true
             tap_action:
               action: toggle
             type: entity-button
-            
-          - entity: sensor.last_boot
-            name: Last boot
-            type: gauge
-            
+          - entity: script.bt_mac
+            hold_action:
+              action: more-info
+            icon: "mdi:bluetooth"
+            icon_height: 48px
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+
       - type: horizontal-stack
         cards:
           - entity: sensor.r7000_gateway_kib_s_received
@@ -66,26 +82,6 @@ cards:
               yellow: 1000
               red: 5000
             type: gauge
-          - entity: script.sleep_mac
-            hold_action:
-              action: more-info
-            icon: "mdi:sleep"
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
-          - entity: script.bt_mac
-            hold_action:
-              action: more-info
-            icon: "mdi:bluetooth"
-            icon_height: 48px
-            show_icon: true
-            show_name: true
-            tap_action:
-              action: toggle
-            type: entity-button
 
       - type: custom:mini-graph-card
         hours_to_show: 1
@@ -99,9 +95,6 @@ cards:
         entities:
           - entity: sensor.r7000_gateway_kib_s_sent
           - entity: sensor.r7000_gateway_kib_s_received
-            
-            
-
 
       - type: vertical-stack
         title: Sonoff
@@ -173,26 +166,3 @@ cards:
                   - entity: sensor.wc_wall_version
                   - entity: sensor.chaussures_version
                   - entity: sensor.salle_de_bain_version
-
-      - type: history-graph
-        title: Battery Xiaomi
-        hours_to_show: 72
-        entities:
-          - entity: sensor.porte_entree
-          - entity: sensor.interrupteur_chambre
-          - entity: sensor.interrupteur_cleo
-          - entity: sensor.interrupteur_couloir
-          - entity: sensor.interrupteur_entree
-          - entity: sensor.interrupteur_cuisine
-          - entity: sensor.interrupteur_salon
-          - entity: sensor.interrupteur_entree_couloir
-          - entity: sensor.interrupteur_sdb
-          - entity: sensor.interrupteur_marina
-          - entity: sensor.interrupteur_fabrice
-          - entity: sensor.temperature_cleo
-          - entity: sensor.temperature_salon
-          - entity: sensor.temperature_cuisine
-          - entity: sensor.temperature_sdb
-          - entity: sensor.temperature_chambre
-          - entity: sensor.fuite_sdb
-          - entity: sensor.fuite_cuisine

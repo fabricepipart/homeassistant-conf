@@ -15,18 +15,22 @@ ios:
 http:
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
-  #base_url: !secret my_home_domain
 
 mqtt:
   broker: !secret mosquitto_ip
   username: sonoff
   password: !secret mqtt
   discovery: true
-  discovery_prefix: cmnd
-
+  birth_message:
+    topic: 'hass/status'
+    payload: 'online'
+  will_message:
+    topic: 'hass/status'
+    payload: 'offline'
+  
 neato:
-  username: !secret neato_username
-  password: !secret neato_password
+  client_id: !secret neato_username
+  client_secret: !secret neato_password
 
 google:
   client_id: !secret gcal_client_id
@@ -41,9 +45,10 @@ sensor: !include sensor.yaml
 
 recorder:
   auto_purge: true
-  purge_keep_days: 5
+  purge_keep_days: 10
   commit_interval: 30
-  db_url: 'sqlite:///:memory:'
+#  db_url: 'sqlite:///:memory:'
+  db_url: !secret psql_url
   exclude:
     event_types:
       - service_removed
@@ -80,12 +85,5 @@ xiaomi_aqara:
   gateways:
     - mac: !secret xiaomi_gateway_mac
       key: !secret xiaomi_gateway_key
-plex:
-#   host: 192.168.1.69
-  port: 32400
-  token: !secret plex_token
-  ssl: true
-  verify_ssl: false
-  media_player:
-    use_episode_art: true
-    show_all_controls: false
+
+

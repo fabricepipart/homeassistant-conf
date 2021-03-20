@@ -327,11 +327,9 @@ script:
 automation:
   - alias: Eteindre Home Cinéma
     trigger:
-      platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_right_158d0003558c12
-        click_type: long
+      - platform: state
+        entity_id: sensor.xiaomi_sam_action
+        to: "hold_right"
     action:
       - service: script.activity_off
       - service: mqtt.publish
@@ -362,11 +360,9 @@ automation:
 
   - alias: Eteindre Mac
     trigger:
-      platform: event
-      event_type: xiaomi_aqara.click
-      event_data:
-        entity_id: binary_sensor.wall_switch_left_158d0003558c12
-        click_type: long
+      - platform: state
+        entity_id: sensor.xiaomi_sam_action
+        to: "hold_left"
     action:
       - service: script.sleep_mac
       - service: mqtt.publish
@@ -394,11 +390,9 @@ automation:
 
   - alias: Sortir maison (HiFi)
     trigger:
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_158d000316bbe1
-          click_type: long
+      - platform: state
+        entity_id: sensor.xiaomi_entree_action
+        to: "hold"
     condition:
       - condition: state
         entity_id: alarm_control_panel.maison
@@ -406,10 +400,8 @@ automation:
     action:
       - service: script.sleep_mac
       #- service: script.activity_off
-      - service: notify.alexa_media
+      - service: notify.alexa_media_echo_salon
         data:
-          target:
-            - media_player.alexa
           message: Au revoir!
           data:
             type: announce
@@ -447,3 +439,14 @@ automation:
         data:
           entity_id: media_player.sony_bravia_tv
           source: "HDMI 3/ARC"
+  # - alias: Playlist on Spotify
+  #   trigger:
+  #     - platform: state
+  #       entity_id: sensor.xiaomi_nawak
+  #       to: "hold"
+  #   action:
+  #     - service: media_player.play_media
+  #       data:
+  #         entity_id: media_player.echo_salon
+  #         media_content_id: Playlist Best of
+  #         media_content_type: SPOTIFY

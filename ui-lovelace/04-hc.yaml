@@ -15,25 +15,58 @@ cards:
         entity: media_player.sony_bravia_tv
       - type: custom:mini-media-player
         entity: media_player.rx_v475
-      - entity: media_player.rx_v475
-        type: media-control
-      - entity: media_player.tele
-        type: media-control              
-      - type: entities
-        title: Activities
-        show_header_toggle: false
-        entities:
-        - entity: switch.netflix
-        - entity: switch.plex
-        #- entity: switch.youtube
-        - entity: switch.spotify
-        - entity: switch.box
-        - entity: switch.switch
-        #- entity: switch.amazon
+      - title: Spotify
+        type: vertical-stack
+        cards:
+          - type: custom:mini-media-player
+            entity: media_player.spotify_fabrice_pipart
+          - type: "custom:spotify-playlist-card"
+            sensor: sensor.spotifyplaylist
+            playback_method: spotify
+            #                speaker_entity: " media_player.rx_v475"
+            speaker_entity: "media_player.spotify"
+            show_playlist_titles: true
+            shuffle: true
+            columns: 3
+
+      - title: Alexa
+        type: vertical-stack
+        cards:
+          - title: Echo Salon
+            show_header_toggle: false
+            type: entities
+            entities:
+              - entity: media_player.alexa
+              - entity: switch.alexa_shuffle_switch
+              - entity: switch.alexa_repeat_switch
+          - title: Echo Cuisine
+            show_header_toggle: false
+            type: entities
+            entities:
+              - entity: media_player.alexa_cuisine
+              - entity: switch.alexa_cuisine_shuffle_switch
+              - entity: switch.alexa_cuisine_repeat_switch
+          - title: Echo Cléo
+            show_header_toggle: false
+            type: entities
+            entities:
+              - entity: media_player.echo_de_cleo
+              - entity: switch.echo_de_cleo_shuffle_switch
+              - entity: switch.echo_de_cleo_repeat_switch
 
   - title: Activités
     type: vertical-stack
     cards:
+      - type: entities
+        show_header_toggle: false
+        entities:
+          - entity: switch.netflix
+          - entity: switch.plex
+          #- entity: switch.youtube
+          - entity: switch.spotify
+          - entity: switch.box
+          - entity: switch.switch
+        #- entity: switch.amazon
       - type: horizontal-stack
         columns: 4
         cards:

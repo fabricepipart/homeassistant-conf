@@ -1,109 +1,104 @@
-
 ###############################################################
 # Automation
 ###############################################################
 automation:
-
   - alias: Fuite cuisine
     trigger:
-    - platform: state
-      entity_id: binary_sensor.water_leak_sensor_158d0004235284
-      from: "off"
-      to: "on"
+      - platform: state
+        entity_id: binary_sensor.water_leak_sensor_158d0004235284
+        from: "off"
+        to: "on"
     action:
-    - service: light.turn_on
-      data:
-        entity_id: light.gateway_light_7811dcfaa3ee
-        color_name: red
-        brightness_pct: 100
-    - service: notify.alexa_media
-      data:
-        target:
-          -  media_player.alexa
-        message: Une fuite d'eau a été détectée à la cuisine!
+      - service: light.turn_on
         data:
-          type: announce
-    - service: notify.mobile_app_iphone_de_le_gone
-      alias: 'Notification fuite cuisine'
-      data:
+          entity_id: light.gateway_light_7811dcfaa3ee
+          color_name: red
+          brightness_pct: 100
+      - service: notify.alexa_media
         data:
-          push:
-            badge: 5
-            thread-id: home-assistant
-        message: Vite sortez la serpillère!
-        title: Une fuite d'eau a été détectée à la cuisine!
-    - service: xiaomi_aqara.play_ringtone
-      data_template:
-        gw_mac: !secret xiaomi_gateway_mac
-        ringtone_id: "{{ states.input_select.sirenes_gateway.state.split('-')[0] }}"
-        ringtone_vol: "{{ states.input_number.gateway_volume.state|int }}"
-        
-        
+          target:
+            - media_player.echo_de_cleo
+            - media_player.echo_salon
+            - media_player.echo_sdb
+            - media_player.echo_cuisine
+          message: Alerte! Fuite d'eau détectée à la cuisine!
+          data:
+            type: announce
+      - service: notify.mobile_app_iphone_de_le_gone
+        alias: "Notification fuite cuisine"
+        data:
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
+          message: Vite sortez la serpillère!
+          title: Une fuite d'eau a été détectée à la cuisine!
+      - service: xiaomi_aqara.play_ringtone
+        data_template:
+          gw_mac: !secret xiaomi_gateway_mac
+          ringtone_id: "{{ states.input_select.sirenes_gateway.state.split('-')[0] }}"
+          ringtone_vol: "{{ states.input_number.gateway_volume.state|int }}"
+
   - alias: Fuite cuisine terminée
     trigger:
-    - platform: state
-      entity_id: binary_sensor.water_leak_sensor_158d0004235284
-      from: "on"
-      to: "off"
+      - platform: state
+        entity_id: binary_sensor.water_leak_sensor_158d0004235284
+        from: "on"
+        to: "off"
     action:
-    - service: light.turn_off
-      data:
-        entity_id: light.gateway_light_7811dcfaa3ee
-   
-   
-   
-   
-   
+      - service: light.turn_off
+        data:
+          entity_id: light.gateway_light_7811dcfaa3ee
+
   - alias: Fuite SdB
     trigger:
-    - platform: state
-      entity_id: binary_sensor.water_leak_sensor_158d00045a0d75
-      from: "off"
-      to: "on"
+      - platform: state
+        entity_id: binary_sensor.water_leak_sensor_158d00045a0d75
+        from: "off"
+        to: "on"
     action:
-    - service: light.turn_on
-      data:
-        entity_id: light.gateway_light_7811dcfaa3ee
-        color_name: red
-        brightness_pct: 100
-    - service: light.turn_on
-      data:
-        entity_id: light.gateway_light_7811dcfaa3ee
-        color_name: red
-        brightness_pct: 100
-    - service: notify.alexa_media
-      data:
-        target:
-          -  media_player.alexa
-        message: Une fuite d'eau a été détectée à la salle de bain!
+      - service: light.turn_on
         data:
-          type: announce
-    - service: notify.mobile_app_iphone_de_le_gone
-      alias: 'Notification fuite salle de bain'
-      data:
+          entity_id: light.gateway_light_7811dcfaa3ee
+          color_name: red
+          brightness_pct: 100
+      - service: light.turn_on
         data:
-          push:
-            badge: 5
-            thread-id: home-assistant
-        message: Vite sortez la serpillère!
-        title: Une fuite d'eau a été détectée à la salle de bain!
-    - service: xiaomi_aqara.play_ringtone
-      data_template:
-        gw_mac: !secret xiaomi_gateway_mac
-        ringtone_id: "{{ states.input_select.sirenes_gateway.state.split('-')[0] }}"
-        ringtone_vol: "{{ states.input_number.gateway_volume.state|int }}"
-        
-      
-      
-      
+          entity_id: light.gateway_light_7811dcfaa3ee
+          color_name: red
+          brightness_pct: 100
+      - service: notify.alexa_media
+        data:
+          target:
+            - media_player.echo_de_cleo
+            - media_player.echo_salon
+            - media_player.echo_sdb
+            - media_player.echo_cuisine
+          message: Une fuite d'eau a été détectée à la salle de bain!
+          data:
+            type: announce
+      - service: notify.mobile_app_iphone_de_le_gone
+        alias: "Notification fuite salle de bain"
+        data:
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
+          message: Vite sortez la serpillère!
+          title: Une fuite d'eau a été détectée à la salle de bain!
+      - service: xiaomi_aqara.play_ringtone
+        data_template:
+          gw_mac: !secret xiaomi_gateway_mac
+          ringtone_id: "{{ states.input_select.sirenes_gateway.state.split('-')[0] }}"
+          ringtone_vol: "{{ states.input_number.gateway_volume.state|int }}"
+
   - alias: Fuite SdB terminée
     trigger:
-    - platform: state
-      entity_id: binary_sensor.water_leak_sensor_158d00045a0d75
-      from: "on"
-      to: "off"
+      - platform: state
+        entity_id: binary_sensor.water_leak_sensor_158d00045a0d75
+        from: "on"
+        to: "off"
     action:
-    - service: light.turn_off
-      data:
-        entity_id: light.gateway_light_7811dcfaa3ee
-   
+      - service: light.turn_off
+        data:
+          entity_id: light.gateway_light_7811dcfaa3ee

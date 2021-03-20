@@ -88,12 +88,9 @@ automation:
         service: notify.mobile_app_iphone_de_le_gone
       - service: notify.alexa_media_echo_salon
         data:
-          target: media_player.alexa
           message: Attention, il pleut dehors.
           data:
             type: announce
-            method: all
-    id: 41d536435d6346bca25d4eabb55c7d35
 
   ##################################### Trajets
 
@@ -106,7 +103,6 @@ automation:
     action:
       - service: notify.alexa_media_echo_salon
         data:
-          target: media_player.alexa
           message: Bienvenu à la maison Fabrice!
           data:
             type: announce
@@ -139,7 +135,6 @@ automation:
               thread-id: home-assistant
       - service: notify.alexa_media_echo_salon
         data:
-          target: media_player.alexa
           message: Temps de trajet estimé à {{ states('sensor.fabrice_to_work') }} minutes
           data:
             type: announce

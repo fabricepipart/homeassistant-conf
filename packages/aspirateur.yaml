@@ -87,7 +87,7 @@ script:
           entity_id: vacuum.conchita
           mode: 1
           navigation: 2
-          zone: "Entrée"
+          zone: "Entree"
 
   neato_table:
     alias: Table
@@ -222,13 +222,9 @@ automation:
           title: Conchita se décharge anormalement
       - service: notify.alexa_media_echo_salon
         data:
-          target: media_player.alexa
-          message:
-            Conchita se décharge anormalement. Quelqu'un pourrait la remettre sur
-            sa base?
+          message: Conchita se décharge anormalement. Quelqu'un pourrait la remettre sur sa base?
           data:
             type: announce
-            method: all
 
   - id: "1572943972632"
     alias: Conchita en erreur
@@ -242,85 +238,65 @@ automation:
     action:
       - service: notify.alexa_media_echo_salon
         data:
-          target: media_player.alexa
           message: Conchita a un soucis, quelqu'un veut bien l'aider?
           data:
             type: announce
-            method: all
 
   ################### Boutons ###################
 
   - alias: Aspirateur Salle à manger et salon
     trigger:
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_both_158d0003558c12
-          click_type: long_both
+      - platform: state
+        entity_id: sensor.xiaomi_sam_action
+        to: "hold_both"
     action:
       - service: script.neato_sam
 
   - alias: Aspirateur Cléo
     trigger:
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_158d0002f35399
-          click_type: long
+      - platform: state
+        entity_id: sensor.xiaomi_cleo
+        to: "hold"
     action:
       - service: script.neato_cleo
 
   - alias: Aspirateur Parents
     trigger:
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_158d0002f31e64
-          click_type: long
+      - platform: state
+        entity_id: sensor.xiaomi_bedroom_action
+        to: "hold"
     action:
       - service: script.neato_chambre
 
   - alias: Aspirateur Cuisine
     trigger:
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_158d00031b5437
-          click_type: long
+      - platform: state
+        entity_id: sensor.xiaomi_cuisine_action
+        to: "hold"
     action:
       - service: script.neato_cuisine
 
   - alias: Aspirateur entrée
     trigger:
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_left_158d000355939d
-          click_type: long
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_158d00054418a2
-          click_type: long
+      - platform: state
+        entity_id: sensor.xiaomi_shoes_action
+        to: "hold"
+      - platform: state
+        entity_id: sensor.xiaomi_entree_couloir_action
+        to: "hold_left"
     action:
       - service: script.neato_entree
 
   - alias: Aspirateur couloir
     trigger:
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_right_158d000355939d
-          click_type: long
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_right_158d00036d0507
-          click_type: long
-      - platform: event
-        event_type: xiaomi_aqara.click
-        event_data:
-          entity_id: binary_sensor.wall_switch_158d0003057c5b
-          click_type: long
+      - platform: state
+        entity_id: sensor.xiaomi_entree_couloir_action
+        to: "hold_right"
+      - platform: state
+        entity_id: sensor.xiaomi_sdb_action
+        to: "hold_right"
+      - platform: state
+        entity_id: sensor.xiaomi_couloir
+        to: "hold"
     action:
       - service: script.neato_couloir

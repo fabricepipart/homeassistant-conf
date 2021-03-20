@@ -1,59 +1,49 @@
-
 ###############################################################
 # Automation
 ###############################################################
 automation:
-
   - alias: Humidité SdB
     description: "Humidité SdB"
     trigger:
-    - entity_id: sensor.humidity_158d0004465b49
-      above: 90
-      platform: numeric_state
-      for:
-        minutes: 30
-    - entity_id: sensor.humidity_158d0004465b49
-      above: 80
-      platform: numeric_state
-      for:
-        minutes: 60
+      - entity_id: sensor.xiaomi_temp_sdb_humidity
+        above: 90
+        platform: numeric_state
+        for:
+          minutes: 30
+      - entity_id: sensor.xiaomi_temp_sdb_humidity
+        above: 80
+        platform: numeric_state
+        for:
+          minutes: 60
     condition: []
     action:
-    - service: notify.mobile_app_iphone_de_le_gone
-      data:
+      - service: notify.mobile_app_iphone_de_le_gone
         data:
-          push:
-            badge: 5
-            thread-id: home-assistant
-        message: Quelqu'un pourrait ouvrir la fenêtre?
-        title: Il y a trop d'humidité dans la Salle de Bain
-    - service: notify.alexa_media_echo_salon
-      data:
-        target: media_player.alexa
-        message:
-          Il y a trop d'humidité dans la Salle de Bain. Quelqu'un pourrait ouvrir la fenêtre?
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
+          message: Quelqu'un pourrait ouvrir la fenêtre?
+          title: Il y a trop d'humidité dans la Salle de Bain
+      - service: notify.alexa_media_echo_salon
         data:
-          type: announce
-          method: all
-
+          message: Il y a trop d'humidité dans la Salle de Bain. Quelqu'un pourrait ouvrir la fenêtre?
+          data:
+            type: announce
+            method: all
 
   - alias: Alerte humidité Salle de Bain
     trigger:
-    - entity_id: light.salle_de_bain
-      platform: state
-      to: 'off'
+      - entity_id: light.salle_de_bain
+        platform: state
+        to: "off"
     condition:
       - condition: numeric_state
-        entity_id: sensor.humidity_158d0004465b49
+        entity_id: sensor.xiaomi_temp_sdb_humidity
         above: 80
     action:
-    - service: notify.alexa_media_echo_sdb
-      data:
-        target: media_player.echo_salle_de_bain
-        message: Avez vous pensé à ouvrir la fenêtre?
+      - service: notify.alexa_media_echo_sdb
         data:
-          type: announce
-          method: all
-      
-
-
+          message: Avez vous pensé à ouvrir la fenêtre?
+          data:
+            type: announce

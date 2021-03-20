@@ -15,7 +15,7 @@ automation:
       after: '07:00:00'
       before: '11:00:00'
     - condition: numeric_state
-      entity_id: sensor.temperature_158d0004465b49
+      entity_id: sensor.xiaomi_temp_sdb_temperature
       below: 25
     action:
     - service: light.turn_on
@@ -43,7 +43,7 @@ automation:
       platform: state
       to: 'off'
     - platform: numeric_state
-      entity_id: sensor.temperature_158d0004465b49
+      entity_id: sensor.xiaomi_temp_sdb_temperature
       above: 25
     action:
     - service: light.turn_off

@@ -24,14 +24,9 @@ script.neato_wc:
   icon: mdi:robot-vacuum-variant
 script.sleep_mac:
   icon: mdi:sleep
-binary_sensor.door_window_sensor_158d0003f1b10e:
-  icon: 'mdi:door-closed-lock'
-  
-  
-  
-  
-  
-  
+binary_sensor.xiaomi_porte_contact:
+  icon: "mdi:door-closed-lock"
+
 switch.netflix:
   icon: "mdi:netflix"
 switch.plex:
@@ -46,4 +41,3 @@ switch.switch:
   icon: "mdi:nintendo-switch"
 # switch.amazon
 #  icon: "mdi:amazon"
-  

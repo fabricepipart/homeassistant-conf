@@ -1,7 +1,5 @@
 title: Maison
 resources:
-  - url: /hacsfiles/calendar-card/calendar-card.js
-    type: js
   - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
     type: module
   - url: /hacsfiles/spotify-card/spotify-card.js

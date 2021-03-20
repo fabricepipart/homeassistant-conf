@@ -1,32 +1,8 @@
 sensor:
   - platform: myEnedis
-    token: tAO5FZXhqxhprGM1ACUBr3zp3ounOdvDNkUbmaoQALxJx71fVC0Tb6
+    token: !secret my_enedis
     code: 25409551346900
     scan_interval: 3600
     heures_creuses: "[]"
     hc_cout: 0.1557
     hp_cout: 0.1557
-
-
-  - platform: template
-    sensors:
-      enedis_yesterday_price:
-        value_template: '{{ states.sensor.myenedis_25409551346900.attributes.dailyweek_cost[0]|float|round(2) }}'  
-        friendly_name: 'Coût Hier' 
-        unit_of_measurement: '€'
-      enedis_current_week_price:
-        value_template: '{{ (states.sensor.myenedis_25409551346900.attributes.current_week*0.1557)|float|round(2) }}'  
-        friendly_name: 'Coût Semaine' 
-        unit_of_measurement: '€'       
-      enedis_current_month_price:
-        value_template: '{{ (states.sensor.myenedis_25409551346900.attributes.current_month*0.1557+10.66)|float|round(2) }}'  
-        friendly_name: 'Coût Mois' 
-        unit_of_measurement: '€'
-      enedis_last_month_price:
-        value_template: '{{ (states.sensor.myenedis_25409551346900.attributes.last_month*0.1557+10.66)|float|round(2) }}'  
-        friendly_name: 'Coût Dernier Mois' 
-        unit_of_measurement: '€'
-      enedis_current_year_price:
-        value_template: '{{ (states.sensor.myenedis_25409551346900.attributes.current_year*0.1557+127.92)|float|round(2) }}'  
-        friendly_name: 'Coût Année' 
-        unit_of_measurement: '€'

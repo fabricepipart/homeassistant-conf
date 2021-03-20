@@ -3,58 +3,54 @@ emulated_hue:
   listen_port: 8300
   exposed_domains:
     - light
-
-
+    - switch
 
 ###############################################################
 # Switches
 ###############################################################
 
-
 switch:
   - platform: template
     switches:
-    
       netflix:
         value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'Netflix') }}"
         turn_on:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'Netflix'
+            activity: "Netflix"
         turn_off:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'PowerOff'
-            
+            activity: "PowerOff"
+
       plex:
         value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'Plex') }}"
         turn_on:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'Plex'
+            activity: "Plex"
         turn_off:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'PowerOff'
-            
+            activity: "PowerOff"
+
       youtube:
         value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'Youtube') }}"
         turn_on:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'Youtube'
+            activity: "Youtube"
         turn_off:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'PowerOff'
-            
-            
+            activity: "PowerOff"
+
       spotify:
         value_template: "{{ is_state_attr('media_player.rx_v475', 'source', 'Spotify') }}"
         turn_on:
@@ -63,60 +59,43 @@ switch:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'PowerOff'
-            
-            
+            activity: "PowerOff"
+
       box:
         value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'BBox') }}"
         turn_on:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'BBox'
+            activity: "BBox"
         turn_off:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'PowerOff'
-            
-            
+            activity: "PowerOff"
+
       switch:
         value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'Switch') }}"
         turn_on:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'Switch'
+            activity: "Switch"
         turn_off:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'PowerOff'
-            
-            
+            activity: "PowerOff"
+
       amazon:
         value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'Amazon') }}"
         turn_on:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'Amazon'
+            activity: "Amazon"
         turn_off:
           service: remote.turn_on
           data:
             entity_id: remote.harmony_hub
-            activity: 'PowerOff'
-            
-            
-        
-        
-
-
-
-
-
-
-
-
-
-
+            activity: "PowerOff"
