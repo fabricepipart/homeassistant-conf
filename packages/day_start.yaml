@@ -81,19 +81,3 @@ automation:
           entity_id: media_player.echo_de_cleo
           media_content_id: "Quel est l animal du jour"
           media_content_type: custom
-
-  - alias: appareil
-    trigger:
-      - platform: time
-        at: "20:00"
-    condition:
-      - condition: template
-        value_template: >
-          {% set last_run = state_attr('automation.appareil', 'last_triggered') %}
-          {{ last_run is none or (now().date() - last_run.date()).days >= 2 }}
-    action:
-      - service: notify.alexa_media_echo_de_cleo
-        data_template:
-          message: Mets ton appareil ce soir!
-          data:
-            type: announce

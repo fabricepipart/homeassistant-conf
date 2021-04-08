@@ -102,67 +102,51 @@ cards:
           - type: history-graph
             hours_to_show: 24
             entities:
-              - entity: sensor.salle_a_manger_signal
-              - entity: sensor.salon_signal
-              - entity: sensor.chambre_signal
-              - entity: sensor.chambre_cleo_signal
-              - entity: sensor.couloir_signal
-              - entity: sensor.cuisine_signal
-              - entity: sensor.entree_1_signal
-              - entity: sensor.entree_2_signal
-              - entity: sensor.entree_3_signal
-              - entity: sensor.wc_signal
-              - entity: sensor.wc_wall_signal
-              - entity: sensor.chaussures_signal
-              - entity: sensor.salle_de_bain_signal
+              - entity: sensor.sonoff_chambre_rssi
+              - entity: sensor.sonoff_cleo_rssi
+              - entity: sensor.sonoff_couloir_rssi
+              - entity: sensor.sonoff_cuisine_rssi
+              - entity: sensor.sonoff_entree_1_rssi
+              - entity: sensor.sonoff_entree_2_rssi
+              - entity: sensor.sonoff_entree_3_rssi
+              - entity: sensor.sonoff_salle_de_bain_rssi
+              - entity: sensor.sonoff_salon_rssi
+              - entity: sensor.sonoff_sam_rssi
+              - entity: sensor.sonoff_shoes_rssi
+              - entity: sensor.sonoff_wc_rssi
+              - entity: sensor.sonoff_wc_wall_rssi
           - type: horizontal-stack
-            columns: 3
+            columns: 2
             cards:
               - title: Signal Sonoff
                 type: entities
                 entities:
-                  - entity: sensor.salle_a_manger_signal
-                  - entity: sensor.salon_signal
-                  - entity: sensor.chambre_signal
-                  - entity: sensor.chambre_cleo_signal
-                  - entity: sensor.couloir_signal
-                  - entity: sensor.cuisine_signal
-                  - entity: sensor.entree_1_signal
-                  - entity: sensor.entree_2_signal
-                  - entity: sensor.entree_3_signal
-                  - entity: sensor.wc_signal
-                  - entity: sensor.wc_wall_signal
-                  - entity: sensor.chaussures_signal
-                  - entity: sensor.salle_de_bain_signal
+                  - entity: sensor.sonoff_chambre_rssi
+                  - entity: sensor.sonoff_cleo_rssi
+                  - entity: sensor.sonoff_couloir_rssi
+                  - entity: sensor.sonoff_cuisine_rssi
+                  - entity: sensor.sonoff_entree_1_rssi
+                  - entity: sensor.sonoff_entree_2_rssi
+                  - entity: sensor.sonoff_entree_3_rssi
+                  - entity: sensor.sonoff_salle_de_bain_rssi
+                  - entity: sensor.sonoff_salon_rssi
+                  - entity: sensor.sonoff_sam_rssi
+                  - entity: sensor.sonoff_shoes_rssi
+                  - entity: sensor.sonoff_wc_rssi
+                  - entity: sensor.sonoff_wc_wall_rssi
               - title: IPs Sonoff
                 type: entities
                 entities:
-                  - entity: sensor.salle_a_manger_ip
-                  - entity: sensor.salon_ip
-                  - entity: sensor.chambre_ip
-                  - entity: sensor.chambre_cleo_ip
-                  - entity: sensor.couloir_ip
-                  - entity: sensor.cuisine_ip
-                  - entity: sensor.entree_1_ip
-                  - entity: sensor.entree_2_ip
-                  - entity: sensor.entree_3_ip
-                  - entity: sensor.wc_ip
-                  - entity: sensor.wc_wall_ip
-                  - entity: sensor.chaussures_ip
-                  - entity: sensor.salle_de_bain_ip
-              - title: Versions Sonoff
-                type: entities
-                entities:
-                  - entity: sensor.salle_a_manger_version
-                  - entity: sensor.salon_version
-                  - entity: sensor.chambre_version
-                  - entity: sensor.chambre_cleo_version
-                  - entity: sensor.couloir_version
-                  - entity: sensor.cuisine_version
-                  - entity: sensor.entree_1_version
-                  - entity: sensor.entree_2_version
-                  - entity: sensor.entree_3_version
-                  - entity: sensor.wc_version
-                  - entity: sensor.wc_wall_version
-                  - entity: sensor.chaussures_version
-                  - entity: sensor.salle_de_bain_version
+                  - entity: sensor.sonoff_chambre_ip
+                  - entity: sensor.sonoff_cleo_ip
+                  - entity: sensor.sonoff_couloir_ip
+                  - entity: sensor.sonoff_cuisine_ip
+                  - entity: sensor.sonoff_entree_1_ip
+                  - entity: sensor.sonoff_entree_2_ip
+                  - entity: sensor.sonoff_entree_3_ip
+                  - entity: sensor.sonoff_salle_de_bain_ip
+                  - entity: sensor.sonoff_salon_ip
+                  - entity: sensor.sonoff_sam_ip
+                  - entity: sensor.sonoff_shoes_ip
+                  - entity: sensor.sonoff_wc_ip
+                  - entity: sensor.sonoff_wc_wall_ip

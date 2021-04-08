@@ -13,7 +13,7 @@ cards:
     type: picture-elements
     elements:
       #----------------- Lights -----------------
-      - entity: light.salon
+      - entity: light.sonoff_salon
         style:
           left: 37.5%
           top: 16.5%
@@ -26,7 +26,7 @@ cards:
           service_data:
             entity_id: switch.osram_tv
         type: state-icon
-      - entity: light.sam
+      - entity: light.sonoff_sam
         style:
           left: 45.7%
           top: 51.7%
@@ -39,7 +39,7 @@ cards:
           service: switch.toggle
           service_data:
             entity_id: switch.osram_tv
-      - entity: light.cuisine
+      - entity: light.sonoff_cuisine
         style:
           left: 29.7%
           top: 84.2%
@@ -47,7 +47,7 @@ cards:
         tap_action:
           action: toggle
         type: state-icon
-      - entity: light.entree_1
+      - entity: light.sonoff_entree_1
         style:
           left: 84.4%
           top: 67%
@@ -58,9 +58,9 @@ cards:
           action: call-service
           service: light.toggle
           service_data:
-            entity_id: light.entree_1, light.entree_2, light.entree_3
+            entity_id: light.sonoff_entree_1, light.sonoff_entree_2, light.sonoff_entree_3
         type: state-icon
-      - entity: light.entree_2
+      - entity: light.sonoff_entree_2
         style:
           left: 64.8%
           top: 67%
@@ -71,9 +71,9 @@ cards:
           action: call-service
           service: light.toggle
           service_data:
-            entity_id: light.entree_1, light.entree_2, light.entree_3
+            entity_id: light.sonoff_entree_1, light.sonoff_entree_2, light.sonoff_entree_3
         type: state-icon
-      - entity: light.entree_3
+      - entity: light.sonoff_entree_3
         style:
           left: 45.7%
           top: 67%
@@ -84,9 +84,9 @@ cards:
           action: call-service
           service: light.toggle
           service_data:
-            entity_id: light.entree_1, light.entree_2, light.entree_3
+            entity_id: light.sonoff_entree_1, light.sonoff_entree_2, light.sonoff_entree_3
         type: state-icon
-      - entity: light.couloir
+      - entity: light.sonoff_couloir
         style:
           left: 32.4%
           top: 54%
@@ -94,7 +94,7 @@ cards:
         tap_action:
           action: toggle
         type: state-icon
-      - entity: light.cleo
+      - entity: light.sonoff_cleo
         style:
           left: 16.9%
           top: 64.8%
@@ -102,7 +102,7 @@ cards:
         tap_action:
           action: toggle
         type: state-icon
-      - entity: light.chambre
+      - entity: light.sonoff_chambre
         style:
           left: 18.3%
           top: 17%
@@ -110,7 +110,7 @@ cards:
         tap_action:
           action: toggle
         type: state-icon
-      - entity: light.salle_de_bain
+      - entity: light.sonoff_salle_de_bain
         style:
           left: 18%
           top: 40.5%
@@ -118,7 +118,7 @@ cards:
         tap_action:
           action: toggle
         type: state-icon
-      - entity: light.shoes
+      - entity: light.sonoff_shoes
         style:
           left: 61%
           top: 83%
@@ -126,7 +126,7 @@ cards:
         tap_action:
           action: toggle
         type: state-icon
-      - entity: light.wc
+      - entity: light.sonoff_wc
         style:
           left: 62%
           top: 93.8%
@@ -137,9 +137,9 @@ cards:
           action: call-service
           service: light.toggle
           service_data:
-            entity_id: light.wc_wall, light.wc
+            entity_id: light.sonoff_wc_wall, light.sonoff_wc
         type: state-icon
-      - entity: light.wc_wall
+      - entity: light.sonoff_wc_wall
         style:
           left: 54.5%
           top: 93.8%
@@ -150,7 +150,7 @@ cards:
           action: call-service
           service: light.toggle
           service_data:
-            entity_id: light.wc_wall, light.wc
+            entity_id: light.sonoff_wc_wall, light.sonoff_wc
         type: state-icon
       #----------------- Neato -----------------
       - entity: script.neato_couloir

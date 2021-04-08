@@ -17,7 +17,7 @@ automation:
           minutes: 60
     condition: []
     action:
-      - service: notify.mobile_app_iphone_de_le_gone
+      - service: notify.ios_iphone_de_le_gone
         data:
           data:
             push:
@@ -34,7 +34,7 @@ automation:
 
   - alias: Alerte humidité Salle de Bain
     trigger:
-      - entity_id: light.salle_de_bain
+      - entity_id: light.sonoff_salle_de_bain
         platform: state
         to: "off"
     condition:

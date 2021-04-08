@@ -3,125 +3,12 @@
 ###############################################################
 
 light:
-  - platform: mqtt
-    name: "SàM"
-    state_topic: "stat/home/dining/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/dining/light/POWER"
-    availability_topic: "tele/home/dining/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Cléo"
-    state_topic: "stat/home/cleo/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/cleo/light/POWER"
-    availability_topic: "tele/home/cleo/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salon"
-    state_topic: "stat/home/living/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/living/light/POWER"
-    availability_topic: "tele/home/living/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Chambre"
-    state_topic: "stat/home/parents/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/parents/light/POWER"
-    availability_topic: "tele/home/parents/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "S20"
-    state_topic: "stat/home/s20/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/s20/light/POWER"
-    availability_topic: "tele/home/s20/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Entrée 1"
-    state_topic: "stat/home/entrance/light1/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/entrance/light1/POWER"
-    availability_topic: "tele/home/entrance/light1/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Entrée 2"
-    state_topic: "stat/home/entrance/light2/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/entrance/light2/POWER"
-    availability_topic: "tele/home/entrance/light2/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Entrée 3"
-    state_topic: "stat/home/entrance/light3/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/entrance/light3/POWER"
-    availability_topic: "tele/home/entrance/light3/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Cuisine"
-    state_topic: "stat/home/kitchen/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/kitchen/light/POWER"
-    availability_topic: "tele/home/kitchen/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Salle de Bain"
-    state_topic: "stat/home/bathroom/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/bathroom/light/POWER"
-    availability_topic: "tele/home/bathroom/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Couloir"
-    state_topic: "stat/home/corridor/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/corridor/light/POWER"
-    availability_topic: "tele/home/corridor/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "WC"
-    state_topic: "stat/home/wc/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/wc/light/POWER"
-    availability_topic: "tele/home/wc/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "WC Wall"
-    state_topic: "stat/home/wc-wall/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/wc-wall/light/POWER"
-    availability_topic: "tele/home/wc-wall/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-  - platform: mqtt
-    name: "Shoes"
-    state_topic: "stat/home/shoes/light/RESULT"
-    state_value_template: "{{ value_json.POWER }}"
-    command_topic: "cmnd/home/shoes/light/POWER"
-    availability_topic: "tele/home/shoes/light/LWT"
-    payload_available: "Online"
-    payload_not_available: "Offline"
-
   - platform: group
     name: Groupe entree
     entities:
-      - light.entree_1
-      - light.entree_2
-      - light.entree_3
+      - light.sonoff_entree_1
+      - light.sonoff_entree_2
+      - light.sonoff_entree_3
 
 ###############################################################
 # Scripts
@@ -140,7 +27,7 @@ automation:
         to: "single_right"
     action:
       - service: light.toggle
-        entity_id: light.salon
+        entity_id: light.sonoff_salon
 
   - alias: Lumière salon indirecte
     trigger:
@@ -158,7 +45,7 @@ automation:
         to: "single_left"
     action:
       - service: light.toggle
-        entity_id: light.sam
+        entity_id: light.sonoff_sam
 
   - alias: Lumière salle à manger indirecte
     trigger:
@@ -176,15 +63,21 @@ automation:
       - platform: state
         entity_id: sensor.xiaomi_cleo_action
         to: "single"
+      - platform: state
+        entity_id: sensor.xiaomi_cleo_up_action
+        to: "double"
     action:
       - service: light.toggle
-        entity_id: light.cleo
+        entity_id: light.sonoff_cleo
 
   - alias: Lumière Cléo indirecte
     trigger:
       - platform: state
         entity_id: sensor.xiaomi_cleo_action
         to: "double"
+      - platform: state
+        entity_id: sensor.xiaomi_cleo_up_action
+        to: "single"
     action:
       - entity_id: switch.osram_cleo
         service: switch.toggle
@@ -204,7 +97,7 @@ automation:
         to: "single"
     action:
       - service: light.toggle
-        entity_id: light.chambre
+        entity_id: light.sonoff_chambre
 
   - alias: Lumière lit Parents indirect
     trigger:
@@ -216,16 +109,19 @@ automation:
         to: "double"
       - platform: state
         entity_id: sensor.xiaomi_fabrice_action
+        to: "double"
+      - platform: state
+        entity_id: sensor.xiaomi_shoes_action
+        to: "double"
+      - platform: state
+        entity_id: sensor.xiaomi_fabrice_action
         to: "hold"
       - platform: state
         entity_id: sensor.xiaomi_marina_action
         to: "hold"
       - platform: state
-        entity_id: sensor.xiaomi_fabrice_action
-        to: "double"
-      - platform: state
-        entity_id: sensor.xiaomi_shoes_action
-        to: "double"
+        entity_id: sensor.xiaomi_entree_couloir
+        to: "single_both"
     action:
       - entity_id: switch.osram_chambre
         service: switch.toggle
@@ -234,15 +130,21 @@ automation:
 
   - alias: Lumière Cuisine
     trigger:
-      - platform: state
-        entity_id: sensor.xiaomi_cuisine_action
-        to: "single"
-      - platform: state
-        entity_id: sensor.xiaomi_cuisine_action
-        to: "double"
+      - platform: device
+        domain: mqtt
+        device_id: 45e15a3d039bd6149354b4d0008f51dc
+        type: action
+        subtype: single
+        discovery_id: 0x00158d00031b5437 action_single
+    #      - platform: state
+    #        entity_id: sensor.xiaomi_cuisine_action
+    #        to: "single"
+    #      - platform: state
+    #        entity_id: sensor.xiaomi_cuisine_action
+    #        to: "double"
     action:
       - service: light.toggle
-        entity_id: light.cuisine
+        entity_id: light.sonoff_cuisine
 
   # ----- Entrée
 
@@ -256,7 +158,7 @@ automation:
         to: "single_left"
     action:
       - service: light.toggle
-        entity_id: light.entree_1,light.entree_2,light.entree_3
+        entity_id: light.sonoff_entree_1,light.sonoff_entree_2,light.sonoff_entree_3
 
   # ----- SDB
 
@@ -270,7 +172,7 @@ automation:
         to: "double_left"
     action:
       - service: light.toggle
-        entity_id: light.salle_de_bain
+        entity_id: light.sonoff_salle_de_bain
 
   # ----- Couloir
   - alias: Lumière couloir
@@ -286,7 +188,7 @@ automation:
         to: "single_right"
     action:
       - service: light.toggle
-        entity_id: light.couloir
+        entity_id: light.sonoff_couloir
       - service: timer.start
         data:
           entity_id: timer.couloir
@@ -301,7 +203,7 @@ automation:
       service: light.turn_off
       data:
         entity_id:
-          - light.couloir
+          - light.sonoff_couloir
 
   # ----- Chaussures
   - alias: Lumière chaussures
@@ -311,7 +213,8 @@ automation:
         to: "single"
     action:
       - service: light.toggle
-        entity_id: light.shoes
+        target:
+          entity_id: light.sonoff_shoes
       - service: timer.start
         data:
           entity_id: timer.chaussures
@@ -326,7 +229,7 @@ automation:
       service: light.turn_off
       data:
         entity_id:
-          - light.shoes
+          - light.sonoff_shoes
 
   # ----- WC
   - alias: Lumière WC
@@ -345,9 +248,9 @@ automation:
           before: "08:00:00"
     action:
       - service: light.toggle
-        entity_id: light.wc
+        entity_id: light.sonoff_wc
       - service: light.toggle
-        entity_id: light.wc_wall
+        entity_id: light.sonoff_wc_wall
 
   - alias: Lumière WC nuit
     trigger:
@@ -363,7 +266,7 @@ automation:
       before: "08:00:00"
     action:
       - service: light.toggle
-        entity_id: light.wc_wall
+        entity_id: light.sonoff_wc_wall
 
   - alias: Lumière WC resync off
     trigger:
@@ -372,7 +275,7 @@ automation:
         to: "hold"
     action:
       - service: light.turn_off
-        entity_id: light.wc_wall, light.wc
+        entity_id: light.sonoff_wc_wall, light.sonoff_wc
 
   # ----- All
 
@@ -388,6 +291,23 @@ automation:
     action:
       - service: light.turn_off
         entity_id: all
+
+  # ----- Spare
+
+  - alias: Test
+    trigger:
+      #- platform: state
+      #  entity_id: sensor.xiaomi_spare_action
+      #  to: "single"
+      - platform: device
+        domain: mqtt
+        device_id: a5d6d08fc57bdc0a4bd0caad05fad841
+        type: action
+        subtype: single
+        discovery_id: 0x00158d0005441db0 action_single
+    action:
+      - service: light.toggle
+        entity_id: light.sonoff_shoes
 
 ###############################################################
 # Timer

@@ -55,7 +55,7 @@ automation:
               thread-id: home-assistant
           message: Pense à prendre ton blouson de moto étanche
           title: Risque de pluie
-        service: notify.mobile_app_iphone_de_le_gone
+        service: notify.ios_iphone_de_le_gone
     id: 6fbc85b1b12f43ff83421c7e0879c21b
 
   - alias: Il pleut
@@ -85,7 +85,7 @@ automation:
               thread-id: home-assistant
           message: Habillez vous en conséquence
           title: Il pleut dehors
-        service: notify.mobile_app_iphone_de_le_gone
+        service: notify.ios_iphone_de_le_gone
       - service: notify.alexa_media_echo_salon
         data:
           message: Attention, il pleut dehors.
@@ -125,7 +125,7 @@ automation:
         state: "off"
     action:
       - alias: ""
-        service: notify.mobile_app_iphone_de_le_gone
+        service: notify.ios_iphone_de_le_gone
         data:
           message: "{{ states('sensor.fabrice_to_work') }} minutes"
           title: Temps de trajet estimé
@@ -157,7 +157,7 @@ automation:
         state: "off"
     action:
       - alias: ""
-        service: notify.mobile_app_iphone_de_le_gone
+        service: notify.ios_iphone_de_le_gone
         data:
           message: "{{ states('sensor.fabrice_to_work') }} minutes"
           title: Temps de trajet estimé

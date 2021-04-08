@@ -1,4 +1,5 @@
 sensor:
+  # https://www.canaletto.fr/post/home-assistant-and-enedis
   - platform: myEnedis
     token: !secret my_enedis
     code: 25409551346900

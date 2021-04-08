@@ -36,23 +36,23 @@ cards:
             show_header_toggle: false
             type: entities
             entities:
-              - entity: media_player.alexa
-              - entity: switch.alexa_shuffle_switch
-              - entity: switch.alexa_repeat_switch
+              - entity: media_player.echo_salon
+              - entity: switch.echo_salon_shuffle_switch
+              - entity: switch.echo_salon_repeat_switch
           - title: Echo Cuisine
             show_header_toggle: false
             type: entities
             entities:
-              - entity: media_player.alexa_cuisine
-              - entity: switch.alexa_cuisine_shuffle_switch
-              - entity: switch.alexa_cuisine_repeat_switch
+              - entity: media_player.echo_cuisine
+              - entity: switch.echo_cuisine_shuffle_switch
+              - entity: switch.echo_cuisine_repeat_switch
           - title: Echo Cléo
             show_header_toggle: false
             type: entities
             entities:
               - entity: media_player.echo_de_cleo
-              - entity: switch.echo_de_cleo_shuffle_switch
-              - entity: switch.echo_de_cleo_repeat_switch
+              - entity: switch.echo_cuisine_shuffle_switch
+              - entity: switch.echo_cuisine_repeat_switch
 
   - title: Activités
     type: vertical-stack
