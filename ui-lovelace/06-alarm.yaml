@@ -5,8 +5,8 @@
 badges:
   - binary_sensor.xiaomi_porte_contact
   - light.gateway_light_7811dcfaa3ee
-  - binary_sensor.water_leak_sensor_158d0004235284
-  - binary_sensor.water_leak_sensor_158d00045a0d75
+  - binary_sensor.xiaomi_fuite_cuisine_water_leak
+  - binary_sensor.xiaomi_fuite_sdb_water_leak
   - person.fabrice_pipart
   - person.marina_pipart
 icon: "mdi:alarm-light"
@@ -30,6 +30,7 @@ cards:
       - entity: script.jouer_sirene
       - entity: script.jouer_sirene_boucle
   - entities:
+      - entity: input_boolean.automated_lights
       - entity: input_boolean.vacations
       - entity: person.fabrice_pipart
       - entity: person.marina_pipart

@@ -42,9 +42,6 @@ media_player:
       HDMI3: "Plex"
   - platform: braviatv
     host: 192.168.1.65
-  - platform: spotify
-    client_id: !secret spotify_clientid
-    client_secret: !secret spotify_secret
 
 ###############################################################
 # Scripts
@@ -331,11 +328,12 @@ automation:
         entity_id: sensor.xiaomi_sam_action
         to: "hold_right"
     action:
-      - service: script.activity_off
-      - service: mqtt.publish
+      - service: remote.turn_on
         data:
-          topic: cmnd/home/living/light/power
-          payload: "0"
+          entity_id: remote.harmony_hub
+          activity: "PowerOff"
+      - service: light.toggle
+        entity_id: light.sonoff_salon
 
   - alias: Son Netflix
     trigger:
@@ -365,10 +363,8 @@ automation:
         to: "hold_left"
     action:
       - service: script.sleep_mac
-      - service: mqtt.publish
-        data:
-          topic: cmnd/home/dining/light/power
-          payload: "0"
+      - service: light.toggle
+        entity_id: light.sonoff_sam
 
   - alias: Yamaha allumé par erreur
     trigger:
@@ -399,7 +395,10 @@ automation:
         state: disarmed
     action:
       - service: script.sleep_mac
-      #- service: script.activity_off
+      - service: remote.turn_on
+        data:
+          entity_id: remote.harmony_hub
+          activity: "PowerOff"
       - service: notify.alexa_media_echo_salon
         data:
           message: Au revoir!

@@ -246,7 +246,7 @@ automation:
           message: Alarme activée
           data:
             type: announce
-      - service: notify.ios_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_de_le_gone
         alias: "Notification alarme armée"
         data:
           data:
@@ -297,7 +297,7 @@ automation:
         entity_id: script.jouer_sirene_boucle
       - delay:
           seconds: .1
-      - service: notify.ios_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_de_le_gone
         alias: "Notification alarme déclenchée"
         data:
           data:
@@ -345,7 +345,7 @@ automation:
       - service: light.turn_off
         data:
           entity_id: light.gateway_light_7811dcfaa3ee
-      - service: notify.ios_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_de_le_gone
         alias: "Notification alarme déclenchée"
         data:
           data:

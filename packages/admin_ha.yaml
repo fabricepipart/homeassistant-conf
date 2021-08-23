@@ -36,7 +36,7 @@ automation:
             subtitle: Démarrage terminé
           message: Le redémarrage était-il intentionnel?
           title: Redémarrage de Home Assistant
-        service: notify.ios_iphone_de_le_gone
+        service: notify.mobile_app_iphone_de_le_gone
       - service: notify.alexa_media_echo_salon
         data:
           message: Home Assistant a fini de redémarrer!

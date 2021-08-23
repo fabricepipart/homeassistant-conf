@@ -40,3 +40,66 @@
     ignore_availability: true
     name: Family
     track: true
+
+- cal_id: gi7ruodplb9oap2fqnc5836k4g@group.calendar.google.com
+  entities:
+  - device_id: autre
+    ignore_availability: true
+    name: Autre
+    track: true
+
+- cal_id: 0l43k82c05oj4s3ap81v15t08g@group.calendar.google.com
+  entities:
+  - device_id: calendrier_boulot
+    ignore_availability: true
+    name: Calendrier Boulot
+    track: true
+
+- cal_id: p#weather@group.v.calendar.google.com
+  entities:
+  - device_id: meteo
+    ignore_availability: true
+    name: "M\xE9t\xE9o"
+    track: true
+
+- cal_id: '#daynum@group.v.calendar.google.com'
+  entities:
+  - device_id: jour_de_l_annee
+    ignore_availability: true
+    name: "Jour de l'ann\xE9e"
+    track: true
+
+- cal_id: p#weeknum@group.v.calendar.google.com
+  entities:
+  - device_id: numeros_de_semaine
+    ignore_availability: true
+    name: "Num\xE9ros de semaine"
+    track: true
+
+- cal_id: contact.circuitduvar@gmail.com
+  entities:
+  - device_id: contact_circuitduvar_gmail_com
+    ignore_availability: true
+    name: contact.circuitduvar@gmail.com
+    track: true
+
+- cal_id: fr.french#holiday@group.v.calendar.google.com
+  entities:
+  - device_id: jours_feries_en_france
+    ignore_availability: true
+    name: "Jours f\xE9ri\xE9s en France"
+    track: true
+
+- cal_id: fraizouille@gmail.com
+  entities:
+  - device_id: marina_assensi
+    ignore_availability: true
+    name: marina assensi
+    track: true
+
+- cal_id: family03945577770501009631@group.calendar.google.com
+  entities:
+  - device_id: family
+    ignore_availability: true
+    name: Family
+    track: true

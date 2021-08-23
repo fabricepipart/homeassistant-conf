@@ -1,14 +1,24 @@
 homekit:
-  auto_start: false
   filter:
     include_domains:
       - cover
       - light
-      - script
       - sensor
-      - switch
     include_entities:
       - light.gateway_light_7811dcfaa3ee
+      - script.bt_mac
+      - script.neato_chambre
+      - script.neato_cleo
+      - script.neato_couloir
+      - script.neato_cuisine
+      - script.neato_entree
+      - script.neato_sam
+      - script.neato_sdb
+      - script.neato_stop
+      - script.neato_table
+      - script.neato_table_basse
+      - script.neato_wc
+      - script.sleep_mac
     exclude_entities:
       - switch.alexa_cuisine_do_not_disturb_switch
       - switch.alexa_cuisine_repeat_switch

@@ -1,4 +1,13 @@
 ###############################################################
+# Inputs
+###############################################################
+
+input_boolean:
+  automated_lights:
+    name: Automated lights
+    icon: mdi:auto-fix
+
+###############################################################
 # Lights
 ###############################################################
 
@@ -120,7 +129,7 @@ automation:
         entity_id: sensor.xiaomi_marina_action
         to: "hold"
       - platform: state
-        entity_id: sensor.xiaomi_entree_couloir
+        entity_id: sensor.xiaomi_entree_couloir_action
         to: "single_both"
     action:
       - entity_id: switch.osram_chambre
@@ -130,21 +139,37 @@ automation:
 
   - alias: Lumière Cuisine
     trigger:
-      - platform: device
-        domain: mqtt
-        device_id: 45e15a3d039bd6149354b4d0008f51dc
-        type: action
-        subtype: single
-        discovery_id: 0x00158d00031b5437 action_single
-    #      - platform: state
-    #        entity_id: sensor.xiaomi_cuisine_action
-    #        to: "single"
-    #      - platform: state
-    #        entity_id: sensor.xiaomi_cuisine_action
-    #        to: "double"
+      - platform: state
+        entity_id: sensor.xiaomi_cuisine_action
+        to: "single"
+      - platform: state
+        entity_id: sensor.xiaomi_cuisine_action
+        to: "double"
+    condition:
+      - condition: state
+        entity_id: timer.cuisine
+        state: idle
     action:
       - service: light.toggle
         entity_id: light.sonoff_cuisine
+
+  - alias: Auto Cuisine
+    use_blueprint:
+      path: homeassistant/motion_light.yaml
+      input:
+        motion_sensor: binary_sensor.xiaomi_presence_cuisine_occupancy
+        light: light.sonoff_cuisine
+
+  - alias: Lumière Cuisine auto timer
+    trigger:
+      platform: state
+      entity_id: light.sonoff_cuisine
+      from: "off"
+      to: "on"
+    action:
+      - service: timer.start
+        data:
+          entity_id: timer.cuisine
 
   # ----- Entrée
 
@@ -277,6 +302,18 @@ automation:
       - service: light.turn_off
         entity_id: light.sonoff_wc_wall, light.sonoff_wc
 
+  - alias: Lumière WC autoresync
+    trigger:
+      platform: time
+      at: "08:00:00"
+    condition:
+      - condition: state
+        entity_id: light.sonoff_wc_wall
+        state: "on"
+    action:
+      - service: light.turn_on
+        entity_id: light.sonoff_wc
+
   # ----- All
 
   - alias: Sortir maison (lumières)
@@ -284,6 +321,9 @@ automation:
       - platform: state
         entity_id: sensor.xiaomi_entree_action
         to: "hold"
+      - platform: state
+        entity_id: sensor.xiaomi_entree_couloir_action
+        to: "single_both"
     condition:
       - condition: state
         entity_id: alarm_control_panel.maison
@@ -296,15 +336,9 @@ automation:
 
   - alias: Test
     trigger:
-      #- platform: state
-      #  entity_id: sensor.xiaomi_spare_action
-      #  to: "single"
-      - platform: device
-        domain: mqtt
-        device_id: a5d6d08fc57bdc0a4bd0caad05fad841
-        type: action
-        subtype: single
-        discovery_id: 0x00158d0005441db0 action_single
+      - platform: state
+        entity_id: sensor.xiaomi_spare_action
+        to: "single"
     action:
       - service: light.toggle
         entity_id: light.sonoff_shoes
@@ -315,6 +349,8 @@ automation:
 
 timer:
   chaussures:
-    duration: "00:01:00"
+    duration: "00:05:00"
   couloir:
-    duration: "00:01:00"
+    duration: "00:05:00"
+  cuisine:
+    duration: "00:00:05"

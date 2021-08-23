@@ -1,9 +1,9 @@
-sensor:
-  # https://www.canaletto.fr/post/home-assistant-and-enedis
-  - platform: myEnedis
-    token: !secret my_enedis
-    code: 25409551346900
-    scan_interval: 3600
-    heures_creuses: "[]"
-    hc_cout: 0.1557
-    hp_cout: 0.1557
+# sensor:
+#   # https://www.canaletto.fr/post/home-assistant-and-enedis
+#   - platform: myEnedis
+#     token: !secret my_enedis
+#     code: 25409551346900
+#     scan_interval: 3600
+#     heures_creuses: "[]"
+#     hc_cout: 0.1557
+#     hp_cout: 0.1557

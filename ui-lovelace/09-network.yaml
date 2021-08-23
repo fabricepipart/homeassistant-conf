@@ -16,7 +16,7 @@ cards:
           - type: custom:mini-graph-card
             hour24: true
             entities:
-              - sensor.processor_use
+              - sensor.processor_use_percent
           - type: custom:mini-graph-card
             hour24: true
             entities:
@@ -37,8 +37,9 @@ cards:
             content: "{{ (as_timestamp(now()) - as_timestamp(states('sensor.last_boot')) | int ) | timestamp_custom('%d days %H hours', false)}}"
           - type: custom:mini-graph-card
             hour24: true
+            hours_to_show: 144
             entities:
-              - sensor.db_size
+              - sensor.home_assistant_v2_db
           - entity: script.sleep_mac
             hold_action:
               action: more-info

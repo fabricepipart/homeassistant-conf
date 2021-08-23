@@ -8,6 +8,8 @@ tts:
 homeassistant:
   customize: !include customize.yaml
   packages: !include_dir_named packages
+  whitelist_external_dirs:
+    - /config
 
 discovery:
 ios:
@@ -22,12 +24,12 @@ mqtt:
   password: !secret mqtt
   discovery: true
   birth_message:
-    topic: 'hass/status'
-    payload: 'online'
+    topic: "hass/status"
+    payload: "online"
   will_message:
-    topic: 'hass/status'
-    payload: 'offline'
-  
+    topic: "hass/status"
+    payload: "offline"
+
 neato:
   client_id: !secret neato_username
   client_secret: !secret neato_password
@@ -38,6 +40,17 @@ google:
 
 lovelace:
   mode: yaml
+  resources:
+    - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
+      type: module
+    - url: /hacsfiles/spotify-card/spotify-card.js
+      type: module
+    - url: /hacsfiles/spotify-playlist-card/spotify-playlist-card.js
+      type: js
+    - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
+      type: module
+    - url: /hacsfiles/text-element/text-element.js
+      type: module
 
 #meteo_france: !include meteo.yaml
 shell_command: !include shell.yaml
@@ -47,15 +60,15 @@ recorder:
   auto_purge: true
   purge_keep_days: 10
   commit_interval: 30
-#  db_url: 'sqlite:///:memory:'
-#  db_url: !secret psql_url
+  #  db_url: 'sqlite:///:memory:'
+  #  db_url: !secret psql_url
   exclude:
     event_types:
       - service_removed
       #- service_executed
       - platform_discovered
       #- homeassistant_start
-      #- homeassistant_stop      
+      #- homeassistant_stop
       - feedreader
       - service_registered
       #- call_service
@@ -66,17 +79,17 @@ recorder:
       #- script_started
       - timer_out_of_sync
       #- state_changed
-      
+
 alexa:
   smart_home: !include alexa.yaml
 
 frontend:
   themes: !include_dir_merge_named themes
 
-#https://www.ipaddressguide.com/cidr
+# https://techzoom.net/lab/ip-address-calculator/
 device_tracker:
   - platform: nmap_tracker
-    hosts: 192.168.1.128/31
+    hosts: 192.168.1.16/31
 #  - platform: bluetooth_tracker
 #  - platform: bluetooth_le_tracker
 
@@ -85,5 +98,3 @@ xiaomi_aqara:
   gateways:
     - mac: !secret xiaomi_gateway_mac
       key: !secret xiaomi_gateway_key
-
-

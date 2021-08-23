@@ -1,5 +1,5 @@
 emulated_hue:
-  host_ip: 192.168.1.99
+  host_ip: 192.168.1.68
   listen_port: 8300
   exposed_domains:
     - light
@@ -99,3 +99,119 @@ switch:
           data:
             entity_id: remote.harmony_hub
             activity: "PowerOff"
+
+      harmony_pause:
+        value_template: "{{ not is_state_attr('remote.harmony_hub', 'current_activity', 'PowerOff') }}"
+        turn_on:
+          - service: remote.send_command
+            target:
+              entity_id: remote.harmony_hub
+            data:
+              command:
+                - Pause
+              device: TV Sony
+          - service: remote.send_command
+            target:
+              entity_id: remote.harmony_hub
+            data:
+              command:
+                - InputAv1
+              device: Yamaha RX-V475
+          - service: remote.send_command
+            target:
+              entity_id: remote.harmony_hub
+            data:
+              command:
+                - InputAv4
+              device: Yamaha RX-V475
+        turn_off:
+          - service: remote.send_command
+            target:
+              entity_id: remote.harmony_hub
+            data:
+              command:
+                - Pause
+              device: TV Sony
+          - service: remote.send_command
+            target:
+              entity_id: remote.harmony_hub
+            data:
+              command:
+                - InputAv1
+              device: Yamaha RX-V475
+          - service: remote.send_command
+            target:
+              entity_id: remote.harmony_hub
+            data:
+              command:
+                - InputAv4
+              device: Yamaha RX-V475
+
+      harmony_mute:
+        value_template: "{{ not is_state_attr('remote.harmony_hub', 'current_activity', 'PowerOff') }}"
+        turn_on:
+          service: remote.send_command
+          target:
+            entity_id: remote.harmony_hub
+          data:
+            command:
+              - Mute
+            device: Yamaha RX-V475
+        turn_off:
+          service: remote.send_command
+          target:
+            entity_id: remote.harmony_hub
+          data:
+            command:
+              - Mute
+            device: Yamaha RX-V475
+
+      harmony_volume_up:
+        value_template: "{{ not is_state_attr('remote.harmony_hub', 'current_activity', 'PowerOff') }}"
+        turn_on:
+          service: remote.send_command
+          target:
+            entity_id: remote.harmony_hub
+          data:
+            command:
+              - VolumeUp
+              - VolumeUp
+              - VolumeUp
+              - VolumeUp
+            device: Yamaha RX-V475
+        turn_off:
+          service: remote.send_command
+          target:
+            entity_id: remote.harmony_hub
+          data:
+            command:
+              - VolumeUp
+              - VolumeUp
+              - VolumeUp
+              - VolumeUp
+            device: Yamaha RX-V475
+
+      harmony_volume_down:
+        value_template: "{{ not is_state_attr('remote.harmony_hub', 'current_activity', 'PowerOff') }}"
+        turn_on:
+          service: remote.send_command
+          target:
+            entity_id: remote.harmony_hub
+          data:
+            command:
+              - VolumeDown
+              - VolumeDown
+              - VolumeDown
+              - VolumeDown
+            device: Yamaha RX-V475
+        turn_off:
+          service: remote.send_command
+          target:
+            entity_id: remote.harmony_hub
+          data:
+            command:
+              - VolumeDown
+              - VolumeDown
+              - VolumeDown
+              - VolumeDown
+            device: Yamaha RX-V475

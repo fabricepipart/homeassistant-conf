@@ -45,8 +45,7 @@ automation:
             un indice UV de {{ states("sensor.nice_uv") }}. Comptez
             {{ states("sensor.nice_rain_chance") }} % de chances pour qu'il pleuve.
             Il fait {{ state_attr("weather.nice", "temperature") }}
-            degrés dehors avec {{ state_attr("weather.nice", "wind_speed") }} km/h de vent. Temps de trajet estimé à
-            {{ states("sensor.fabrice_to_work") }} minutes. Bonne journée!
+            degrés dehors avec {{ state_attr("weather.nice", "wind_speed") }} km/h de vent. Bonne journée!
           data:
             type: announce
 

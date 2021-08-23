@@ -212,7 +212,7 @@ automation:
         to: "80"
     condition: []
     action:
-      - service: notify.ios_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_de_le_gone
         data:
           data:
             push:

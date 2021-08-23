@@ -1,0 +1,27 @@
+###############################################################
+# Automation
+###############################################################
+automation:
+  - alias: Appel Cleo
+    trigger:
+      - platform: state
+        entity_id: sensor.xiaomi_cleo_up_action
+        to: "hold"
+    action:
+      - service: notify.mobile_app_iphone_de_le_gone
+        data:
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
+          message: Appel passé depuis son lit
+          title: Cléo aimerait passer un message
+      - service: notify.alexa_media
+        data:
+          message: Cléo aimerait passer un message
+          target:
+            - media_player.echo_de_cleo
+            - media_player.echo_salon
+            - media_player.echo_cuisine
+          data:
+            type: announce

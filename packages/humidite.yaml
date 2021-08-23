@@ -15,9 +15,12 @@ automation:
         platform: numeric_state
         for:
           minutes: 60
-    condition: []
+    condition:
+      - condition: time
+        after: "07:00:00"
+        before: "20:00:00"
     action:
-      - service: notify.ios_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_de_le_gone
         data:
           data:
             push:
@@ -41,6 +44,9 @@ automation:
       - condition: numeric_state
         entity_id: sensor.xiaomi_temp_sdb_humidity
         above: 80
+      - condition: time
+        after: "07:00:00"
+        before: "20:00:00"
     action:
       - service: notify.alexa_media_echo_sdb
         data:
