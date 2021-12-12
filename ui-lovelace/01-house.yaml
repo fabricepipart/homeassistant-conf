@@ -330,6 +330,19 @@ cards:
       #----------------- Activities -----------------
 
       #----------------- HiFi -----------------
+      - entity: media_player.samsung_tv
+        icon: mdi:television
+        show_state: false
+        tap_action:
+          action: toggle
+        hold_action:
+          action: more-info
+        style:
+          left: 23.5%
+          top: 28%
+          "--paper-item-icon-color": purple
+        type: state-icon
+
       - entity: media_player.sony_bravia_tv
         icon: mdi:television
         show_state: false

@@ -18,6 +18,23 @@ sensor:
     resource_template: http://domogeek.entropialux.com/feastedsaint/now/1-3
 
 ###############################################################
+# Script
+###############################################################
+
+script:
+  lavage_dents:
+    alias: Lavage dents
+    sequence:
+      - service: notify.alexa_media
+        data:
+          target:
+            - media_player.echo_de_cleo
+            - media_player.echo_salon
+          message: Cléo est demandée à la salle de bain!
+          data:
+            type: announce
+
+###############################################################
 # Automation
 ###############################################################
 
@@ -53,7 +70,7 @@ automation:
     description: ""
     trigger:
       platform: time
-      at: "07:15:00"
+      at: "06:59:00"
     condition:
       - condition: time
         weekday:

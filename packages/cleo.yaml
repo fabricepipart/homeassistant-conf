@@ -25,3 +25,4 @@ automation:
             - media_player.echo_cuisine
           data:
             type: announce
+

@@ -74,7 +74,7 @@ automation:
         to: "single"
       - platform: state
         entity_id: sensor.xiaomi_cleo_up_action
-        to: "double"
+        to: "single"
     action:
       - service: light.toggle
         entity_id: light.sonoff_cleo
@@ -86,7 +86,7 @@ automation:
         to: "double"
       - platform: state
         entity_id: sensor.xiaomi_cleo_up_action
-        to: "single"
+        to: "double"
     action:
       - entity_id: switch.osram_cleo
         service: switch.toggle
@@ -147,29 +147,44 @@ automation:
         to: "double"
     condition:
       - condition: state
-        entity_id: timer.cuisine
+        entity_id: timer.cuisine_idle
         state: idle
     action:
       - service: light.toggle
         entity_id: light.sonoff_cuisine
+      - service: timer.start
+        target:
+          entity_id: timer.cuisine_idle
 
   - alias: Auto Cuisine
     use_blueprint:
-      path: homeassistant/motion_light.yaml
+      path: homeassistant/motion_light_on.yaml
       input:
         motion_sensor: binary_sensor.xiaomi_presence_cuisine_occupancy
         light: light.sonoff_cuisine
+        timer: timer.cuisine_idle
 
-  - alias: Lumière Cuisine auto timer
-    trigger:
-      platform: state
-      entity_id: light.sonoff_cuisine
-      from: "off"
-      to: "on"
-    action:
-      - service: timer.start
-        data:
-          entity_id: timer.cuisine
+  - alias: Auto Cuisine off
+    use_blueprint:
+      path: homeassistant/motion_light_off.yaml
+      input:
+        motion_sensor: binary_sensor.xiaomi_presence_cuisine_occupancy
+        light: light.sonoff_cuisine
+        timer: timer.cuisine_idle
+
+  # - alias: Lumière cuisine autoresync
+  #   trigger:
+  #     - platform: numeric_state
+  #       entity_id: binary_sensor.xiaomi_presence_cuisine_occupancy
+  #       attribute: illuminance
+  #       above: 20
+  #   condition:
+  #     - condition: state
+  #       entity_id: light.sonoff_cuisine
+  #       state: "on"
+  #   action:
+  #     - service: light.turn_off
+  #       entity_id: light.sonoff_cuisine
 
   # ----- Entrée
 
@@ -352,5 +367,5 @@ timer:
     duration: "00:05:00"
   couloir:
     duration: "00:05:00"
-  cuisine:
+  cuisine_idle:
     duration: "00:00:05"

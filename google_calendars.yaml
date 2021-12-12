@@ -103,3 +103,10 @@
     ignore_availability: true
     name: Family
     track: true
+
+- cal_id: crnp8evhj8q5rd8u5ndqm53pb5onrng3@import.calendar.google.com
+  entities:
+  - device_id: https_plus_qconferences_com_my_calendar_0740a780_d405_4451_b9a0_fa0381e216ca
+    ignore_availability: true
+    name: https://plus.qconferences.com/my-calendar/0740a780-d405-4451-b9a0-fa0381e216ca
+    track: true

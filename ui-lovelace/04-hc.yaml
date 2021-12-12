@@ -20,6 +20,22 @@ cards:
         cards:
           - type: custom:mini-media-player
             entity: media_player.spotify_fabrice_pipart
+            artwork: cover
+            source: icon
+            speaker_group:
+              platform: media_player
+              show_group_count: true
+              entities:
+                - entity_id: media_player.rx_v475
+                  name: RX-V475
+                - entity_id: media_player.echo_salon
+                  name: Echo Salon
+                - entity_id: media_player.echo_cuisine
+                  name: Echo Cuisine
+                - entity_id: media_player.echo_de_cleo
+                  name: Echo Cléo
+                - entity_id: media_player.echo_sdb
+                  name: Echo Salle de Bain
           - type: "custom:spotify-playlist-card"
             sensor: sensor.spotifyplaylist
             playback_method: spotify
@@ -53,6 +69,13 @@ cards:
               - entity: media_player.echo_de_cleo
               - entity: switch.echo_cuisine_shuffle_switch
               - entity: switch.echo_cuisine_repeat_switch
+          - title: Echo SDB
+            show_header_toggle: false
+            type: entities
+            entities:
+              - entity: media_player.echo_sdb
+              - entity: switch.echo_sdb_shuffle_switch
+              - entity: switch.echo_sdb_repeat_switch
 
   - title: Activités
     type: vertical-stack

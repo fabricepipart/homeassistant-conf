@@ -5,7 +5,7 @@ automation:
   - alias: Fuite cuisine
     trigger:
       - platform: state
-        entity_id: binary_sensor.water_leak_sensor_158d0004235284
+        entity_id: binary_sensor.xiaomi_fuite_cuisine_water_leak
         from: "off"
         to: "on"
     action:
@@ -42,7 +42,7 @@ automation:
   - alias: Fuite cuisine terminée
     trigger:
       - platform: state
-        entity_id: binary_sensor.water_leak_sensor_158d0004235284
+        entity_id: binary_sensor.xiaomi_fuite_cuisine_water_leak
         from: "on"
         to: "off"
     action:
@@ -53,7 +53,7 @@ automation:
   - alias: Fuite SdB
     trigger:
       - platform: state
-        entity_id: binary_sensor.water_leak_sensor_158d00045a0d75
+        entity_id: binary_sensor.xiaomi_fuite_sdb_water_leak
         from: "off"
         to: "on"
     action:
@@ -95,7 +95,7 @@ automation:
   - alias: Fuite SdB terminée
     trigger:
       - platform: state
-        entity_id: binary_sensor.water_leak_sensor_158d00045a0d75
+        entity_id: binary_sensor.xiaomi_fuite_sdb_water_leak
         from: "on"
         to: "off"
     action:

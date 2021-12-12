@@ -4,48 +4,44 @@
 ###############################################################
 automation:
 
-  # - alias: Chauffage SdB On
-  #   trigger:
-  #   - entity_id: light.sonoff_salle_de_bain
-  #     platform: state
-  #     from: 'off'
-  #     to: 'on'
-  #   condition:
-  #   - condition: time
-  #     after: '07:00:00'
-  #     before: '11:00:00'
-  #   - condition: numeric_state
-  #     entity_id: sensor.xiaomi_temp_sdb_temperature
-  #     below: 25
-  #   action:
-  #   - service: light.turn_on
-  #     entity_id: light.s20
+  - alias: Chauffage SdB On
+    trigger:
+    - entity_id: light.sonoff_salle_de_bain
+      platform: state
+      from: 'off'
+      to: 'on'
+    condition:
+    - condition: time
+      after: '06:00:00'
+      before: '09:00:00'
+    - condition: numeric_state
+      entity_id: sensor.temperature_sdb
+      below: 23
+    action:
+    - service: switch.turn_on
+      entity_id: switch.osram_sdb
 
-  # - alias: Chauffage SdB Toggle
-  #   trigger:
-  #   - platform: event
-  #     event_type: xiaomi_aqara.click
-  #     event_data:
-  #       entity_id: binary_sensor.wall_switch_left_158d00036d0507
-  #       click_type: long
-  #   - platform: event
-  #     event_type: xiaomi_aqara.click
-  #     event_data:
-  #       entity_id: binary_sensor.wall_switch_left_158d00036d0507
-  #       click_type: double
-  #   action:
-  #   - service: light.toggle
-  #     entity_id: light.s20
+  - alias: Chauffage SdB Toggle
+    trigger:
+    - platform: state
+      entity_id: sensor.xiaomi_sdb_action
+      to: "hold_left"
+    - platform: state
+      entity_id: sensor.xiaomi_sdb_action
+      to: "double_left"
+    action:
+    - service: switch.toggle
+      entity_id: switch.osram_sdb
       
-  # - alias: Chauffage SdB Off
-  #   trigger:
-  #   - entity_id: light.sonoff_salle_de_bain
-  #     platform: state
-  #     to: 'off'
-  #   - platform: numeric_state
-  #     entity_id: sensor.xiaomi_temp_sdb_temperature
-  #     above: 25
-  #   action:
-  #   - service: light.turn_off
-  #     entity_id: light.s20
+  - alias: Chauffage SdB Off
+    trigger:
+    - entity_id: light.sonoff_salle_de_bain
+      platform: state
+      to: 'off'
+    - platform: numeric_state
+      entity_id: sensor.temperature_sdb
+      above: 26
+    action:
+    - service: switch.turn_off
+      entity_id: switch.osram_sdb
       

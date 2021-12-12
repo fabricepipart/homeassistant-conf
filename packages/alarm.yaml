@@ -314,6 +314,9 @@ automation:
       - platform: state
         entity_id: sensor.xiaomi_entree_action
         to: "hold"
+      - platform: state
+        entity_id: sensor.xiaomi_shoes_action
+        to: "hold"
     condition:
       - condition: or
         conditions:
