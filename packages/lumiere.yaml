@@ -142,9 +142,6 @@ automation:
       - platform: state
         entity_id: sensor.xiaomi_cuisine_action
         to: "single"
-      - platform: state
-        entity_id: sensor.xiaomi_cuisine_action
-        to: "double"
     condition:
       - condition: state
         entity_id: timer.cuisine_idle
@@ -155,6 +152,15 @@ automation:
       - service: timer.start
         target:
           entity_id: timer.cuisine_idle
+
+  - alias: Lumière Cuisine
+    trigger:
+      - platform: state
+        entity_id: sensor.xiaomi_cuisine_action
+        to: "double"
+    action:
+      - service: light.toggle
+        entity_id: light.sonoff_cuisine
 
   - alias: Auto Cuisine
     use_blueprint:

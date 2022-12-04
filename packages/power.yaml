@@ -1,3 +1,22 @@
+###############################################################
+# Inputs
+###############################################################
+
+input_boolean:
+  lave_linge_on:
+    name: Lave linge ON
+    icon: mdi:washing-machine
+  seche_linge_on:
+    name: Seche linge ON
+    icon: mdi:tumble-dryer
+  lave_vaisselle_on:
+    name: Lave vaisselle ON
+    icon: mdi:dishwasher
+
+###############################################################
+# Sensors
+###############################################################
+
 # sensor:
 #   # https://www.canaletto.fr/post/home-assistant-and-enedis
 #   - platform: myEnedis
@@ -7,3 +26,258 @@
 #     heures_creuses: "[]"
 #     hc_cout: 0.1557
 #     hp_cout: 0.1557
+
+# sensor:
+#   - platform: template
+#     sensors:
+#       ha_uptime_min:
+#         friendly_name: "HA uptime minutes"
+#         value_template: >
+#           {{ ((as_timestamp(now()) - as_timestamp(states('sensor.uptime'))) / 60) | int }}
+
+###############################################################
+# Automation
+###############################################################
+
+automation:
+  # ------------------ Start ------------------
+  - alias: Debut lave linge
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.tuya_power_sdb_wash_power
+        above: 10
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.lave_linge_on
+
+  - alias: Debut seche linge
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.tuya_power_sdb_dry_power
+        above: 10
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.seche_linge_on
+
+  - alias: Debut lave vaisselle
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.tuya_power_cuisine_power
+        above: 10
+    action:
+      - service: input_boolean.turn_on
+        data:
+          entity_id: input_boolean.lave_vaisselle_on
+
+  # ------------------ End ------------------
+
+  - alias: Fin lave linge
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.tuya_power_sdb_wash_power
+        below: 10
+        for:
+          minutes: 3
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lave_linge_on
+
+  - alias: Fin seche linge
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.tuya_power_sdb_dry_power
+        below: 10
+        for:
+          minutes: 3
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.seche_linge_on
+
+  - alias: Fin lave vaisselle
+    trigger:
+      - platform: numeric_state
+        entity_id: sensor.tuya_power_cuisine_power
+        below: 5
+        for:
+          minutes: 20
+    action:
+      - service: input_boolean.turn_off
+        data:
+          entity_id: input_boolean.lave_vaisselle_on
+
+  # ------------------ Annonces ------------------
+  - alias: Annonce fin lave linge
+    trigger:
+      - platform: state
+        entity_id: input_boolean.lave_linge_on
+        to: "off"
+    condition:
+      - condition: not
+        conditions:
+          - condition: time
+            after: "23:00:00"
+            before: "07:00:00"
+    action:
+      - service: notify.alexa_media_echo_salon
+        data:
+          message: Le lave linge est terminé
+          data:
+            type: announce
+      - alias: ""
+        data:
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
+          message: Le lave linge est terminé
+          title: Fin de machine
+        service: notify.mobile_app_iphone_de_le_gone
+
+  - alias: Annonce fin seche linge
+    trigger:
+      - platform: state
+        entity_id: input_boolean.seche_linge_on
+        to: "off"
+    condition:
+      - condition: not
+        conditions:
+          - condition: time
+            after: "23:00:00"
+            before: "07:00:00"
+    action:
+      - service: notify.alexa_media_echo_salon
+        data:
+          message: Le sèche linge est terminé
+          data:
+            type: announce
+      - alias: ""
+        data:
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
+          message: Le sèche linge est terminé
+          title: Fin de machine
+        service: notify.mobile_app_iphone_de_le_gone
+
+  - alias: Annonce fin lave vaisselle
+    trigger:
+      - platform: state
+        entity_id: input_boolean.lave_vaisselle_on
+        to: "off"
+    condition:
+      - condition: not
+        conditions:
+          - condition: time
+            after: "23:00:00"
+            before: "07:00:00"
+    action:
+      - service: notify.alexa_media_echo_salon
+        data:
+          message: Le lave vaisselle est terminé
+          data:
+            type: announce
+      - alias: ""
+        data:
+          data:
+            push:
+              badge: 5
+              thread-id: home-assistant
+          message: Le lave vaisselle est terminé
+          title: Fin de machine
+        service: notify.mobile_app_iphone_de_le_gone
+
+  # ------------------ Bugs ------------------
+  - alias: Bug seche linge
+    trigger:
+      - platform: state
+        entity_id: switch.tuya_power_sdb_dry
+        to: "off"
+    # condition:
+    #   condition: not
+    #   conditions:
+    #     - condition: time
+    #       after: "22:00:00"
+    #       before: "08:00:00"
+    action:
+      # - service: notify.alexa_media_echo_salon
+      #   data:
+      #     message: La prise du seche linge s'est éteinte
+      #     data:
+      #       type: announce
+      # - alias: ""
+      #   data:
+      #     data:
+      #       push:
+      #         badge: 5
+      #         thread-id: home-assistant
+      #     message: La prise du seche linge s'est éteinte
+      #     title: La prise du seche linge s'est éteinte
+      #   service: notify.mobile_app_iphone_de_le_gone
+      #- delay: 5
+      - service: switch.turn_on
+        entity_id: switch.tuya_power_sdb_dry
+
+  - alias: Bug lave linge
+    trigger:
+      - platform: state
+        entity_id: switch.tuya_power_sdb_wash
+        to: "off"
+    # condition:
+    #   condition: not
+    #   conditions:
+    #     - condition: time
+    #       after: "22:00:00"
+    #       before: "08:00:00"
+    action:
+      # - service: notify.alexa_media_echo_salon
+      #   data:
+      #     message: La prise du lave linge s'est éteinte
+      #     data:
+      #       type: announce
+      # - alias: ""
+      #   data:
+      #     data:
+      #       push:
+      #         badge: 5
+      #         thread-id: home-assistant
+      #     message: La prise du lave linge s'est éteinte
+      #     title: La prise du lave linge s'est éteinte
+      #   service: notify.mobile_app_iphone_de_le_gone
+      - service: switch.turn_on
+        entity_id: switch.tuya_power_sdb_wash
+      #- delay: 5
+
+  - alias: Bug lave vaisselle
+    trigger:
+      - platform: state
+        entity_id: switch.tuya_power_cuisine
+        to: "off"
+    # condition:
+    #   condition: not
+    #   conditions:
+    #     - condition: time
+    #       after: "22:00:00"
+    #       before: "08:00:00"
+    action:
+      # - service: notify.alexa_media_echo_salon
+      #   data:
+      #     message: La prise du lave linge s'est éteinte
+      #     data:
+      #       type: announce
+      # - alias: ""
+      #   data:
+      #     data:
+      #       push:
+      #         badge: 5
+      #         thread-id: home-assistant
+      #     message: La prise du lave linge s'est éteinte
+      #     title: La prise du lave linge s'est éteinte
+      #   service: notify.mobile_app_iphone_de_le_gone
+      #- delay: 5
+      - service: switch.turn_on
+        entity_id: switch.tuya_power_cuisine

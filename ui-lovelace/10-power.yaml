@@ -8,16 +8,142 @@ icon: "mdi:power-plug"
 path: power
 title: Electricité
 cards:
-  - type: vertical-stack
+  - type: horizontal-stack
     cards:
-      - type: horizontal-stack
+      - type: vertical-stack
         cards:
-          - entities:
+          - title: Power
+            type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                name: Lave linge
+                entity: input_boolean.lave_linge_on
+                show_name: true
+                show_last_changed: false
+                show_state: false
+                show_label: true
+                color: auto
+                color_type: icon
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - type: custom:button-card
+                name: Sèche linge
+                entity: input_boolean.seche_linge_on
+                show_name: true
+                show_last_changed: false
+                show_state: false
+                show_label: true
+                color: auto
+                color_type: icon
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+              - type: custom:button-card
+                name: Lave vaisselle
+                entity: input_boolean.lave_vaisselle_on
+                show_name: true
+                show_last_changed: false
+                show_state: false
+                show_label: true
+                color: auto
+                color_type: icon
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+
+                  
+          - type: horizontal-stack
+            cards:
+              - type: history-graph
+                title: Power
+                hours_to_show: 12
+                entities:
+                  - entity: sensor.tuya_power_sdb_wash_power
+                    name: Lave linge
+                  - entity: sensor.tuya_power_sdb_dry_power
+                    name: Seche linge
+                  - entity: sensor.tuya_power_cuisine_power
+                    name: Lave vaisselle
+
+                  
+          - type: horizontal-stack
+            cards:
+              - type: custom:button-card
+                name: Lave linge
+                entity: switch.tuya_power_sdb_wash
+                label: |
+                  [[[ return states['sensor.tuya_power_sdb_wash_power'].state + ' W'; ]]]
+                show_name: true
+                show_last_changed: false
+                show_state: false
+                show_label: true
+                color: auto
+                color_type: icon
+                icon: "mdi:power-socket-eu"
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+                  
+              - type: custom:button-card
+                name: Seche linge
+                entity: switch.tuya_power_sdb_dry
+                label: |
+                  [[[ return states['sensor.tuya_power_sdb_dry_power'].state + ' W'; ]]]
+                show_name: true
+                show_last_changed: false
+                show_state: false
+                show_label: true
+                color: auto
+                color_type: icon
+                icon: "mdi:power-socket-eu"
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+
+              - type: custom:button-card
+                name: Lave vaisselle
+                entity: switch.tuya_power_cuisine
+                label: |
+                  [[[ return states['sensor.tuya_power_cuisine_power'].state + ' W'; ]]]
+                show_name: true
+                show_last_changed: false
+                show_state: false
+                show_label: true
+                color: auto
+                color_type: icon
+                icon: "mdi:power-socket-eu"
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+
+          - title: iPhone
+            type: horizontal-stack
+            cards:
               - entity: sensor.iphone_de_le_gone_battery_level
-              - entity: sensor.iphone_de_le_gone_battery_state
-            show_header_toggle: false
-            title: iPhone
-            type: entities
+                name: iPhone Fabrice
+                min: 0
+                max: 100
+                severity:
+                  green: 60
+                  yellow: 40
+                  red: 20
+                type: gauge
+              - entity: sensor.iphone_de_marina_battery_level
+                name: iPhone Marina
+                min: 0
+                max: 100
+                severity:
+                  green: 60
+                  yellow: 40
+                  red: 20
+                type: gauge
 
           - title: Gateway
             type: horizontal-stack
@@ -36,7 +162,7 @@ cards:
                   red: 200
                 type: gauge
 
-      - type: horizontal-stack
+      - type: vertical-stack
         cards:
           - type: history-graph
             title: Battery Xiaomi

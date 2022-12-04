@@ -39,7 +39,7 @@ cards:
             hour24: true
             hours_to_show: 144
             entities:
-              - sensor.home_assistant_v2_db
+              - sensor.home_assistant_v2_db_size
           - entity: script.sleep_mac
             hold_action:
               action: more-info

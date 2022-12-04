@@ -366,7 +366,6 @@ automation:
         data:
           target:
             - media_player.echo_salon
-            - media_player.echo_cuisine
           message: Alarme désactivée. Bienvenu à la maison!
           data:
             type: announce

@@ -152,7 +152,17 @@ automation:
       - condition: state
         entity_id: input_boolean.vacations
         state: "off"
+      - condition: state
+        entity_id: input_boolean.reveil_cleo
+        state: "on"
     action:
+      - service: notify.alexa_media_echo_salon
+        data:
+          message: Direction la salle de bain!
+          data:
+            type: announce
+      - delay:
+          minutes: "{{ 25 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | float }}"
       - service: script.neato_cuisine
 
   - alias: Neato Table basse (Programmation Ecole)
@@ -172,7 +182,17 @@ automation:
       - condition: state
         entity_id: input_boolean.vacations
         state: "off"
+      - condition: state
+        entity_id: input_boolean.reveil_cleo
+        state: "on"
     action:
+      - service: notify.alexa_media_echo_salon
+        data:
+          message: Direction l'école!
+          data:
+            type: announce
+      - delay:
+          minutes: "{{ 35 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | float }}"
       - service: script.neato_table_basse
 
   - alias: Neato Cuisine (Programmation Vacances)
@@ -214,7 +234,7 @@ automation:
   - alias: Neato Entrée (Programmation)
     trigger:
       platform: time
-      at: "08:30:00"
+      at: "07:40:00"
     condition:
       - condition: time
         weekday:
@@ -231,7 +251,7 @@ automation:
   - alias: Neato Couloir (Programmation)
     trigger:
       platform: time
-      at: "08:30:00"
+      at: "07:40:00"
     condition:
       - condition: time
         weekday:
@@ -253,7 +273,10 @@ automation:
         from: "1"
         platform: state
         to: "80"
-    condition: []
+    condition:
+      - condition: time
+        after: "07:00:00"
+        before: "20:00:00"
     action:
       - service: notify.mobile_app_iphone_de_le_gone
         data:
@@ -275,11 +298,31 @@ automation:
         to: error
         platform: state
         for: "00:10:00"
-    condition: []
+    condition:
+      - condition: time
+        after: "07:00:00"
+        before: "20:00:00"
     action:
       - service: notify.alexa_media_echo_salon
         data:
           message: Conchita a un soucis, quelqu'un veut bien l'aider?
+          data:
+            type: announce
+
+  - alias: Conchita offline
+    trigger:
+      - entity_id: vacuum.conchita
+        to: unavailable
+        platform: state
+        for: "00:10:00"
+    condition:
+      - condition: time
+        after: "07:00:00"
+        before: "20:00:00"
+    action:
+      - service: notify.alexa_media_echo_salon
+        data:
+          message: Conchita est déconnectée, quelqu'un veut bien l'aider?
           data:
             type: announce
 

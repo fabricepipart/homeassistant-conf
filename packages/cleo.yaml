@@ -22,7 +22,5 @@ automation:
           target:
             - media_player.echo_de_cleo
             - media_player.echo_salon
-            - media_player.echo_cuisine
           data:
             type: announce
-

@@ -5,7 +5,9 @@
 badges: []
 icon: "mdi:thermometer"
 path: sensors
-title: Sensors
+title: Sensor
+panel: true
+
 cards:
   - type: vertical-stack
     cards:
@@ -15,82 +17,98 @@ cards:
           - type: custom:mini-graph-card
             name: Salon
             hour24: true
+            hours_to_show: 32
+            points_per_hour: 20
             font_size: 50
+            height: 200
             entities:
               - sensor.xiaomi_temp_sam_temperature
-            lower_bound: 19
+            lower_bound: 20
+            upper_bound: 30
+            decimals: 1
             color_thresholds:
               - value: 19
                 color: blue
-              - value: 22
+              - value: 24
                 color: green
-              - value: 26
-                color: orange
               - value: 28
                 color: red
           - type: custom:mini-graph-card
             name: Cuisine
             hour24: true
+            hours_to_show: 32
+            points_per_hour: 20
             entities:
               - sensor.xiaomi_temp_cuisine_temperature
-            lower_bound: 19
+            lower_bound: 20
+            upper_bound: 30
+            decimals: 1
             font_size: 50
+            height: 200
             color_thresholds:
               - value: 19
                 color: blue
-              - value: 21
+              - value: 23
                 color: green
-              - value: 26
-                color: orange
               - value: 28
                 color: red
           - type: custom:mini-graph-card
             name: Salle de bain
             hour24: true
+            hours_to_show: 32
+            points_per_hour: 20
             entities:
               - sensor.xiaomi_temp_sdb_temperature
-            lower_bound: 19
+            lower_bound: 20
+            upper_bound: 30
+            decimals: 1
             font_size: 50
+            height: 200
             color_thresholds:
               - value: 19
                 color: blue
               - value: 21
                 color: green
-              - value: 27
-                color: orange
               - value: 30
                 color: red
+      - type: horizontal-stack
+        cards:
           - type: custom:mini-graph-card
             name: Cléo
             hour24: true
+            hours_to_show: 32
+            points_per_hour: 20
             entities:
               - sensor.xiaomi_temp_cleo_temperature
-            lower_bound: 19
+            lower_bound: 18
+            upper_bound: 30
+            decimals: 1
             font_size: 50
+            height: 150
             color_thresholds:
               - value: 19
                 color: blue
               - value: 21
                 color: green
-              - value: 24
-                color: orange
               - value: 28
                 color: red
           - type: custom:mini-graph-card
             name: Chambre
             hour24: true
+            hours_to_show: 32
+            points_per_hour: 20
             entities:
               - sensor.xiaomi_temp_chambre_temperature
-            lower_bound: 19
+            lower_bound: 18
             upper_bound: 30
+            decimals: 1
             font_size: 50
+            height: 150
             color_thresholds:
               - value: 19
                 color: blue
               - value: 21
                 color: green
-              - value: 24
-                color: orange
               - value: 28
                 color: red
       - type: history-graph
@@ -105,6 +123,8 @@ cards:
             name: Cléo
           - entity: sensor.xiaomi_temp_chambre_temperature
             name: Chambre
+          - entity: sensor.temperature_exterieure
+            name: Exterieur
         hours_to_show: 32
 
       - title: Humidité
@@ -113,9 +133,11 @@ cards:
           - type: custom:mini-graph-card
             name: Salon
             hour24: true
+            hours_to_show: 32
             entities:
               - sensor.xiaomi_temp_sam_humidity
             lower_bound: 40
+            decimals: 0
             font_size: 50
             color_thresholds:
               - value: 40
@@ -129,9 +151,11 @@ cards:
           - type: custom:mini-graph-card
             name: Cuisine
             hour24: true
+            hours_to_show: 32
             entities:
               - sensor.xiaomi_temp_cuisine_humidity
             lower_bound: 40
+            decimals: 0
             font_size: 50
             color_thresholds:
               - value: 40
@@ -145,9 +169,11 @@ cards:
           - type: custom:mini-graph-card
             name: Salle de bain
             hour24: true
+            hours_to_show: 32
             entities:
               - sensor.xiaomi_temp_sdb_humidity
             lower_bound: 40
+            decimals: 0
             font_size: 50
             color_thresholds:
               - value: 40
@@ -158,12 +184,16 @@ cards:
                 color: orange
               - value: 70
                 color: red
+      - type: horizontal-stack
+        cards:
           - type: custom:mini-graph-card
             name: Cléo
             hour24: true
+            hours_to_show: 32
             entities:
               - sensor.xiaomi_temp_cleo_humidity
             lower_bound: 40
+            decimals: 0
             font_size: 50
             color_thresholds:
               - value: 40
@@ -177,9 +207,11 @@ cards:
           - type: custom:mini-graph-card
             name: Chambre
             hour24: true
+            hours_to_show: 32
             entities:
               - sensor.xiaomi_temp_chambre_humidity
             lower_bound: 40
+            decimals: 0
             font_size: 50
             color_thresholds:
               - value: 40

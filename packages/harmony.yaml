@@ -1,5 +1,5 @@
 emulated_hue:
-  host_ip: 192.168.1.68
+  host_ip: 192.168.1.99
   listen_port: 8300
   exposed_domains:
     - light

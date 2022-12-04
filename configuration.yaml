@@ -18,25 +18,9 @@ http:
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
 
-mqtt:
-  broker: !secret mosquitto_ip
-  username: sonoff
-  password: !secret mqtt
-  discovery: true
-  birth_message:
-    topic: "hass/status"
-    payload: "online"
-  will_message:
-    topic: "hass/status"
-    payload: "offline"
-
 neato:
   client_id: !secret neato_username
   client_secret: !secret neato_password
-
-google:
-  client_id: !secret gcal_client_id
-  client_secret: !secret gcal_client_secret
 
 lovelace:
   mode: yaml
@@ -50,6 +34,8 @@ lovelace:
     - url: /hacsfiles/mini-graph-card/mini-graph-card-bundle.js
       type: module
     - url: /hacsfiles/text-element/text-element.js
+      type: module
+    - url: /hacsfiles/button-card/button-card.js
       type: module
 
 #meteo_france: !include meteo.yaml
@@ -87,9 +73,13 @@ frontend:
   themes: !include_dir_merge_named themes
 
 # https://techzoom.net/lab/ip-address-calculator/
-device_tracker:
-  - platform: nmap_tracker
-    hosts: 192.168.1.16/31
+# device_tracker:
+#   - platform: nmap_tracker
+#     hosts: 192.168.1.16/31
+#     home_interval: 10 # Idem interval_seconds mais en minute pour nmap
+#     interval_seconds: 300 # Le temps en secondes entre chaque scan
+#     consider_home: 180 # Le temps sans résultat positif, donc considéré comme absent.
+
 #  - platform: bluetooth_tracker
 #  - platform: bluetooth_le_tracker
 

@@ -7,6 +7,14 @@ input_boolean:
     name: Is it a day off
     icon: mdi:calendar-remove
 
+  reveil_cleo_tardif:
+    name: Réveil tardif Cléo (pas de garderie)
+    icon: mdi:alarm-snooze
+
+  reveil_cleo:
+    name: Reveil Cléo
+    icon: mdi:alarm
+
 ###############################################################
 # Sensor
 ###############################################################
@@ -30,7 +38,7 @@ script:
           target:
             - media_player.echo_de_cleo
             - media_player.echo_salon
-          message: Cléo est demandée à la salle de bain!
+          message: La salle de bain est disponible pour Cléo. Elle peut venir dès qu'elle a finit ce qu'elle est en train de faire.
           data:
             type: announce
 
@@ -54,7 +62,12 @@ automation:
       - condition: state
         entity_id: input_boolean.vacations
         state: "off"
+      - condition: state
+        entity_id: input_boolean.reveil_cleo
+        state: "on"
     action:
+      - delay:
+          minutes: "{{ 20 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | int }}"
       - service: notify.alexa_media_echo_salon
         data:
           message:
@@ -65,6 +78,7 @@ automation:
             degrés dehors avec {{ state_attr("weather.nice", "wind_speed") }} km/h de vent. Bonne journée!
           data:
             type: announce
+            
 
   - alias: Réveil Cléo
     description: ""
@@ -81,7 +95,12 @@ automation:
       - condition: state
         entity_id: input_boolean.vacations
         state: "off"
+      - condition: state
+        entity_id: input_boolean.reveil_cleo
+        state: "on"
     action:
+      - delay:
+          minutes: "{{ 20 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | int }}"
       - service: notify.alexa_media_echo_de_cleo
         data_template:
           message: >

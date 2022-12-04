@@ -10,27 +10,38 @@ sensor:
       ########################## Température ##########################
       temperature_cleo:
         friendly_name: Température Cléo
-        unit_of_measurement: "%"
+        unit_of_measurement: "°C"
         value_template: "{{ states('sensor.xiaomi_temp_cleo_temperature') | round(1) }}"
-        icon_template: "mdi:battery-medium"
+        icon_template: "mdi:thermometer"
       temperature_salon:
         friendly_name: Température Salon
-        unit_of_measurement: "%"
+        unit_of_measurement: "°C"
         value_template: "{{ states('sensor.xiaomi_temp_sam_temperature') | round(1) }}"
-        icon_template: "mdi:battery-medium"
+        icon_template: "mdi:thermometer"
       temperature_cuisine:
         friendly_name: Température Cuisine
-        unit_of_measurement: "%"
+        unit_of_measurement: "°C"
         value_template: "{{ states('sensor.xiaomi_temp_cuisine_temperature') | round(1) }}"
-        icon_template: "mdi:battery-medium"
+        icon_template: "mdi:thermometer"
       temperature_sdb:
         friendly_name: Température salle de bain
-        unit_of_measurement: "%"
+        unit_of_measurement: "°C"
         value_template: "{{ states('sensor.xiaomi_temp_sdb_temperature') | round(1) }}"
-        icon_template: "mdi:battery-medium"
+        icon_template: "mdi:thermometer"
       temperature_chambre:
         friendly_name: Température chambre
-        unit_of_measurement: "%"
+        unit_of_measurement: "°C"
         value_template: "{{ states('sensor.xiaomi_temp_chambre_temperature') | round(1) }}"
-        icon_template: "mdi:battery-medium"
+        icon_template: "mdi:thermometer"
+      temperature_exterieure:
+        friendly_name: Température extérieure
+        unit_of_measurement: "°C"
+        value_template: "{{ ((states.weather.nice.attributes.temperature)) | float }}"
+        icon_template: "mdi:thermometer"
+      temperature_exterieure_accuweather:
+        friendly_name: Température extérieure
+        unit_of_measurement: "°C"
+        value_template: "{{ ((states.weather.maison.attributes.temperature)) | float }}"
+        icon_template: "mdi:thermometer"
+
       ########################## Mouvement ##########################

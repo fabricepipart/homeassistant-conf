@@ -306,6 +306,22 @@ cards:
         tap_action:
           action: toggle
         type: state-icon
+      - type: state-badge
+        entity: input_boolean.reveil_cleo
+        style:
+          left: 84%
+          top: 95%
+        tap_action:
+          action: toggle
+        type: state-icon
+      - type: state-badge
+        entity: input_boolean.reveil_cleo_tardif
+        style:
+          left: 96%
+          top: 95%
+        tap_action:
+          action: toggle
+        type: state-icon
       - type: custom:text-element
         text: "Vacations"
         style:
@@ -330,18 +346,6 @@ cards:
       #----------------- Activities -----------------
 
       #----------------- HiFi -----------------
-      - entity: media_player.samsung_tv
-        icon: mdi:television
-        show_state: false
-        tap_action:
-          action: toggle
-        hold_action:
-          action: more-info
-        style:
-          left: 23.5%
-          top: 28%
-          "--paper-item-icon-color": purple
-        type: state-icon
 
       - entity: media_player.sony_bravia_tv
         icon: mdi:television
@@ -500,3 +504,41 @@ cards:
         tap_action:
           action: toggle
         type: state-icon
+        
+      #----------------- Power -----------------
+        
+      - entity: input_boolean.lave_linge_on
+        show_state: false
+        style:
+          left: 13.5%
+          top: 35%
+        type: state-icon
+        
+      - entity: input_boolean.seche_linge_on
+        show_state: false
+        style:
+          left: 18.5%
+          top: 35%
+        type: state-icon
+        
+      - entity: input_boolean.lave_vaisselle_on
+        show_state: false
+        style:
+          left: 32%
+          top: 90%
+        type: state-icon
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        

@@ -94,19 +94,18 @@ automation:
 
   ##################################### Trajets
 
-  - alias: Fabrice maison
-    trigger:
-      - entity_id: person.fabrice_pipart
-        platform: state
-        from: "not_home"
-        to: "home"
-    action:
-      - service: notify.alexa_media_echo_salon
-        data:
-          message: Bienvenu à la maison Fabrice!
-          data:
-            type: announce
-            method: all
+  # - alias: Fabrice maison
+  #   trigger:
+  #     - entity_id: person.fabrice_pipart
+  #       platform: state
+  #       from: "not_home"
+  #       to: "home"
+  #   action:
+  #     - service: notify.alexa_media_echo_salon
+  #       data:
+  #         message: Bienvenu à la maison Fabrice!
+  #         data:
+  #           type: announce
 
   - alias: Temps de trajet
     trigger:
@@ -165,7 +164,7 @@ automation:
       - alias: ""
         service: notify.mobile_app_iphone_de_le_gone
         data:
-          message: "{{ states('sensor.sensor.fabrice_back_home') }} minutes"
+          message: "{{ states('sensor.fabrice_back_home') }} minutes"
           title: Temps de trajet estimé
           data:
             push:

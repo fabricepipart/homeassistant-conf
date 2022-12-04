@@ -13,7 +13,7 @@ automation:
     condition:
     - condition: time
       after: '06:00:00'
-      before: '09:00:00'
+      before: '12:00:00'
     - condition: numeric_state
       entity_id: sensor.temperature_sdb
       below: 23
@@ -40,7 +40,7 @@ automation:
       to: 'off'
     - platform: numeric_state
       entity_id: sensor.temperature_sdb
-      above: 26
+      above: 24
     action:
     - service: switch.turn_off
       entity_id: switch.osram_sdb
