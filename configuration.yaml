@@ -11,16 +11,11 @@ homeassistant:
   whitelist_external_dirs:
     - /config
 
-discovery:
 ios:
 
 http:
   ssl_certificate: /ssl/fullchain.pem
   ssl_key: /ssl/privkey.pem
-
-neato:
-  client_id: !secret neato_username
-  client_secret: !secret neato_password
 
 lovelace:
   mode: yaml
@@ -36,6 +31,10 @@ lovelace:
     - url: /hacsfiles/text-element/text-element.js
       type: module
     - url: /hacsfiles/button-card/button-card.js
+      type: module
+    - url: /hacsfiles/better-thermostat-ui-card/better-thermostat-ui-card.js
+      type: module
+    - url: /hacsfiles/lovelace-expander-card/expander-card.js
       type: module
 
 #meteo_france: !include meteo.yaml
@@ -71,7 +70,6 @@ alexa:
 
 frontend:
   themes: !include_dir_merge_named themes
-
 # https://techzoom.net/lab/ip-address-calculator/
 # device_tracker:
 #   - platform: nmap_tracker
@@ -83,8 +81,8 @@ frontend:
 #  - platform: bluetooth_tracker
 #  - platform: bluetooth_le_tracker
 
-xiaomi_aqara:
-  discovery_retry: 5
-  gateways:
-    - mac: !secret xiaomi_gateway_mac
-      key: !secret xiaomi_gateway_key
+# xiaomi_aqara:
+#   discovery_retry: 5
+#   gateways:
+#     - mac: !secret xiaomi_gateway_mac
+#       key: !secret xiaomi_gateway_key

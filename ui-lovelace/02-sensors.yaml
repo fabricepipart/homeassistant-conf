@@ -2,7 +2,6 @@
 # Sensors
 ################################################################################
 
-badges: []
 icon: "mdi:thermometer"
 path: sensors
 title: Sensor
@@ -11,121 +10,175 @@ panel: true
 cards:
   - type: vertical-stack
     cards:
+      - title: Thermostat
+        type: horizontal-stack
+        cards:
+          - type: custom:better-thermostat-ui-card
+            entity: climate.moes_sam_better
+            name: Salon
+          - type: custom:better-thermostat-ui-card
+            entity: climate.moes_cuisine_better
+            name: Cuisine
+          - type: custom:better-thermostat-ui-card
+            entity: climate.moes_sdb_better
+            name: Salle de bain
+
+      # - title: Thermostat
+      #   type: horizontal-stack
+      #   cards:
+      #     - type: thermostat
+      #       entity: climate.moes_sam_better
+      #       name: Salon
+      #     - type: thermostat
+      #       entity: climate.moes_cuisine_better
+      #       name: Cuisine
+      #     - type: thermostat
+      #       entity: climate.moes_sdb_better
+      #       name: Salle de bain
+
       - title: Températures
         type: horizontal-stack
         cards:
           - type: custom:mini-graph-card
             name: Salon
-            hour24: true
-            hours_to_show: 32
-            points_per_hour: 20
-            font_size: 50
-            height: 200
             entities:
-              - sensor.xiaomi_temp_sam_temperature
-            lower_bound: 20
-            upper_bound: 30
-            decimals: 1
+              - entity: sensor.xiaomi_temp_sam_temperature
+                name: Salon
+              - entity: sensor.moes_sam_position
+                name: Position
+                show_state: true
+                show_graph: false
             color_thresholds:
               - value: 19
-                color: blue
-              - value: 24
-                color: green
+                color: "#f39c12"
+              - value: 21
+                color: "#d35400"
               - value: 28
-                color: red
+                color: "#c0392b"
+            hours_to_show: 32
+            hour24: true
+            points_per_hour: 1
+            decimals: 1
+            font_size: 50
+            show:
+              state: true
+              extrema: true
+              labels: false
+              legend: true
+              fill: false
+              show_points: true
+              icon_adaptive_color: true
+              name_adaptive_color: true
           - type: custom:mini-graph-card
             name: Cuisine
-            hour24: true
-            hours_to_show: 32
-            points_per_hour: 20
             entities:
               - sensor.xiaomi_temp_cuisine_temperature
-            lower_bound: 20
-            upper_bound: 30
-            decimals: 1
-            font_size: 50
-            height: 200
+              - entity: sensor.moes_cuisine_position
+                name: Position
+                show_state: true
+                show_graph: false
             color_thresholds:
               - value: 19
-                color: blue
-              - value: 23
-                color: green
+                color: "#f39c12"
+              - value: 21
+                color: "#d35400"
               - value: 28
-                color: red
+                color: "#c0392b"
+            hours_to_show: 32
+            hour24: true
+            points_per_hour: 1
+            decimals: 1
+            font_size: 50
+            show:
+              state: true
+              extrema: true
+              labels: false
+              legend: true
+              fill: false
+              show_points: true
+              icon_adaptive_color: true
+              name_adaptive_color: true
           - type: custom:mini-graph-card
             name: Salle de bain
-            hour24: true
-            hours_to_show: 32
-            points_per_hour: 20
             entities:
               - sensor.xiaomi_temp_sdb_temperature
-            lower_bound: 20
-            upper_bound: 30
-            decimals: 1
-            font_size: 50
-            height: 200
+              - entity: sensor.moes_sdb_position
+                name: Position
+                show_state: true
+                show_graph: false
             color_thresholds:
               - value: 19
-                color: blue
+                color: "#f39c12"
               - value: 21
-                color: green
-              - value: 30
-                color: red
-      - type: horizontal-stack
-        cards:
+                color: "#d35400"
+              - value: 28
+                color: "#c0392b"
+            hours_to_show: 32
+            hour24: true
+            points_per_hour: 1
+            decimals: 1
+            font_size: 50
+            show:
+              state: true
+              extrema: true
+              labels: false
+              legend: true
+              fill: false
+              show_points: true
+              icon_adaptive_color: true
+              name_adaptive_color: true
+
           - type: custom:mini-graph-card
             name: Cléo
-            hour24: true
-            hours_to_show: 32
-            points_per_hour: 20
             entities:
               - sensor.xiaomi_temp_cleo_temperature
-            lower_bound: 18
-            upper_bound: 30
-            decimals: 1
-            font_size: 50
-            height: 150
             color_thresholds:
               - value: 19
-                color: blue
+                color: "#f39c12"
               - value: 21
-                color: green
+                color: "#d35400"
               - value: 28
-                color: red
+                color: "#c0392b"
+            hours_to_show: 32
+            hour24: true
+            points_per_hour: 1
+            decimals: 1
+            font_size: 50
+            show:
+              state: true
+              extrema: true
+              labels: false
+              legend: true
+              fill: false
+              show_points: true
+              icon_adaptive_color: true
+              name_adaptive_color: true
+
           - type: custom:mini-graph-card
             name: Chambre
-            hour24: true
-            hours_to_show: 32
-            points_per_hour: 20
             entities:
               - sensor.xiaomi_temp_chambre_temperature
-            lower_bound: 18
-            upper_bound: 30
-            decimals: 1
-            font_size: 50
-            height: 150
             color_thresholds:
               - value: 19
-                color: blue
+                color: "#f39c12"
               - value: 21
-                color: green
+                color: "#d35400"
               - value: 28
-                color: red
-      - type: history-graph
-        entities:
-          - entity: sensor.xiaomi_temp_sam_temperature
-            name: Salon
-          - entity: sensor.xiaomi_temp_cuisine_temperature
-            name: Cuisine
-          - entity: sensor.xiaomi_temp_sdb_temperature
-            name: Salle de bain
-          - entity: sensor.xiaomi_temp_cleo_temperature
-            name: Cléo
-          - entity: sensor.xiaomi_temp_chambre_temperature
-            name: Chambre
-          - entity: sensor.temperature_exterieure
-            name: Exterieur
-        hours_to_show: 32
+                color: "#c0392b"
+            hours_to_show: 32
+            hour24: true
+            points_per_hour: 1
+            decimals: 1
+            font_size: 50
+            show:
+              state: true
+              extrema: true
+              labels: false
+              legend: true
+              fill: false
+              show_points: true
+              icon_adaptive_color: true
+              name_adaptive_color: true
 
       - title: Humidité
         type: horizontal-stack
@@ -136,7 +189,6 @@ cards:
             hours_to_show: 32
             entities:
               - sensor.xiaomi_temp_sam_humidity
-            lower_bound: 40
             decimals: 0
             font_size: 50
             color_thresholds:
@@ -148,13 +200,22 @@ cards:
                 color: orange
               - value: 70
                 color: red
+            show:
+              state: true
+              extrema: true
+              labels: false
+              legend: true
+              fill: false
+              show_points: true
+              icon_adaptive_color: true
+              name_adaptive_color: true
+
           - type: custom:mini-graph-card
             name: Cuisine
             hour24: true
             hours_to_show: 32
             entities:
               - sensor.xiaomi_temp_cuisine_humidity
-            lower_bound: 40
             decimals: 0
             font_size: 50
             color_thresholds:
@@ -166,13 +227,21 @@ cards:
                 color: orange
               - value: 70
                 color: red
+            show:
+              state: true
+              extrema: true
+              labels: false
+              legend: true
+              fill: false
+              show_points: true
+              icon_adaptive_color: true
+              name_adaptive_color: true
           - type: custom:mini-graph-card
             name: Salle de bain
             hour24: true
             hours_to_show: 32
             entities:
               - sensor.xiaomi_temp_sdb_humidity
-            lower_bound: 40
             decimals: 0
             font_size: 50
             color_thresholds:
@@ -184,15 +253,22 @@ cards:
                 color: orange
               - value: 70
                 color: red
-      - type: horizontal-stack
-        cards:
+            show:
+              state: true
+              extrema: true
+              labels: false
+              legend: true
+              fill: false
+              show_points: true
+              icon_adaptive_color: true
+              name_adaptive_color: true
+
           - type: custom:mini-graph-card
             name: Cléo
             hour24: true
             hours_to_show: 32
             entities:
               - sensor.xiaomi_temp_cleo_humidity
-            lower_bound: 40
             decimals: 0
             font_size: 50
             color_thresholds:
@@ -204,13 +280,21 @@ cards:
                 color: orange
               - value: 70
                 color: red
+            show:
+              state: true
+              extrema: true
+              labels: false
+              legend: true
+              fill: false
+              show_points: true
+              icon_adaptive_color: true
+              name_adaptive_color: true
           - type: custom:mini-graph-card
             name: Chambre
             hour24: true
             hours_to_show: 32
             entities:
               - sensor.xiaomi_temp_chambre_humidity
-            lower_bound: 40
             decimals: 0
             font_size: 50
             color_thresholds:
@@ -222,23 +306,18 @@ cards:
                 color: orange
               - value: 70
                 color: red
-
-      - type: history-graph
-        entities:
-          - entity: sensor.xiaomi_temp_sam_humidity
-            name: Salon
-          - entity: sensor.xiaomi_temp_cuisine_humidity
-            name: Cuisine
-          - entity: sensor.xiaomi_temp_sdb_humidity
-            name: Salle de bain
-          - entity: sensor.xiaomi_temp_cleo_humidity
-            name: Cléo
-          - entity: sensor.xiaomi_temp_chambre_humidity
-            name: Chambre
-        hours_to_show: 32
+            show:
+              state: true
+              extrema: true
+              labels: false
+              legend: true
+              fill: false
+              show_points: true
+              icon_adaptive_color: true
+              name_adaptive_color: true
 
       - title: Météo
-        type: horizontal-stack
+        type: vertical-stack
         cards:
           - entity: weather.maison
             type: weather-forecast
@@ -246,17 +325,85 @@ cards:
             name: Météo France
             type: weather-forecast
 
-      - type: history-graph
-        hours_to_show: 72
-        title: Pressions
-        entities:
-          - entity: sensor.xiaomi_temp_sam_pressure
-            name: Salon
-          - entity: sensor.xiaomi_temp_cuisine_pressure
-            name: Cuisine
-          - entity: sensor.xiaomi_temp_sdb_pressure
-            name: Salle de bain
-          - entity: sensor.xiaomi_temp_cleo_pressure
-            name: Cléo
-          - entity: sensor.xiaomi_temp_chambre_pressure
-            name: Chambre
+      - type: custom:expander-card
+        title: Temperatures
+        cards:
+          - type: history-graph
+            entities:
+              - entity: sensor.xiaomi_temp_sam_temperature
+                name: Salon
+              - entity: sensor.xiaomi_temp_cuisine_temperature
+                name: Cuisine
+              - entity: sensor.xiaomi_temp_sdb_temperature
+                name: Salle de bain
+              - entity: sensor.xiaomi_temp_cleo_temperature
+                name: Cléo
+              - entity: sensor.xiaomi_temp_chambre_temperature
+                name: Chambre
+              - entity: sensor.temperature_exterieure
+                name: Exterieur
+            hours_to_show: 32
+
+          # - type: history-graph
+          #   entities:
+          #     - entity: sensor.moes_sam_position
+          #       name: Salon
+          #     - entity: sensor.moes_cuisine_position
+          #       name: Cuisine
+          #     - entity: sensor.moes_sdb_position
+          #       name: Salle de bain
+          #   hours_to_show: 24
+
+      - type: custom:expander-card
+        title: Valves
+        cards:
+          - type: custom:mini-graph-card
+            entities:
+              - entity: sensor.moes_sam_position
+                name: Salon
+              - entity: sensor.moes_cuisine_position
+                name: Cuisine
+              - entity: sensor.moes_sdb_position
+                name: Salle de bain
+            hours_to_show: 24
+            hour24: true
+            points_per_hour: 3
+            line_width: 2
+            fill: false
+
+      - type: custom:expander-card
+        title: Humidity
+        cards:
+          - type: history-graph
+            entities:
+              - entity: sensor.xiaomi_temp_sam_humidity
+                name: Salon
+              - entity: sensor.xiaomi_temp_cuisine_humidity
+                name: Cuisine
+              - entity: sensor.xiaomi_temp_sdb_humidity
+                name: Salle de bain
+              - entity: sensor.xiaomi_temp_cleo_humidity
+                name: Cléo
+              - entity: sensor.xiaomi_temp_chambre_humidity
+                name: Chambre
+            hours_to_show: 32
+
+      - type: custom:expander-card
+        title: Pressures
+        padding: 1em
+        title-card-padding: 20px
+        cards:
+          - type: history-graph
+            hours_to_show: 72
+            title: Pressions
+            entities:
+              - entity: sensor.xiaomi_temp_sam_pressure
+                name: Salon
+              - entity: sensor.xiaomi_temp_cuisine_pressure
+                name: Cuisine
+              - entity: sensor.xiaomi_temp_sdb_pressure
+                name: Salle de bain
+              - entity: sensor.xiaomi_temp_cleo_pressure
+                name: Cléo
+              - entity: sensor.xiaomi_temp_chambre_pressure
+                name: Chambre

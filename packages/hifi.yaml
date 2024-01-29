@@ -1,5 +1,3 @@
-
-
 ###############################################################
 # Sensor
 ###############################################################
@@ -16,7 +14,7 @@
 media_player:
   - platform: yamaha
     name: rx_v475
-    host: 192.168.0.75
+    host: 192.168.1.75
     source_ignore:
       - "AV3"
       - "AV5"
@@ -34,8 +32,6 @@ media_player:
       HDMI1: "PS3"
       HDMI2: "Box"
       HDMI3: "Plex"
-  - platform: braviatv
-    host: 192.168.1.65
 
 ###############################################################
 # Scripts
@@ -316,6 +312,114 @@ script:
 ###############################################################
 
 automation:
+  # - alias: Eteindre AppleTV
+  #   trigger:
+  #     - platform: state
+  #       entity_id: media_player.sony_bravia_tv
+  #       to: "offonoff"
+  #   condition:
+  #     - condition: template
+  #       value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'AppleTV') }}"
+  #   action:
+  #     - service: remote.turn_on
+  #       data:
+  #         entity_id: remote.harmony_hub
+  #         activity: "PowerOff"
+  #     - service: remote.turn_off
+  #       data:
+  #         entity_id: remote.appletv
+
+  - alias: Allumer AppleTV sans Harmony
+    trigger:
+      - platform: state
+        entity_id: media_player.appletv
+        to: "idle"
+      - platform: state
+        entity_id: media_player.appletv
+        to: "paused"
+    condition:
+      - condition: state
+        entity_id: switch.appletv
+        state: "off"
+        for:
+          seconds: 20
+      - condition: state
+        entity_id: switch.tuya_tv
+        state: "on"
+        for:
+          minutes: 1
+    action:
+      - service: switch.turn_on
+        target:
+          entity_id: switch.appletv
+
+  - alias: Eteindre AppleTV (boot)
+    trigger:
+      - platform: state
+        entity_id: media_player.appletv
+        to: "idle"
+    condition:
+      condition: not
+      conditions:
+        - condition: state
+          entity_id: switch.tuya_tv
+          state: "on"
+          for:
+            minutes: 1
+    action:
+      - service: media_player.turn_off
+        target:
+          entity_id: media_player.appletv
+
+  - alias: Eteindre AppleTV sans Harmony
+    trigger:
+      - platform: state
+        entity_id: media_player.appletv
+        to: "standby"
+        for: "00:00:10"
+      - platform: state
+        entity_id: media_player.appletv
+        to: "off"
+        for: "00:00:10"
+    condition:
+      - condition: state
+        entity_id: switch.appletv
+        state: "on"
+    action:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.appletv
+
+  - alias: Eteindre AppleTV si Harmony Off
+    trigger:
+      - platform: state
+        entity_id: switch.appletv
+        to: "off"
+        for: "00:00:05"
+    condition:
+      - condition: state
+        entity_id: media_player.appletv
+        state: "idle"
+    action:
+      - service: media_player.turn_off
+        target:
+          entity_id: media_player.appletv
+
+  # - alias: Eteindre AppleTV apres Harmony
+  #   trigger:
+  #     - platform: state
+  #       entity_id: select.harmony_hub_activities
+  #       to: "off"
+  #       for: "00:00:15"
+  #   condition:
+  #     - condition: state
+  #       entity_id: media_player.appletv
+  #       state: "on"
+  #   action:
+  #     - service: remote.turn_off
+  #       data:
+  #         entity_id: remote.appletv
+
   - alias: Eteindre Home Cinéma
     trigger:
       - platform: state
@@ -326,8 +430,38 @@ automation:
         data:
           entity_id: remote.harmony_hub
           activity: "PowerOff"
-      - service: light.toggle
+      - service: light.turn_off
         entity_id: light.sonoff_salon
+      - service: switch.turn_off
+        entity_id: switch.tuya_tv
+
+  - alias: Switch Home Cinéma
+    trigger:
+      - platform: state
+        entity_id: sensor.xiaomi_sam_action
+        to: "double_right"
+    action:
+      - entity_id: switch.tuya_tv
+        service: switch.toggle
+
+  - alias: TV ready
+    trigger:
+      - platform: state
+        entity_id: media_player.sony_bravia_tv
+        to: "on"
+    condition:
+      - condition: template
+        value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'PowerOff') }}"
+    action:
+      - service: media_player.turn_off
+        target:
+          entity_id: media_player.sony_bravia_tv
+      - service: media_player.play_media
+        target:
+          entity_id: media_player.echo_salon
+        data:
+          media_content_type: sound
+          media_content_id: amzn_sfx_rooster_crow_01
 
   - alias: Son Netflix
     trigger:
@@ -363,16 +497,11 @@ automation:
   - alias: Yamaha allumé par erreur
     trigger:
       - entity_id: media_player.rx_v475
-        from: "off"
         platform: state
         to: "on"
     condition:
-      - condition: time
-        after: "22:00:00"
-        before: "06:00:00"
-      - condition: state
-        entity_id: media_player.tele
-        state: "off"
+      - condition: template
+        value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'PowerOff') }}"
     action:
       - service: media_player.turn_off
         data:
@@ -443,3 +572,12 @@ automation:
   #         entity_id: media_player.echo_salon
   #         media_content_id: Playlist Best of
   #         media_content_type: SPOTIFY
+
+  - alias: Switch TV chambre
+    trigger:
+      - platform: state
+        entity_id: sensor.xiaomi_sdb_action
+        to: "double_right"
+    action:
+      - service: switch.toggle
+        entity_id: switch.osram_tv_chambre

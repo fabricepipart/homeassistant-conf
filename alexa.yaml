@@ -33,6 +33,10 @@ entity_config:
     name: "Plex"
     description: Plex Media center
     display_categories: ACTIVITY_TRIGGER
+  script.lavage_dents:
+    name: "Lavage dents"
+  #    description: Lavage dents
+  #    display_categories: ACTIVITY_TRIGGER
   script.activity_off:
     name: "Tout"
   script.sleep_mac:

@@ -4,11 +4,13 @@
 
 badges:
   - binary_sensor.xiaomi_porte_contact
+  - binary_sensor.xiaomi_fenetre_sam_contact
+  - binary_sensor.xiaomi_fenetre_cuisine_contact
+  - binary_sensor.xiaomi_fenetre_sdb_contact
   - light.gateway_light_7811dcfaa3ee
   - binary_sensor.xiaomi_fuite_cuisine_water_leak
   - binary_sensor.xiaomi_fuite_sdb_water_leak
   - person.fabrice_pipart
-  - person.marina_pipart
 icon: "mdi:alarm-light"
 path: alarm
 title: Alarm
@@ -27,6 +29,9 @@ cards:
       - entity: input_number.gateway_volume
       - entity: input_number.delai_boucle
       - entity: binary_sensor.xiaomi_porte_contact
+      - entity: binary_sensor.xiaomi_fenetre_sam_contact
+      - entity: binary_sensor.xiaomi_fenetre_cuisine_contact
+      - entity: binary_sensor.xiaomi_fenetre_sdb_contact
       - entity: script.jouer_sirene
       - entity: script.jouer_sirene_boucle
   - entities:
@@ -35,7 +40,6 @@ cards:
       - entity: input_boolean.reveil_cleo
       - entity: input_boolean.reveil_cleo_tardif
       - entity: person.fabrice_pipart
-      - entity: person.marina_pipart
     show_header_toggle: false
     title: Utilisateurs
     type: entities
@@ -43,7 +47,5 @@ cards:
     entities:
       - entity: sensor.fabrice_to_work
       - entity: sensor.fabrice_back_home
-      - entity: sensor.marina_to_work
-      - entity: sensor.marina_back_home
     type: glance
     title: Trajets

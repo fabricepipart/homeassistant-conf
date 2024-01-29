@@ -24,8 +24,7 @@ automation:
         data:
           data:
             push:
-              badge: 5
-              thread-id: home-assistant
+              interruption-level: time-sensitive
           message: Quelqu'un pourrait ouvrir la fenêtre?
           title: Il y a trop d'humidité dans la Salle de Bain
       - service: notify.alexa_media_echo_salon

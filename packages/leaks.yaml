@@ -29,8 +29,7 @@ automation:
         data:
           data:
             push:
-              badge: 5
-              thread-id: home-assistant
+              interruption-level: critical
           message: Vite sortez la serpillère!
           title: Une fuite d'eau a été détectée à la cuisine!
       - service: xiaomi_aqara.play_ringtone
@@ -82,8 +81,7 @@ automation:
         data:
           data:
             push:
-              badge: 5
-              thread-id: home-assistant
+              interruption-level: critical
           message: Vite sortez la serpillère!
           title: Une fuite d'eau a été détectée à la salle de bain!
       - service: xiaomi_aqara.play_ringtone

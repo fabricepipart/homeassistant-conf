@@ -40,12 +40,56 @@ input_boolean:
 ###############################################################
 
 automation:
+  # ------------------ Economie Energie ------------------
+  - alias: Economie Energie
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.maison
+        to: "armed_away"
+      - platform: state
+        entity_id: alarm_control_panel.maison
+        to: armed_night
+    condition:
+      - condition: template
+        value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'PowerOff') }}"
+    action:
+      - service: switch.turn_off
+        entity_id: switch.tuya_tv
+      - service: switch.turn_off
+        entity_id: switch.tuya_ordi
+
+  - alias: Reveil economie energie
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.maison
+        to: "disarmed"
+    action:
+      - service: switch.turn_on
+        entity_id: switch.tuya_ordi
+
+  - alias: Reveil economie energie TV
+    trigger:
+      - platform: state
+        entity_id: remote.harmony_hub
+        attribute: current_activity
+        from: "PowerOff"
+    condition:
+      - condition: state
+        entity_id: switch.tuya_tv
+        state: "off"
+      - condition: state
+        entity_id: media_player.appletv
+        state: "off"
+    action:
+      - service: switch.turn_on
+        entity_id: switch.tuya_tv
+
   # ------------------ Start ------------------
   - alias: Debut lave linge
     trigger:
       - platform: numeric_state
         entity_id: sensor.tuya_power_sdb_wash_power
-        above: 10
+        above: 30
     action:
       - service: input_boolean.turn_on
         data:
@@ -55,7 +99,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: sensor.tuya_power_sdb_dry_power
-        above: 10
+        above: 500
     action:
       - service: input_boolean.turn_on
         data:
@@ -129,10 +173,6 @@ automation:
             type: announce
       - alias: ""
         data:
-          data:
-            push:
-              badge: 5
-              thread-id: home-assistant
           message: Le lave linge est terminé
           title: Fin de machine
         service: notify.mobile_app_iphone_de_le_gone
@@ -156,10 +196,6 @@ automation:
             type: announce
       - alias: ""
         data:
-          data:
-            push:
-              badge: 5
-              thread-id: home-assistant
           message: Le sèche linge est terminé
           title: Fin de machine
         service: notify.mobile_app_iphone_de_le_gone
@@ -183,86 +219,22 @@ automation:
             type: announce
       - alias: ""
         data:
-          data:
-            push:
-              badge: 5
-              thread-id: home-assistant
           message: Le lave vaisselle est terminé
           title: Fin de machine
         service: notify.mobile_app_iphone_de_le_gone
 
   # ------------------ Bugs ------------------
-  - alias: Bug seche linge
+  - alias: Bug power
     trigger:
       - platform: state
         entity_id: switch.tuya_power_sdb_dry
         to: "off"
-    # condition:
-    #   condition: not
-    #   conditions:
-    #     - condition: time
-    #       after: "22:00:00"
-    #       before: "08:00:00"
-    action:
-      # - service: notify.alexa_media_echo_salon
-      #   data:
-      #     message: La prise du seche linge s'est éteinte
-      #     data:
-      #       type: announce
-      # - alias: ""
-      #   data:
-      #     data:
-      #       push:
-      #         badge: 5
-      #         thread-id: home-assistant
-      #     message: La prise du seche linge s'est éteinte
-      #     title: La prise du seche linge s'est éteinte
-      #   service: notify.mobile_app_iphone_de_le_gone
-      #- delay: 5
-      - service: switch.turn_on
-        entity_id: switch.tuya_power_sdb_dry
-
-  - alias: Bug lave linge
-    trigger:
       - platform: state
         entity_id: switch.tuya_power_sdb_wash
         to: "off"
-    # condition:
-    #   condition: not
-    #   conditions:
-    #     - condition: time
-    #       after: "22:00:00"
-    #       before: "08:00:00"
-    action:
-      # - service: notify.alexa_media_echo_salon
-      #   data:
-      #     message: La prise du lave linge s'est éteinte
-      #     data:
-      #       type: announce
-      # - alias: ""
-      #   data:
-      #     data:
-      #       push:
-      #         badge: 5
-      #         thread-id: home-assistant
-      #     message: La prise du lave linge s'est éteinte
-      #     title: La prise du lave linge s'est éteinte
-      #   service: notify.mobile_app_iphone_de_le_gone
-      - service: switch.turn_on
-        entity_id: switch.tuya_power_sdb_wash
-      #- delay: 5
-
-  - alias: Bug lave vaisselle
-    trigger:
       - platform: state
         entity_id: switch.tuya_power_cuisine
         to: "off"
-    # condition:
-    #   condition: not
-    #   conditions:
-    #     - condition: time
-    #       after: "22:00:00"
-    #       before: "08:00:00"
     action:
       # - service: notify.alexa_media_echo_salon
       #   data:
@@ -281,3 +253,7 @@ automation:
       #- delay: 5
       - service: switch.turn_on
         entity_id: switch.tuya_power_cuisine
+      - service: switch.turn_on
+        entity_id: switch.tuya_power_sdb_wash
+      - service: switch.turn_on
+        entity_id: switch.tuya_power_sdb_dry

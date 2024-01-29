@@ -19,6 +19,22 @@ light:
       - light.sonoff_entree_2
       - light.sonoff_entree_3
 
+  - platform: group
+    name: Toutes lumieres
+    entities:
+      - light.sonoff_entree_1
+      - light.sonoff_entree_2
+      - light.sonoff_entree_3
+      - light.sonoff_chambre
+      - light.sonoff_cleo
+      - light.sonoff_couloir
+      - light.sonoff_salle_de_bain
+      - light.sonoff_salon
+      - light.sonoff_sam
+      - light.sonoff_shoes
+      - light.sonoff_wc
+      - light.sonoff_wc_wall
+
 ###############################################################
 # Scripts
 ###############################################################
@@ -38,15 +54,6 @@ automation:
       - service: light.toggle
         entity_id: light.sonoff_salon
 
-  - alias: Lumière salon indirecte
-    trigger:
-      - platform: state
-        entity_id: sensor.xiaomi_sam_action
-        to: "double_right"
-    action:
-      - entity_id: switch.osram_tv
-        service: switch.toggle
-
   - alias: Lumière salle à manger
     trigger:
       - platform: state
@@ -55,16 +62,6 @@ automation:
     action:
       - service: light.toggle
         entity_id: light.sonoff_sam
-
-  - alias: Lumière salle à manger indirecte
-    trigger:
-      - platform: state
-        entity_id: sensor.xiaomi_sam_action
-        to: "double_left"
-    action:
-      - entity_id: switch.osram_bureau
-        service: switch.toggle
-
   # ----- Cleo
 
   - alias: Lumière Cléo
@@ -153,15 +150,6 @@ automation:
         target:
           entity_id: timer.cuisine_idle
 
-  - alias: Lumière Cuisine
-    trigger:
-      - platform: state
-        entity_id: sensor.xiaomi_cuisine_action
-        to: "double"
-    action:
-      - service: light.toggle
-        entity_id: light.sonoff_cuisine
-
   - alias: Auto Cuisine
     use_blueprint:
       path: homeassistant/motion_light_on.yaml
@@ -204,6 +192,20 @@ automation:
         to: "single_left"
     action:
       - service: light.toggle
+        entity_id: light.sonoff_entree_1,light.sonoff_entree_2,light.sonoff_entree_3
+      - service: timer.start
+        data:
+          entity_id: timer.entree
+
+  - alias: Lumière entree auto off
+    trigger:
+      platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.entree
+    action:
+      service: light.turn_off
+      data:
         entity_id: light.sonoff_entree_1,light.sonoff_entree_2,light.sonoff_entree_3
 
   # ----- SDB
@@ -335,6 +337,18 @@ automation:
       - service: light.turn_on
         entity_id: light.sonoff_wc
 
+  - alias: Lumière WC autoresync night
+    trigger:
+      platform: time
+      at: "22:00:00"
+    condition:
+      - condition: state
+        entity_id: light.sonoff_wc
+        state: "on"
+    action:
+      - service: light.turn_off
+        entity_id: light.sonoff_wc
+
   # ----- All
 
   - alias: Sortir maison (lumières)
@@ -352,6 +366,36 @@ automation:
     action:
       - service: light.turn_off
         entity_id: all
+
+  - alias: "Anti moustiques on"
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.maison
+        to: "armed_away"
+    action:
+      - service: switch.turn_on
+        target:
+          entity_id: switch.osram_cuisine
+
+  - alias: "Anti moustiques off"
+    trigger:
+      - platform: state
+        entity_id: alarm_control_panel.maison
+        to: "disarmed"
+    action:
+      - service: switch.turn_off
+        target:
+          entity_id: switch.osram_cuisine
+
+  - alias: "Anti moustiques toggle"
+    trigger:
+      - platform: state
+        entity_id: sensor.xiaomi_cuisine_action
+        to: "double"
+    action:
+      - service: switch.toggle
+        target:
+          entity_id: switch.osram_cuisine
 
   # ----- Spare
 
@@ -372,6 +416,8 @@ timer:
   chaussures:
     duration: "00:05:00"
   couloir:
+    duration: "00:05:00"
+  entree:
     duration: "00:05:00"
   cuisine_idle:
     duration: "00:00:05"

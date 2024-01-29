@@ -10,10 +10,8 @@ automation:
     action:
       - service: notify.mobile_app_iphone_de_le_gone
         data:
-          data:
-            push:
-              badge: 5
-              thread-id: home-assistant
+          push:
+            interruption-level: time-sensitive
           message: Appel passé depuis son lit
           title: Cléo aimerait passer un message
       - service: notify.alexa_media

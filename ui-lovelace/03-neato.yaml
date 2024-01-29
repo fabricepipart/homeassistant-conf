@@ -140,9 +140,13 @@ cards:
             type: entity-button
         
       - entities:
-          - entity: switch.conchita_schedule
           - entity: vacuum.conchita
+          - type: attribute
+            entity: vacuum.conchita
+            name: Status
+            attribute: status
           - entity: sensor.conchita_battery
+          - entity: switch.conchita_schedule
         type: entities
   - aspect_ratio: 100%
     camera_image: camera.conchita_cleaning_map

@@ -110,3 +110,9 @@
     ignore_availability: true
     name: https://plus.qconferences.com/my-calendar/0740a780-d405-4451-b9a0-fa0381e216ca
     track: true
+
+- cal_id: d7b1aea133f31b70d2f9eefab332d83f24cdff0b6f361ebc92b5eb5cc68ceeaf@group.calendar.google.com
+  entities:
+  - device_id: cleo
+    ignore_availability: true
+    name: "Cl\xE9o"

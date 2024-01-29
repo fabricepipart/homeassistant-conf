@@ -26,6 +26,12 @@ script.sleep_mac:
   icon: mdi:sleep
 binary_sensor.xiaomi_porte_contact:
   icon: "mdi:door-closed-lock"
+binary_sensor.xiaomi_fenetre_sam_contact:
+  icon: "mdi:door-closed-lock"
+binary_sensor.xiaomi_fenetre_cuisine_contact:
+  icon: "mdi:door-closed-lock"
+binary_sensor.xiaomi_fenetre_sdb_contact:
+  icon: "mdi:door-closed-lock"
 
 switch.netflix:
   icon: "mdi:netflix"

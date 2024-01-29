@@ -138,12 +138,13 @@ automation:
   - alias: Neato Cuisine (Programmation Ecole)
     trigger:
       platform: time
-      at: "07:10:00"
+      at: "07:05:00"
     condition:
       - condition: time
         weekday:
           - mon
           - tue
+          - wed
           - thu
           - fri
       - condition: state
@@ -168,12 +169,13 @@ automation:
   - alias: Neato Table basse (Programmation Ecole)
     trigger:
       platform: time
-      at: "07:35:00"
+      at: "07:30:00"
     condition:
       - condition: time
         weekday:
           - mon
           - tue
+          - wed
           - thu
           - fri
       - condition: state
@@ -195,75 +197,120 @@ automation:
           minutes: "{{ 35 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | float }}"
       - service: script.neato_table_basse
 
-  - alias: Neato Cuisine (Programmation Vacances)
+  - alias: Neato Entrée (Away)
     trigger:
       platform: time
-      at: "09:20:00"
+      at: "11:00:00"
     condition:
       - condition: time
         weekday:
           - mon
           - wed
-          - fri
-      - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
-      - condition: state
-        entity_id: input_boolean.vacations
-        state: "on"
-    action:
-      - service: script.neato_cuisine
-
-  - alias: Neato Table basse (Programmation Vacances)
-    trigger:
-      platform: time
-      at: "09:30:00"
-    condition:
-      - condition: state
-        entity_id: media_player.rx_v475
-        state: "off"
-      - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
-      - condition: state
-        entity_id: input_boolean.vacations
-        state: "on"
-    action:
-      - service: script.neato_table_basse
-
-  - alias: Neato Entrée (Programmation)
-    trigger:
-      platform: time
-      at: "07:40:00"
-    condition:
-      - condition: time
-        weekday:
-          - tue
+          - sat
+          - sun
       - condition: state
         entity_id: switch.conchita_schedule
         state: "on"
       - condition: state
         entity_id: input_boolean.vacations
         state: "off"
+      - condition: state
+        entity_id: alarm_control_panel.maison
+        state: armed_away
     action:
       - service: script.neato_entree
 
-  - alias: Neato Couloir (Programmation)
+  - alias: Neato Cuisine (Away)
     trigger:
       platform: time
-      at: "07:40:00"
+      at: "11:20:00"
     condition:
       - condition: time
         weekday:
-          - thu
+          - mon
+          - wed
+          - sat
+          - sun
+      - condition: state
+        entity_id: switch.conchita_schedule
+        state: "on"
+      - condition: state
+        entity_id: input_boolean.vacations
+        state: "on"
+      - condition: state
+        entity_id: alarm_control_panel.maison
+        state: armed_away
+    action:
+      - service: script.neato_cuisine
+
+  - alias: Neato Table basse (Away)
+    trigger:
+      platform: time
+      at: "11:40:00"
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - wed
+          - sat
+          - sun
+      - condition: state
+        entity_id: switch.conchita_schedule
+        state: "on"
+      - condition: state
+        entity_id: input_boolean.vacations
+        state: "on"
+      - condition: state
+        entity_id: alarm_control_panel.maison
+        state: armed_away
+    action:
+      - service: script.neato_table_basse
+
+  - alias: Neato Couloir (Away)
+    trigger:
+      platform: time
+      at: "16:20:00"
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - wed
+          - sat
+          - sun
       - condition: state
         entity_id: switch.conchita_schedule
         state: "on"
       - condition: state
         entity_id: input_boolean.vacations
         state: "off"
+      - condition: state
+        entity_id: alarm_control_panel.maison
+        state: armed_away
     action:
       - service: script.neato_couloir
+
+  - alias: Neato Salle à Manger (Away)
+    trigger:
+      platform: time
+      at: "16:40:00"
+    condition:
+      - condition: time
+        weekday:
+          - mon
+          - wed
+          - sat
+          - sun
+      - condition: state
+        entity_id: switch.conchita_schedule
+        state: "on"
+      - condition: state
+        entity_id: input_boolean.vacations
+        state: "off"
+      - condition: state
+        entity_id: alarm_control_panel.maison
+        state: armed_away
+    action:
+      - service: script.neato_sam
 
   ################### Erreurs ###################
 
@@ -280,10 +327,8 @@ automation:
     action:
       - service: notify.mobile_app_iphone_de_le_gone
         data:
-          data:
-            push:
-              badge: 5
-              thread-id: home-assistant
+          push:
+            interruption-level: time-sensitive
           message: Quelqu'un pourrait la remettre sur sa base?
           title: Conchita se décharge anormalement
       - service: notify.alexa_media_echo_salon

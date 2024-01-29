@@ -266,7 +266,7 @@ cards:
         style:
           color: rgba(0,0,0,0)
           left: 7%
-          top: 90%
+          top: 96%
           font-size: 10px
       - type: state-badge
         entity: sensor.temperature_sdb
@@ -330,13 +330,6 @@ cards:
       #----------------- People -----------------
       - type: state-badge
         entity: person.fabrice_pipart
-        style:
-          color: rgba(0,0,0,0)
-          left: 80%
-          top: 10%
-          font-size: 10px
-      - type: state-badge
-        entity: person.marina_pipart
         style:
           color: rgba(0,0,0,0)
           left: 90%
@@ -479,6 +472,31 @@ cards:
         style:
           left: 92%
           top: 71%
+          "--paper-item-icon-color": red
+        type: state-icon
+
+      - entity: binary_sensor.xiaomi_fenetre_sam_contact
+        icon: "mdi:door-closed-lock"
+        style:
+          left: 45%
+          top: 16%
+          "--paper-item-icon-color": red
+        type: state-icon
+
+      - entity: binary_sensor.xiaomi_fenetre_sdb_contact
+        icon: "mdi:door-closed-lock"
+        style:
+          left: 7%
+          top: 44%
+          "--paper-item-icon-color": red
+        type: state-icon
+
+      - entity: binary_sensor.xiaomi_fenetre_cuisine_contact
+        icon: "mdi:door-closed-lock"
+        style:
+          left: 7%
+          top: 83%
+          "--paper-item-icon-color": red
         type: state-icon
 
       - type: state-badge

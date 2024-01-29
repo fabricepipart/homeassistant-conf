@@ -55,7 +55,6 @@ cards:
                 hold_action:
                   action: more-info
 
-                  
           - type: horizontal-stack
             cards:
               - type: history-graph
@@ -68,8 +67,11 @@ cards:
                     name: Seche linge
                   - entity: sensor.tuya_power_cuisine_power
                     name: Lave vaisselle
+                  - entity: sensor.tuya_ordi_power
+                    name: Hackintosh
+                  - entity: sensor.tuya_tv_power
+                    name: TV
 
-                  
           - type: horizontal-stack
             cards:
               - type: custom:button-card
@@ -88,7 +90,7 @@ cards:
                   action: toggle
                 hold_action:
                   action: more-info
-                  
+
               - type: custom:button-card
                 name: Seche linge
                 entity: switch.tuya_power_sdb_dry
@@ -123,20 +125,45 @@ cards:
                 hold_action:
                   action: more-info
 
+              - type: custom:button-card
+                name: Hackintosh
+                entity: switch.tuya_ordi
+                label: |
+                  [[[ return states['sensor.tuya_ordi_power'].state + ' W'; ]]]
+                show_name: true
+                show_last_changed: false
+                show_state: false
+                show_label: true
+                color: auto
+                color_type: icon
+                icon: "mdi:power-socket-eu"
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+
+              - type: custom:button-card
+                name: TV
+                entity: switch.tuya_tv
+                label: |
+                  [[[ return states['sensor.tuya_tv_power'].state + ' W'; ]]]
+                show_name: true
+                show_last_changed: false
+                show_state: false
+                show_label: true
+                color: auto
+                color_type: icon
+                icon: "mdi:power-socket-eu"
+                tap_action:
+                  action: toggle
+                hold_action:
+                  action: more-info
+
           - title: iPhone
             type: horizontal-stack
             cards:
               - entity: sensor.iphone_de_le_gone_battery_level
                 name: iPhone Fabrice
-                min: 0
-                max: 100
-                severity:
-                  green: 60
-                  yellow: 40
-                  red: 20
-                type: gauge
-              - entity: sensor.iphone_de_marina_battery_level
-                name: iPhone Marina
                 min: 0
                 max: 100
                 severity:

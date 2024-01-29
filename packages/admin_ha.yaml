@@ -3,17 +3,13 @@
 ###############################################################
 
 sensor:
-  #   - platform: sql
-  #     db_url: !secret psql_url
-  #     queries:
-  #       - name: DB size
-  #         query: "SELECT (pg_database_size('homeassistant')/1024/1024) as db_size"
-  #         column: "db_size"
-  #         unit_of_measurement: MB
-
-  - platform: filesize
-    file_paths:
-      - /config/home-assistant_v2.db
+#   - platform: sql
+#     db_url: !secret psql_url
+#     queries:
+#       - name: DB size
+#         query: "SELECT (pg_database_size('homeassistant')/1024/1024) as db_size"
+#         column: "db_size"
+#         unit_of_measurement: MB
 
 ###############################################################
 # Automation
@@ -27,16 +23,6 @@ automation:
       platform: homeassistant
       event: start
     action:
-      - alias: ""
-        data:
-          data:
-            push:
-              badge: 5
-              thread-id: home-assistant
-            subtitle: Démarrage terminé
-          message: Le redémarrage était-il intentionnel?
-          title: Redémarrage de Home Assistant
-        service: notify.mobile_app_iphone_de_le_gone
       - service: notify.alexa_media_echo_salon
         data:
           message: Home Assistant a fini de redémarrer!

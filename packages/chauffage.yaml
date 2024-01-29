@@ -1,47 +1,44 @@
-
 ###############################################################
 # Automation
 ###############################################################
 automation:
-
   - alias: Chauffage SdB On
     trigger:
-    - entity_id: light.sonoff_salle_de_bain
-      platform: state
-      from: 'off'
-      to: 'on'
+      - entity_id: light.sonoff_salle_de_bain
+        platform: state
+        from: "off"
+        to: "on"
     condition:
-    - condition: time
-      after: '06:00:00'
-      before: '12:00:00'
-    - condition: numeric_state
-      entity_id: sensor.temperature_sdb
-      below: 23
+      - condition: time
+        after: "06:00:00"
+        before: "08:30:00"
+      - condition: numeric_state
+        entity_id: sensor.temperature_sdb
+        below: 23
     action:
-    - service: switch.turn_on
-      entity_id: switch.osram_sdb
+      - service: switch.turn_on
+        entity_id: switch.tuya_power_sdb_chauffage
 
   - alias: Chauffage SdB Toggle
     trigger:
-    - platform: state
-      entity_id: sensor.xiaomi_sdb_action
-      to: "hold_left"
-    - platform: state
-      entity_id: sensor.xiaomi_sdb_action
-      to: "double_left"
+      - platform: state
+        entity_id: sensor.xiaomi_sdb_action
+        to: "hold_left"
+      - platform: state
+        entity_id: sensor.xiaomi_sdb_action
+        to: "double_left"
     action:
-    - service: switch.toggle
-      entity_id: switch.osram_sdb
-      
+      - service: switch.toggle
+        entity_id: switch.tuya_power_sdb_chauffage
+
   - alias: Chauffage SdB Off
     trigger:
-    - entity_id: light.sonoff_salle_de_bain
-      platform: state
-      to: 'off'
-    - platform: numeric_state
-      entity_id: sensor.temperature_sdb
-      above: 24
+      - entity_id: light.sonoff_salle_de_bain
+        platform: state
+        to: "off"
+      - platform: numeric_state
+        entity_id: sensor.temperature_sdb
+        above: 24
     action:
-    - service: switch.turn_off
-      entity_id: switch.osram_sdb
-      
+      - service: switch.turn_off
+        entity_id: switch.tuya_power_sdb_chauffage
