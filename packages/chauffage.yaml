@@ -39,6 +39,10 @@ automation:
       - platform: numeric_state
         entity_id: sensor.temperature_sdb
         above: 24
+      - platform: state
+        entity_id: binary_sensor.xiaomi_fenetre_sdb_contact
+        from: "off"
+        to: "on"
     action:
       - service: switch.turn_off
         entity_id: switch.tuya_power_sdb_chauffage

@@ -159,8 +159,7 @@ cards:
                 hold_action:
                   action: more-info
 
-          - title: iPhone
-            type: horizontal-stack
+          - type: horizontal-stack
             cards:
               - entity: sensor.iphone_de_le_gone_battery_level
                 name: iPhone Fabrice
@@ -171,18 +170,37 @@ cards:
                   yellow: 40
                   red: 20
                 type: gauge
-
-          - title: Gateway
-            type: horizontal-stack
-            cards:
               - type: light
                 entity: light.gateway_light_7811dcfaa3ee
                 name: LED
+
+          - type: horizontal-stack
+            cards:
               - entity: sensor.illumination_7811dcfaa3ee
-                name: Lux
+                name: Entrée
                 unit: lm
                 min: 0
-                max: 1000
+                max: 2000
+                severity:
+                  green: 600
+                  yellow: 400
+                  red: 200
+                type: gauge
+              - entity: sensor.tuya_presence_wc_illuminance_lux
+                name: WC
+                unit: lm
+                min: 0
+                max: 2000
+                severity:
+                  green: 600
+                  yellow: 400
+                  red: 200
+                type: gauge
+              - entity: sensor.tuya_presence_cuisine_illuminance_lux
+                name: Cuisine
+                unit: lm
+                min: 0
+                max: 2000
                 severity:
                   green: 600
                   yellow: 400

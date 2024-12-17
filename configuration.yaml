@@ -39,7 +39,7 @@ lovelace:
 
 #meteo_france: !include meteo.yaml
 shell_command: !include shell.yaml
-sensor: !include sensor.yaml
+#sensor: !include sensor.yaml
 
 recorder:
   auto_purge: true

@@ -335,6 +335,13 @@ cards:
           left: 90%
           top: 10%
           font-size: 10px
+      - type: state-badge
+        entity: person.cleo_pipart
+        style:
+          color: rgba(0,0,0,0)
+          left: 95%
+          top: 10%
+          font-size: 10px
 
       #----------------- Activities -----------------
 
@@ -352,18 +359,18 @@ cards:
           top: 28%
           "--paper-item-icon-color": purple
         type: state-icon
-      - entity: media_player.rx_v475
-        icon: mdi:audio-video
-        show_state: false
-        tap_action:
-          action: toggle
-        hold_action:
-          action: more-info
-        style:
-          left: 57.2%
-          top: 34%
-          "--paper-item-icon-color": purple
-        type: state-icon
+      # - entity: media_player.rx_v475
+      #   icon: mdi:audio-video
+      #   show_state: false
+      #   tap_action:
+      #     action: toggle
+      #   hold_action:
+      #     action: more-info
+      #   style:
+      #     left: 57.2%
+      #     top: 34%
+      #     "--paper-item-icon-color": purple
+      #   type: state-icon
       - entity: script.sleep_mac
         icon: "mdi:desktop-tower"
         tap_action:
@@ -467,7 +474,7 @@ cards:
         type: state-icon
 
       #----------------- Alarm -----------------
-      - entity: binary_sensor.xiaomi_porte_contact
+      - entity: binary_sensor.xiaomi_door_contact
         icon: "mdi:door-closed-lock"
         style:
           left: 92%

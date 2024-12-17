@@ -33,14 +33,22 @@ script:
   lavage_dents:
     alias: Lavage dents
     sequence:
-      - service: notify.alexa_media
-        data:
-          target:
-            - media_player.echo_de_cleo
+      - service: media_player.play_media
+        target:
+          entity_id:
             - media_player.echo_salon
-          message: La salle de bain est disponible pour Cléo. Elle peut venir dès qu'elle a finit ce qu'elle est en train de faire.
-          data:
-            type: announce
+            - media_player.echo_cuisine
+            - media_player.echo_de_cleo
+        data:
+          media_content_type: sound
+          media_content_id: air_horn_03
+
+  switch_reveil:
+    alias: Switch reveil
+    sequence:
+      - service: input_boolean.toggle
+        target:
+          entity_id: input_boolean.reveil_cleo
 
 ###############################################################
 # Automation
@@ -83,7 +91,7 @@ automation:
     description: ""
     trigger:
       platform: time
-      at: "06:54:00"
+      at: "06:45:00"
     condition:
       - condition: time
         weekday:

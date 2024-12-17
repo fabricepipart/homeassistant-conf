@@ -77,9 +77,6 @@ automation:
       - condition: state
         entity_id: switch.tuya_tv
         state: "off"
-      - condition: state
-        entity_id: media_player.appletv
-        state: "off"
     action:
       - service: switch.turn_on
         entity_id: switch.tuya_tv

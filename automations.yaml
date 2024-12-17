@@ -1,0 +1,43 @@
+- id: '1711572975698'
+  alias: 'Aspi partout '
+  description: ''
+  trigger:
+  - event_type: ios.action_fired
+    platform: event
+    event_data:
+      actionID: 20FA5864-70A0-4A36-A4CF-B8088975B84D
+  condition: []
+  action:
+  - service: script.neato_sam
+    metadata: {}
+    data: {}
+  - service: script.neato_couloir
+    metadata: {}
+    data: {}
+  - service: script.neato_cuisine
+    metadata: {}
+    data: {}
+  - service: script.neato_entree
+    metadata: {}
+    data: {}
+  - service: script.neato_table
+    metadata: {}
+    data: {}
+  - service: script.neato_table_basse
+    metadata: {}
+    data: {}
+  mode: single
+- id: '1731108835305'
+  alias: Switch réveil
+  description: ''
+  triggers:
+  - event_type: ios.action_fired
+    event_data:
+      actionID: 979D45CC-52E1-4E9E-B233-72305016D786
+    trigger: event
+  conditions: []
+  actions:
+  - action: script.switch_reveil
+    metadata: {}
+    data: {}
+  mode: single

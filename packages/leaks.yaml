@@ -14,6 +14,14 @@ automation:
           entity_id: light.gateway_light_7811dcfaa3ee
           color_name: red
           brightness_pct: 100
+      - service: media_player.play_media
+        target:
+          entity_id:
+            - media_player.echo_salon
+            - media_player.echo_cuisine
+        data:
+          media_content_type: sound
+          media_content_id: amzn_sfx_scifi_alarm_01
       - service: notify.alexa_media
         data:
           target:
@@ -66,6 +74,14 @@ automation:
           entity_id: light.gateway_light_7811dcfaa3ee
           color_name: red
           brightness_pct: 100
+      - service: media_player.play_media
+        target:
+          entity_id:
+            - media_player.echo_salon
+            - media_player.echo_cuisine
+        data:
+          media_content_type: sound
+          media_content_id: amzn_sfx_scifi_alarm_01
       - service: notify.alexa_media
         data:
           target:

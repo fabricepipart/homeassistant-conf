@@ -86,7 +86,7 @@ automation:
   - alias: Temps de trajet
     trigger:
       platform: time
-      at: "07:32:00"
+      at: "07:28:00"
     condition:
       - condition: time
         weekday:

@@ -3,7 +3,7 @@
 ################################################################################
 
 badges:
-  - binary_sensor.xiaomi_porte_contact
+  - binary_sensor.xiaomi_door_contact
   - binary_sensor.xiaomi_fenetre_sam_contact
   - binary_sensor.xiaomi_fenetre_cuisine_contact
   - binary_sensor.xiaomi_fenetre_sdb_contact
@@ -28,7 +28,7 @@ cards:
       - entity: input_boolean.sourdine_sirenes_gateway
       - entity: input_number.gateway_volume
       - entity: input_number.delai_boucle
-      - entity: binary_sensor.xiaomi_porte_contact
+      - entity: binary_sensor.xiaomi_door_contact
       - entity: binary_sensor.xiaomi_fenetre_sam_contact
       - entity: binary_sensor.xiaomi_fenetre_cuisine_contact
       - entity: binary_sensor.xiaomi_fenetre_sdb_contact
