@@ -26,7 +26,7 @@ automation:
         above: 20
     action:
       - alias: ""
-        service: notify.mobile_app_iphone_de_le_gone
+        service: notify.mobile_app_iphone_amadeus
         data:
           message: Pense à prendre ton blouson de moto étanche
           title: Risque de pluie
@@ -61,7 +61,7 @@ automation:
           data:
             push:
               interruption-level: time-sensitive
-        service: notify.mobile_app_iphone_de_le_gone
+        service: notify.mobile_app_iphone_amadeus
       - service: notify.alexa_media_echo_salon
         data:
           message: Attention, il pleut dehors.
@@ -103,7 +103,7 @@ automation:
         above: 20
     action:
       - alias: ""
-        service: notify.mobile_app_iphone_de_le_gone
+        service: notify.mobile_app_iphone_amadeus
         data:
           message: "{{ states('sensor.fabrice_to_work') }} minutes"
           title: Temps de trajet estimé
@@ -134,7 +134,7 @@ automation:
         above: 20
     action:
       - alias: ""
-        service: notify.mobile_app_iphone_de_le_gone
+        service: notify.mobile_app_iphone_amadeus
         data:
           message: "{{ states('sensor.fabrice_back_home') }} minutes"
           title: Temps de trajet estimé

@@ -222,8 +222,8 @@ cards:
               - entity: sensor.xiaomi_sam_battery
               - entity: sensor.xiaomi_entree_couloir_battery
               - entity: sensor.xiaomi_sdb_battery
-              - entity: sensor.xiaomi_marina_battery
-              - entity: sensor.xiaomi_fabrice_battery
+              - entity: sensor.xiaomi_chambre_gauche_battery
+              - entity: sensor.xiaomi_chambre_droite_battery
               - entity: sensor.xiaomi_shoes_battery
               - entity: sensor.xiaomi_wc_battery
               - entity: sensor.xiaomi_temp_cleo_battery
@@ -247,8 +247,8 @@ cards:
               - entity: sensor.xiaomi_sam_battery
               - entity: sensor.xiaomi_entree_couloir_battery
               - entity: sensor.xiaomi_sdb_battery
-              - entity: sensor.xiaomi_marina_battery
-              - entity: sensor.xiaomi_fabrice_battery
+              - entity: sensor.xiaomi_chambre_gauche_battery
+              - entity: sensor.xiaomi_chambre_droite_battery
               - entity: sensor.xiaomi_shoes_battery
               - entity: sensor.xiaomi_wc_battery
               - entity: sensor.xiaomi_temp_cleo_battery

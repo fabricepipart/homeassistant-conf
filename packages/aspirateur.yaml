@@ -136,9 +136,9 @@ automation:
   ################### Programmation ###################
 
   - alias: Neato Cuisine (Programmation Ecole)
-    trigger:
-      platform: time
-      at: "07:05:00"
+    triggers:
+      - trigger: time
+        at: "07:05:00"
     condition:
       - condition: time
         weekday:
@@ -157,14 +157,14 @@ automation:
         entity_id: input_boolean.reveil_cleo
         state: "on"
     action:
-      - service: notify.alexa_media_echo_salon
+      - action: notify.alexa_media_echo_salon
         data:
           message: Direction la salle de bain!
           data:
             type: announce
       - delay:
           minutes: "{{ 25 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | float }}"
-      - service: script.neato_cuisine
+      - action: script.neato_cuisine
 
   - alias: Neato Table basse (Programmation Ecole)
     trigger:
@@ -188,14 +188,14 @@ automation:
         entity_id: input_boolean.reveil_cleo
         state: "on"
     action:
-      - service: notify.alexa_media_echo_salon
+      - action: notify.alexa_media_echo_salon
         data:
           message: Direction l'école!
           data:
             type: announce
       - delay:
           minutes: "{{ 35 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | float }}"
-      - service: script.neato_table_basse
+      - action: script.neato_table_basse
 
   - alias: Neato Entrée (Away)
     trigger:
@@ -218,7 +218,7 @@ automation:
         entity_id: alarm_control_panel.maison
         state: armed_away
     action:
-      - service: script.neato_entree
+      - action: script.neato_entree
 
   - alias: Neato Cuisine (Away)
     trigger:
@@ -241,7 +241,7 @@ automation:
         entity_id: alarm_control_panel.maison
         state: armed_away
     action:
-      - service: script.neato_cuisine
+      - action: script.neato_cuisine
 
   - alias: Neato Table basse (Away)
     trigger:
@@ -264,7 +264,7 @@ automation:
         entity_id: alarm_control_panel.maison
         state: armed_away
     action:
-      - service: script.neato_table_basse
+      - action: script.neato_table_basse
 
   - alias: Neato Couloir (Away)
     trigger:
@@ -287,7 +287,8 @@ automation:
         entity_id: alarm_control_panel.maison
         state: armed_away
     action:
-      - service: script.neato_couloir
+      - action: script.neato_couloir
+        enabled: false
 
   - alias: Neato Salle à Manger (Away)
     trigger:
@@ -310,7 +311,7 @@ automation:
         entity_id: alarm_control_panel.maison
         state: armed_away
     action:
-      - service: script.neato_sam
+      - action: script.neato_sam
 
   ################### Erreurs ###################
 
@@ -325,7 +326,7 @@ automation:
         after: "07:00:00"
         before: "20:00:00"
     action:
-      - service: notify.mobile_app_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_amadeus
         data:
           push:
             interruption-level: time-sensitive

@@ -7,7 +7,7 @@ alarm_control_panel:
     code_arm_required: false
     code: !secret alarm_code
     arming_time: 30
-    delay_time: 30
+    delay_time: 60
     trigger_time: 4
     disarmed:
       trigger_time: 0
@@ -180,8 +180,7 @@ automation:
         for: "00:00:10"
       - condition: state
         entity_id: binary_sensor.xiaomi_door_contact
-        attribute: contact
-        state: false
+        state: "on"
     action:
       - service: light.turn_on
         data:
@@ -207,8 +206,7 @@ automation:
         state: disarmed
       - condition: state
         entity_id: binary_sensor.xiaomi_door_contact
-        attribute: contact
-        state: true
+        state: "off"
     action:
       - service: alarm_control_panel.alarm_arm_night
         entity_id: alarm_control_panel.maison
@@ -221,7 +219,7 @@ automation:
           brightness_pct: 25
       - delay:
           seconds: 5
-      - service: light.toggle
+      - service: light.turn_on
         entity_id: light.sonoff_chambre
 
   - alias: "Armer alarme (nuit auto)"
@@ -236,8 +234,7 @@ automation:
         state: disarmed
       - condition: state
         entity_id: binary_sensor.xiaomi_door_contact
-        attribute: contact
-        state: true
+        state: "off"
       # - condition: time
       #   after: "20:00:00"
       #   before: "06:40:00"
@@ -269,7 +266,7 @@ automation:
           message: Alarme activée
           data:
             type: announce
-      - service: notify.mobile_app_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_amadeus
         alias: "Notification alarme armée"
         data:
           message: Tout est sous contrôle
@@ -281,8 +278,8 @@ automation:
     trigger:
       - platform: state
         entity_id: binary_sensor.xiaomi_door_contact
-        attribute: contact
-        to: false
+        from: "off"
+        to: "on"
       - platform: state
         entity_id: binary_sensor.xiaomi_fenetre_sam_contact
         from: "off"
@@ -333,7 +330,7 @@ automation:
       entity_id: alarm_control_panel.maison
       to: "triggered"
     action:
-      - service: notify.mobile_app_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_amadeus
         alias: "Notification alarme déclenchée"
         data:
           message: Déclenchement de la sirène
@@ -407,7 +404,7 @@ automation:
       from: "armed_away"
       to: "disarmed"
     action:
-      - service: notify.mobile_app_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_amadeus
         alias: "Notification alarme déclenchée"
         data:
           message: Tout va bien

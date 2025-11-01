@@ -21,10 +21,9 @@ automation:
         before: "20:00:00"
       - condition: state
         entity_id: binary_sensor.xiaomi_fenetre_sdb_contact
-        attribute: contact
-        state: true
+        state: "off"
     action:
-      - service: notify.mobile_app_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_amadeus
         data:
           data:
             push:
@@ -46,8 +45,7 @@ automation:
     condition:
       - condition: state
         entity_id: binary_sensor.xiaomi_fenetre_sdb_contact
-        attribute: contact
-        state: true
+        state: "off"
       - condition: numeric_state
         entity_id: sensor.xiaomi_temp_sdb_temperature
         below: 20

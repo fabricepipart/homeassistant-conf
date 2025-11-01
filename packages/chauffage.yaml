@@ -14,9 +14,12 @@ automation:
         before: "08:30:00"
       - condition: numeric_state
         entity_id: sensor.temperature_sdb
-        below: 23
+        below: 22
+      - condition: numeric_state
+        entity_id: sensor.maison_realfeel_temperature
+        below: 10
     action:
-      - service: switch.turn_on
+      - action: switch.turn_on
         entity_id: switch.tuya_power_sdb_chauffage
 
   - alias: Chauffage SdB Toggle
@@ -28,7 +31,7 @@ automation:
         entity_id: sensor.xiaomi_sdb_action
         to: "double_left"
     action:
-      - service: switch.toggle
+      - action: switch.toggle
         entity_id: switch.tuya_power_sdb_chauffage
 
   - alias: Chauffage SdB Off
@@ -38,11 +41,11 @@ automation:
         to: "off"
       - platform: numeric_state
         entity_id: sensor.temperature_sdb
-        above: 24
+        above: 22
       - platform: state
         entity_id: binary_sensor.xiaomi_fenetre_sdb_contact
         from: "off"
         to: "on"
     action:
-      - service: switch.turn_off
+      - action: switch.turn_off
         entity_id: switch.tuya_power_sdb_chauffage

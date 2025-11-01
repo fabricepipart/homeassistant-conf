@@ -32,7 +32,7 @@ automation:
           message: Alerte! Fuite d'eau détectée à la cuisine!
           data:
             type: announce
-      - service: notify.mobile_app_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_amadeus
         alias: "Notification fuite cuisine"
         data:
           data:
@@ -92,7 +92,7 @@ automation:
           message: Une fuite d'eau a été détectée à la salle de bain!
           data:
             type: announce
-      - service: notify.mobile_app_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_amadeus
         alias: "Notification fuite salle de bain"
         data:
           data:

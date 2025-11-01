@@ -89,6 +89,9 @@ automation:
       - entity_id: switch.osram_cleo
         service: switch.toggle
 
+      - entity_id: switch.osram_globe
+        service: switch.toggle
+
   # ----- Chambre
 
   - alias: Lumière lit Parents
@@ -97,14 +100,11 @@ automation:
         entity_id: sensor.xiaomi_bedroom_action
         to: "single"
       - platform: state
-        entity_id: sensor.xiaomi_marina_action
+        entity_id: sensor.xiaomi_chambre_gauche_action
         to: "single"
       - platform: state
-        entity_id: sensor.xiaomi_fabrice_action
+        entity_id: sensor.xiaomi_chambre_droite_action
         to: "single"
-      - platform: state
-        entity_id: sensor.xiaomi_entree_couloir_action
-        to: "single_both"
     action:
       - service: light.toggle
         entity_id: light.sonoff_chambre
@@ -115,19 +115,19 @@ automation:
         entity_id: sensor.xiaomi_bedroom_action
         to: "double"
       - platform: state
-        entity_id: sensor.xiaomi_marina_action
+        entity_id: sensor.xiaomi_chambre_gauche_action
         to: "double"
       - platform: state
-        entity_id: sensor.xiaomi_fabrice_action
+        entity_id: sensor.xiaomi_chambre_droite_action
         to: "double"
       - platform: state
         entity_id: sensor.xiaomi_shoes_action
         to: "double"
       - platform: state
-        entity_id: sensor.xiaomi_fabrice_action
+        entity_id: sensor.xiaomi_chambre_droite_action
         to: "hold"
       - platform: state
-        entity_id: sensor.xiaomi_marina_action
+        entity_id: sensor.xiaomi_chambre_gauche_action
         to: "hold"
     action:
       - entity_id: switch.osram_chambre
@@ -135,55 +135,69 @@ automation:
 
   # ----- Cuisine
 
-  - alias: Lumière Cuisine
-    trigger:
-      - platform: state
-        entity_id: sensor.xiaomi_cuisine_action
-        to: "single"
-    condition:
-      - condition: state
-        entity_id: timer.cuisine_idle
-        state: idle
-    action:
-      - service: light.toggle
-        entity_id: light.sonoff_cuisine
-      - service: timer.start
-        target:
-          entity_id: timer.cuisine_idle
-
   - alias: Auto Cuisine
     use_blueprint:
-      path: homeassistant/motion_light_on.yaml
+      path: homeassistant/motion_light.yaml
       input:
         motion_sensor: binary_sensor.xiaomi_presence_cuisine_occupancy
-        light: light.sonoff_cuisine
-        timer: timer.cuisine_idle
-        min_lux: 20
+        motion_sensor_2: binary_sensor.tuya_presence_cuisine_presence
+        switch_sensor: sensor.xiaomi_cuisine_action
+        primary_light: light.sonoff_cuisine
+        light_sensor: sensor.tuya_presence_cuisine_illuminance
+        min_lux: 1200
+        no_motion_wait: 120
 
-  - alias: Auto Cuisine off
-    use_blueprint:
-      path: homeassistant/motion_light_off.yaml
-      input:
-        motion_sensor: binary_sensor.xiaomi_presence_cuisine_occupancy
-        light: light.sonoff_cuisine
-        timer: timer.cuisine_idle
+  # - alias: Lumière Cuisine
+  #   trigger:
+  #     - platform: state
+  #       entity_id: sensor.xiaomi_cuisine_action
+  #       to: "single"
+  #   condition:
+  #     - condition: state
+  #       entity_id: timer.cuisine_idle
+  #       state: idle
+  #   action:
+  #     - service: light.toggle
+  #       entity_id: light.sonoff_cuisine
+  #     - service: timer.start
+  #       target:
+  #         entity_id: timer.cuisine_idle
 
-  - alias: Auto Cuisine 2
-    use_blueprint:
-      path: homeassistant/motion_light_on.yaml
-      input:
-        motion_sensor: binary_sensor.tuya_presence_cuisine_presence
-        light: light.sonoff_cuisine
-        timer: timer.cuisine_idle
-        min_lux: 2000
+  # - alias: Auto Cuisine
+  #   use_blueprint:
+  #     path: homeassistant/motion_light_on.yaml
+  #     input:
+  #       motion_sensor: binary_sensor.xiaomi_presence_cuisine_occupancy
+  #       light: light.sonoff_cuisine
+  #       light_sensor: sensor.xiaomi_presence_cuisine_illuminance
+  #       timer: timer.cuisine_idle
+  #       min_lux: 20
 
-  - alias: Auto Cuisine off 2
-    use_blueprint:
-      path: homeassistant/motion_light_off.yaml
-      input:
-        motion_sensor: binary_sensor.tuya_presence_cuisine_presence
-        light: light.sonoff_cuisine
-        timer: timer.cuisine_idle
+  # - alias: Auto Cuisine off
+  #   use_blueprint:
+  #     path: homeassistant/motion_light_off.yaml
+  #     input:
+  #       motion_sensor: binary_sensor.xiaomi_presence_cuisine_occupancy
+  #       light: light.sonoff_cuisine
+  #       timer: timer.cuisine_idle
+
+  # - alias: Auto Cuisine 2
+  #   use_blueprint:
+  #     path: homeassistant/motion_light_on.yaml
+  #     input:
+  #       motion_sensor: binary_sensor.tuya_presence_cuisine_presence
+  #       light_sensor: sensor.tuya_presence_cuisine_illuminance
+  #       light: light.sonoff_cuisine
+  #       timer: timer.cuisine_idle
+  #       min_lux: 2000
+
+  # - alias: Auto Cuisine off 2
+  #   use_blueprint:
+  #     path: homeassistant/motion_light_off.yaml
+  #     input:
+  #       motion_sensor: binary_sensor.tuya_presence_cuisine_presence
+  #       light: light.sonoff_cuisine
+  #       timer: timer.cuisine_idle
 
   # - alias: Auto Cuisine radar
   #   trigger:
@@ -239,9 +253,8 @@ automation:
     trigger:
       - platform: state
         entity_id: binary_sensor.xiaomi_door_contact
-        attribute: contact
-        from: true
-        to: false
+        from: "off"
+        to: "on"
     condition:
       - condition: state
         entity_id: alarm_control_panel.maison
@@ -257,9 +270,8 @@ automation:
     trigger:
       - platform: state
         entity_id: binary_sensor.xiaomi_door_contact
-        attribute: contact
-        from: false
-        to: true
+        from: "on"
+        to: "off"
     condition:
       - condition: state
         entity_id: alarm_control_panel.maison
@@ -350,41 +362,42 @@ automation:
           - light.sonoff_shoes
 
   # ----- WC
-  - alias: Lumière WC
-    trigger:
-      - platform: state
-        entity_id: sensor.xiaomi_wc_action
-        to: "single"
-      - platform: state
-        entity_id: sensor.xiaomi_wc_action
-        to: "double"
-    condition:
-      condition: not
-      conditions:
-        - condition: time
-          after: "22:00:00"
-          before: "08:00:00"
-    action:
-      - service: light.toggle
-        entity_id: light.sonoff_wc
-      - service: light.toggle
-        entity_id: light.sonoff_wc_wall
 
-  - alias: Lumière WC nuit
-    trigger:
-      - platform: state
-        entity_id: sensor.xiaomi_wc_action
-        to: "single"
-      - platform: state
-        entity_id: sensor.xiaomi_wc_action
-        to: "double"
-    condition:
-      condition: time
-      after: "22:00:00"
-      before: "08:00:00"
-    action:
-      - service: light.toggle
-        entity_id: light.sonoff_wc_wall
+  # - alias: Lumière WC
+  #   trigger:
+  #     - platform: state
+  #       entity_id: sensor.xiaomi_wc_action
+  #       to: "single"
+  #     - platform: state
+  #       entity_id: sensor.xiaomi_wc_action
+  #       to: "double"
+  #   condition:
+  #     condition: not
+  #     conditions:
+  #       - condition: time
+  #         after: "22:00:00"
+  #         before: "08:00:00"
+  #   action:
+  #     - service: light.toggle
+  #       entity_id: light.sonoff_wc
+  #     - service: light.toggle
+  #       entity_id: light.sonoff_wc_wall
+
+  # - alias: Lumière WC nuit
+  #   trigger:
+  #     - platform: state
+  #       entity_id: sensor.xiaomi_wc_action
+  #       to: "single"
+  #     - platform: state
+  #       entity_id: sensor.xiaomi_wc_action
+  #       to: "double"
+  #   condition:
+  #     condition: time
+  #     after: "22:00:00"
+  #     before: "08:00:00"
+  #   action:
+  #     - service: light.toggle
+  #       entity_id: light.sonoff_wc_wall
 
   - alias: Lumière WC resync off
     trigger:
@@ -395,29 +408,29 @@ automation:
       - service: light.turn_off
         entity_id: light.sonoff_wc_wall, light.sonoff_wc
 
-  - alias: Lumière WC autoresync
-    trigger:
-      platform: time
-      at: "08:00:00"
-    condition:
-      - condition: state
-        entity_id: light.sonoff_wc_wall
-        state: "on"
-    action:
-      - service: light.turn_on
-        entity_id: light.sonoff_wc
+  # - alias: Lumière WC autoresync
+  #   trigger:
+  #     platform: time
+  #     at: "08:00:00"
+  #   condition:
+  #     - condition: state
+  #       entity_id: light.sonoff_wc_wall
+  #       state: "on"
+  #   action:
+  #     - service: light.turn_on
+  #       entity_id: light.sonoff_wc
 
-  - alias: Lumière WC autoresync night
-    trigger:
-      platform: time
-      at: "22:00:00"
-    condition:
-      - condition: state
-        entity_id: light.sonoff_wc
-        state: "on"
-    action:
-      - service: light.turn_off
-        entity_id: light.sonoff_wc
+  # - alias: Lumière WC autoresync night
+  #   trigger:
+  #     platform: time
+  #     at: "22:00:00"
+  #   condition:
+  #     - condition: state
+  #       entity_id: light.sonoff_wc
+  #       state: "on"
+  #   action:
+  #     - service: light.turn_off
+  #       entity_id: light.sonoff_wc
 
   # - alias: Auto WC radar
   #   trigger:
@@ -426,6 +439,46 @@ automation:
   #   action:
   #     - service: light.turn_{{trigger.to_state.state}}
   #       entity_id: light.sonoff_wc_wall, light.sonoff_wc
+
+  # - alias: Auto WC radar
+  #   trigger:
+  #     - platform: state
+  #       entity_id: binary_sensor.tuya_presence_wc_presence
+  #       to: "on"
+  #       from: "off"
+  #   condition:
+  #     condition: time
+  #     after: "08:00:00"
+  #     before: "23:59:00"
+  #   action:
+  #     - service: light.turn_on
+  #       entity_id: light.sonoff_wc
+  #     - service: light.turn_on
+  #       entity_id: light.sonoff_wc_wall
+
+  # - alias: Auto WC radar
+  #   use_blueprint:
+  #     path: homeassistant/motion_light_on.yaml
+  #     input:
+  #       motion_sensor: binary_sensor.tuya_presence_wc_presence
+  #       light_sensor: sensor.tuya_presence_wc_illuminance
+  #       light: light.sonoff_wc,light.sonoff_wc_wall
+  #       timer: timer.wc_idle
+  #       min_lux: 2000
+
+  - alias: Auto WC radar
+    use_blueprint:
+      path: homeassistant/motion_light.yaml
+      input:
+        motion_sensor: binary_sensor.tuya_presence_wc_presence
+        switch_sensor: sensor.xiaomi_wc_action
+        primary_light: light.sonoff_wc
+        secondary_light: light.sonoff_wc_wall
+        light_sensor: sensor.tuya_presence_wc_illuminance
+        min_lux: 2000
+        no_motion_wait: 300
+        day_start_hour: "08:00:00"
+        night_start_hour: "22:00:00"
 
   # ----- All
 
@@ -439,18 +492,16 @@ automation:
         entity_id: light.toutes_lumieres
 
   - alias: Sortir maison (lumières)
-    trigger:
-      - platform: state
-        entity_id: alarm_control_panel.maison
-        to: "armed_away"
-      - platform: state
-        entity_id: alarm_control_panel.maison
-        to: "armed_night"
-      - platform: state
-        entity_id: alarm_control_panel.maison
-        to: "pending"
-    action:
-      - service: light.turn_off
+    triggers:
+      - trigger: state
+        entity_id: sensor.xiaomi_entree_action
+        to: "hold"
+    conditions:
+      - condition: state
+        entity_id: binary_sensor.xiaomi_door_contact
+        state: "on"
+    actions:
+      - action: light.turn_off
         entity_id: light.toutes_lumieres
 
   - alias: "Anti moustiques on"
@@ -505,5 +556,3 @@ timer:
     duration: "00:05:00"
   entree:
     duration: "00:05:00"
-  cuisine_idle:
-    duration: "00:00:05"

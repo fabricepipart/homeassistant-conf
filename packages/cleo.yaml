@@ -8,7 +8,7 @@ automation:
         entity_id: sensor.xiaomi_cleo_up_action
         to: "hold"
     action:
-      - service: notify.mobile_app_iphone_de_le_gone
+      - service: notify.mobile_app_iphone_amadeus
         data:
           push:
             interruption-level: time-sensitive

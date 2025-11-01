@@ -118,7 +118,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: sensor.tuya_power_sdb_wash_power
-        below: 10
+        below: 5
         for:
           minutes: 3
     action:
@@ -130,7 +130,7 @@ automation:
     trigger:
       - platform: numeric_state
         entity_id: sensor.tuya_power_sdb_dry_power
-        below: 10
+        below: 5
         for:
           minutes: 3
     action:
@@ -172,7 +172,7 @@ automation:
         data:
           message: Le lave linge est terminé
           title: Fin de machine
-        service: notify.mobile_app_iphone_de_le_gone
+        service: notify.mobile_app_iphone_amadeus
 
   - alias: Annonce fin seche linge
     trigger:
@@ -195,7 +195,7 @@ automation:
         data:
           message: Le sèche linge est terminé
           title: Fin de machine
-        service: notify.mobile_app_iphone_de_le_gone
+        service: notify.mobile_app_iphone_amadeus
 
   - alias: Annonce fin lave vaisselle
     trigger:
@@ -218,7 +218,7 @@ automation:
         data:
           message: Le lave vaisselle est terminé
           title: Fin de machine
-        service: notify.mobile_app_iphone_de_le_gone
+        service: notify.mobile_app_iphone_amadeus
 
   # ------------------ Bugs ------------------
   - alias: Bug power
@@ -246,7 +246,7 @@ automation:
       #         thread-id: home-assistant
       #     message: La prise du lave linge s'est éteinte
       #     title: La prise du lave linge s'est éteinte
-      #   service: notify.mobile_app_iphone_de_le_gone
+      #   service: notify.mobile_app_iphone_amadeus
       #- delay: 5
       - service: switch.turn_on
         entity_id: switch.tuya_power_cuisine
@@ -254,3 +254,28 @@ automation:
         entity_id: switch.tuya_power_sdb_wash
       - service: switch.turn_on
         entity_id: switch.tuya_power_sdb_dry
+
+  # ------------------ Moustiques ------------------
+  
+  - alias: Allumer la prise antimoustiques
+    mode: single
+    description: Allume la prise antimoustiques
+    trigger:
+      - platform: time
+        at: "12:00:00"
+      - platform: time
+        at: "17:00:00"
+      - platform: time
+        at: "19:30:00"
+      - platform: time
+        at: "22:00:00"
+    action:
+      - service: switch.turn_on
+        target:
+          entity_id: switch.tuya_moustiques
+          entity_id: switch.tuya_moustiques_cleo
+      - delay: "01:00:00" # attend 2h
+      - service: switch.turn_off
+        target:
+          entity_id: switch.tuya_moustiques
+          entity_id: switch.tuya_moustiques_cleo
