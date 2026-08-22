@@ -23,11 +23,11 @@ automation:
       platform: homeassistant
       event: start
     action:
-      - service: notify.alexa_media_echo_salon
+      - action: notify.send_message
         data:
           message: Home Assistant a fini de redémarrer!
-          data:
-            type: announce
+        target:
+          entity_id: notify.echo_salon_announce
 
   - id: letsencrypt-renewal
     alias: Let's Encrypt Renewal

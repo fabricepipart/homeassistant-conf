@@ -3,130 +3,219 @@
 ###############################################################
 
 script:
-  neato_clean:
+  roborock_clean:
     mode: queued
-    alias: Neato Room Cleaning
+    alias: Roborock Room Cleaning
     max: 10
     fields:
-      zone:
-        name: Zone
-        required: true
-        example: "Cuisine"
+      mop:
+        description: Run mop step after vacuum
+        selector:
+          boolean:
+      turbo:
+        description: Run fan speed at max speed
+        selector:
+          boolean:
+      rooms:
+        description: Room IDs to clean
         selector:
           select:
+            multiple: true
             options:
-              - "Cuisine"
-              - "Chambre Principale"
-              - "Salle De Bains"
-              - "Couloir"
-              - "Chambre Cléo"
-              - "Toilettes"
-              - "Entree"
-              - "Table"
-              - "Salle a Manger"
-              - "Table basse"
+              - "1"
+              - "2"
+              - "3"
+              - "4"
+              - "5"
+              - "6"
+              - "7"
+              - "8"
     sequence:
-      - wait_template: "{{ is_state('vacuum.conchita', 'docked') }}"
+      - wait_template: "{{ is_state('vacuum.medor', 'docked') }}"
         continue_on_timeout: false
         timeout: "00:20:00"
-      - service: neato.custom_cleaning
+      - action: select.select_option
+        target:
+          entity_id: select.medor_mop_intensity
         data:
-          entity_id: vacuum.conchita
-          mode: 1
-          navigation: 2
-          zone: "{{ zone }}"
-      - wait_for_trigger:
-          - platform: state
-            entity_id: vacuum.conchita
-            to: docked
+          option: "off"
+      - if:
+          - condition: template
+            value_template: "{{ mop | default(false) }}"
+        then:
+          - action: select.select_option
+            target:
+              entity_id: select.medor_mop_intensity
+            data:
+              option: "medium"
+      - if:
+          - condition: template
+            value_template: "{{ turbo | default(false) }}"
+        then:
+          - action: vacuum.set_fan_speed
+            target:
+              entity_id: vacuum.medor
+            data:
+              fan_speed: max_plus
+        else:
+          - action: vacuum.set_fan_speed
+            target:
+              entity_id: vacuum.medor
+            data:
+              fan_speed: balanced
+
+      - delay: "00:00:10"
+      - action: vacuum.send_command
+        target:
+          entity_id: vacuum.medor
+        data:
+          command: app_segment_clean
+          params:
+            - segments: "{{ rooms | map('int') | list }}"
+              repeat: 2
+      - delay: "00:00:10"
+      - wait_template: "{{ is_state('vacuum.medor', 'docked') }}"
         continue_on_timeout: false
         timeout: "00:20:00"
 
-  neato_stop:
-    alias: Stop aspirateur
+  roborock_aspirer_cuisine:
+    alias: Aspirer Cuisine
     sequence:
-      - service: vacuum.locate
+      - action: script.roborock_clean
         data:
-          entity_id: vacuum.conchita
-      - wait_template: "{{ state_attr('vacuum.conchita', 'status') != 'Eco Recovering Location' and state_attr('vacuum.conchita', 'status') != 'Charging' }}"
-        timeout: "00:01:00"
-        continue_on_timeout: false
-      - service: vacuum.pause
-        data:
-          entity_id: vacuum.conchita
-      - service: vacuum.return_to_base
-        data:
-          entity_id: vacuum.conchita
+          mop: false
+          rooms: "2"
 
-  neato_cuisine:
-    alias: Cuisine
+  roborock_aspirer_chambre:
+    alias: Aspirer Chambre
     sequence:
-      - service: script.neato_clean
+      - action: script.roborock_clean
         data:
-          zone: "Cuisine"
+          mop: false
+          rooms: "7"
 
-  neato_chambre:
-    alias: Chambre
+  roborock_aspirer_sdb:
+    alias: Aspirer SdB
     sequence:
-      - service: script.neato_clean
+      - action: script.roborock_clean
         data:
-          zone: "Chambre Principale"
+          mop: false
+          rooms: "6"
 
-  neato_sdb:
-    alias: SdB
+  roborock_aspirer_couloir:
+    alias: Aspirer Couloir
     sequence:
-      - service: script.neato_clean
+      - action: script.roborock_clean
         data:
-          zone: "Salle De Bains"
+          mop: false
+          rooms: "5"
 
-  neato_couloir:
-    alias: Couloir
+  roborock_aspirer_cleo:
+    alias: Aspirer Cléo
     sequence:
-      - service: script.neato_clean
+      - action: script.roborock_clean
         data:
-          zone: "Couloir"
+          mop: false
+          rooms: "4"
 
-  neato_cleo:
-    alias: Cléo
+  roborock_aspirer_wc:
+    alias: Aspirer Toilettes
     sequence:
-      - service: script.neato_clean
+      - action: script.roborock_clean
         data:
-          zone: "Chambre Cléo"
+          turbo: true
+          mop: false
+          rooms: "1"
 
-  neato_wc:
-    alias: Toilettes
+  roborock_aspirer_entree:
+    alias: Aspirer Entrée
     sequence:
-      - service: script.neato_clean
+      - action: script.roborock_clean
         data:
-          zone: "Toilettes"
+          mop: false
+          rooms: "8"
 
-  neato_entree:
-    alias: Entrée
+  roborock_aspirer_sam:
+    alias: Aspirer SàM
     sequence:
-      - service: script.neato_clean
+      - action: script.roborock_clean
         data:
-          zone: "Entree"
+          mop: false
+          rooms: "3"
 
-  neato_table:
-    alias: Table
+  roborock_laver_cuisine:
+    alias: Laver Cuisine
     sequence:
-      - service: script.neato_clean
+      - action: script.roborock_clean
         data:
-          zone: "Table"
+          mop: true
+          rooms: "2"
 
-  neato_sam:
-    alias: SàM
+  roborock_laver_chambre:
+    alias: Laver Chambre
     sequence:
-      - service: script.neato_clean
+      - action: script.roborock_clean
         data:
-          zone: "Salle a Manger"
+          mop: true
+          rooms: "7"
 
-  neato_table_basse:
-    alias: Table basse
+  roborock_laver_sdb:
+    alias: Laver SdB
     sequence:
-      - service: script.neato_clean
+      - action: script.roborock_clean
         data:
-          zone: "Table basse"
+          mop: true
+          rooms: "6"
+
+  roborock_laver_couloir:
+    alias: Laver Couloir
+    sequence:
+      - action: script.roborock_clean
+        data:
+          mop: true
+          rooms: "5"
+
+  roborock_laver_cleo:
+    alias: Laver Cléo
+    sequence:
+      - action: script.roborock_clean
+        data:
+          mop: true
+          rooms: "4"
+
+  roborock_laver_wc:
+    alias: Laver Toilettes
+    sequence:
+      - action: script.roborock_clean
+        data:
+          mop: true
+          rooms: "1"
+
+  roborock_laver_entree:
+    alias: Laver Entrée
+    sequence:
+      - action: script.roborock_clean
+        data:
+          mop: true
+          rooms: "8"
+
+  roborock_laver_sam:
+    alias: Laver SàM
+    sequence:
+      - action: script.roborock_clean
+        data:
+          mop: true
+          rooms: "3"
+
+  roborock_laver_table_basse:
+    alias: Laver Table basse
+    sequence:
+      - action: vacuum.send_command
+        target:
+          entity_id: vacuum.medor
+        data:
+          command: app_zoned_clean
+          params: [[29033, 31557, 30953, 34808]]
 
 ###############################################################
 # Automation
@@ -135,7 +224,23 @@ script:
 automation:
   ################### Programmation ###################
 
-  - alias: Neato Cuisine (Programmation Ecole)
+  - alias: Roborock entree
+    triggers:
+      - trigger: time
+        at: "10:00:00"
+      - trigger: time
+        at: "16:00:00"
+    condition:
+      - condition: state
+        entity_id: input_boolean.vacations
+        state: "off"
+      - condition: state
+        entity_id: input_boolean.reveil_cleo
+        state: "on"
+    action:
+      - action: script.roborock_aspirer_entree
+
+  - alias: Roborock Cuisine (Programmation Ecole)
     triggers:
       - trigger: time
         at: "07:05:00"
@@ -147,9 +252,7 @@ automation:
           - wed
           - thu
           - fri
-      - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
+
       - condition: state
         entity_id: input_boolean.vacations
         state: "off"
@@ -157,60 +260,20 @@ automation:
         entity_id: input_boolean.reveil_cleo
         state: "on"
     action:
-      - action: notify.alexa_media_echo_salon
+      - action: notify.send_message
         data:
           message: Direction la salle de bain!
-          data:
-            type: announce
+        target:
+          entity_id: notify.echo_salon_announce
       - delay:
-          minutes: "{{ 25 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | float }}"
-      - action: script.neato_cuisine
+          minutes: "{{ 60 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | float }}"
+      - action: script.roborock_aspirer_cuisine
 
-  - alias: Neato Table basse (Programmation Ecole)
-    trigger:
-      platform: time
-      at: "07:30:00"
+  - alias: Roborock (Away)
+    triggers:
+      - trigger: time
+        at: "11:00:00"
     condition:
-      - condition: time
-        weekday:
-          - mon
-          - tue
-          - wed
-          - thu
-          - fri
-      - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
-      - condition: state
-        entity_id: input_boolean.vacations
-        state: "off"
-      - condition: state
-        entity_id: input_boolean.reveil_cleo
-        state: "on"
-    action:
-      - action: notify.alexa_media_echo_salon
-        data:
-          message: Direction l'école!
-          data:
-            type: announce
-      - delay:
-          minutes: "{{ 35 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | float }}"
-      - action: script.neato_table_basse
-
-  - alias: Neato Entrée (Away)
-    trigger:
-      platform: time
-      at: "11:00:00"
-    condition:
-      - condition: time
-        weekday:
-          - mon
-          - wed
-          - sat
-          - sun
-      - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
       - condition: state
         entity_id: input_boolean.vacations
         state: "off"
@@ -218,222 +281,79 @@ automation:
         entity_id: alarm_control_panel.maison
         state: armed_away
     action:
-      - action: script.neato_entree
-
-  - alias: Neato Cuisine (Away)
-    trigger:
-      platform: time
-      at: "11:20:00"
-    condition:
-      - condition: time
-        weekday:
-          - mon
-          - wed
-          - sat
-          - sun
-      - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
-      - condition: state
-        entity_id: input_boolean.vacations
-        state: "on"
-      - condition: state
-        entity_id: alarm_control_panel.maison
-        state: armed_away
-    action:
-      - action: script.neato_cuisine
-
-  - alias: Neato Table basse (Away)
-    trigger:
-      platform: time
-      at: "11:40:00"
-    condition:
-      - condition: time
-        weekday:
-          - mon
-          - wed
-          - sat
-          - sun
-      - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
-      - condition: state
-        entity_id: input_boolean.vacations
-        state: "on"
-      - condition: state
-        entity_id: alarm_control_panel.maison
-        state: armed_away
-    action:
-      - action: script.neato_table_basse
-
-  - alias: Neato Couloir (Away)
-    trigger:
-      platform: time
-      at: "16:20:00"
-    condition:
-      - condition: time
-        weekday:
-          - mon
-          - wed
-          - sat
-          - sun
-      - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
-      - condition: state
-        entity_id: input_boolean.vacations
-        state: "off"
-      - condition: state
-        entity_id: alarm_control_panel.maison
-        state: armed_away
-    action:
-      - action: script.neato_couloir
-        enabled: false
-
-  - alias: Neato Salle à Manger (Away)
-    trigger:
-      platform: time
-      at: "16:40:00"
-    condition:
-      - condition: time
-        weekday:
-          - mon
-          - wed
-          - sat
-          - sun
-      - condition: state
-        entity_id: switch.conchita_schedule
-        state: "on"
-      - condition: state
-        entity_id: input_boolean.vacations
-        state: "off"
-      - condition: state
-        entity_id: alarm_control_panel.maison
-        state: armed_away
-    action:
-      - action: script.neato_sam
-
-  ################### Erreurs ###################
-
-  - alias: Conchita se decharge
-    trigger:
-      - entity_id: sensor.conchita_battery
-        from: "1"
-        platform: state
-        to: "80"
-    condition:
-      - condition: time
-        after: "07:00:00"
-        before: "20:00:00"
-    action:
-      - service: notify.mobile_app_iphone_amadeus
+      - action: script.roborock_clean
         data:
-          push:
-            interruption-level: time-sensitive
-          message: Quelqu'un pourrait la remettre sur sa base?
-          title: Conchita se décharge anormalement
-      - service: notify.alexa_media_echo_salon
+          mop: false
+          rooms:
+            - "2"
+            - "3"
+            - "8"
+            - "1"
+            - "5"
+            - "6"
+      - action: script.roborock_clean
         data:
-          message: Conchita se décharge anormalement. Quelqu'un pourrait la remettre sur sa base?
-          data:
-            type: announce
-
-  - alias: Conchita en erreur
-    trigger:
-      - entity_id: vacuum.conchita
-        to: error
-        platform: state
-        for: "00:10:00"
-    condition:
-      - condition: time
-        after: "07:00:00"
-        before: "20:00:00"
-    action:
-      - service: notify.alexa_media_echo_salon
-        data:
-          message: Conchita a un soucis, quelqu'un veut bien l'aider?
-          data:
-            type: announce
-
-  - alias: Conchita offline
-    trigger:
-      - entity_id: vacuum.conchita
-        to: unavailable
-        platform: state
-        for: "00:10:00"
-    condition:
-      - condition: time
-        after: "07:00:00"
-        before: "20:00:00"
-    action:
-      - service: notify.alexa_media_echo_salon
-        data:
-          message: Conchita est déconnectée, quelqu'un veut bien l'aider?
-          data:
-            type: announce
-
-  - alias: Conchita laisse tomber
-    trigger:
-      - entity_id: vacuum.conchita
-        to: error
-        platform: state
-        for: "00:02:00"
-    condition: []
-    action:
-      - service: script.neato_stop
+          mop: true
+          rooms:
+            - "2"
+            - "3"
+            - "8"
+            - "1"
+            - "5"
+            - "6"
 
   ################### Boutons ###################
 
   - alias: Aspirateur Salle à manger et salon
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: sensor.xiaomi_sam_action
         to: "hold_both"
     action:
-      - service: script.neato_sam
+      - action: script.roborock_laver_sam
 
   - alias: Aspirateur Cléo
-    trigger:
-      - platform: state
-        entity_id: sensor.xiaomi_cleo
+    triggers:
+      - trigger: state
+        entity_id: sensor.xiaomi_cleo_action
         to: "hold"
     action:
-      - service: script.neato_cleo
+      - action: script.roborock_laver_cleo
 
   - alias: Aspirateur Parents
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: sensor.xiaomi_bedroom_action
         to: "hold"
     action:
-      - service: script.neato_chambre
+      - action: script.roborock_laver_chambre
 
   - alias: Aspirateur Cuisine
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: sensor.xiaomi_cuisine_action
         to: "hold"
     action:
-      - service: script.neato_cuisine
+      - action: script.roborock_laver_cuisine
 
   - alias: Aspirateur entrée
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: sensor.xiaomi_entree_couloir_action
         to: "hold_left"
     action:
-      - service: script.neato_entree
+      - action: script.roborock_aspirer_entree
 
   - alias: Aspirateur couloir
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: sensor.xiaomi_entree_couloir_action
         to: "hold_right"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sdb_action
         to: "hold_right"
-      - platform: state
-        entity_id: sensor.xiaomi_couloir
+      - trigger: state
+        entity_id: sensor.xiaomi_couloir_action
         to: "hold"
     action:
-      - service: script.neato_couloir
+      - action: script.roborock_laver_couloir

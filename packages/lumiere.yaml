@@ -48,108 +48,123 @@ automation:
 
   - alias: Lumière salon
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sam_action
         to: "single_right"
     action:
-      - service: light.toggle
+      - action: light.toggle
         entity_id: light.sonoff_salon
 
   - alias: Lumière salle à manger
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sam_action
         to: "single_left"
     action:
-      - service: light.toggle
+      - action: light.toggle
         entity_id: light.sonoff_sam
   # ----- Cleo
 
   - alias: Lumière Cléo
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_cleo_action
         to: "single"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_cleo_up_action
         to: "single"
     action:
-      - service: light.toggle
+      - action: light.toggle
         entity_id: light.sonoff_cleo
 
   - alias: Lumière Cléo indirecte
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: sensor.xiaomi_cleo_action
         to: "double"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_cleo_up_action
         to: "double"
     action:
       - entity_id: switch.osram_cleo
-        service: switch.toggle
+        action: switch.toggle
 
       - entity_id: switch.osram_globe
-        service: switch.toggle
+        action: switch.toggle
 
   # ----- Chambre
 
   - alias: Lumière lit Parents
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_bedroom_action
         to: "single"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_chambre_gauche_action
         to: "single"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_chambre_droite_action
         to: "single"
     action:
-      - service: light.toggle
+      - action: light.toggle
         entity_id: light.sonoff_chambre
 
   - alias: Lumière lit Parents indirect
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_bedroom_action
         to: "double"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_chambre_gauche_action
         to: "double"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_chambre_droite_action
         to: "double"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_shoes_action
         to: "double"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_chambre_droite_action
         to: "hold"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_chambre_gauche_action
         to: "hold"
     action:
       - entity_id: switch.osram_chambre
-        service: switch.toggle
+        action: switch.toggle
 
   # ----- Cuisine
 
   - alias: Auto Cuisine
+    id: light_auto_cuisine
     use_blueprint:
       path: homeassistant/motion_light.yaml
       input:
-        motion_sensor: binary_sensor.xiaomi_presence_cuisine_occupancy
-        motion_sensor_2: binary_sensor.tuya_presence_cuisine_presence
+        motion_sensor: binary_sensor.tuya_mmwave_presence_cuisine_presence
         switch_sensor: sensor.xiaomi_cuisine_action
         primary_light: light.sonoff_cuisine
-        light_sensor: sensor.tuya_presence_cuisine_illuminance
+        secondary_light: light.sonoff_cuisine
+        light_sensor: sensor.illumination_7811dcfaa3ee
         min_lux: 1200
-        no_motion_wait: 120
+        no_motion_wait: 1
+        no_action_wait: 1
+
+  - alias: Auto Shoes
+    id: light_auto_shoes
+    use_blueprint:
+      path: homeassistant/motion_light.yaml
+      input:
+        motion_sensor: binary_sensor.tuya_presence_shoes_presence
+        switch_sensor: sensor.xiaomi_shoes_action
+        primary_light: light.sonoff_shoes
+        secondary_light: light.sonoff_shoes
+        light_sensor: sensor.illumination_7811dcfaa3ee
+        no_motion_wait: 1
+        no_action_wait: 1
 
   # - alias: Lumière Cuisine
   #   trigger:
-  #     - platform: state
+  #     - trigger: state
   #       entity_id: sensor.xiaomi_cuisine_action
   #       to: "single"
   #   condition:
@@ -201,7 +216,7 @@ automation:
 
   # - alias: Auto Cuisine radar
   #   trigger:
-  #     - platform: state
+  #     - trigger: state
   #       entity_id: binary_sensor.tuya_presence_cuisine_presence
   #   action:
   #     - service: light.turn_{{trigger.to_state.state}}
@@ -225,16 +240,16 @@ automation:
 
   - alias: Lumière entrée
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_entree_action
         to: "single"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_entree_couloir_action
         to: "single_left"
     action:
-      - service: light.toggle
+      - action: light.toggle
         entity_id: light.sonoff_entree_1,light.sonoff_entree_2,light.sonoff_entree_3
-      - service: timer.start
+      - action: timer.start
         data:
           entity_id: timer.entree
 
@@ -245,13 +260,13 @@ automation:
       event_data:
         entity_id: timer.entree
     action:
-      service: light.turn_off
+      action: light.turn_off
       data:
         entity_id: light.sonoff_entree_1,light.sonoff_entree_2,light.sonoff_entree_3
 
   - alias: Porte ouverte
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: binary_sensor.xiaomi_door_contact
         from: "off"
         to: "on"
@@ -260,7 +275,7 @@ automation:
         entity_id: alarm_control_panel.maison
         state: disarmed
     action:
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           entity_id: light.gateway_light_7811dcfaa3ee
           color_name: yellow
@@ -268,7 +283,7 @@ automation:
 
   - alias: Porte fermée
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: binary_sensor.xiaomi_door_contact
         from: "on"
         to: "off"
@@ -277,260 +292,168 @@ automation:
         entity_id: alarm_control_panel.maison
         state: disarmed
     action:
-      - service: light.turn_off
+      - action: light.turn_off
         data:
           entity_id: light.gateway_light_7811dcfaa3ee
+
+  - alias: "Veilleuse alarme nuit"
+    description: "Allume la lumière en bleu si elle change d'état alors que l'alarme est en mode nuit."
+    trigger:
+      - trigger: state
+        entity_id: light.gateway_light_7811dcfaa3ee
+        from: "on"
+        to: "off"
+    condition:
+      - condition: state
+        entity_id: alarm_control_panel.maison
+        state: armed_night
+    action:
+      - action: light.turn_on
+        data:
+          entity_id: light.gateway_light_7811dcfaa3ee
+          rgb_color: [0, 255, 255]
+          brightness_pct: 25
+    mode: single
 
   # ----- SDB
 
   - alias: Lumière salle de bain
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sdb_action
         to: "single_left"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sdb_action
         to: "double_left"
     action:
-      - service: light.toggle
+      - action: light.toggle
         entity_id: light.sonoff_salle_de_bain
 
   # ----- Couloir
   - alias: Lumière couloir
-    trigger:
-      - platform: state
+    triggers:
+      - trigger: state
         entity_id: sensor.xiaomi_couloir_action
         to: "single"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_entree_couloir_action
         to: "single_right"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sdb_action
         to: "single_right"
     action:
-      - service: light.toggle
-        entity_id: light.sonoff_couloir
-      - service: timer.start
+      - action: light.toggle
+        target:
+          entity_id: light.tuya_light_rgb_couloir
+        data:
+          color_temp_kelvin: 6500
+          brightness_pct: 100
+      - action: timer.start
         data:
           entity_id: timer.couloir
 
   - alias: Lumière couloir permanent
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_couloir_action
         to: "double"
     action:
-      - service: light.toggle
-        entity_id: light.sonoff_couloir
+      - action: light.toggle
+        target:
+          entity_id: light.tuya_light_rgb_couloir
+        data:
+          color_temp_kelvin: 6500
+          brightness_pct: 100
 
   - alias: Lumière couloir auto off
     trigger:
-      platform: event
+      trigger: event
       event_type: timer.finished
       event_data:
         entity_id: timer.couloir
     action:
-      service: light.turn_off
-      data:
-        entity_id:
-          - light.sonoff_couloir
+      - action: light.turn_off
+        entity_id: light.tuya_light_rgb_couloir
 
   # ----- Chaussures
   - alias: Lumière chaussures
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_shoes_action
         to: "single"
     action:
-      - service: light.toggle
+      - action: light.toggle
         target:
           entity_id: light.sonoff_shoes
-      - service: timer.start
+      - action: timer.start
         data:
           entity_id: timer.chaussures
 
   - alias: Lumière chaussures auto off
     trigger:
-      platform: event
+      trigger: event
       event_type: timer.finished
       event_data:
         entity_id: timer.chaussures
     action:
-      service: light.turn_off
+      action: light.turn_off
       data:
         entity_id:
           - light.sonoff_shoes
 
   # ----- WC
 
-  # - alias: Lumière WC
-  #   trigger:
-  #     - platform: state
-  #       entity_id: sensor.xiaomi_wc_action
-  #       to: "single"
-  #     - platform: state
-  #       entity_id: sensor.xiaomi_wc_action
-  #       to: "double"
-  #   condition:
-  #     condition: not
-  #     conditions:
-  #       - condition: time
-  #         after: "22:00:00"
-  #         before: "08:00:00"
-  #   action:
-  #     - service: light.toggle
-  #       entity_id: light.sonoff_wc
-  #     - service: light.toggle
-  #       entity_id: light.sonoff_wc_wall
-
-  # - alias: Lumière WC nuit
-  #   trigger:
-  #     - platform: state
-  #       entity_id: sensor.xiaomi_wc_action
-  #       to: "single"
-  #     - platform: state
-  #       entity_id: sensor.xiaomi_wc_action
-  #       to: "double"
-  #   condition:
-  #     condition: time
-  #     after: "22:00:00"
-  #     before: "08:00:00"
-  #   action:
-  #     - service: light.toggle
-  #       entity_id: light.sonoff_wc_wall
-
   - alias: Lumière WC resync off
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_wc_action
         to: "hold"
     action:
-      - service: light.turn_off
+      - action: light.turn_off
         entity_id: light.sonoff_wc_wall, light.sonoff_wc
-
-  # - alias: Lumière WC autoresync
-  #   trigger:
-  #     platform: time
-  #     at: "08:00:00"
-  #   condition:
-  #     - condition: state
-  #       entity_id: light.sonoff_wc_wall
-  #       state: "on"
-  #   action:
-  #     - service: light.turn_on
-  #       entity_id: light.sonoff_wc
-
-  # - alias: Lumière WC autoresync night
-  #   trigger:
-  #     platform: time
-  #     at: "22:00:00"
-  #   condition:
-  #     - condition: state
-  #       entity_id: light.sonoff_wc
-  #       state: "on"
-  #   action:
-  #     - service: light.turn_off
-  #       entity_id: light.sonoff_wc
-
-  # - alias: Auto WC radar
-  #   trigger:
-  #     - platform: state
-  #       entity_id: binary_sensor.tuya_presence_wc_presence
-  #   action:
-  #     - service: light.turn_{{trigger.to_state.state}}
-  #       entity_id: light.sonoff_wc_wall, light.sonoff_wc
-
-  # - alias: Auto WC radar
-  #   trigger:
-  #     - platform: state
-  #       entity_id: binary_sensor.tuya_presence_wc_presence
-  #       to: "on"
-  #       from: "off"
-  #   condition:
-  #     condition: time
-  #     after: "08:00:00"
-  #     before: "23:59:00"
-  #   action:
-  #     - service: light.turn_on
-  #       entity_id: light.sonoff_wc
-  #     - service: light.turn_on
-  #       entity_id: light.sonoff_wc_wall
-
-  # - alias: Auto WC radar
-  #   use_blueprint:
-  #     path: homeassistant/motion_light_on.yaml
-  #     input:
-  #       motion_sensor: binary_sensor.tuya_presence_wc_presence
-  #       light_sensor: sensor.tuya_presence_wc_illuminance
-  #       light: light.sonoff_wc,light.sonoff_wc_wall
-  #       timer: timer.wc_idle
-  #       min_lux: 2000
 
   - alias: Auto WC radar
     use_blueprint:
       path: homeassistant/motion_light.yaml
       input:
-        motion_sensor: binary_sensor.tuya_presence_wc_presence
+        motion_sensor: binary_sensor.presence_wc_presence
         switch_sensor: sensor.xiaomi_wc_action
         primary_light: light.sonoff_wc
         secondary_light: light.sonoff_wc_wall
-        light_sensor: sensor.tuya_presence_wc_illuminance
-        min_lux: 2000
-        no_motion_wait: 300
+        light_sensor: sensor.illumination_7811dcfaa3ee
+        no_motion_wait: 1
         day_start_hour: "08:00:00"
         night_start_hour: "22:00:00"
 
   # ----- All
 
-  - alias: Tout eteindre
-    trigger:
-      - platform: state
-        entity_id: sensor.xiaomi_entree_action
-        to: "double"
-    action:
-      - service: light.turn_off
-        entity_id: light.toutes_lumieres
-
-  - alias: Sortir maison (lumières)
-    triggers:
-      - trigger: state
-        entity_id: sensor.xiaomi_entree_action
-        to: "hold"
-    conditions:
-      - condition: state
-        entity_id: binary_sensor.xiaomi_door_contact
-        state: "on"
-    actions:
-      - action: light.turn_off
-        entity_id: light.toutes_lumieres
-
   - alias: "Anti moustiques on"
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: alarm_control_panel.maison
         to: "armed_away"
     action:
-      - service: switch.turn_on
+      - action: switch.turn_on
         target:
           entity_id: switch.tuya_cuisine
 
   - alias: "Anti moustiques off"
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: alarm_control_panel.maison
         to: "disarmed"
     action:
-      - service: switch.turn_off
+      - action: switch.turn_off
         target:
           entity_id: switch.tuya_cuisine
 
   - alias: "Anti moustiques toggle"
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_cuisine_action
         to: "double"
     action:
-      - service: switch.toggle
+      - action: switch.toggle
         target:
           entity_id: switch.tuya_cuisine
 
@@ -538,11 +461,11 @@ automation:
 
   - alias: Test
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_spare_action
         to: "single"
     action:
-      - service: light.toggle
+      - action: light.toggle
         entity_id: light.sonoff_shoes
 
 ###############################################################

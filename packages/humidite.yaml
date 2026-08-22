@@ -30,17 +30,16 @@ automation:
               interruption-level: time-sensitive
           message: Quelqu'un pourrait ouvrir la fenêtre?
           title: Il y a trop d'humidité dans la Salle de Bain
-      - service: notify.alexa_media_echo_salon
+      - action: notify.send_message
         data:
           message: Il y a trop d'humidité dans la Salle de Bain. Quelqu'un pourrait ouvrir la fenêtre?
-          data:
-            type: announce
-            method: all
+        target:
+          entity_id: notify.echo_salon_announce
 
   - alias: Alerte humidité Salle de Bain
     trigger:
       - entity_id: light.sonoff_salle_de_bain
-        platform: state
+        trigger: state
         to: "off"
     condition:
       - condition: state
@@ -56,8 +55,8 @@ automation:
         after: "07:00:00"
         before: "20:00:00"
     action:
-      - service: notify.alexa_media_echo_sdb
+      - action: notify.send_message
         data:
           message: Avez vous pensé à ouvrir la fenêtre?
-          data:
-            type: announce
+        target:
+          entity_id: notify.echo_sdb_speak

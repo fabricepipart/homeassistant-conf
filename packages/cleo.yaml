@@ -4,7 +4,7 @@
 automation:
   - alias: Appel Cleo
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_cleo_up_action
         to: "hold"
     action:
@@ -14,11 +14,9 @@ automation:
             interruption-level: time-sensitive
           message: Appel passé depuis son lit
           title: Cléo aimerait passer un message
-      - service: notify.alexa_media
+      - action: notify.send_message
+        target:
+          entity_id:
+            - notify.partout_announce
         data:
           message: Cléo aimerait passer un message
-          target:
-            - media_player.echo_de_cleo
-            - media_player.echo_salon
-          data:
-            type: announce

@@ -1,0 +1,518 @@
+################################################################################
+# Neato
+################################################################################
+
+badges: []
+path: vacuum
+title: Vacuum
+
+cards:
+  - type: custom:xiaomi-vacuum-map-card
+    vacuum_platform: Roborock
+    entity: vacuum.medor
+    map_source:
+      camera: image.medor_corniche_fleurie_custom
+    calibration_source:
+      camera: true
+    clean_selection_on_start: false
+    map_modes:
+      - template: vacuum_clean_segment
+        predefined_selections:
+        - id: "1"
+          icon:
+            name: mdi:toilet
+            x: 30600
+            y: 25450
+          label:
+            text: WC
+            x: 30600
+            y: 25450
+            offset_y: 25
+          outline:
+            - - 29900
+              - 24400
+            - - 31700
+              - 24400
+            - - 31700
+              - 26500
+            - - 29900
+              - 26500
+        - id: "2"
+          icon:
+            name: mdi:silverware-fork-knife
+            x: 27820
+            y: 25930
+          label:
+            text: Cuisine
+            x: 27820
+            y: 25930
+            offset_y: 25
+          outline:
+            - - 23200
+              - 24800
+            - - 29700
+              - 24800
+            - - 29700
+              - 26700
+            - - 23200
+              - 26700
+        - id: "3"
+          icon:
+            name: mdi:table-chair
+            x: 30400
+            y: 31050
+          label:
+            text: Salle à manger
+            x: 30400
+            y: 31050
+            offset_y: 25
+          outline:
+            - - 28300
+              - 28050
+            - - 31800
+              - 28050
+            - - 31800
+              - 34850
+            - - 28300
+              - 34850
+        - id: "4"
+          icon:
+            name: mdi:bed
+            x: 25820
+            y: 28260
+          label:
+            text: Chambre Cléo
+            x: 25820
+            y: 28260
+            offset_y: 25
+          outline:
+            - - 22400
+              - 26500
+            - - 27150
+              - 26500
+            - - 27150
+              - 30150
+            - - 22400
+              - 30150
+        - id: "5"
+          icon:
+            name: mdi:broom
+            x: 27950
+            y: 28120
+          label:
+            text: Couloir
+            x: 27950
+            y: 28120
+            offset_y: 25
+          outline:
+            - - 27150
+              - 27100
+            - - 28800
+              - 27100
+            - - 28800
+              - 32300
+            - - 27150
+              - 32300
+        - id: "6"
+          icon:
+            name: mdi:shower
+            x: 26175
+            y: 31700
+          label:
+            text: SDB
+            x: 26175
+            y: 31700
+            offset_y: 25
+          outline:
+            - - 25250
+              - 30500
+            - - 27100
+              - 30500
+            - - 27100
+              - 31650
+            - - 25250
+              - 31650
+        - id: "7"
+          icon:
+            name: mdi:bed-king
+            x: 26300
+            y: 33900
+          label:
+            text: Chambre principale
+            x: 26300
+            y: 33900
+            offset_y: 25
+          outline:
+            - - 24550
+              - 32350
+            - - 28050
+              - 32350
+            - - 28050
+              - 35600
+            - - 24550
+              - 35600
+        - id: "8"
+          icon:
+            name: mdi:door
+            x: 32050
+            y: 27420
+          label:
+            text: Entrée
+            x: 32050
+            y: 27420
+            offset_y: 25
+          outline:
+            - - 28850
+              - 26400
+            - - 34550
+              - 26400
+            - - 34550
+              - 28000
+            - - 28850
+              - 28000
+      - template: vacuum_clean_zone_predefined
+        predefined_selections:
+        - zones: [[29033, 31557, 30953, 34808]]
+          label:
+            text: "Table basse"
+            x: 30000
+            y: 34000
+            offset_y: 25
+          icon:
+            name: "mdi:sofa"
+            x: 30000
+            y: 34000
+        - zones: [[29966, 27961, 31886, 31212]]
+          label:
+            text: "Table"
+            x: 31000
+            y: 29500
+            offset_y: 25
+          icon:
+            name: "mdi:table-furniture"
+            x: 31000
+            y: 29500
+        - zones: [[28201, 27927, 29921, 29247]]
+          label:
+            text: "Bureau"
+            x: 29000
+            y: 29000
+            offset_y: 25
+          icon:
+            name: "mdi:desk"
+            x: 29000
+            y: 29000
+      - template: vacuum_clean_zone
+    tiles:
+      # Status tiles
+      - label: Status
+        entity: vacuum.medor
+        icon: mdi:robot-vacuum
+        order: 1
+        
+      - label: Battery
+        entity: sensor.medor_battery
+        unit: '%'
+        icon: mdi:battery
+        order: 2
+        
+      - label: Cleaning progress
+        entity: sensor.medor_cleaning_progress
+        icon: mdi:progress-check
+        unit: '%'
+        order: 3
+        
+      # # Cleaning stats
+      - label: Cleaned
+        entity: sensor.medor_cleaning_area
+        unit: 'm²'
+        icon: mdi:map-marker-check
+        order: 4
+        
+      - label: Fan Speed
+        entity: vacuum.medor
+        attribute: fan_speed
+        icon: mdi:fan
+        order: 5
+        
+      # # Mop controls
+      - label: Mop Mode
+        entity: select.medor_mop_mode
+        icon: mdi:water
+        order: 6
+        
+      - label: Mop Intensity
+        entity: select.medor_mop_intensity
+        icon: mdi:water-percent
+        order: 7
+        
+      - label: Water Tank
+        entity: binary_sensor.medor_water_shortage
+        icon: mdi:water-outline
+        order: 8
+        
+      # # Maintenance
+      - label: Filter change
+        entity: sensor.medor_filter_time_left
+        icon: mdi:air-filter
+        tooltip: 'Filter hours left'
+        unit: 'h'
+        precision: 0
+        order: 9
+        
+      - label: Main Brush change
+        entity: sensor.medor_main_brush_time_left
+        icon: mdi:brush
+        unit: 'h'
+        precision: 0
+        order: 10
+        
+      - label: Side Brush change
+        entity: sensor.medor_side_brush_time_left
+        icon: mdi:brush-variant
+        unit: 'h'
+        precision: 0
+        order: 11
+        
+      - label: Sensors change
+        entity: sensor.medor_sensor_time_left
+        icon: mdi:circle-slice-3
+        unit: 'h'
+        precision: 0
+        order: 12
+
+        
+
+  - type: vertical-stack
+    cards:
+      - title: Aspirer
+        type: horizontal-stack
+        cards:
+          - entity: script.roborock_aspirer_cuisine
+            hold_action:
+              action: more-info
+            icon: "mdi:robot-vacuum"
+            icon_height: 48px
+            name: Cuisine
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: button
+          - entity: script.roborock_aspirer_sam
+            hold_action:
+              action: more-info
+            icon: "mdi:robot-vacuum"
+            icon_height: 48px
+            name: SàM
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.roborock_aspirer_chambre
+            hold_action:
+              action: more-info
+            icon: "mdi:robot-vacuum"
+            icon_height: 48px
+            name: Chambre
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.roborock_aspirer_cleo
+            hold_action:
+              action: more-info
+            icon: "mdi:robot-vacuum"
+            icon_height: 48px
+            name: Cléo
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+
+      - type: horizontal-stack
+        cards:
+          - entity: script.roborock_aspirer_couloir
+            hold_action:
+              action: more-info
+            icon: "mdi:robot-vacuum"
+            icon_height: 48px
+            name: Couloir
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.roborock_aspirer_entree
+            hold_action:
+              action: more-info
+            icon: "mdi:robot-vacuum"
+            icon_height: 48px
+            name: Entrée
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.roborock_aspirer_sdb
+            hold_action:
+              action: more-info
+            icon: "mdi:robot-vacuum"
+            icon_height: 48px
+            name: SdB
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.roborock_aspirer_wc
+            hold_action:
+              action: more-info
+            icon: "mdi:robot-vacuum"
+            icon_height: 48px
+            name: WC
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+
+      - title: Laver zone
+        type: horizontal-stack
+        cards:
+          - entity: script.roborock_laver_cuisine
+            hold_action:
+              action: more-info
+            icon: "mdi:water"
+            icon_height: 48px
+            name: Cuisine
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.roborock_laver_sam
+            hold_action:
+              action: more-info
+            icon: "mdi:water"
+            icon_height: 48px
+            name: SàM
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.roborock_laver_chambre
+            hold_action:
+              action: more-info
+            icon: "mdi:water"
+            icon_height: 48px
+            name: Chambre
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.roborock_laver_cleo
+            hold_action:
+              action: more-info
+            icon: "mdi:water"
+            icon_height: 48px
+            name: Cléo
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+
+      - type: horizontal-stack
+        cards:
+          - entity: script.roborock_laver_couloir
+            hold_action:
+              action: more-info
+            icon: "mdi:water"
+            icon_height: 48px
+            name: Couloir
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.roborock_laver_entree
+            hold_action:
+              action: more-info
+            icon: "mdi:water"
+            icon_height: 48px
+            name: Entrée
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.roborock_laver_sdb
+            hold_action:
+              action: more-info
+            icon: "mdi:water"
+            icon_height: 48px
+            name: SdB
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+          - entity: script.roborock_laver_wc
+            hold_action:
+              action: more-info
+            icon: "mdi:water"
+            icon_height: 48px
+            name: WC
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: toggle
+            type: entity-button
+      
+      - title: Urgence
+        type: horizontal-stack
+        cards:
+          - hold_action:
+              action: more-info
+            icon: 'mdi:stop-circle'
+            icon_height: 48px
+            name: Stop
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: call-service
+              service: vacuum.stop
+              target:
+                entity_id: vacuum.medor
+            type: button
+          - hold_action:
+              action: more-info
+            icon: 'mdi:home'
+            icon_height: 48px
+            name: Retour à la base
+            show_icon: true
+            show_name: true
+            tap_action:
+              action: call-service
+              service: vacuum.return_to_base
+              target:
+                entity_id: vacuum.medor
+            type: button
+
+      - type: horizontal-stack
+        cards:
+        - entities:
+            - entity: vacuum.medor
+            - entity: sensor.medor_status
+            - entity: sensor.medor_battery
+          type: entities
+
+icon: "mdi:robot-vacuum"
+panel: false
+title: Aspirateur

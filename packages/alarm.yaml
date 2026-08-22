@@ -146,7 +146,7 @@ automation:
   - alias: "[Alarme] Boolean Sirène en sourdine"
     initial_state: on
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: input_boolean.sourdine_sirenes_gateway
         to: "on"
     action:
@@ -159,7 +159,7 @@ automation:
   - alias: "[Alarme] Boolean Sirène son activé"
     initial_state: on
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: input_boolean.sourdine_sirenes_gateway
         to: "off"
     action:
@@ -170,7 +170,7 @@ automation:
 
   - alias: "Armer alarme"
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_entree_action
         to: "hold"
     condition:
@@ -182,22 +182,24 @@ automation:
         entity_id: binary_sensor.xiaomi_door_contact
         state: "on"
     action:
-      - service: light.turn_on
+      - action: light.turn_off
+        entity_id: light.toutes_lumieres
+      - action: notify.send_message
+        data:
+          message: Au revoir!
+        target:
+          entity_id: notify.echo_salon_speak
+      - action: alarm_control_panel.alarm_arm_away
+        entity_id: alarm_control_panel.maison
+      - action: light.turn_on
         data:
           entity_id: light.gateway_light_7811dcfaa3ee
           rgb_color: [255, 63, 0]
           brightness_pct: 100
-      - service: notify.alexa_media_echo_salon
-        data:
-          message: Au revoir!
-          data:
-            type: announce
-      - service: alarm_control_panel.alarm_arm_away
-        entity_id: alarm_control_panel.maison
 
   - alias: "Armer alarme (nuit)"
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_entree_couloir_action
         to: "single_both"
     condition:
@@ -208,23 +210,45 @@ automation:
         entity_id: binary_sensor.xiaomi_door_contact
         state: "off"
     action:
-      - service: alarm_control_panel.alarm_arm_night
+      - action: alarm_control_panel.alarm_arm_night
         entity_id: alarm_control_panel.maison
+      - action: light.turn_off
+        entity_id: light.toutes_lumieres
       - delay:
           seconds: 1
-      - service: light.turn_on
+      - action: light.turn_on
         data:
           entity_id: light.gateway_light_7811dcfaa3ee
           rgb_color: [0, 255, 255]
           brightness_pct: 25
-      - delay:
-          seconds: 5
-      - service: light.turn_on
-        entity_id: light.sonoff_chambre
+      - action: light.turn_on
+        target:
+          entity_id: light.tuya_light_rgb_couloir
+        data:
+          rgb_color: [255, 0, 0]
+          brightness_pct: 50
+      - entity_id: switch.osram_chambre
+        action: switch.toggle
+
+  - alias: "Rallumer gateway"
+    trigger:
+      - trigger: state
+        entity_id: light.gateway_light_7811dcfaa3ee
+        to: "off"
+    condition:
+      - condition: state
+        entity_id: alarm_control_panel.maison
+        state: armed_night
+    action:
+      - action: light.turn_on
+        data:
+          entity_id: light.gateway_light_7811dcfaa3ee
+          rgb_color: [0, 255, 255]
+          brightness_pct: 25
 
   - alias: "Armer alarme (nuit auto)"
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: light.toutes_lumieres
         to: "off"
         for: "1:00:00"
@@ -249,7 +273,7 @@ automation:
 
   - alias: "[Alarme] Armée"
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: alarm_control_panel.maison
         to: "armed_away"
     action:
@@ -258,14 +282,11 @@ automation:
           entity_id: light.gateway_light_7811dcfaa3ee
           color_name: red
           brightness_pct: 100
-      - service: notify.alexa_media
+      - action: notify.send_message
         data:
-          target:
-            - media_player.echo_salon
-            - media_player.echo_cuisine
           message: Alarme activée
-          data:
-            type: announce
+        target:
+          entity_id: notify.echo_salon_speak
       - service: notify.mobile_app_iphone_amadeus
         alias: "Notification alarme armée"
         data:
@@ -276,19 +297,19 @@ automation:
 
   - alias: "Déclencher alarme"
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: binary_sensor.xiaomi_door_contact
         from: "off"
         to: "on"
-      - platform: state
+      - trigger: state
         entity_id: binary_sensor.xiaomi_fenetre_sam_contact
         from: "off"
         to: "on"
-      - platform: state
+      - trigger: state
         entity_id: binary_sensor.xiaomi_fenetre_cuisine_contact
         from: "off"
         to: "on"
-      - platform: state
+      - trigger: state
         entity_id: binary_sensor.xiaomi_fenetre_sdb_contact
         from: "off"
         to: "on"
@@ -326,7 +347,7 @@ automation:
   - alias: "[Alarme] Déclenchée"
     initial_state: on
     trigger:
-      platform: state
+      trigger: state
       entity_id: alarm_control_panel.maison
       to: "triggered"
     action:
@@ -345,10 +366,10 @@ automation:
 
   - alias: "Désactiver alarme"
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_entree_action
         to: "hold"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_shoes_action
         to: "hold"
     condition:
@@ -371,9 +392,9 @@ automation:
 
   - alias: "Désactiver alarme nuit"
     trigger:
-      - platform: state
-        entity_id: light.toutes_lumieres
-        to: "on"
+      - trigger: state
+        entity_id: sensor.xiaomi_entree_couloir_action
+        to: "single_both"
     condition:
       - condition: state
         entity_id: alarm_control_panel.maison
@@ -389,7 +410,7 @@ automation:
 
   - alias: "[Alarme] Désactivée"
     trigger:
-      platform: state
+      trigger: state
       entity_id: alarm_control_panel.maison
       to: "disarmed"
     action:
@@ -399,7 +420,7 @@ automation:
 
   - alias: "[Alarme away] Désactivée"
     trigger:
-      platform: state
+      trigger: state
       entity_id: alarm_control_panel.maison
       from: "armed_away"
       to: "disarmed"
@@ -409,10 +430,29 @@ automation:
         data:
           message: Tout va bien
           title: "[Alarme] Désactivée"
-      - service: notify.alexa_media
+      - action: notify.send_message
         data:
-          target:
-            - media_player.echo_salon
           message: Alarme désactivée. Bienvenu à la maison!
+        target:
+          entity_id: notify.echo_salon_speak
+
+  - alias: "Alarme - Désarmement automatique"
+    description: "Désarme l'alarme si présence aux toilettes et alarme armée en nuit depuis au moins 3h."
+    trigger:
+      - trigger: state
+        entity_id: binary_sensor.presence_wc_presence
+        from: "off"
+        to: "on"
+    condition:
+      - condition: state
+        entity_id: alarm_control_panel.maison
+        state: armed_night
+        for:
+          hours: 3
+    action:
+      - action: alarm_control_panel.alarm_disarm
+        target:
+          entity_id: alarm_control_panel.maison
           data:
-            type: announce
+            code: !secret alarm_code
+    mode: single

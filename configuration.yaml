@@ -19,7 +19,14 @@ http:
   server_port: 443
 
 lovelace:
-  mode: yaml
+  resource_mode: yaml
+  dashboards:
+    lovelace:
+      mode: yaml
+      filename: ui-lovelace.yaml
+      title: Overview
+      icon: mdi:view-dashboard
+      show_in_sidebar: true
   resources:
     - url: /hacsfiles/mini-media-player/mini-media-player-bundle.js
       type: module
@@ -37,6 +44,9 @@ lovelace:
       type: module
     - url: /hacsfiles/lovelace-expander-card/expander-card.js
       type: module
+    - url: /hacsfiles/lovelace-xiaomi-vacuum-map-card/xiaomi-vacuum-map-card.js
+      type: module
+
 
 #meteo_france: !include meteo.yaml
 shell_command: !include shell.yaml

@@ -4,34 +4,36 @@
 automation:
   - alias: Fuite cuisine
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: binary_sensor.xiaomi_fuite_cuisine_water_leak
         from: "off"
         to: "on"
-    action:
+    actions:
       - service: light.turn_on
         data:
           entity_id: light.gateway_light_7811dcfaa3ee
           color_name: red
           brightness_pct: 100
-      - service: media_player.play_media
+      - parallel:
+          # Salon
+          - action: alexa_devices.send_sound
+            data:
+              device_id: 469a2e22fa36880f8ba14e1fadd9d995
+              sound: amzn_sfx_scifi_alarm_01
+          # Cuisine
+          - action: alexa_devices.send_sound
+            data:
+              device_id: da05d4e93809561b0b1b7e9dbe2ea3b5
+              sound: amzn_sfx_scifi_alarm_01
+      - action: notify.send_message
         target:
           entity_id:
-            - media_player.echo_salon
-            - media_player.echo_cuisine
+            - notify.echo_de_cleo_announce
+            - notify.echo_salon_announce
+            - notify.echo_sdb_announce
+            - notify.echo_cuisine_announce
         data:
-          media_content_type: sound
-          media_content_id: amzn_sfx_scifi_alarm_01
-      - service: notify.alexa_media
-        data:
-          target:
-            - media_player.echo_de_cleo
-            - media_player.echo_salon
-            - media_player.echo_sdb
-            - media_player.echo_cuisine
           message: Alerte! Fuite d'eau détectée à la cuisine!
-          data:
-            type: announce
       - service: notify.mobile_app_iphone_amadeus
         alias: "Notification fuite cuisine"
         data:
@@ -48,7 +50,7 @@ automation:
 
   - alias: Fuite cuisine terminée
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: binary_sensor.xiaomi_fuite_cuisine_water_leak
         from: "on"
         to: "off"
@@ -59,7 +61,7 @@ automation:
 
   - alias: Fuite SdB
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: binary_sensor.xiaomi_fuite_sdb_water_leak
         from: "off"
         to: "on"
@@ -74,24 +76,26 @@ automation:
           entity_id: light.gateway_light_7811dcfaa3ee
           color_name: red
           brightness_pct: 100
-      - service: media_player.play_media
+      - parallel:
+          # Salon
+          - action: alexa_devices.send_sound
+            data:
+              device_id: 469a2e22fa36880f8ba14e1fadd9d995
+              sound: amzn_sfx_scifi_alarm_01
+          # Cuisine
+          - action: alexa_devices.send_sound
+            data:
+              device_id: da05d4e93809561b0b1b7e9dbe2ea3b5
+              sound: amzn_sfx_scifi_alarm_01
+      - action: notify.send_message
         target:
           entity_id:
-            - media_player.echo_salon
-            - media_player.echo_cuisine
+            - notify.echo_de_cleo_announce
+            - notify.echo_salon_announce
+            - notify.echo_sdb_announce
+            - notify.echo_cuisine_announce
         data:
-          media_content_type: sound
-          media_content_id: amzn_sfx_scifi_alarm_01
-      - service: notify.alexa_media
-        data:
-          target:
-            - media_player.echo_de_cleo
-            - media_player.echo_salon
-            - media_player.echo_sdb
-            - media_player.echo_cuisine
           message: Une fuite d'eau a été détectée à la salle de bain!
-          data:
-            type: announce
       - service: notify.mobile_app_iphone_amadeus
         alias: "Notification fuite salle de bain"
         data:
@@ -108,7 +112,7 @@ automation:
 
   - alias: Fuite SdB terminée
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: binary_sensor.xiaomi_fuite_sdb_water_leak
         from: "on"
         to: "off"

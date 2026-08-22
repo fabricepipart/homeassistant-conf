@@ -5,7 +5,7 @@ automation:
   - alias: Chauffage SdB On
     trigger:
       - entity_id: light.sonoff_salle_de_bain
-        platform: state
+        trigger: state
         from: "off"
         to: "on"
     condition:
@@ -24,10 +24,10 @@ automation:
 
   - alias: Chauffage SdB Toggle
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sdb_action
         to: "hold_left"
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sdb_action
         to: "double_left"
     action:
@@ -37,12 +37,12 @@ automation:
   - alias: Chauffage SdB Off
     trigger:
       - entity_id: light.sonoff_salle_de_bain
-        platform: state
+        trigger: state
         to: "off"
       - platform: numeric_state
         entity_id: sensor.temperature_sdb
         above: 22
-      - platform: state
+      - trigger: state
         entity_id: binary_sensor.xiaomi_fenetre_sdb_contact
         from: "off"
         to: "on"

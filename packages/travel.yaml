@@ -62,26 +62,13 @@ automation:
             push:
               interruption-level: time-sensitive
         service: notify.mobile_app_iphone_amadeus
-      - service: notify.alexa_media_echo_salon
+      - action: notify.send_message
         data:
           message: Attention, il pleut dehors.
-          data:
-            type: announce
+        target:
+          entity_id: notify.echo_salon_announce
 
   ##################################### Trajets
-
-  # - alias: Fabrice maison
-  #   trigger:
-  #     - entity_id: person.fabrice_pipart
-  #       platform: state
-  #       from: "not_home"
-  #       to: "home"
-  #   action:
-  #     - service: notify.alexa_media_echo_salon
-  #       data:
-  #         message: Bienvenu à la maison Fabrice!
-  #         data:
-  #           type: announce
 
   - alias: Temps de trajet
     trigger:
@@ -107,12 +94,11 @@ automation:
         data:
           message: "{{ states('sensor.fabrice_to_work') }} minutes"
           title: Temps de trajet estimé
-      - service: notify.alexa_media_echo_salon
+      - action: notify.send_message
         data:
           message: Temps de trajet particulièrement long de {{ states("sensor.fabrice_to_work") }} minutes
-          data:
-            type: announce
-            method: all
+        target:
+          entity_id: notify.echo_salon_announce
 
   - alias: Temps de trajet retour
     trigger:

@@ -8,7 +8,7 @@ input_boolean:
     icon: mdi:calendar-remove
 
   reveil_cleo_tardif:
-    name: Réveil tardif Cléo (pas de garderie)
+    name: Réveil tardif Cléo (collège à 9h)
     icon: mdi:alarm-snooze
 
   reveil_cleo:
@@ -33,16 +33,22 @@ script:
   lavage_dents:
     alias: Lavage dents
     sequence:
-      - service: media_player.play_media
-        target:
-          entity_id:
-            - media_player.echo_salon
-            - media_player.echo_cuisine
-            - media_player.echo_de_cleo
-        data:
-          media_content_type: sound
-          media_content_id: air_horn_03
-
+      - parallel:
+          # Salon
+          - action: alexa_devices.send_sound
+            data:
+              device_id: 469a2e22fa36880f8ba14e1fadd9d995
+              sound: air_horn_03
+          # Cuisine
+          - action: alexa_devices.send_sound
+            data:
+              device_id: da05d4e93809561b0b1b7e9dbe2ea3b5
+              sound: air_horn_03
+          # Cleo
+          - action: alexa_devices.send_sound
+            data:
+              device_id: 36b1082749eeef5cd31d83fde1dfa777
+              sound: air_horn_03
   switch_reveil:
     alias: Switch reveil
     sequence:
@@ -75,8 +81,8 @@ automation:
         state: "on"
     action:
       - delay:
-          minutes: "{{ 20 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | int }}"
-      - service: notify.alexa_media_echo_salon
+          minutes: "{{ 60 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | int }}"
+      - action: notify.send_message
         data:
           message:
             Bonjour! Aujourd'hui, c'est {{ states("sensor.nice_cloud_cover") }} % de nuages et
@@ -84,8 +90,8 @@ automation:
             {{ states("sensor.nice_rain_chance") }} % de chances pour qu'il pleuve.
             Il fait {{ state_attr("weather.nice", "temperature") }}
             degrés dehors avec {{ state_attr("weather.nice", "wind_speed") }} km/h de vent. Bonne journée!
-          data:
-            type: announce
+        target:
+          entity_id: notify.echo_salon_speak
 
   - alias: Réveil Cléo
     description: ""
@@ -107,19 +113,18 @@ automation:
         state: "on"
     action:
       - delay:
-          minutes: "{{ 20 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | int }}"
-      - service: notify.alexa_media_echo_de_cleo
-        data_template:
+          minutes: "{{ 60 if is_state('input_boolean.reveil_cleo_tardif', 'on') else 0 | int }}"
+      - action: notify.send_message
+        target:
+          entity_id:
+            - notify.echo_de_cleo_announce
+        data:
           message: >
             {% set months = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"] %}
             {% set days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"]  %}
             Bonjour! Aujourd'hui, nous sommes le {{ days[now().weekday()] + ' ' + (now().day | string) + ' ' + months[now().month-1] }}.
             Le saint du jour est {{ states("sensor.saint_du_jour") }}. Bonne journée!
-          data:
-            type: announce
-
-      - service: media_player.play_media
+      - action: alexa_devices.send_text_command
         data:
-          entity_id: media_player.echo_de_cleo
-          media_content_id: "Quel est l animal du jour"
-          media_content_type: custom
+          device_id: 36b1082749eeef5cd31d83fde1dfa777
+          text_command: "Quel est l animal du jour"

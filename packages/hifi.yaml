@@ -41,17 +41,17 @@ script:
   sleep_mac:
     alias: Sleep Mac
     sequence:
-      - service: shell_command.sleep_mac
+      - action: shell_command.sleep_mac
 
   bt_mac:
     alias: Bluetooth Mac
     sequence:
-      - service: shell_command.bt_mac
+      - action: shell_command.bt_mac
 
   volume_up:
     alias: Volume Up
     sequence:
-      - service: media_player.volume_set
+      - action: media_player.volume_set
         entity_id: media_player.rx_v475
         data_template:
           volume_level: "{{ states.media_player.rx_v475.attributes.volume_level + 0.02 }}"
@@ -59,7 +59,7 @@ script:
   volume_down:
     alias: Volume Down
     sequence:
-      - service: media_player.volume_set
+      - action: media_player.volume_set
         entity_id: media_player.rx_v475
         data_template:
           volume_level: "{{ states.media_player.rx_v475.attributes.volume_level - 0.02 }}"
@@ -67,32 +67,32 @@ script:
   activity_wii:
     alias: Wii
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: AUDIO
-      - service: shell_command.switch_tv_component
+      - action: shell_command.switch_tv_component
 
   activity_ps3:
     alias: PS3
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: HDMI1
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.sony_bravia_tv
           source: "HDMI 3/ARC"
@@ -100,17 +100,17 @@ script:
   activity_switch:
     alias: Switch
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: HDMI1
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.sony_bravia_tv
           source: "HDMI 3/ARC"
@@ -118,58 +118,58 @@ script:
   activity_netflix:
     alias: Netflix
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: AV4
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.sony_bravia_tv
           source: "HDMI 3/ARC"
-      - service: shell_command.switch_tv_netflix
+      - action: shell_command.switch_tv_netflix
 
   activity_amazon:
     alias: Prime Video
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: AV4
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.sony_bravia_tv
           source: "HDMI 3/ARC"
-      - service: shell_command.switch_tv_home
-      - service: shell_command.switch_tv_home
-      - service: shell_command.switch_tv_right
-      - service: shell_command.switch_tv_confirm
+      - action: shell_command.switch_tv_home
+      - action: shell_command.switch_tv_home
+      - action: shell_command.switch_tv_right
+      - action: shell_command.switch_tv_confirm
 
   activity_play_tv:
     alias: Play TV
     sequence:
-      - service: shell_command.switch_tv_play
+      - action: shell_command.switch_tv_play
 
   activity_pause_tv:
     alias: Pause TV
     sequence:
-      - service: shell_command.switch_tv_pause
-      - service: media_player.select_source
+      - action: shell_command.switch_tv_pause
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: AV1
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: AV4
@@ -177,61 +177,61 @@ script:
   activity_youtube:
     alias: Youtube
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: AV4
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.sony_bravia_tv
           source: "HDMI 3/ARC"
-      - service: shell_command.switch_tv_youtube
+      - action: shell_command.switch_tv_youtube
 
   activity_youtube_kids:
     alias: Youtube Kids
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: AV4
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.sony_bravia_tv
           source: "HDMI 3/ARC"
-      - service: shell_command.switch_tv_home
-      - service: shell_command.switch_tv_home
-      - service: shell_command.switch_tv_right
-      - service: shell_command.switch_tv_right
-      - service: shell_command.switch_tv_right
-      - service: shell_command.switch_tv_right
-      - service: shell_command.switch_tv_confirm
+      - action: shell_command.switch_tv_home
+      - action: shell_command.switch_tv_home
+      - action: shell_command.switch_tv_right
+      - action: shell_command.switch_tv_right
+      - action: shell_command.switch_tv_right
+      - action: shell_command.switch_tv_right
+      - action: shell_command.switch_tv_confirm
 
   activity_box:
     alias: Box
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: HDMI2
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.sony_bravia_tv
           source: "HDMI 3/ARC"
@@ -239,17 +239,17 @@ script:
   activity_plex:
     alias: Plex
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: HDMI3
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.sony_bravia_tv
           source: "HDMI 3/ARC"
@@ -257,13 +257,13 @@ script:
   activity_airplay:
     alias: Airplay
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_off
+      - action: media_player.turn_off
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: AirPlay
@@ -271,13 +271,13 @@ script:
   activity_spotify:
     alias: Spotify
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_off
+      - action: media_player.turn_off
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: Spotify
@@ -285,13 +285,13 @@ script:
   activity_dlna:
     alias: iTunes
     sequence:
-      - service: media_player.turn_on
+      - action: media_player.turn_on
         data:
           entity_id: media_player.rx_v475
-      - service: media_player.turn_off
+      - action: media_player.turn_off
         data:
           entity_id: media_player.sony_bravia_tv
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: SERVER
@@ -299,11 +299,11 @@ script:
   activity_off:
     alias: "Off"
     sequence:
-      - service: media_player.turn_off
+      - action: media_player.turn_off
         data:
           entity_id: media_player.sony_bravia_tv
       - delay: "00:00:03"
-      - service: media_player.turn_off
+      - action: media_player.turn_off
         data:
           entity_id: media_player.rx_v475
 
@@ -314,27 +314,27 @@ script:
 automation:
   # - alias: Eteindre AppleTV
   #   trigger:
-  #     - platform: state
+  #     - trigger: state
   #       entity_id: media_player.sony_bravia_tv
   #       to: "offonoff"
   #   condition:
   #     - condition: template
   #       value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'AppleTV') }}"
   #   action:
-  #     - service: remote.turn_on
+  #     - action: remote.turn_on
   #       data:
   #         entity_id: remote.harmony_hub
   #         activity: "PowerOff"
-  #     - service: remote.turn_off
+  #     - action: remote.turn_off
   #       data:
   #         entity_id: remote.appletv
 
   - alias: Allumer AppleTV sans Harmony
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: media_player.appletv
         to: "idle"
-      - platform: state
+      - trigger: state
         entity_id: media_player.appletv
         to: "paused"
     condition:
@@ -349,29 +349,29 @@ automation:
         for:
           minutes: 1
     action:
-      - service: switch.turn_on
+      - action: switch.turn_on
         target:
           entity_id: switch.appletv
 
   - alias: Allumage initial Home Cinema
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: switch.tuya_tv
         from: "off"
         to: "on"
     action:
-      - service: switch.turn_on
+      - action: switch.turn_on
         target:
           entity_id: switch.appletv
       - delay: "00:00:10"
-      - service: remote.send_command
+      - action: remote.send_command
         target:
           entity_id: remote.harmony_hub
         data:
           command: PowerOn
           device: 71869520
       - delay: "00:00:10"
-      - service: remote.send_command
+      - action: remote.send_command
         target:
           entity_id: remote.harmony_hub
         data:
@@ -380,7 +380,7 @@ automation:
 
   # - alias: Eteindre AppleTV (boot)
   #   trigger:
-  #     - platform: state
+  #     - trigger: state
   #       entity_id: media_player.appletv
   #       to: "idle"
   #   condition:
@@ -392,16 +392,16 @@ automation:
   #         for:
   #           minutes: 1
   #   action:
-  #     - service: media_player.turn_off
+  #     - action: media_player.turn_off
   #       target:
   #         entity_id: media_player.appletv
 
   - alias: Eteindre AppleTV sans Harmony
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: media_player.appletv
         to: "standby"
-      - platform: state
+      - trigger: state
         entity_id: media_player.appletv
         to: "off"
     condition:
@@ -411,13 +411,13 @@ automation:
         for:
           seconds: 20
     action:
-      - service: switch.turn_off
+      - action: switch.turn_off
         target:
           entity_id: switch.appletv
 
   - alias: Eteindre AppleTV si Harmony Off
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: switch.appletv
         to: "off"
         for: "00:00:05"
@@ -426,13 +426,13 @@ automation:
         entity_id: media_player.appletv
         state: "idle"
     action:
-      - service: media_player.turn_off
+      - action: media_player.turn_off
         target:
           entity_id: media_player.appletv
 
   # - alias: Eteindre AppleTV apres Harmony
   #   trigger:
-  #     - platform: state
+  #     - trigger: state
   #       entity_id: select.harmony_hub_activities
   #       to: "off"
   #       for: "00:00:15"
@@ -441,48 +441,48 @@ automation:
   #       entity_id: media_player.appletv
   #       state: "on"
   #   action:
-  #     - service: remote.turn_off
+  #     - action: remote.turn_off
   #       data:
   #         entity_id: remote.appletv
 
   - alias: Eteindre Home Cinéma
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sam_action
         to: "hold_right"
     action:
-      - service: remote.turn_on
+      - action: remote.turn_on
         data:
           entity_id: remote.harmony_hub
           activity: "PowerOff"
-      - service: light.turn_off
+      - action: light.turn_off
         entity_id: light.sonoff_salon
-      - service: switch.turn_off
+      - action: switch.turn_off
         entity_id: switch.tuya_tv
 
   - alias: Switch Home Cinéma
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sam_action
         to: "double_right"
     action:
       - entity_id: switch.tuya_tv
-        service: switch.toggle
+        action: switch.toggle
 
   # - alias: TV ready
   #   trigger:
-  #     - platform: state
+  #     - trigger: state
   #       entity_id: media_player.sony_bravia_tv
   #       to: "on"
   #   condition:
   #     - condition: template
   #       value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'PowerOff') }}"
   #   action:
-  #     - service: media_player.turn_off
+  #     - action: media_player.turn_off
   #       target:
   #         entity_id: media_player.sony_bravia_tv
   #     - delay: "00:00:05"
-  #     - service: media_player.play_media
+  #     - action: media_player.play_media
   #       target:
   #         entity_id: media_player.echo_salon
   #       data:
@@ -491,9 +491,9 @@ automation:
   #         media_content_id: amzn_sfx_cat_meow_1x_01
 
   - alias: Son Netflix
-    trigger:
-      platform: template
-      value_template: "{{ state_attr('media_player.rx_v475','source')  }}"
+    triggers:
+      - trigger: template
+        value_template: "{{ state_attr('media_player.rx_v475','source')  }}"
     condition:
       - condition: state
         entity_id: media_player.tele
@@ -506,37 +506,37 @@ automation:
       - condition: template
         value_template: '{{ state_attr("media_player.sony_bravia_tv", "source") == "HDMI 3/ARC" }}'
     action:
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.rx_v475
           source: AV4
 
   - alias: Eteindre Mac
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sam_action
         to: "hold_left"
     action:
-      - service: script.sleep_mac
-      - service: light.toggle
+      - action: script.sleep_mac
+      - action: light.toggle
         entity_id: light.sonoff_sam
 
   - alias: Yamaha allumé par erreur
     trigger:
       - entity_id: media_player.rx_v475
-        platform: state
+        trigger: state
         to: "on"
     condition:
       - condition: template
         value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'PowerOff') }}"
     action:
-      - service: media_player.turn_off
+      - action: media_player.turn_off
         data:
           entity_id: media_player.rx_v475
 
   - alias: TV allumée par erreur
     trigger:
-      - platform: template
+      - trigger: template
         value_template: "{{ is_state_attr('remote.harmony_hub', 'current_activity', 'PowerOff') }}"
         for: "00:00:10"
     condition:
@@ -544,7 +544,7 @@ automation:
         entity_id: media_player.sony_bravia_tv
         state: "on"
     action:
-      - service: remote.send_command
+      - action: remote.send_command
         target:
           entity_id: remote.harmony_hub
         data:
@@ -553,25 +553,24 @@ automation:
 
   - alias: Sortir maison (HiFi)
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: alarm_control_panel.maison
         to: "armed_away"
-      - platform: state
+      - trigger: state
         entity_id: alarm_control_panel.maison
         to: "armed_night"
-      - platform: state
-        entity_id: alarm_control_panel.maison
-        to: "pending"
     action:
-      - service: script.sleep_mac
-      - service: remote.turn_on
+      - action: switch.turn_off
+        entity_id: switch.tuya_ordi
+      - action: script.sleep_mac
+      - action: remote.turn_on
         data:
           entity_id: remote.harmony_hub
           activity: "PowerOff"
 
   - alias: TV pas sur Box
     trigger:
-      - platform: template
+      - trigger: template
         value_template: "{{ is_state_attr('media_player.rx_v475','source','Box') }}"
     condition:
       condition: not
@@ -581,14 +580,14 @@ automation:
           state: "HDMI 3/ARC"
           attribute: source
     action:
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.sony_bravia_tv
           source: "HDMI 3/ARC"
 
   - alias: TV pas sur Switch
     trigger:
-      - platform: template
+      - trigger: template
         value_template: "{{ is_state_attr('media_player.rx_v475','source','PS3') }}"
     condition:
       condition: not
@@ -598,17 +597,17 @@ automation:
           state: "HDMI 3/ARC"
           attribute: source
     action:
-      - service: media_player.select_source
+      - action: media_player.select_source
         data:
           entity_id: media_player.sony_bravia_tv
           source: "HDMI 3/ARC"
   # - alias: Playlist on Spotify
   #   trigger:
-  #     - platform: state
+  #     - trigger: state
   #       entity_id: sensor.xiaomi_nawak
   #       to: "hold"
   #   action:
-  #     - service: media_player.play_media
+  #     - action: media_player.play_media
   #       data:
   #         entity_id: media_player.echo_salon
   #         media_content_id: Playlist Best of
@@ -616,9 +615,9 @@ automation:
 
   - alias: Switch TV chambre
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sdb_action
         to: "double_right"
     action:
-      - service: switch.toggle
+      - action: switch.toggle
         entity_id: switch.osram_tv_chambre

@@ -15,6 +15,9 @@ icon: "mdi:alarm-light"
 path: alarm
 title: Alarm
 cards:
+  - type: picture-entity
+    entity: camera.cam0
+
   - type: alarm-panel
     name: House Alarm
     entity: alarm_control_panel.maison

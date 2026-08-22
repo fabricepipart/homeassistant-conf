@@ -28,14 +28,6 @@ cards:
               entities:
                 - entity_id: media_player.rx_v475
                   name: RX-V475
-                - entity_id: media_player.echo_salon
-                  name: Echo Salon
-                - entity_id: media_player.echo_cuisine
-                  name: Echo Cuisine
-                - entity_id: media_player.echo_de_cleo
-                  name: Echo Cléo
-                - entity_id: media_player.echo_sdb
-                  name: Echo Salle de Bain
           - type: "custom:spotify-playlist-card"
             sensor: sensor.spotifyplaylist
             playback_method: spotify
@@ -44,38 +36,6 @@ cards:
             show_playlist_titles: true
             shuffle: true
             columns: 3
-
-      - title: Alexa
-        type: vertical-stack
-        cards:
-          - title: Echo Salon
-            show_header_toggle: false
-            type: entities
-            entities:
-              - entity: media_player.echo_salon
-              - entity: switch.echo_salon_shuffle_switch
-              - entity: switch.echo_salon_repeat_switch
-          - title: Echo Cuisine
-            show_header_toggle: false
-            type: entities
-            entities:
-              - entity: media_player.echo_cuisine
-              - entity: switch.echo_cuisine_shuffle_switch
-              - entity: switch.echo_cuisine_repeat_switch
-          - title: Echo Cléo
-            show_header_toggle: false
-            type: entities
-            entities:
-              - entity: media_player.echo_de_cleo
-              - entity: switch.echo_cuisine_shuffle_switch
-              - entity: switch.echo_cuisine_repeat_switch
-          - title: Echo SDB
-            show_header_toggle: false
-            type: entities
-            entities:
-              - entity: media_player.echo_sdb
-              - entity: switch.echo_sdb_shuffle_switch
-              - entity: switch.echo_sdb_repeat_switch
 
   - title: Activités
     type: vertical-stack

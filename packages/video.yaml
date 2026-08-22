@@ -1,0 +1,4 @@
+camera:
+  - platform: ffmpeg
+    name: cam0
+    input: /dev/video0

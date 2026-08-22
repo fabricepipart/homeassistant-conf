@@ -2,8 +2,6 @@
 
 script.neato_chambre:
   icon: mdi:robot-vacuum-variant
-switch.conchita_schedule:
-  icon: mdi:clock-check-outline
 script.neato_cleo:
   icon: mdi:robot-vacuum-variant
 script.neato_couloir:

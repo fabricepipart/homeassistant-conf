@@ -186,16 +186,6 @@ cards:
                   yellow: 400
                   red: 200
                 type: gauge
-              - entity: sensor.tuya_presence_wc_illuminance_lux
-                name: WC
-                unit: lm
-                min: 0
-                max: 2000
-                severity:
-                  green: 600
-                  yellow: 400
-                  red: 200
-                type: gauge
               - entity: sensor.tuya_presence_cuisine_illuminance_lux
                 name: Cuisine
                 unit: lm

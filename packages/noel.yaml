@@ -19,7 +19,7 @@ automation:
       platform: time
       at: "07:40:00"
     action:
-      - service: switch.turn_on
+      - action: switch.turn_on
         entity_id: switch.tuya_sapin
 
   - alias: Eteindre sapin
@@ -27,14 +27,14 @@ automation:
       platform: time
       at: "20:30:00"
     action:
-      - service: switch.turn_off
+      - action: switch.turn_off
         entity_id: switch.tuya_sapin
 
   - alias: Toggle sapin
     trigger:
-      - platform: state
+      - trigger: state
         entity_id: sensor.xiaomi_sam_action
         to: "single_both"
     action:
-      - service: switch.toggle
+      - action: switch.toggle
         entity_id: switch.tuya_sapin
